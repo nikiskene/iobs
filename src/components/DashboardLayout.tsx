@@ -88,8 +88,8 @@ export default function DashboardLayout() {
           isInboxRoute ? 'md:max-w-7xl' : ''
         }`}
       >
-        <div className="flex flex-col gap-8 md:flex-row">
-          <aside className="hidden w-full shrink-0 md:block md:w-64">
+        <div className="flex flex-col gap-8 lg:flex-row">
+          <aside className="hidden w-full shrink-0 lg:block lg:w-64">
             <div className="sticky top-24 space-y-6">
               <div className="px-3">
                 <h2 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">

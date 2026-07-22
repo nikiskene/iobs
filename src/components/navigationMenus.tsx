@@ -25,7 +25,7 @@ export function MobileMenu({ links, isActive, user, isAdmin, onClose, onLogout }
   links: NavLinkItem[]; isActive: (path: string) => boolean; user: boolean; isAdmin: boolean;
   onClose: () => void; onLogout: () => void;
 }) {
-  return <div className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-white/5 bg-[#0A0A0A] px-4 py-4 md:hidden">
+  return <div className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-white/5 bg-[#0A0A0A] px-4 py-4 lg:hidden">
     <div className="space-y-1">{links.map((link) => <MobileLink key={link.to} link={link} active={isActive(link.to)} onClose={onClose} />)}</div>
     {isAdmin && <div className="my-4 border-y border-white/5 py-4"><p className="mb-2 px-3 text-[10px] uppercase tracking-[0.25em] text-sky-500">Identity Research</p>{identityLinks.map((link) => <Link key={link.to} to={link.to} onClick={onClose} className="flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-zinc-300 hover:bg-white/5"><link.icon className="h-4 w-4 text-sky-400" />{link.label}</Link>)}</div>}
     {user ? <div className="space-y-1"><Link to="/dashboard/profile" onClick={onClose} className={mobileClass}>Profile</Link>{isAdmin && <Link to="/admin" onClick={onClose} className={mobileClass}>Admin dashboard</Link>}<button type="button" onClick={onLogout} className="block w-full rounded-md px-3 py-3 text-left text-sm text-red-300 hover:bg-red-500/10">Log out</button></div> : <Link to="/login" onClick={onClose} className="block px-3 py-3 text-sm text-sky-400">Sign In</Link>}

@@ -55,13 +55,13 @@ export default function Navigation() {
     <nav className="fixed left-0 right-0 top-0 z-50 border-b border-white/5 bg-[#0A0A0A]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <Logo logoUrl={logoUrl} />
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-1 lg:flex">
           {links.map((link) => <NavItem key={link.to} link={link} active={isActive(link.to)} />)}
           {isAdmin && <IdentityMenu active={isActive('/admin/identity')} />}
           <div className="ml-3 h-5 w-px bg-white/10" />
           {user ? <ProfileMenu refElement={menuRef} open={profileOpen} onToggle={() => setProfileOpen((value) => !value)} onLogout={handleLogout} name={profile?.full_name || 'Explorer'} email={user.email || null} photoUrl={profile?.photo_url || null} isAdmin={isAdmin} /> : <SignInLink />}
         </div>
-        <button type="button" onClick={() => setMobileOpen((value) => !value)} className="rounded-md p-2 text-zinc-400 hover:bg-white/5 hover:text-white md:hidden" aria-label="Toggle navigation">
+        <button type="button" onClick={() => setMobileOpen((value) => !value)} className="rounded-md p-2 text-zinc-400 hover:bg-white/5 hover:text-white lg:hidden" aria-label="Toggle navigation">
           {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
