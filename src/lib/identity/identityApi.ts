@@ -140,6 +140,7 @@ export type ReviewOverrides = {
   signalType?: string;
   reviewerConfidence?: number;
   comment?: string;
+  visibility?: string;
 };
 
 export async function submitReview(
@@ -168,7 +169,7 @@ export async function submitReview(
   };
   const { error: signalError } = await supabase
     .from('identity_signals')
-    .update({ review_status: statusMap[decision], updated_at: new Date().toISOString() })
+    .update({ review_status: statusMap[decision], visibility: overrides.visibility, updated_at: new Date().toISOString() })
     .eq('id', signalId);
   if (signalError) throw signalError;
 }

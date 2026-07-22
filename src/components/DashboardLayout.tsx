@@ -2,7 +2,7 @@
 // src/components/DashboardLayout.tsx
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { ArrowLeft, BookOpen, CalendarDays, Compass, Database, FileText, LayoutGrid as Layout, MessageCircle, Newspaper, Palette, Shield, Telescope, User, Users } from 'lucide-react';
+import { ArrowLeft, BookOpen, CalendarDays, Clock, Compass, Database, FileText, LayoutGrid as Layout, MessageCircle, Newspaper, Palette, Shield, Telescope, User, Users } from 'lucide-react';
 
 type SidebarLink = {
   to: string;
@@ -66,6 +66,7 @@ export default function DashboardLayout() {
         { to: '/admin/identity/daily-scan', label: 'Daily Scan', icon: Newspaper },
         { to: '/admin/identity/sources', label: 'Sources', icon: Database },
         { to: '/admin/identity/method', label: 'METHOD', icon: Telescope },
+        { to: '/admin/identity/settings', label: 'Schedule', icon: Clock },
       ],
     },
     {

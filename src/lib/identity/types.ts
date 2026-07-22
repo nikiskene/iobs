@@ -14,6 +14,7 @@ export type IdentitySignalType =
 export type IdentitySpeakerType = 'self' | 'attributed' | 'editorial' | 'system';
 export type IdentityDirection = 'preserves' | 'strengthens' | 'changes' | 'abandons' | 'unclear';
 export type IdentityExplicitness = 'explicit' | 'strongly_implied';
+export type IdentityVisibility = 'admin_only' | 'team' | 'explorers' | 'members' | 'public';
 export type IdentitySourceTier = 'primary' | 'discovery' | 'media';
 export type IdentitySourceRegion =
   | 'europe'
@@ -86,7 +87,7 @@ export type IdentitySignal = {
   extraction_model: string | null;
   prompt_version: string | null;
   review_status: IdentityReviewStatus;
-  visibility: 'admin_only' | 'research_team' | 'members' | 'public';
+  visibility: IdentityVisibility | 'research_team';
   created_at: string;
   updated_at: string;
 };

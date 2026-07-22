@@ -1,6 +1,6 @@
 // src/components/admin/adminNav.ts
 // src/components/admin/adminNav.ts
-import { BookOpen, CalendarDays, Compass, Database, FileText, LayoutGrid as Layout, MessageCircle, Newspaper, Palette, Settings, Shield, Telescope, Users } from 'lucide-react';
+import { BookOpen, CalendarDays, Clock, Compass, Database, FileText, LayoutGrid as Layout, MessageCircle, Newspaper, Palette, Settings, Shield, Telescope, Users } from 'lucide-react';
 
 export type AdminNavLink = {
   to: string;
@@ -158,6 +158,12 @@ export const adminNavGroups: AdminNavGroup[] = [
         label: 'METHOD',
         icon: Telescope,
         description: 'WorldOS Identity Research methodology.',
+      },
+      {
+        to: '/admin/identity/settings',
+        label: 'Schedule',
+        icon: Clock,
+        description: 'Daily automation and source retention.',
       },
     ],
   },

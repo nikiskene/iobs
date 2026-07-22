@@ -28,6 +28,7 @@ import IdentityReview from '../pages/admin/identity/IdentityReview';
 import IdentitySources from '../pages/admin/identity/IdentitySources';
 import MethodPage from '../pages/admin/identity/MethodPage';
 import DailyIdentityScan from '../pages/admin/identity/DailyIdentityScan';
+import IdentitySettingsPage from '../pages/admin/identity/IdentitySettingsPage';
 
 export default function AdminRoutes() {
   return (
@@ -78,6 +79,7 @@ export default function AdminRoutes() {
       <Route path="identity" element={<IdentityOverview />} />
       <Route path="identity/review" element={<IdentityReview />} />
       <Route path="identity/daily-scan" element={<DailyIdentityScan />} />
+      <Route path="identity/settings" element={<IdentitySettingsPage />} />
       <Route path="identity/sources" element={<IdentitySources />} />
       <Route path="identity/method" element={<MethodPage />} />
 

@@ -1,8 +1,9 @@
 // src/pages/admin/identity/DailyIdentityScan.tsx
 import { useEffect, useMemo, useState } from 'react';
 import { fetchDailyScan, type DailyScanSignal } from '../../../lib/identity/identityApi';
-import { ErrorBanner, PageHeader, Spinner } from './identityUi';
+import { ErrorBanner, Spinner } from './identityUi';
 import { ContextList, PatternBars, SignalFeature } from './dailyScanParts';
+import { IdentityPulse } from './IdentityPulse';
 
 function localDate() {
   const date = new Date();
@@ -28,12 +29,10 @@ export default function DailyIdentityScan() {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <PageHeader eyebrow="W01 · Admin only" title="Daily Identity Scan" description="What the reviewed evidence says entities are becoming—not simply what happened." />
-        <label className="text-xs uppercase tracking-wider text-zinc-500">Review date<input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="mt-2 block rounded-lg border border-white/10 bg-zinc-950 px-3 py-2 text-sm text-white" /></label>
-      </div>
+      <div className="flex justify-end"><label className="text-xs uppercase tracking-wider text-zinc-500">Review date<input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="mt-2 block min-h-11 rounded-lg border border-white/10 bg-zinc-950 px-3 py-2 text-sm text-white" /></label></div>
       {error && <ErrorBanner message={error} />}
-      {loading ? <Spinner label="Composing daily scan…" /> : signals.length === 0 ? <EmptyScan /> : <>
+      {loading ? <Spinner label="Composing daily scan…" /> : signals.length === 0 ? <><IdentityPulse signals={[]} date={date} /><EmptyScan /></> : <>
+        <IdentityPulse signals={signals} date={date} />
         <section className="grid gap-4 sm:grid-cols-3">
           <Metric value={identity.length} label="Identity signals" /><Metric value={operating.length} label="Operating signals" /><Metric value={context.length} label="Context signals" />
         </section>

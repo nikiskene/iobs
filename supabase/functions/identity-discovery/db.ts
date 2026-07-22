@@ -90,3 +90,21 @@ export async function failScanRun(
     .update({ status: 'failed', error_message: message, completed_at: new Date().toISOString() })
     .eq('id', runId);
 }
+
+export async function shouldRunScheduled(supabase: ReturnType<typeof getSupabase>): Promise<boolean> {
+  const { data: settings, error } = await supabase
+    .from('identity_settings')
+    .select('enabled, scan_hour_utc')
+    .eq('singleton', true)
+    .maybeSingle();
+  if (error || !settings?.enabled) return false;
+  if (new Date().getUTCHours() !== settings.scan_hour_utc) return false;
+  const today = new Date().toISOString().slice(0, 10);
+  const { count } = await supabase
+    .from('identity_scan_runs')
+    .select('id', { count: 'exact', head: true })
+    .eq('mode', 'scheduled')
+    .eq('run_date', today)
+    .in('status', ['running', 'completed']);
+  return (count ?? 0) === 0;
+}

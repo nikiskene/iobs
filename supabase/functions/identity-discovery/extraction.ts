@@ -124,7 +124,7 @@ export async function extractWithOpenAI(
   const systemPrompt =
     'You are an identity signal extraction assistant. Given news article headlines and snippets, ' +
     'extract candidate identity signals. Return ONLY a JSON array. Each item must have: ' +
-    'candidate_sentence, signal_type (definition|purpose|aspiration|promise|preservation|rejection|external_interpretation), ' +
+    'article_index, candidate_sentence, signal_type (definition|purpose|aspiration|promise|preservation|rejection|external_interpretation), ' +
     'classification (what|how|context), direction (preserves|strengthens|changes|abandons|unclear), ' +
     'explicitness (explicit|strongly_implied), speaker_type (self|attributed|editorial|system), ' +
     'evidence_text, confidence (0-1). If no identity signal, return an empty array. ' +
@@ -161,21 +161,25 @@ export async function extractWithOpenAI(
     return [];
   }
   const signals = parsed.signals ?? [];
-  return signals.slice(0, 10).map((s) => ({
-    entity_id: entity.id,
-    document: {
-      canonical_url: articles[0]?.url ?? '',
-      title: articles[0]?.title ?? '',
-      snippet: articles[0]?.snippet?.slice(0, 500) ?? null,
-      published_at: articles[0]?.publishedAt ?? null,
-      language: articles[0]?.language ?? null,
-      source_region: entity.region ?? 'global',
-      content_hash: hashContent(articles[0]?.url ?? '', articles[0]?.title ?? ''),
-      source_id: null,
-      source_name: null,
-      domain: null,
-    },
-    signal: {
+  return signals.slice(0, 10).flatMap((s) => {
+    const index = Number(s.article_index);
+    const article = articles[Number.isInteger(index) ? index : -1];
+    if (!article) return [];
+    return [{
+      entity_id: entity.id,
+      document: {
+        canonical_url: article.url,
+        title: article.title,
+        snippet: article.snippet?.slice(0, 500) ?? null,
+        published_at: article.publishedAt,
+        language: article.language,
+        source_region: entity.region ?? 'global',
+        content_hash: hashContent(article.url, article.title),
+        source_id: null,
+        source_name: article.sourceName,
+        domain: article.domain,
+      },
+      signal: {
       speaker_type: String(s.speaker_type ?? 'editorial'),
       evidence_text: String(s.evidence_text ?? ''),
       classification: String(s.classification ?? 'context'),
@@ -186,7 +190,8 @@ export async function extractWithOpenAI(
       model_interpretation: 'OpenAI extraction',
       model_confidence: Number(s.confidence ?? 0.5),
       extraction_model: 'gpt-4o-mini',
-      prompt_version: 'identity-v1',
-    },
-  }));
+        prompt_version: 'identity-v2',
+      },
+    }];
+  });
 }

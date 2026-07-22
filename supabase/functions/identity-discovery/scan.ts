@@ -15,6 +15,7 @@ import {
   type CandidateSignal,
 } from './extraction.ts';
 import { storeDocument, storeSignal } from './storage.ts';
+import { applyRetention } from './retention.ts';
 
 const MAX_ENTITIES = 3;
 const MAX_GDELT_RECORDS = 50;
@@ -35,6 +36,7 @@ function sleep(ms: number): Promise<void> {
 
 export async function runScan(mode: string): Promise<ScanResult> {
   const supabase = getSupabase();
+  const retention = await applyRetention(supabase);
   const entities = await loadEntities(supabase);
   const sources = await loadSources(supabase);
 
@@ -45,6 +47,7 @@ export async function runScan(mode: string): Promise<ScanResult> {
     discovery_source: gdeltSource?.name ?? 'GDELT',
     max_entities: MAX_ENTITIES,
     max_documents: MAX_DOCUMENTS,
+    retention,
   };
   const runId = await createScanRun(supabase, mode, scope);
 
@@ -97,32 +100,36 @@ export async function runScan(mode: string): Promise<ScanResult> {
     }
 
     const signalCandidates = limited.slice(0, MAX_SIGNALS);
+    let useHeuristicFallback = !hasOpenAI;
     if (hasOpenAI) {
       try {
-        const aiSignals = await extractWithOpenAI(
-          signalCandidates.map((c) => ({
-            url: c.document.canonical_url,
-            title: c.document.title,
-            snippet: c.document.snippet ?? '',
-            publishedAt: c.document.published_at,
-            language: c.document.language,
-            domain: c.document.domain,
-            sourceName: c.document.source_name,
-          })),
-          entities[0],
-          null,
-        );
-        counts.ai_candidates = aiSignals.length;
-        for (const sig of aiSignals) {
-          await storeSignal(supabase, sig);
+        for (const entity of entities.slice(0, MAX_ENTITIES)) {
+          const entityCandidates = signalCandidates.filter((candidate) => candidate.entity_id === entity.id);
+          if (!entityCandidates.length) continue;
+          const aiSignals = await extractWithOpenAI(
+            entityCandidates.map((c) => ({
+              url: c.document.canonical_url,
+              title: c.document.title,
+              snippet: c.document.snippet ?? '',
+              publishedAt: c.document.published_at,
+              language: c.document.language,
+              domain: c.document.domain,
+              sourceName: c.document.source_name,
+            })),
+            entity,
+            null,
+          );
+          counts.ai_candidates += aiSignals.length;
+          for (const signal of aiSignals) await storeSignal(supabase, signal);
         }
+        useHeuristicFallback = counts.ai_candidates === 0;
       } catch {
-        // fall through to heuristic
+        useHeuristicFallback = true;
       }
     }
 
     for (const candidate of signalCandidates) {
-      if (!hasOpenAI) {
+      if (useHeuristicFallback) {
         await storeSignal(supabase, candidate);
         counts.heuristic_candidates++;
       }
