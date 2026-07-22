@@ -1,0 +1,137 @@
+// src/lib/identity/identityApi.ts
+import { supabase } from '../supabase';
+import type {
+  IdentityEntity,
+  IdentityScanRun,
+  IdentitySource,
+  ScanRunCounts,
+  SignalWithRelations,
+} from './types';
+
+export async function fetchLastScan(): Promise<IdentityScanRun | null> {
+  const { data, error } = await supabase
+    .from('identity_scan_runs')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+export async function fetchScanHistory(limit = 10): Promise<IdentityScanRun[]> {
+  const { data, error } = await supabase
+    .from('identity_scan_runs')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(limit);
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function fetchOverviewCounts(): Promise<ScanRunCounts> {
+  const [docs, clusters, candidates, pending, approved] = await Promise.all([
+    supabase.from('identity_documents').select('id', { count: 'exact', head: true }),
+    supabase.from('identity_story_clusters').select('id', { count: 'exact', head: true }),
+    supabase.from('identity_signals').select('id', { count: 'exact', head: true }),
+    supabase
+      .from('identity_signals')
+      .select('id', { count: 'exact', head: true })
+      .eq('review_status', 'pending'),
+    supabase
+      .from('identity_signals')
+      .select('id', { count: 'exact', head: true })
+      .eq('review_status', 'approved'),
+  ]);
+  for (const r of [docs, clusters, candidates, pending, approved]) {
+    if (r.error) throw r.error;
+  }
+  return {
+    documents_found: docs.count ?? 0,
+    clusters: clusters.count ?? 0,
+    candidate_signals: candidates.count ?? 0,
+    pending_review: pending.count ?? 0,
+    approved_signals: approved.count ?? 0,
+  };
+}
+
+export async function fetchSources(): Promise<IdentitySource[]> {
+  const { data, error } = await supabase
+    .from('identity_sources')
+    .select('*')
+    .order('source_tier', { ascending: true })
+    .order('name', { ascending: true });
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function fetchEntities(): Promise<IdentityEntity[]> {
+  const { data, error } = await supabase
+    .from('identity_entities')
+    .select('*')
+    .order('name', { ascending: true });
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function fetchPendingSignals(): Promise<SignalWithRelations[]> {
+  const { data, error } = await supabase
+    .from('identity_signals')
+    .select(
+      '*, entity:identity_entities(name, slug), document:identity_documents(title, canonical_url, snippet, source_region)',
+    )
+    .eq('review_status', 'pending')
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as SignalWithRelations[];
+}
+
+export type ReviewAction = 'approved' | 'rejected' | 'rewritten' | 'needs_evidence';
+
+export async function submitReview(
+  signalId: string,
+  decision: ReviewAction,
+  reviewerId: string,
+  approvedSentence?: string,
+  comment?: string,
+): Promise<void> {
+  const { error: reviewError } = await supabase.from('identity_reviews').insert({
+    signal_id: signalId,
+    reviewer_id: reviewerId,
+    decision,
+    approved_sentence: approvedSentence ?? null,
+    comment: comment ?? null,
+  });
+  if (reviewError) throw reviewError;
+
+  const statusMap: Record<ReviewAction, 'approved' | 'rejected' | 'needs_evidence' | 'pending'> = {
+    approved: 'approved',
+    rejected: 'rejected',
+    rewritten: 'pending',
+    needs_evidence: 'needs_evidence',
+  };
+  const { error: signalError } = await supabase
+    .from('identity_signals')
+    .update({ review_status: statusMap[decision], updated_at: new Date().toISOString() })
+    .eq('id', signalId);
+  if (signalError) throw signalError;
+}
+
+export async function triggerScan(mode: string = 'manual'): Promise<{ ok: boolean; message: string; runId?: string }> {
+  const { data: sessionData } = await supabase.auth.getSession();
+  const token = sessionData.session?.access_token;
+  if (!token) return { ok: false, message: 'Not authenticated.' };
+
+  const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/identity-discovery`;
+  const resp = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ mode }),
+  });
+  const body = await resp.json().catch(() => ({}));
+  if (!resp.ok) return { ok: false, message: body.error || `Scan failed (${resp.status})` };
+  return { ok: true, message: body.message || 'Scan completed.', runId: body.runId };
+}
