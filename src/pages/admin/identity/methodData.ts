@@ -29,7 +29,7 @@ export type FunnelStage = { step: string; label: string };
 export const funnelStages: FunnelStage[] = [
   { step: '1', label: 'Discover broadly' },
   { step: '2', label: 'Match entities and trigger language' },
-  { step: '3', label: 'Cluster duplicate stories' },
+  { step: '3', label: 'Deduplicate URLs and content hashes' },
   { step: '4', label: 'Retrieve selected evidence' },
   { step: '5', label: 'Extract candidate identity signals' },
   { step: '6', label: 'Admin review' },
@@ -55,7 +55,7 @@ export const sourceTiers: SourceTier[] = [
   {
     tier: 'Tier 2',
     title: 'Global discovery',
-    items: ['GDELT', 'Media Cloud'],
+    items: ['GDELT (active)', 'Media Cloud (planned)'],
   },
   {
     tier: 'Tier 3',
@@ -69,23 +69,22 @@ export const sourceTiers: SourceTier[] = [
 export type LimitRow = { label: string; value: string };
 
 export const dailyLimits: LimitRow[] = [
-  { label: 'Headlines discovered', value: 'up to 2,000' },
-  { label: 'Entity matches', value: '200' },
-  { label: 'Story clusters', value: '50' },
-  { label: 'Retrieved documents', value: '20' },
-  { label: 'AI candidates', value: '10' },
-  { label: 'Admin review candidates', value: '3–7' },
-  { label: 'Approved signals', value: '0–3' },
+  { label: 'Entity queries', value: '3' },
+  { label: 'Headlines returned', value: 'up to 150' },
+  { label: 'Documents retained per run', value: 'up to 50' },
+  { label: 'AI extraction candidates', value: 'up to 10' },
+  { label: 'Admin review candidates', value: 'up to 10' },
+  { label: 'Approved signals', value: '0–10' },
 ];
 
 export const decisionsLog: string[] = [
   'W01 admin only',
   'Fortune 50 first',
-  'public/member/explorer/team/admin model planned but not activated',
+  'admin/team/explorer/member/public visibility is recorded; delivery remains admin only',
   'Explorer means a manually granted research contributor',
   'members/public release comes only after the workflow is proven',
   'explicit identity statements first; behavioral inference later',
-  'daily automation only after a seven-day manual-assisted pilot',
+  'daily automation active with an admin-controlled UTC run hour',
 ];
 
 export const visualizationSections: string[] = [

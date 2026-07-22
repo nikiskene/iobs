@@ -5,7 +5,7 @@ import { Section } from './methodPrimitives';
 const PIPELINE_STEPS = [
   { label: 'Discovery', detail: 'GDELT DOC 2.0 broad search + official-domain RSS/API where machine-readable. Free-first, no paywalled bodies.' },
   { label: 'Entity match', detail: 'Match entity names/aliases against headlines and snippets. Filter identity patterns.' },
-  { label: 'Dedup & cluster', detail: 'Deduplicate by canonical URL / content hash. Cluster near-identical coverage into story clusters.' },
+  { label: 'Deduplication', detail: 'Deduplicate by canonical URL and content hash. Semantic story clustering is planned after W01 validation.' },
   { label: 'Extraction', detail: 'If OPENAI_API_KEY present: strict JSON extraction. If absent: heuristic candidates, low confidence. Never block.' },
   { label: 'Human review', detail: 'Admin approves, rewrites, rejects, or flags needs_evidence. Model output kept separate from human decision.' },
   { label: 'Retention', detail: 'Raw rejected/low-value documents purged after 7 days. Approved evidence/provenance retained.' },

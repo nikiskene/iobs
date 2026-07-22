@@ -113,7 +113,7 @@ export function StructureSection() {
   return (
     <Section id="structure" icon={Layers} title="6 · Structure">
       <ul className="space-y-2.5 text-sm leading-6 text-zinc-400">
-        <li>Temporary Discovery records retained about 14 days.</li>
+        <li>Raw discovery records retained for seven days.</li>
         <li>Story Clusters deduplicate repeated coverage.</li>
         <li>
           Approved Identity Signals retain evidence, provenance, classification,
