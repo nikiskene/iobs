@@ -89,6 +89,49 @@ export async function fetchPendingSignals(): Promise<SignalWithRelations[]> {
   return (data ?? []) as SignalWithRelations[];
 }
 
+export type DailyScanSignal = SignalWithRelations & {
+  final_sentence: string;
+  final_classification: string;
+  final_signal_type: string | null;
+  reviewer_confidence: number | null;
+};
+
+export async function fetchDailyScan(date: string): Promise<DailyScanSignal[]> {
+  const start = new Date(`${date}T00:00:00`);
+  const end = new Date(start);
+  end.setDate(end.getDate() + 1);
+  const { data: signals, error } = await supabase
+    .from('identity_signals')
+    .select('*, entity:identity_entities(name, slug), document:identity_documents(title, canonical_url, snippet, source_region)')
+    .eq('review_status', 'approved')
+    .gte('updated_at', start.toISOString())
+    .lt('updated_at', end.toISOString())
+    .order('model_confidence', { ascending: false });
+  if (error) throw error;
+  if (!signals?.length) return [];
+
+  const { data: reviews, error: reviewError } = await supabase
+    .from('identity_reviews')
+    .select('signal_id, approved_sentence, classification_override, signal_type_override, reviewer_confidence, created_at')
+    .in('signal_id', signals.map((signal) => signal.id))
+    .in('decision', ['approved', 'rewritten'])
+    .order('created_at', { ascending: false });
+  if (reviewError) throw reviewError;
+  const latest = new Map<string, Record<string, unknown>>();
+  for (const review of reviews ?? []) if (!latest.has(review.signal_id)) latest.set(review.signal_id, review);
+
+  return (signals as SignalWithRelations[]).map((signal) => {
+    const review = latest.get(signal.id);
+    return {
+      ...signal,
+      final_sentence: (review?.approved_sentence as string) || signal.candidate_sentence,
+      final_classification: (review?.classification_override as string) || signal.classification,
+      final_signal_type: (review?.signal_type_override as string) || signal.signal_type,
+      reviewer_confidence: (review?.reviewer_confidence as number) ?? null,
+    };
+  });
+}
+
 export type ReviewAction = 'approved' | 'rejected' | 'rewritten' | 'needs_evidence';
 
 export type ReviewOverrides = {

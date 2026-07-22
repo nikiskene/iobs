@@ -1,5 +1,6 @@
 // src/components/admin/adminNav.ts
-import { BookOpen, CalendarDays, Compass, Database, FileText, LayoutGrid as Layout, MessageCircle, Palette, Settings, Shield, Telescope, Users } from 'lucide-react';
+// src/components/admin/adminNav.ts
+import { BookOpen, CalendarDays, Compass, Database, FileText, LayoutGrid as Layout, MessageCircle, Newspaper, Palette, Settings, Shield, Telescope, Users } from 'lucide-react';
 
 export type AdminNavLink = {
   to: string;
@@ -139,6 +140,12 @@ export const adminNavGroups: AdminNavGroup[] = [
         label: 'Review',
         icon: FileText,
         description: 'Candidate signal review queue.',
+      },
+      {
+        to: '/admin/identity/daily-scan',
+        label: 'Daily Scan',
+        icon: Newspaper,
+        description: 'Reviewed identity signals and patterns by day.',
       },
       {
         to: '/admin/identity/sources',
