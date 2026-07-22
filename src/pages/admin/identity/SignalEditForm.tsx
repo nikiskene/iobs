@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import type { IdentityClassification, IdentitySignalType, SignalWithRelations } from '../../../lib/identity/types';
 import type { ReviewAction, ReviewOverrides } from '../../../lib/identity/identityApi';
+import { ReviewHelp, reviewHelp } from './reviewHelp';
 
 type Props = {
   signal: SignalWithRelations;
@@ -34,21 +35,21 @@ export default function SignalEditForm({ signal, busy, onCancel, onSubmit }: Pro
         <p className="mt-1 text-sm text-zinc-300">{signal.candidate_sentence}</p>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
-        <Field label="Classification">
+        <Field label="Classification" help={reviewHelp.classification}>
           <select value={classification} onChange={(e) => setClassification(e.target.value as IdentityClassification)} className={controlClass}>
             <option value="what">WHAT</option><option value="how">HOW</option><option value="context">CONTEXT</option>
           </select>
         </Field>
-        <Field label="Signal type">
+        <Field label="Signal type" help={reviewHelp.signalType}>
           <select value={signalType} onChange={(e) => setSignalType(e.target.value as IdentitySignalType | '')} className={controlClass}>
             <option value="">None</option>
             {['definition', 'purpose', 'aspiration', 'promise', 'preservation', 'rejection', 'external_interpretation'].map((value) => <option key={value} value={value}>{value.replace(/_/g, ' ')}</option>)}
           </select>
         </Field>
       </div>
-      <Field label="Final sentence"><textarea value={sentence} onChange={(e) => setSentence(e.target.value)} rows={3} className={controlClass} /></Field>
-      <Field label={`Reviewer confidence: ${Math.round(confidence * 100)}%`}><input type="range" min="0" max="1" step="0.05" value={confidence} onChange={(e) => setConfidence(Number(e.target.value))} className="w-full" /></Field>
-      <Field label="Reviewer comment / reason"><textarea value={comment} onChange={(e) => setComment(e.target.value)} rows={2} className={controlClass} placeholder="Why did you change or decide this signal?" /></Field>
+      <Field label="Final sentence" help={reviewHelp.finalSentence}><textarea value={sentence} onChange={(e) => setSentence(e.target.value)} rows={3} className={controlClass} /></Field>
+      <Field label={`Reviewer confidence: ${Math.round(confidence * 100)}%`} help={reviewHelp.confidence}><input type="range" min="0" max="1" step="0.05" value={confidence} onChange={(e) => setConfidence(Number(e.target.value))} className="w-full" /></Field>
+      <Field label="Reviewer comment / reason" help={reviewHelp.comment}><textarea value={comment} onChange={(e) => setComment(e.target.value)} rows={2} className={controlClass} placeholder="Why did you change or decide this signal?" /></Field>
       <div className="flex flex-wrap gap-2">
         <button onClick={() => submit('rewritten')} disabled={busy || !sentence.trim()} className="rounded-lg bg-white px-3 py-2 text-xs font-medium text-black disabled:opacity-50">Save corrections</button>
         <button onClick={() => submit('approved')} disabled={busy || !sentence.trim()} className="rounded-lg bg-emerald-500/20 px-3 py-2 text-xs text-emerald-300 disabled:opacity-50">Save & approve</button>
@@ -61,6 +62,6 @@ export default function SignalEditForm({ signal, busy, onCancel, onSubmit }: Pro
 
 const controlClass = 'w-full rounded-lg border border-white/10 bg-zinc-950 p-3 text-sm text-white focus:border-white/20 focus:outline-none';
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return <label className="block space-y-1.5 text-xs uppercase tracking-wider text-zinc-500"><span>{label}</span>{children}</label>;
+function Field({ label, help, children }: { label: string; help: string; children: React.ReactNode }) {
+  return <label className="block space-y-1.5 text-xs uppercase tracking-wider text-zinc-500"><span className="flex items-center gap-1.5">{label}<ReviewHelp text={help} /></span>{children}</label>;
 }
