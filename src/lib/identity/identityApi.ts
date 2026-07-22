@@ -33,7 +33,10 @@ export async function fetchOverviewCounts(): Promise<ScanRunCounts> {
   const [docs, clusters, candidates, pending, approved] = await Promise.all([
     supabase.from('identity_documents').select('id', { count: 'exact', head: true }),
     supabase.from('identity_story_clusters').select('id', { count: 'exact', head: true }),
-    supabase.from('identity_signals').select('id', { count: 'exact', head: true }),
+    supabase
+      .from('identity_signals')
+      .select('id', { count: 'exact', head: true })
+      .neq('review_status', 'rejected'),
     supabase
       .from('identity_signals')
       .select('id', { count: 'exact', head: true })
@@ -88,19 +91,29 @@ export async function fetchPendingSignals(): Promise<SignalWithRelations[]> {
 
 export type ReviewAction = 'approved' | 'rejected' | 'rewritten' | 'needs_evidence';
 
+export type ReviewOverrides = {
+  approvedSentence?: string;
+  classification?: string;
+  signalType?: string;
+  reviewerConfidence?: number;
+  comment?: string;
+};
+
 export async function submitReview(
   signalId: string,
   decision: ReviewAction,
   reviewerId: string,
-  approvedSentence?: string,
-  comment?: string,
+  overrides: ReviewOverrides = {},
 ): Promise<void> {
   const { error: reviewError } = await supabase.from('identity_reviews').insert({
     signal_id: signalId,
     reviewer_id: reviewerId,
     decision,
-    approved_sentence: approvedSentence ?? null,
-    comment: comment ?? null,
+    approved_sentence: overrides.approvedSentence ?? null,
+    classification_override: overrides.classification ?? null,
+    signal_type_override: overrides.signalType ?? null,
+    reviewer_confidence: overrides.reviewerConfidence ?? null,
+    comment: overrides.comment ?? null,
   });
   if (reviewError) throw reviewError;
 
@@ -115,6 +128,11 @@ export async function submitReview(
     .update({ review_status: statusMap[decision], updated_at: new Date().toISOString() })
     .eq('id', signalId);
   if (signalError) throw signalError;
+}
+
+export async function deleteDuplicateSignal(signalId: string): Promise<void> {
+  const { error } = await supabase.from('identity_signals').delete().eq('id', signalId);
+  if (error) throw error;
 }
 
 export async function triggerScan(mode: string = 'manual'): Promise<{ ok: boolean; message: string; runId?: string }> {
