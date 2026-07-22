@@ -10,17 +10,17 @@ import {
 import { buildGdeltQueries, hashContent, searchGdelt } from './gdelt.ts';
 import {
   buildHeuristicCandidate,
-  extractWithOpenAI,
   matchEntities,
   type CandidateSignal,
 } from './extraction.ts';
+import { extractWithOpenAI } from './aiExtraction.ts';
 import { storeDocument, storeSignal } from './storage.ts';
 import { applyRetention } from './retention.ts';
 
 const MAX_ENTITIES = 3;
 const MAX_GDELT_RECORDS = 50;
-const MAX_DOCUMENTS = 50;
-const MAX_SIGNALS = 10;
+const MAX_DOCUMENTS = 20;
+const MAX_SIGNALS = 20;
 const GDELT_DELAY_MS = 6000;
 
 export type ScanResult = {
@@ -59,6 +59,7 @@ export async function runScan(mode: string): Promise<ScanResult> {
       candidate_signals: 0,
       ai_candidates: 0,
       heuristic_candidates: 0,
+      extraction_errors: 0,
     };
 
     const queries = buildGdeltQueries(entities, MAX_ENTITIES);
@@ -117,13 +118,14 @@ export async function runScan(mode: string): Promise<ScanResult> {
               sourceName: c.document.source_name,
             })),
             entity,
-            null,
           );
           counts.ai_candidates += aiSignals.length;
           for (const signal of aiSignals) await storeSignal(supabase, signal);
         }
-        useHeuristicFallback = counts.ai_candidates === 0;
-      } catch {
+        useHeuristicFallback = false;
+      } catch (error) {
+        console.error('OpenAI extraction failed', error);
+        counts.extraction_errors++;
         useHeuristicFallback = true;
       }
     }
@@ -151,5 +153,6 @@ export async function runScan(mode: string): Promise<ScanResult> {
 }
 
 function formatMessage(c: Record<string, number>, hasAI: boolean): string {
-  return `Discovery complete: ${c.documents_found} found, ${c.documents_stored} stored, ${c.candidate_signals} candidates (${hasAI ? 'AI' : 'heuristic'}).`;
+  const method = c.ai_candidates > 0 ? 'AI' : c.extraction_errors > 0 ? 'heuristic fallback' : hasAI ? 'AI, no qualifying signals' : 'heuristic';
+  return `Discovery complete: ${c.documents_found} found, ${c.documents_stored} stored, ${c.candidate_signals} candidates (${method}).`;
 }
