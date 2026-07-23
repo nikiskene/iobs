@@ -1,3 +1,4 @@
+// src/hooks/useAuth.tsx
 import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react';
 import type { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
@@ -43,29 +44,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [user, fetchProfile]);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session: s } }) => {
-      setSession(s);
-      setUser(s?.user ?? null);
-      if (s?.user) {
-        fetchProfile(s.user.id).finally(() => setLoading(false));
-      } else {
-        setLoading(false);
-      }
-    });
+    let active = true;
+
+    async function restoreSession() {
+      const { data: { session: restored } } = await supabase.auth.getSession();
+      if (!active) return;
+      setSession(restored);
+      setUser(restored?.user ?? null);
+      if (restored?.user) await fetchProfile(restored.user.id);
+      if (active) setLoading(false);
+    }
+
+    void restoreSession();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, s) => {
+      if (!active) return;
       setSession(s);
       setUser(s?.user ?? null);
       if (s?.user) {
-        (async () => {
-          await fetchProfile(s.user.id);
-        })();
+        void fetchProfile(s.user.id);
       } else {
         setProfile(null);
       }
+      setLoading(false);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      active = false;
+      subscription.unsubscribe();
+    };
   }, [fetchProfile]);
 
   return (
