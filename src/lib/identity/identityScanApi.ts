@@ -21,6 +21,7 @@ export async function fetchRunAssessment(runId: string): Promise<RunAssessment> 
   const { data, error } = await supabase
     .from('identity_signals')
     .select('classification, document:identity_documents!inner(scan_run_id)')
+    .eq('quality_status', 'verified')
     .eq('document.scan_run_id', runId);
   if (error) throw error;
   return (data ?? []).reduce<RunAssessment>((counts, signal) => {

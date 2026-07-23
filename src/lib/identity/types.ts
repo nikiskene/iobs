@@ -105,6 +105,7 @@ export type IdentitySignal = {
   prompt_version: string | null;
   review_status: IdentityReviewStatus;
   review_eligible: boolean;
+  quality_status: 'unverified' | 'verified' | 'invalid';
   visibility: IdentityVisibility | 'research_team';
   created_at: string;
   updated_at: string;

@@ -68,7 +68,12 @@ export async function discoverCandidates(
       const screened = prioritizeArticles(articles, MAX_GDELT_RECORDS);
       counts.documents_screened_in += screened.length;
       for (const article of screened) {
-        addArticle(article, null, [], entities, seen, candidates);
+        const registered = sources.find((source) =>
+          normalizeDomain(source.domain) === normalizeDomain(article.domain)
+          && source.automation_allowed
+          && source.rights_status === 'allowed'
+        ) ?? null;
+        addArticle(article, registered, [], entities, seen, candidates);
         counts.discovery_documents++;
       }
     } catch (error) {
@@ -98,4 +103,8 @@ function addArticle(
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function normalizeDomain(value: string | null): string {
+  return (value ?? '').replace(/^www\./, '').toLowerCase();
 }

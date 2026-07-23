@@ -15,11 +15,13 @@ export default function ScanFunnel({
   const analyzed = number(run?.counts?.balanced_documents)
     || number(run?.counts?.documents_stored)
     || screened;
-  const identity = number(run?.counts?.what_signals);
-  const operating = number(run?.counts?.how_signals);
+  const identity = number(run?.counts?.what_documents);
+  const operating = number(run?.counts?.how_documents);
+  const context = number(run?.counts?.context_documents);
   const approved = Number(totals?.approved_signals ?? 0);
   const max = Math.max(discovered, 1);
-  const yieldRate = discovered ? (identity / discovered) * 100 : 0;
+  const assessed = identity + operating + context;
+  const yieldRate = assessed ? (identity / assessed) * 100 : 0;
 
   const stages = [
     { label: 'Discovered', value: discovered, color: 'bg-zinc-500' },
@@ -35,7 +37,7 @@ export default function ScanFunnel({
           <p className="text-xs uppercase tracking-[0.25em] text-sky-400">Research funnel</p>
           <h2 className="mt-2 font-serif text-3xl text-white">
             {discovered > 0
-              ? `${formatRate(yieldRate)} of observed output expressed identity.`
+              ? `${formatRate(yieldRate)} of evidence-assessed documents expressed identity.`
               : 'Identity is the exception.'}
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">

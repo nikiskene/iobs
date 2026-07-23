@@ -15,10 +15,12 @@ export function IdentityPulse({ signals, run, assessment, date }: Props) {
   const total = number(run?.counts?.balanced_documents)
     || number(run?.counts?.documents_stored)
     || raw;
-  const what = number(run?.counts?.what_signals) || assessment.what;
-  const how = number(run?.counts?.how_signals) || assessment.how;
-  const noise = Math.max(total - what - how, 0);
-  const yieldRate = total > 0 ? (what / total) * 100 : 0;
+  const what = number(run?.counts?.what_documents) || assessment.what;
+  const how = number(run?.counts?.how_documents) || assessment.how;
+  const context = number(run?.counts?.context_documents) || assessment.context;
+  const assessed = what + how + context;
+  const unassessed = Math.max(total - assessed, 0);
+  const yieldRate = assessed > 0 ? (what / assessed) * 100 : 0;
   const approved = signals.filter((signal) => signal.final_classification === 'what').length;
   const completeness = run?.counts?.analysis_complete;
   const incomplete = completeness !== undefined && number(completeness) === 0;
@@ -37,7 +39,7 @@ export function IdentityPulse({ signals, run, assessment, date }: Props) {
             {incomplete
               ? 'Today’s material was collected, but identity analysis is incomplete.'
               : total > 0
-              ? `${formatRate(yieldRate)} of today’s public output expressed identity.`
+              ? `${formatRate(yieldRate)} of evidence-assessed items expressed identity.`
               : 'The scan has not measured today’s public output yet.'}
           </p>
           <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-400">
@@ -50,7 +52,7 @@ export function IdentityPulse({ signals, run, assessment, date }: Props) {
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10">
           <NumberBlock value={raw} label="raw items found" />
           <NumberBlock value={total} label="weighted sample" />
-          <NumberBlock value={Math.max(total - what, 0)} label="without identity" />
+          <NumberBlock value={assessed} label="evidence assessed" />
           <NumberBlock value={how} label="HOW signals" />
           <NumberBlock value={what} label="identity signals" accent />
           <NumberBlock value={approved} label="human approved" />
@@ -59,12 +61,14 @@ export function IdentityPulse({ signals, run, assessment, date }: Props) {
 
       <div className="px-6 pb-7 sm:px-8 lg:px-10">
         <div className="flex h-5 w-full overflow-hidden rounded-full bg-zinc-800">
-          <Segment value={noise} total={total} className="bg-zinc-700" />
+          <Segment value={unassessed} total={total} className="bg-zinc-800" />
+          <Segment value={context} total={total} className="bg-zinc-600" />
           <Segment value={how} total={total} className="bg-violet-400" />
           <Segment value={what} total={total} className="bg-sky-300" minimum />
         </div>
-        <div className="mt-4 grid gap-3 text-xs uppercase tracking-wider text-zinc-500 sm:grid-cols-3">
-          <Legend color="bg-zinc-700" value={noise} label="Noise / context" />
+        <div className="mt-4 grid gap-3 text-xs uppercase tracking-wider text-zinc-500 sm:grid-cols-2 lg:grid-cols-4">
+          <Legend color="bg-zinc-800" value={unassessed} label="Unassessed" />
+          <Legend color="bg-zinc-600" value={context} label="Context" />
           <Legend color="bg-violet-400" value={how} label="HOW — operating language" />
           <Legend color="bg-sky-300" value={what} label="WHAT — identity" />
         </div>
@@ -73,6 +77,12 @@ export function IdentityPulse({ signals, run, assessment, date }: Props) {
             ? 'No identity-yield conclusion is published when AI classification is unavailable or incomplete.'
             : 'The engine’s deliverable is the blue remainder: evidence-backed identity language, measured against a regionally balanced sample rather than the loudest source.'}
         </p>
+        {!incomplete && total > 0 && (
+          <p className="mt-3 text-xs text-zinc-600">
+            Evidence coverage: {formatRate((assessed / total) * 100)} of the weighted sample.
+            Identity yield is never calculated from unassessed material.
+          </p>
+        )}
       </div>
     </section>
   );

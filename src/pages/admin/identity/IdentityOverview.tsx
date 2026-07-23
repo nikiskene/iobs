@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { ListChecks, RefreshCw, Telescope } from 'lucide-react';
 import {
   fetchLastScan,
-  fetchOverviewCounts,
   fetchScanHistory,
   triggerScan,
 } from '../../../lib/identity/identityApi';
+import { fetchOverviewCounts } from '../../../lib/identity/identityOverviewApi';
 import type { IdentityScanRun, ScanRunCounts } from '../../../lib/identity/types';
 import { ErrorBanner, PageHeader, Spinner, StatCard } from './identityUi';
 import { ScanHistory, SchedulingNote, formatDate } from './overviewParts';

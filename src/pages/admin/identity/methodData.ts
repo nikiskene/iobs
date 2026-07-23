@@ -90,6 +90,8 @@ export const decisionsLog: string[] = [
   'explicit identity statements first; behavioral inference later',
   'daily automation active; failed feeds remain visible through source health',
   'only sources with explicit automation rights enter unattended ingestion',
+  'the first 59 stored classifications were fully audited and quarantined from all metrics',
+  'identity yield counts unique evidence-assessed documents, never raw signal rows',
 ];
 
 export const visualizationSections: string[] = [

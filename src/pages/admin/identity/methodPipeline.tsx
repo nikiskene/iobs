@@ -6,8 +6,9 @@ const PIPELINE_STEPS = [
   { label: 'Discovery', detail: 'Verified official feeds run in parallel; grouped GDELT searches cover every active cohort entity. Free-first, no paywalled bodies.' },
   { label: 'Entity match', detail: 'Official domains map directly to entities; discovery items use names and aliases.' },
   { label: 'Cheap screening', detail: 'Local trigger grammar removes routine and low-value material before storage or AI use.' },
+  { label: 'Evidence retrieval', detail: 'For automation-permitted sources, the article is read transiently. Unknown or prohibited sources remain unassessed metadata.' },
   { label: 'Deduplication', detail: 'Deduplicate by canonical URL and content hash. Semantic story clustering is planned after W01 validation.' },
-  { label: 'Assessment', detail: 'AI classifies WHAT / HOW / CONTEXT. Identity relevance is 0 for ordinary facts, 20–49 for operational implication, and 70–100 for explicit identity.' },
+  { label: 'Assessment', detail: 'AI classifies WHAT / HOW / CONTEXT only from retrieved evidence. Every evidence passage must match the source text verbatim.' },
   { label: 'Review gate', detail: 'Only WHAT scoring at least 60 identity relevance, 40 evidence strength, and 55% model confidence enters human review.' },
   { label: 'Human review', detail: 'Admin approves, rewrites, rejects, or flags needs_evidence. HOW and CONTEXT remain measurement data, not identity candidates.' },
   { label: 'Retention', detail: 'Raw rejected/low-value documents purged after 7 days. Approved evidence/provenance retained.' },
@@ -80,6 +81,7 @@ export function StorageSection() {
       <ul className="space-y-2 text-sm leading-6 text-zinc-400">
         <li>Store: canonical URL, headline, source/domain, publication time, short snippet, language, entity match, retrieval time, content hash.</li>
         <li>Never store full article bodies by default.</li>
+        <li>Article bodies used for analysis are transient; only the short supporting passage survives.</li>
         <li>Raw rejected / low-value documents purged after 7 days.</li>
         <li>Approved evidence and provenance retained indefinitely.</li>
       </ul>

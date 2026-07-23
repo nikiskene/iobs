@@ -1,5 +1,6 @@
 // supabase/functions/identity-discovery/storage.ts
 import type { CandidateSignal } from './extraction.ts';
+import { isVerifiedWhat } from './qualityGate.ts';
 
 const RETENTION_DAYS = 7;
 
@@ -7,7 +8,7 @@ export async function storeDocument(
   supabase: ReturnType<typeof import('./db.ts').getSupabase>,
   candidate: CandidateSignal,
   runId: string,
-): Promise<void> {
+): Promise<boolean> {
   const retainUntil = new Date();
   retainUntil.setDate(retainUntil.getDate() + RETENTION_DAYS);
   const { error } = await supabase.from('identity_documents').insert({
@@ -24,7 +25,9 @@ export async function storeDocument(
     retain_until: retainUntil.toISOString().slice(0, 10),
     metadata: { domain: candidate.document.domain, source_name: candidate.document.source_name },
   });
-  if (error && !error.message.includes('duplicate')) throw error;
+  if (error?.code === '23505' || error?.message.includes('duplicate')) return false;
+  if (error) throw error;
+  return true;
 }
 
 export async function storeSignal(
@@ -57,6 +60,7 @@ export async function storeSignal(
     prompt_version: candidate.signal.prompt_version,
     review_status: 'pending',
     review_eligible: isReviewEligible(candidate),
+    quality_status: 'verified',
   });
   if (error?.code === '23505' || error?.message.includes('duplicate')) return false;
   if (error) throw error;
@@ -64,9 +68,6 @@ export async function storeSignal(
 }
 
 function isReviewEligible(candidate: CandidateSignal): boolean {
-  return candidate.signal.classification === 'what'
-    && Number(candidate.signal.identity_relevance ?? 0) >= 60
-    && Number(candidate.signal.evidence_strength ?? 0) >= 40
-    && Number(candidate.signal.model_confidence ?? 0) >= 0.55
+  return isVerifiedWhat(candidate)
     && !String(candidate.signal.extraction_model ?? '').startsWith('heuristic');
 }

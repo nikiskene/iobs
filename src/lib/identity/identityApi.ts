@@ -4,7 +4,6 @@ import type {
   IdentityEntity,
   IdentityScanRun,
   IdentitySource,
-  ScanRunCounts,
   SignalWithRelations,
 } from './types';
 
@@ -27,36 +26,6 @@ export async function fetchScanHistory(limit = 10): Promise<IdentityScanRun[]> {
     .limit(limit);
   if (error) throw error;
   return data ?? [];
-}
-export async function fetchOverviewCounts(): Promise<ScanRunCounts> {
-  const [docs, clusters, candidates, pending, approved] = await Promise.all([
-    supabase.from('identity_documents').select('id', { count: 'exact', head: true }),
-    supabase.from('identity_story_clusters').select('id', { count: 'exact', head: true }),
-    supabase
-      .from('identity_signals')
-      .select('id', { count: 'exact', head: true })
-      .eq('review_eligible', true)
-      .neq('review_status', 'rejected'),
-    supabase
-      .from('identity_signals')
-      .select('id', { count: 'exact', head: true })
-      .eq('review_eligible', true)
-      .eq('review_status', 'pending'),
-    supabase
-      .from('identity_signals')
-      .select('id', { count: 'exact', head: true })
-      .eq('review_status', 'approved'),
-  ]);
-  for (const r of [docs, clusters, candidates, pending, approved]) {
-    if (r.error) throw r.error;
-  }
-  return {
-    documents_found: docs.count ?? 0,
-    clusters: clusters.count ?? 0,
-    candidate_signals: candidates.count ?? 0,
-    pending_review: pending.count ?? 0,
-    approved_signals: approved.count ?? 0,
-  };
 }
 export async function fetchSources(): Promise<IdentitySource[]> {
   const { data, error } = await supabase
@@ -82,6 +51,7 @@ export async function fetchPendingSignals(): Promise<SignalWithRelations[]> {
     .select(
       '*, entity:identity_entities(name, slug), document:identity_documents(title, canonical_url, snippet, source_region)',
     )
+    .eq('quality_status', 'verified')
     .eq('review_eligible', true)
     .eq('review_status', 'pending')
     .order('created_at', { ascending: false });
@@ -103,6 +73,7 @@ export async function fetchDailyScan(date: string): Promise<DailyScanSignal[]> {
   const { data: signals, error } = await supabase
     .from('identity_signals')
     .select('*, entity:identity_entities(name, slug), document:identity_documents(title, canonical_url, snippet, source_region)')
+    .eq('quality_status', 'verified')
     .eq('review_status', 'approved')
     .gte('updated_at', start.toISOString())
     .lt('updated_at', end.toISOString())

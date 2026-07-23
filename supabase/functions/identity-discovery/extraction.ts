@@ -16,6 +16,8 @@ export type CandidateSignal = {
     source_id: string | null;
     source_name: string | null;
     domain: string | null;
+    analysis_text?: string | null;
+    retrieval_allowed: boolean;
   };
   signal: {
     speaker_type: string;
@@ -40,11 +42,10 @@ export function matchEntities(
   article: GdeltArticle,
   entities: EntityRow[],
 ): EntityRow[] {
-  const titleLower = article.title.toLowerCase();
-  const snippetLower = (article.snippet ?? '').toLowerCase();
+  const searchable = normalizeSearchText(`${article.title} ${article.snippet ?? ''}`);
   return entities.filter((e) => {
-    const names = [e.name, ...e.aliases].map((n) => n.toLowerCase());
-    return names.some((n) => titleLower.includes(n) || snippetLower.includes(n));
+    const names = [e.name, ...e.aliases].map(normalizeSearchText).filter(Boolean);
+    return names.some((name) => ` ${searchable} `.includes(` ${name} `));
   });
 }
 
@@ -116,6 +117,8 @@ export function buildHeuristicCandidate(
       source_id: source?.id ?? null,
       source_name: source?.name ?? article.sourceName,
       domain: article.domain ?? source?.domain ?? null,
+      analysis_text: null,
+      retrieval_allowed: !!source?.automation_allowed && source.rights_status === 'allowed',
     },
     signal: {
       speaker_type: classification.is_context ? 'system' : 'editorial',
@@ -133,4 +136,13 @@ export function buildHeuristicCandidate(
       prompt_version: 'heuristic-v1',
     },
   };
+}
+
+function normalizeSearchText(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
