@@ -2,7 +2,7 @@
 import type { SourceRow } from './db.ts';
 import type { GdeltArticle } from './gdelt.ts';
 
-const MAX_FEED_ITEMS = 10;
+const MAX_FEED_ITEMS = 30;
 const MAX_AGE_DAYS = 8;
 
 export async function fetchOfficialFeed(source: SourceRow): Promise<GdeltArticle[]> {

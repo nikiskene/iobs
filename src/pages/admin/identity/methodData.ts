@@ -71,9 +71,9 @@ export type LimitRow = { label: string; value: string };
 export const dailyLimits: LimitRow[] = [
   { label: 'Entity queries', value: '3' },
   { label: 'Official feeds', value: '5 initial feeds' },
-  { label: 'Documents retained per run', value: 'up to 20' },
-  { label: 'AI extraction candidates', value: 'up to 10' },
-  { label: 'Admin review candidates', value: 'up to 10' },
+  { label: 'Documents analyzed per run', value: 'up to 100' },
+  { label: 'AI analysis batch', value: '20 documents' },
+  { label: 'Admin review observations', value: 'only materially useful items' },
   { label: 'Approved signals', value: '0–10' },
 ];
 

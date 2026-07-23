@@ -31,6 +31,12 @@ export default function SignalCard({
             <Badge tone="warning">
               {signal.model_confidence == null ? '—' : `${Math.round(signal.model_confidence * 100)}%`}
             </Badge>
+            <Badge tone={scoreTone(signal.identity_relevance)}>
+              Identity {signal.identity_relevance ?? '—'}/100
+            </Badge>
+            <Badge tone={scoreTone(signal.evidence_strength)}>
+              Evidence {signal.evidence_strength ?? '—'}/100
+            </Badge>
           </div>
           <TextBlock label="Candidate sentence" text={signal.candidate_sentence} />
           <TextBlock label="Evidence" text={signal.evidence_text} muted />
@@ -64,6 +70,13 @@ export default function SignalCard({
       </div>
     </article>
   );
+}
+
+function scoreTone(score: number | null): 'neutral' | 'warning' | 'success' {
+  if (score == null) return 'neutral';
+  if (score >= 70) return 'success';
+  if (score >= 40) return 'warning';
+  return 'neutral';
 }
 
 function TextBlock({ label, text, muted = false }: { label: string; text: string; muted?: boolean }) {

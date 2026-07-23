@@ -11,6 +11,7 @@ import {
 import type { IdentityScanRun, ScanRunCounts } from '../../../lib/identity/types';
 import { ErrorBanner, PageHeader, Spinner, StatCard } from './identityUi';
 import { ScanHistory, SchedulingNote, formatDate } from './overviewParts';
+import ScanFunnel from './ScanFunnel';
 
 export default function IdentityOverview() {
   const [counts, setCounts] = useState<ScanRunCounts | null>(null);
@@ -111,6 +112,7 @@ export default function IdentityOverview() {
         <StatCard label="Approved signals" value={counts?.approved_signals ?? 0} />
       </div>
 
+      <ScanFunnel run={lastScan} totals={counts} />
       <ScanHistory history={history} lastScan={lastScan} />
       <SchedulingNote />
     </div>

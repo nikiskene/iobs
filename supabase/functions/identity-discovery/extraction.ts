@@ -27,6 +27,8 @@ export type CandidateSignal = {
     candidate_sentence: string;
     model_interpretation: string | null;
     model_confidence: number | null;
+    identity_relevance: number | null;
+    evidence_strength: number | null;
     extraction_model: string | null;
     prompt_version: string | null;
   };
@@ -121,6 +123,8 @@ export function buildHeuristicCandidate(
       candidate_sentence: article.title,
       model_interpretation: 'Heuristic candidate: no AI extraction model available.',
       model_confidence: 0.25,
+      identity_relevance: classification.classification === 'what' ? 40 : 10,
+      evidence_strength: article.snippet ? 35 : 15,
       extraction_model: 'heuristic-v1',
       prompt_version: 'heuristic-v1',
     },

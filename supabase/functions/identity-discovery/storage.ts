@@ -30,14 +30,14 @@ export async function storeDocument(
 export async function storeSignal(
   supabase: ReturnType<typeof import('./db.ts').getSupabase>,
   candidate: CandidateSignal,
-): Promise<void> {
+): Promise<boolean> {
   const { data: doc } = await supabase
     .from('identity_documents')
     .select('id')
     .eq('canonical_url', candidate.document.canonical_url)
     .maybeSingle();
   const documentId = doc?.id;
-  if (!documentId) return;
+  if (!documentId) return false;
 
   const { error } = await supabase.from('identity_signals').insert({
     entity_id: candidate.entity_id,
@@ -51,9 +51,13 @@ export async function storeSignal(
     candidate_sentence: candidate.signal.candidate_sentence,
     model_interpretation: candidate.signal.model_interpretation,
     model_confidence: candidate.signal.model_confidence,
+    identity_relevance: candidate.signal.identity_relevance,
+    evidence_strength: candidate.signal.evidence_strength,
     extraction_model: candidate.signal.extraction_model,
     prompt_version: candidate.signal.prompt_version,
     review_status: 'pending',
   });
+  if (error?.code === '23505' || error?.message.includes('duplicate')) return false;
   if (error) throw error;
+  return true;
 }

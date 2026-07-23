@@ -84,6 +84,8 @@ export type IdentitySignal = {
   candidate_sentence: string;
   model_interpretation: string | null;
   model_confidence: number | null;
+  identity_relevance: number | null;
+  evidence_strength: number | null;
   extraction_model: string | null;
   prompt_version: string | null;
   review_status: IdentityReviewStatus;

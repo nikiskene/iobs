@@ -21,8 +21,7 @@ import { applyRetention } from './retention.ts';
 
 const MAX_ENTITIES = 3;
 const MAX_GDELT_RECORDS = 50;
-const MAX_DOCUMENTS = 20;
-const MAX_SIGNALS = 20;
+const MAX_DOCUMENTS = 100;
 const GDELT_DELAY_MS = 6000;
 
 export type ScanResult = {
@@ -127,15 +126,16 @@ export async function runScan(mode: string): Promise<ScanResult> {
       counts.documents_stored++;
     }
 
-    const signalCandidates = limited.slice(0, MAX_SIGNALS);
+    const signalCandidates = limited;
     let useHeuristicFallback = !hasOpenAI;
     if (hasOpenAI) {
       try {
         for (const entity of entities.slice(0, MAX_ENTITIES)) {
           const entityCandidates = signalCandidates.filter((candidate) => candidate.entity_id === entity.id);
           if (!entityCandidates.length) continue;
-          const aiSignals = await extractWithOpenAI(
-            entityCandidates.map((c) => ({
+          for (let offset = 0; offset < entityCandidates.length; offset += 20) {
+            const batch = entityCandidates.slice(offset, offset + 20);
+            const aiSignals = await extractWithOpenAI(batch.map((c) => ({
               url: c.document.canonical_url,
               title: c.document.title,
               snippet: c.document.snippet ?? '',
@@ -143,11 +143,11 @@ export async function runScan(mode: string): Promise<ScanResult> {
               language: c.document.language,
               domain: c.document.domain,
               sourceName: c.document.source_name,
-            })),
-            entity,
-          );
-          counts.ai_candidates += aiSignals.length;
-          for (const signal of aiSignals) await storeSignal(supabase, signal);
+            })), entity);
+            for (const signal of aiSignals) {
+              if (await storeSignal(supabase, signal)) counts.ai_candidates++;
+            }
+          }
         }
         useHeuristicFallback = false;
       } catch (error) {
@@ -159,8 +159,7 @@ export async function runScan(mode: string): Promise<ScanResult> {
 
     for (const candidate of signalCandidates) {
       if (useHeuristicFallback) {
-        await storeSignal(supabase, candidate);
-        counts.heuristic_candidates++;
+        if (await storeSignal(supabase, candidate)) counts.heuristic_candidates++;
       }
     }
     counts.candidate_signals = counts.ai_candidates + counts.heuristic_candidates;
