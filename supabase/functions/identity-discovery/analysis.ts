@@ -10,11 +10,12 @@ export async function analyzeCandidates(
   supabase: ReturnType<typeof getSupabase>,
   candidates: CandidateSignal[],
   entities: EntityRow[],
-): Promise<{ stored: number; errors: number }> {
+): Promise<{ stored: number; errors: number; what: number; how: number; context: number }> {
   const tasks = buildTasks(candidates, entities);
   let cursor = 0;
   let stored = 0;
   let errors = 0;
+  const classification = { what: 0, how: 0, context: 0 };
 
   async function worker() {
     while (cursor < tasks.length) {
@@ -23,7 +24,11 @@ export async function analyzeCandidates(
         const signals = await extractWithOpenAI(task.candidates.map(toArticle), task.entity);
         for (const signal of signals) {
           if (!isUseful(signal)) continue;
-          if (await storeSignal(supabase, signal)) stored++;
+          if (await storeSignal(supabase, signal)) {
+            stored++;
+            const key = signal.signal.classification as keyof typeof classification;
+            if (key in classification) classification[key]++;
+          }
         }
       } catch (error) {
         console.error('OpenAI extraction batch failed', error);
@@ -32,7 +37,7 @@ export async function analyzeCandidates(
     }
   }
   await Promise.all(Array.from({ length: Math.min(CONCURRENCY, tasks.length) }, worker));
-  return { stored, errors };
+  return { stored, errors, ...classification };
 }
 
 function buildTasks(candidates: CandidateSignal[], entities: EntityRow[]) {

@@ -13,16 +13,17 @@ export default function ScanFunnel({
   const discovered = number(run?.counts?.documents_found) || Number(totals?.documents_found ?? 0);
   const screened = number(run?.counts?.documents_screened_in) || discovered;
   const analyzed = number(run?.counts?.documents_stored) || screened;
-  const observations = number(run?.counts?.candidate_signals) || Number(totals?.candidate_signals ?? 0);
+  const identity = number(run?.counts?.what_signals);
+  const operating = number(run?.counts?.how_signals);
   const approved = Number(totals?.approved_signals ?? 0);
   const max = Math.max(discovered, 1);
-  const yieldRate = analyzed ? (observations / analyzed) * 100 : 0;
+  const yieldRate = discovered ? (identity / discovered) * 100 : 0;
 
   const stages = [
     { label: 'Discovered', value: discovered, color: 'bg-zinc-500' },
     { label: 'Screened in', value: screened, color: 'bg-amber-400' },
     { label: 'Analyzed', value: analyzed, color: 'bg-violet-400' },
-    { label: 'Observations', value: observations, color: 'bg-sky-400' },
+    { label: 'Identity', value: identity, color: 'bg-sky-300' },
   ];
 
   return (
@@ -30,10 +31,14 @@ export default function ScanFunnel({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.25em] text-sky-400">Research funnel</p>
-          <h2 className="mt-2 font-serif text-3xl text-white">Identity is the exception.</h2>
+          <h2 className="mt-2 font-serif text-3xl text-white">
+            {discovered > 0
+              ? `${formatRate(yieldRate)} of observed output expressed identity.`
+              : 'Identity is the exception.'}
+          </h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
-            The scanner is designed to reveal scarcity: activity is common, explicit institutional
-            identity is rare.
+            The gap is the finding: institutions publish constantly, but rarely say who they are,
+            seek to become, or intend to remain.
           </p>
         </div>
         <Link
@@ -61,8 +66,9 @@ export default function ScanFunnel({
         </div>
 
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
-          <Metric value={`${yieldRate.toFixed(1)}%`} label="Observation yield" />
-          <Metric value={approved} label="Approved total" />
+          <Metric value={operating} label="HOW signals" />
+          <Metric value={identity} label="WHAT signals" />
+          <Metric value={approved} label="Human approved" />
         </div>
       </div>
     </section>
@@ -81,4 +87,9 @@ function Metric({ value, label }: { value: string | number; label: string }) {
 function number(value: number | string | undefined): number {
   const parsed = Number(value ?? 0);
   return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function formatRate(rate: number): string {
+  if (rate > 0 && rate < 0.1) return '<0.1%';
+  return `${rate.toFixed(1)}%`;
 }

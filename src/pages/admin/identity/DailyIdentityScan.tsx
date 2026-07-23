@@ -1,6 +1,15 @@
 // src/pages/admin/identity/DailyIdentityScan.tsx
 import { useEffect, useMemo, useState } from 'react';
-import { fetchDailyScan, type DailyScanSignal } from '../../../lib/identity/identityApi';
+import {
+  fetchDailyScan,
+  type DailyScanSignal,
+} from '../../../lib/identity/identityApi';
+import {
+  fetchRunAssessment,
+  fetchScanForDate,
+  type RunAssessment,
+} from '../../../lib/identity/identityScanApi';
+import type { IdentityScanRun } from '../../../lib/identity/types';
 import { ErrorBanner, Spinner } from './identityUi';
 import { ContextList, PatternBars, SignalFeature } from './dailyScanParts';
 import { IdentityPulse } from './IdentityPulse';
@@ -13,13 +22,25 @@ function localDate() {
 export default function DailyIdentityScan() {
   const [date, setDate] = useState(localDate);
   const [signals, setSignals] = useState<DailyScanSignal[]>([]);
+  const [run, setRun] = useState<IdentityScanRun | null>(null);
+  const [assessment, setAssessment] = useState<RunAssessment>({ what: 0, how: 0, context: 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setLoading(true);
     setError(null);
-    fetchDailyScan(date).then(setSignals).catch((e) => setError(e instanceof Error ? e.message : 'Failed to load scan.')).finally(() => setLoading(false));
+    async function load() {
+      try {
+        const [nextSignals, nextRun] = await Promise.all([fetchDailyScan(date), fetchScanForDate(date)]);
+        setSignals(nextSignals);
+        setRun(nextRun);
+        setAssessment(nextRun ? await fetchRunAssessment(nextRun.id) : { what: 0, how: 0, context: 0 });
+      } catch (e) {
+        setError(e instanceof Error ? e.message : 'Failed to load scan.');
+      } finally { setLoading(false); }
+    }
+    void load();
   }, [date]);
 
   const identity = useMemo(() => signals.filter((signal) => signal.final_classification === 'what'), [signals]);
@@ -31,10 +52,10 @@ export default function DailyIdentityScan() {
     <div className="space-y-8">
       <div className="flex justify-end"><label className="text-xs uppercase tracking-wider text-zinc-500">Review date<input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="mt-2 block min-h-11 rounded-lg border border-white/10 bg-zinc-950 px-3 py-2 text-sm text-white" /></label></div>
       {error && <ErrorBanner message={error} />}
-      {loading ? <Spinner label="Composing daily scan…" /> : signals.length === 0 ? <><IdentityPulse signals={[]} date={date} /><EmptyScan /></> : <>
-        <IdentityPulse signals={signals} date={date} />
+      {loading ? <Spinner label="Composing daily scan…" /> : signals.length === 0 ? <><IdentityPulse signals={[]} run={run} assessment={assessment} date={date} /><EmptyScan /></> : <>
+        <IdentityPulse signals={signals} run={run} assessment={assessment} date={date} />
         <section className="grid gap-4 sm:grid-cols-3">
-          <Metric value={identity.length} label="Identity signals" /><Metric value={operating.length} label="Operating signals" /><Metric value={context.length} label="Context signals" />
+          <Metric value={identity.length} label="Approved identity" /><Metric value={operating.length} label="Approved operating" /><Metric value={context.length} label="Approved context" />
         </section>
         <section><SectionTitle number="01" title="Strongest identity signals" subtitle="Approved WHAT signals, ranked by reviewer confidence." /><div className="space-y-4">{strongest.map((signal, index) => <SignalFeature key={signal.id} signal={signal} index={index} />)}</div></section>
         <section className="grid gap-8 lg:grid-cols-2">

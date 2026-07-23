@@ -49,6 +49,9 @@ export async function runScan(mode: string): Promise<ScanResult> {
       official_documents: 0,
       discovery_documents: 0,
       source_errors: 0,
+      what_signals: 0,
+      how_signals: 0,
+      context_signals: 0,
     };
     const discovery = await discoverCandidates(supabase, entities, sources);
     Object.assign(counts, discovery.counts);
@@ -68,12 +71,20 @@ export async function runScan(mode: string): Promise<ScanResult> {
       const analysis = await analyzeCandidates(supabase, signalCandidates, entities);
       counts.ai_candidates = analysis.stored;
       counts.extraction_errors = analysis.errors;
+      counts.what_signals = analysis.what;
+      counts.how_signals = analysis.how;
+      counts.context_signals = analysis.context;
       useHeuristicFallback = analysis.errors > 0 && analysis.stored === 0;
     }
 
     for (const candidate of signalCandidates) {
       if (useHeuristicFallback) {
-        if (await storeSignal(supabase, candidate)) counts.heuristic_candidates++;
+        if (await storeSignal(supabase, candidate)) {
+          counts.heuristic_candidates++;
+          const key = `${candidate.signal.classification}_signals` as
+            'what_signals' | 'how_signals' | 'context_signals';
+          if (key in counts) counts[key]++;
+        }
       }
     }
     counts.candidate_signals = counts.ai_candidates + counts.heuristic_candidates;
@@ -94,5 +105,5 @@ export async function runScan(mode: string): Promise<ScanResult> {
 
 function formatMessage(c: Record<string, number>, hasAI: boolean): string {
   const method = c.ai_candidates > 0 ? 'AI' : c.extraction_errors > 0 ? 'heuristic fallback' : hasAI ? 'AI, no qualifying signals' : 'heuristic';
-  return `Discovery complete: ${c.documents_found} found, ${c.documents_stored} stored, ${c.candidate_signals} candidates (${method}).`;
+  return `Discovery complete: ${c.documents_found} observed, ${c.what_signals} identity signals, ${c.how_signals} HOW signals (${method}).`;
 }

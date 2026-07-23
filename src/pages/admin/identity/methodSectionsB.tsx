@@ -45,7 +45,9 @@ export function VizSection() {
   return (
     <Section id="viz" icon={GitBranch} title="9 · Visualization principles">
       <ul className="space-y-2 text-sm leading-6 text-zinc-400">
-        <li>Communicate change, not volume. One dominant sentence.</li>
+        <li>Lead with the Identity Gap: everything observed versus explicit WHAT.</li>
+        <li>Show HOW separately; operational ambition must never inflate identity.</li>
+        <li>Make the scarce identity remainder visually unmistakable.</li>
         <li>FROM → BECOMING movement cards.</li>
         <li>Regional framing kept separate from entity self-description.</li>
         <li>No unexplained AI scores.</li>
