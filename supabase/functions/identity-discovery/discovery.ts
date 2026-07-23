@@ -8,7 +8,7 @@ import { fetchOfficialFeed } from './officialFeeds.ts';
 import { prioritizeArticles } from './relevance.ts';
 
 const MAX_GDELT_RECORDS = 50;
-const MAX_CANDIDATES = 400;
+const MAX_RAW_CANDIDATES = 1200;
 const GDELT_DELAY_MS = 6000;
 
 export type DiscoveryCounts = {
@@ -60,7 +60,7 @@ export async function discoverCandidates(
   }));
 
   const queries = buildGdeltQueries(entities);
-  for (let index = 0; index < queries.length && candidates.length < MAX_CANDIDATES; index++) {
+  for (let index = 0; index < queries.length && candidates.length < MAX_RAW_CANDIDATES; index++) {
     if (index > 0) await sleep(GDELT_DELAY_MS);
     try {
       const articles = await searchGdelt(queries[index], MAX_GDELT_RECORDS);
@@ -76,7 +76,7 @@ export async function discoverCandidates(
       counts.source_errors++;
     }
   }
-  return { candidates: candidates.slice(0, MAX_CANDIDATES), counts };
+  return { candidates: candidates.slice(0, MAX_RAW_CANDIDATES), counts };
 }
 
 function addArticle(

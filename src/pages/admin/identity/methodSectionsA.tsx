@@ -51,7 +51,9 @@ export function SourcesSection() {
         ))}
       </div>
       <p className="mt-4 text-sm leading-6 text-zinc-500">
-        Region caps prevent English / North American volume from dominating.
+        A round-robin regional sampler caps each region at 60 items, each source at 15,
+        and each entity at 20. Scarce regions are never diluted by filling their quota
+        with additional UK, European, or North American volume.
       </p>
     </Section>
   );

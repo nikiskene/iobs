@@ -23,6 +23,7 @@ export type IdentitySourceRegion =
   | 'china'
   | 'middle_east'
   | 'south_america'
+  | 'africa'
   | 'global'
   | 'other';
 

@@ -12,7 +12,9 @@ export default function ScanFunnel({
 }) {
   const discovered = number(run?.counts?.documents_found) || Number(totals?.documents_found ?? 0);
   const screened = number(run?.counts?.documents_screened_in) || discovered;
-  const analyzed = number(run?.counts?.documents_stored) || screened;
+  const analyzed = number(run?.counts?.balanced_documents)
+    || number(run?.counts?.documents_stored)
+    || screened;
   const identity = number(run?.counts?.what_signals);
   const operating = number(run?.counts?.how_signals);
   const approved = Number(totals?.approved_signals ?? 0);
@@ -22,7 +24,7 @@ export default function ScanFunnel({
   const stages = [
     { label: 'Discovered', value: discovered, color: 'bg-zinc-500' },
     { label: 'Screened in', value: screened, color: 'bg-amber-400' },
-    { label: 'Analyzed', value: analyzed, color: 'bg-violet-400' },
+    { label: 'Weighted', value: analyzed, color: 'bg-violet-400' },
     { label: 'Identity', value: identity, color: 'bg-sky-300' },
   ];
 

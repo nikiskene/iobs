@@ -11,7 +11,10 @@ type Props = {
 };
 
 export function IdentityPulse({ signals, run, assessment, date }: Props) {
-  const total = number(run?.counts?.documents_found);
+  const raw = number(run?.counts?.documents_found);
+  const total = number(run?.counts?.balanced_documents)
+    || number(run?.counts?.documents_stored)
+    || raw;
   const what = number(run?.counts?.what_signals) || assessment.what;
   const how = number(run?.counts?.how_signals) || assessment.how;
   const noise = Math.max(total - what - how, 0);
@@ -45,9 +48,11 @@ export function IdentityPulse({ signals, run, assessment, date }: Props) {
         </div>
 
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10">
-          <NumberBlock value={total} label="items observed" />
-          <NumberBlock value={what} label="identity signals" accent />
+          <NumberBlock value={raw} label="raw items found" />
+          <NumberBlock value={total} label="weighted sample" />
           <NumberBlock value={Math.max(total - what, 0)} label="without identity" />
+          <NumberBlock value={how} label="HOW signals" />
+          <NumberBlock value={what} label="identity signals" accent />
           <NumberBlock value={approved} label="human approved" />
         </div>
       </div>
@@ -66,7 +71,7 @@ export function IdentityPulse({ signals, run, assessment, date }: Props) {
         <p className="mt-6 border-l border-sky-400/50 pl-4 text-sm leading-6 text-zinc-400">
           {incomplete
             ? 'No identity-yield conclusion is published when AI classification is unavailable or incomplete.'
-            : 'The engine’s deliverable is the blue remainder: evidence-backed identity language, made visible against everything institutions push into the world.'}
+            : 'The engine’s deliverable is the blue remainder: evidence-backed identity language, measured against a regionally balanced sample rather than the loudest source.'}
         </p>
       </div>
     </section>

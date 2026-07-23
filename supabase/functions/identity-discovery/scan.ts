@@ -11,6 +11,7 @@ import { storeDocument } from './storage.ts';
 import { applyRetention } from './retention.ts';
 import { discoverCandidates } from './discovery.ts';
 import { analyzeCandidates } from './analysis.ts';
+import { balanceCandidates } from './balancing.ts';
 
 export type ScanResult = {
   ok: boolean;
@@ -37,7 +38,7 @@ export async function runScan(mode: string): Promise<ScanResult> {
   const runId = await createScanRun(supabase, mode, scope);
 
   try {
-    const counts = {
+    const counts: Record<string, number> = {
       documents_found: 0,
       documents_screened_in: 0,
       documents_stored: 0,
@@ -53,13 +54,18 @@ export async function runScan(mode: string): Promise<ScanResult> {
       how_signals: 0,
       context_signals: 0,
       analysis_complete: 0,
+      balanced_documents: 0,
     };
     const discovery = await discoverCandidates(supabase, entities, sources);
     Object.assign(counts, discovery.counts);
-    const candidates = discovery.candidates;
+    const balanced = balanceCandidates(discovery.candidates, 400);
+    counts.balanced_documents = balanced.candidates.length;
+    for (const [region, count] of Object.entries(balanced.regions)) {
+      counts[`region_${region}`] = count;
+    }
 
     const hasOpenAI = !!Deno.env.get('OPENAI_API_KEY');
-    const limited = candidates.slice(0, 400);
+    const limited = balanced.candidates;
 
     for (const candidate of limited) {
       await storeDocument(supabase, candidate, runId);
