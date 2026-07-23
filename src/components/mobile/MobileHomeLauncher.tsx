@@ -7,24 +7,17 @@ import {
   Compass,
   Info,
   MessageCircle,
+  ScanSearch,
   Shield,
   User,
   Users,
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { supabase } from '../../lib/supabase';
+import LauncherTile, { type MobileLauncherTile } from './MobileLauncherTile';
 
 const customExpeditionImage =
   'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/expedition-media/IMG_2923.JPG';
-
-type Tile = {
-  to: string;
-  label: string;
-  description: string;
-  icon: React.ElementType;
-  image?: string | null;
-  highlight?: boolean;
-};
 
 export default function MobileHomeLauncher() {
   const { profile } = useAuth();
@@ -75,7 +68,7 @@ export default function MobileHomeLauncher() {
     fetchImages();
   }, []);
 
-  const items: Tile[] = [
+  const items: MobileLauncherTile[] = [
     {
       to: '/dashboard/inbox',
       label: 'Messages',
@@ -120,6 +113,13 @@ export default function MobileHomeLauncher() {
   ];
 
   if (profile?.role === 'admin') {
+    items.push({
+      to: '/admin/identity',
+      label: 'Identity Scanner',
+      description: 'Research signals',
+      icon: ScanSearch,
+      highlight: true,
+    });
     items.push({
       to: '/admin',
       label: 'Admin',
@@ -183,49 +183,6 @@ export default function MobileHomeLauncher() {
         </div>
       </div>
     </section>
-  );
-}
-
-function LauncherTile({ item }: { item: Tile }) {
-  const Icon = item.icon;
-
-  return (
-    <Link
-      to={item.to}
-      className={`group relative overflow-hidden rounded-[1.25rem] border p-4 transition active:scale-95 ${
-        item.highlight
-          ? 'min-h-[104px] border-sky-400/30 bg-sky-500/15'
-          : 'min-h-[104px] border-white/10 bg-white/[0.04]'
-      }`}
-    >
-      {item.image ? (
-        <>
-          <img
-            src={item.image}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover opacity-50"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10" />
-        </>
-      ) : (
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_10%,rgba(56,189,248,0.16),transparent_45%)]" />
-      )}
-
-      <div className="relative flex h-full min-h-[72px] flex-col justify-between">
-        <div
-          className={`flex h-8 w-8 items-center justify-center rounded-xl ${
-            item.highlight ? 'bg-sky-500 text-white' : 'bg-white/12 text-sky-300'
-          }`}
-        >
-          <Icon className="h-4 w-4" />
-        </div>
-
-        <div>
-          <h2 className="text-base font-bold leading-tight">{item.label}</h2>
-          <p className="mt-0.5 text-xs text-zinc-300">{item.description}</p>
-        </div>
-      </div>
-    </Link>
   );
 }
 
