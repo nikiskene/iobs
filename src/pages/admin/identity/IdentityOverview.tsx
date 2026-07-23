@@ -62,6 +62,7 @@ export default function IdentityOverview() {
   }
 
   if (loading) return <Spinner label="Loading identity overview…" />;
+  const latestCompleted = history.find((run) => run.status === 'completed') ?? null;
 
   return (
     <div className="space-y-8">
@@ -112,7 +113,7 @@ export default function IdentityOverview() {
         <StatCard label="Approved signals" value={counts?.approved_signals ?? 0} />
       </div>
 
-      <ScanFunnel run={lastScan} totals={counts} />
+      <ScanFunnel run={latestCompleted} totals={counts} />
       <ScanHistory history={history} lastScan={lastScan} />
       <SchedulingNote />
     </div>
