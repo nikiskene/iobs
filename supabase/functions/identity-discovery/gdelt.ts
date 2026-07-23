@@ -34,9 +34,10 @@ type RawGdeltArticle = {
   sourcecountry?: string;
 };
 
-function buildQuery(entityName: string, aliases: string[]): string {
-  const names = [entityName, ...aliases].slice(0, 2).map((n) => `"${n}"`);
-  const namePart = names.length > 1 ? `(${names.join(' OR ')})` : names[0];
+function buildQuery(entities: { name: string; aliases: string[] }[]): string {
+  const names = entities.flatMap((entity) => [entity.name, ...entity.aliases].slice(0, 1))
+    .map((name) => `"${name}"`);
+  const namePart = `(${names.join(' OR ')})`;
   const keyPatterns = ['"we are"', '"our purpose"', '"our mission"', '"future of"', '"committed to"', '"is becoming"', '"aims to be"'];
   const patternGroup = `(${keyPatterns.join(' OR ')})`;
   return `${namePart} AND ${patternGroup}`;
@@ -44,9 +45,14 @@ function buildQuery(entityName: string, aliases: string[]): string {
 
 export function buildGdeltQueries(
   entities: { name: string; aliases: string[] }[],
-  maxEntities = 20,
+  maxEntities = entities.length,
 ): string[] {
-  return entities.slice(0, maxEntities).map((e) => buildQuery(e.name, e.aliases));
+  const selected = entities.slice(0, maxEntities);
+  const groups = [];
+  for (let offset = 0; offset < selected.length; offset += 5) {
+    groups.push(buildQuery(selected.slice(offset, offset + 5)));
+  }
+  return groups;
 }
 
 function parseGdeltDate(seendate: string | undefined): string | null {

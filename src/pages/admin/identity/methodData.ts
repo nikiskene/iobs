@@ -69,9 +69,10 @@ export const sourceTiers: SourceTier[] = [
 export type LimitRow = { label: string; value: string };
 
 export const dailyLimits: LimitRow[] = [
-  { label: 'Entity queries', value: '3' },
-  { label: 'Official feeds', value: '5 initial feeds' },
-  { label: 'Documents analyzed per run', value: 'up to 100' },
+  { label: 'Entity coverage', value: 'all active Fortune 50, G7, and BRICS entities' },
+  { label: 'Discovery queries', value: 'entities grouped in batches of 5' },
+  { label: 'Documents screened per run', value: 'several hundred' },
+  { label: 'Documents analyzed per run', value: 'up to 400 relevant candidates' },
   { label: 'AI analysis batch', value: '20 documents' },
   { label: 'Admin review observations', value: 'only materially useful items' },
   { label: 'Approved signals', value: '0–10' },
@@ -84,7 +85,8 @@ export const decisionsLog: string[] = [
   'Explorer means a manually granted research contributor',
   'members/public release comes only after the workflow is proven',
   'explicit identity statements first; behavioral inference later',
-  'daily automation configured but inactive until source quality is validated',
+  'daily automation active; failed feeds remain visible through source health',
+  'only sources with explicit automation rights enter unattended ingestion',
 ];
 
 export const visualizationSections: string[] = [

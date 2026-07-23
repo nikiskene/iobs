@@ -2,7 +2,7 @@
 import type { SourceRow } from './db.ts';
 import type { GdeltArticle } from './gdelt.ts';
 
-const MAX_FEED_ITEMS = 30;
+const MAX_FEED_ITEMS = 60;
 const MAX_AGE_DAYS = 8;
 
 export async function fetchOfficialFeed(source: SourceRow): Promise<GdeltArticle[]> {
@@ -15,7 +15,7 @@ export async function fetchOfficialFeed(source: SourceRow): Promise<GdeltArticle
   });
   if (!response.ok) throw new Error(`${source.name} feed returned ${response.status}`);
   const xml = await response.text();
-  if (!/<(?:rss|feed)[\s>]/i.test(xml)) throw new Error(`${source.name} did not return RSS or Atom`);
+  if (!/<(?:rss|feed|rdf:RDF)[\s>]/i.test(xml)) throw new Error(`${source.name} did not return RSS or Atom`);
   return parseFeed(xml, source).filter(isRecent).slice(0, MAX_FEED_ITEMS);
 }
 

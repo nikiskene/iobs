@@ -52,6 +52,10 @@ export function matchOfficialEntities(
   source: SourceRow,
   entities: EntityRow[],
 ): EntityRow[] {
+  if (source.owner_entity_id) {
+    const owner = entities.find((entity) => entity.id === source.owner_entity_id);
+    if (owner) return [owner];
+  }
   const domain = source.domain?.replace(/^www\./, '').toLowerCase();
   if (!domain) return [];
   return entities.filter((entity) =>

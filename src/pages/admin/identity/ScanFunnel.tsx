@@ -11,7 +11,8 @@ export default function ScanFunnel({
   totals: ScanRunCounts | null;
 }) {
   const discovered = number(run?.counts?.documents_found) || Number(totals?.documents_found ?? 0);
-  const analyzed = number(run?.counts?.documents_stored) || discovered;
+  const screened = number(run?.counts?.documents_screened_in) || discovered;
+  const analyzed = number(run?.counts?.documents_stored) || screened;
   const observations = number(run?.counts?.candidate_signals) || Number(totals?.candidate_signals ?? 0);
   const approved = Number(totals?.approved_signals ?? 0);
   const max = Math.max(discovered, 1);
@@ -19,6 +20,7 @@ export default function ScanFunnel({
 
   const stages = [
     { label: 'Discovered', value: discovered, color: 'bg-zinc-500' },
+    { label: 'Screened in', value: screened, color: 'bg-amber-400' },
     { label: 'Analyzed', value: analyzed, color: 'bg-violet-400' },
     { label: 'Observations', value: observations, color: 'bg-sky-400' },
   ];

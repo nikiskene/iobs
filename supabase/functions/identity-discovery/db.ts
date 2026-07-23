@@ -28,6 +28,8 @@ export type SourceRow = {
   feed_url: string | null;
   active: boolean;
   automation_allowed: boolean;
+  owner_entity_id: string | null;
+  rights_status: string;
 };
 
 export async function loadEntities(supabase: ReturnType<typeof getSupabase>): Promise<EntityRow[]> {
@@ -43,11 +45,41 @@ export async function loadEntities(supabase: ReturnType<typeof getSupabase>): Pr
 export async function loadSources(supabase: ReturnType<typeof getSupabase>): Promise<SourceRow[]> {
   const { data, error } = await supabase
     .from('identity_sources')
-    .select('id, name, domain, source_tier, region, feed_url, active, automation_allowed')
+    .select('id, name, domain, source_tier, region, feed_url, active, automation_allowed, owner_entity_id, rights_status')
     .eq('active', true)
     .order('name');
   if (error) throw new Error(`Failed to load sources: ${error.message}`);
   return data ?? [];
+}
+
+export async function recordSourceHealth(
+  supabase: ReturnType<typeof getSupabase>,
+  sourceId: string,
+  itemCount: number,
+  errorMessage?: string,
+): Promise<void> {
+  const now = new Date().toISOString();
+  if (!errorMessage) {
+    await supabase.from('identity_sources').update({
+      last_checked_at: now,
+      last_success_at: now,
+      last_error: null,
+      last_item_count: itemCount,
+      consecutive_failures: 0,
+    }).eq('id', sourceId);
+    return;
+  }
+  const { data } = await supabase
+    .from('identity_sources')
+    .select('consecutive_failures')
+    .eq('id', sourceId)
+    .maybeSingle();
+  await supabase.from('identity_sources').update({
+    last_checked_at: now,
+    last_error: errorMessage.slice(0, 500),
+    last_item_count: 0,
+    consecutive_failures: Number(data?.consecutive_failures ?? 0) + 1,
+  }).eq('id', sourceId);
 }
 
 export async function createScanRun(

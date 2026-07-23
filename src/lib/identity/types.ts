@@ -51,6 +51,20 @@ export type IdentitySource = {
   active: boolean;
   automation_allowed: boolean;
   terms_notes: string | null;
+  owner_entity_id: string | null;
+  rights_status: 'allowed' | 'metadata_only' | 'review' | 'licensed';
+  perspective:
+    | 'official'
+    | 'public_media'
+    | 'independent_media'
+    | 'commercial_media'
+    | 'discovery'
+    | 'unknown';
+  last_checked_at: string | null;
+  last_success_at: string | null;
+  last_error: string | null;
+  last_item_count: number;
+  consecutive_failures: number;
 };
 
 export type IdentityScanRun = {

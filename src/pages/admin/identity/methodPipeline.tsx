@@ -3,8 +3,9 @@ import { Database, GitBranch, Layers, ListChecks } from 'lucide-react';
 import { Section } from './methodPrimitives';
 
 const PIPELINE_STEPS = [
-  { label: 'Discovery', detail: 'Verified official RSS/Atom feeds first; GDELT fills remaining capacity. Free-first, no paywalled bodies.' },
+  { label: 'Discovery', detail: 'Verified official feeds run in parallel; grouped GDELT searches cover every active cohort entity. Free-first, no paywalled bodies.' },
   { label: 'Entity match', detail: 'Official domains map directly to entities; discovery items use names and aliases.' },
+  { label: 'Cheap screening', detail: 'Local trigger grammar removes routine and low-value material before storage or AI use.' },
   { label: 'Deduplication', detail: 'Deduplicate by canonical URL and content hash. Semantic story clustering is planned after W01 validation.' },
   { label: 'Assessment', detail: 'Strict WHAT / HOW / CONTEXT classification with separate identity-relevance and evidence-strength scores.' },
   { label: 'Human review', detail: 'Admin approves, rewrites, rejects, or flags needs_evidence. Model output kept separate from human decision.' },

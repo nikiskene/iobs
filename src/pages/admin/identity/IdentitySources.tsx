@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { fetchEntities, fetchSources } from '../../../lib/identity/identityApi';
 import type { IdentityEntity, IdentitySource } from '../../../lib/identity/types';
 import { Badge, EmptyState, ErrorBanner, PageHeader, Spinner } from './identityUi';
+import { RightsBadge, SourceHealth } from './SourceHealth';
 
 const COHORTS = ['Fortune 50', 'G7', 'BRICS'] as const;
 
@@ -61,9 +62,10 @@ export default function IdentitySources() {
                   <th className="py-2 pr-4 font-medium">Tier</th>
                   <th className="py-2 pr-4 font-medium">Region</th>
                   <th className="py-2 pr-4 font-medium">Type</th>
+                  <th className="py-2 pr-4 font-medium">Rights</th>
                   <th className="py-2 pr-4 font-medium">Feed</th>
-                  <th className="py-2 pr-4 font-medium">Active</th>
-                  <th className="py-2 font-medium">Automation</th>
+                  <th className="py-2 pr-4 font-medium">Automation</th>
+                  <th className="py-2 font-medium">Health</th>
                 </tr>
               </thead>
               <tbody>
@@ -82,25 +84,22 @@ export default function IdentitySources() {
                       {source.region.replace(/_/g, ' ')}
                     </td>
                     <td className="py-3 pr-4 text-zinc-400">
-                      {source.source_tier === 'primary' ? 'Official' : 'Free / Discovery'}
+                      {source.perspective.replace(/_/g, ' ')}
+                    </td>
+                    <td className="py-3 pr-4">
+                      <RightsBadge status={source.rights_status} />
                     </td>
                     <td className="py-3 pr-4 text-zinc-400">
                       {source.feed_url ? 'Yes' : '—'}
                     </td>
                     <td className="py-3 pr-4">
-                      {source.active ? (
-                        <Badge tone="success">Active</Badge>
-                      ) : (
-                        <Badge tone="neutral">Inactive</Badge>
-                      )}
-                    </td>
-                    <td className="py-3">
                       {source.automation_allowed ? (
                         <Badge tone="info">Allowed</Badge>
                       ) : (
                         <Badge tone="neutral">Manual</Badge>
                       )}
                     </td>
+                    <td className="py-3"><SourceHealth source={source} /></td>
                   </tr>
                 ))}
               </tbody>
