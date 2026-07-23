@@ -10,9 +10,9 @@ export default function ScanFunnel({
   run: IdentityScanRun | null;
   totals: ScanRunCounts | null;
 }) {
-  const discovered = number(run?.counts?.documents_found);
-  const analyzed = number(run?.counts?.documents_stored);
-  const observations = number(run?.counts?.candidate_signals);
+  const discovered = number(run?.counts?.documents_found) || Number(totals?.documents_found ?? 0);
+  const analyzed = number(run?.counts?.documents_stored) || discovered;
+  const observations = number(run?.counts?.candidate_signals) || Number(totals?.candidate_signals ?? 0);
   const approved = Number(totals?.approved_signals ?? 0);
   const max = Math.max(discovered, 1);
   const yieldRate = analyzed ? (observations / analyzed) * 100 : 0;
