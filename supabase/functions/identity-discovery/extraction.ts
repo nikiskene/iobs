@@ -46,6 +46,20 @@ export function matchEntities(
   });
 }
 
+export function matchOfficialEntities(
+  source: SourceRow,
+  entities: EntityRow[],
+): EntityRow[] {
+  const domain = source.domain?.replace(/^www\./, '').toLowerCase();
+  if (!domain) return [];
+  return entities.filter((entity) =>
+    entity.official_domains.some((value) => {
+      const official = value.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0].toLowerCase();
+      return official === domain || official.endsWith(`.${domain}`) || domain.endsWith(`.${official}`);
+    })
+  );
+}
+
 export function classifyHeadline(title: string): {
   signal_type: string | null;
   classification: string;

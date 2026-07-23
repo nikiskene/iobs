@@ -55,7 +55,7 @@ export const sourceTiers: SourceTier[] = [
   {
     tier: 'Tier 2',
     title: 'Global discovery',
-    items: ['GDELT (active)', 'Media Cloud (planned)'],
+    items: ['GDELT (secondary discovery)', 'Media Cloud (planned)'],
   },
   {
     tier: 'Tier 3',
@@ -70,8 +70,8 @@ export type LimitRow = { label: string; value: string };
 
 export const dailyLimits: LimitRow[] = [
   { label: 'Entity queries', value: '3' },
-  { label: 'Headlines returned', value: 'up to 150' },
-  { label: 'Documents retained per run', value: 'up to 50' },
+  { label: 'Official feeds', value: '5 initial feeds' },
+  { label: 'Documents retained per run', value: 'up to 20' },
   { label: 'AI extraction candidates', value: 'up to 10' },
   { label: 'Admin review candidates', value: 'up to 10' },
   { label: 'Approved signals', value: '0–10' },
@@ -84,7 +84,7 @@ export const decisionsLog: string[] = [
   'Explorer means a manually granted research contributor',
   'members/public release comes only after the workflow is proven',
   'explicit identity statements first; behavioral inference later',
-  'daily automation active with an admin-controlled UTC run hour',
+  'daily automation configured but inactive until source quality is validated',
 ];
 
 export const visualizationSections: string[] = [

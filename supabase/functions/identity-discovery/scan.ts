@@ -11,9 +11,11 @@ import { buildGdeltQueries, hashContent, searchGdelt } from './gdelt.ts';
 import {
   buildHeuristicCandidate,
   matchEntities,
+  matchOfficialEntities,
   type CandidateSignal,
 } from './extraction.ts';
 import { extractWithOpenAI } from './aiExtraction.ts';
+import { fetchOfficialFeed } from './officialFeeds.ts';
 import { storeDocument, storeSignal } from './storage.ts';
 import { applyRetention } from './retention.ts';
 
@@ -60,13 +62,38 @@ export async function runScan(mode: string): Promise<ScanResult> {
       ai_candidates: 0,
       heuristic_candidates: 0,
       extraction_errors: 0,
+      official_documents: 0,
+      source_errors: 0,
     };
 
     const queries = buildGdeltQueries(entities, MAX_ENTITIES);
     const seenHashes = new Set<string>();
     const candidates: CandidateSignal[] = [];
 
-    for (let i = 0; i < queries.length; i++) {
+    const officialSources = sources.filter((source) =>
+      source.source_tier === 'primary' && source.automation_allowed && source.feed_url
+    );
+    for (const source of officialSources) {
+      try {
+        const articles = await fetchOfficialFeed(source);
+        const sourceEntities = matchOfficialEntities(source, entities);
+        counts.documents_found += articles.length;
+        for (const article of articles) {
+          const hash = hashContent(article.url, article.title);
+          if (seenHashes.has(hash)) continue;
+          seenHashes.add(hash);
+          for (const entity of sourceEntities.length ? sourceEntities : matchEntities(article, entities)) {
+            candidates.push(buildHeuristicCandidate(article, entity, source));
+            counts.official_documents++;
+          }
+        }
+      } catch (error) {
+        console.error('Official feed failed', source.name, error);
+        counts.source_errors++;
+      }
+    }
+
+    for (let i = 0; i < queries.length && candidates.length < MAX_DOCUMENTS; i++) {
       const entity = entities[i];
       if (!entity) continue;
       if (i > 0) await sleep(GDELT_DELAY_MS);
