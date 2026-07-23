@@ -28,7 +28,6 @@ export async function fetchScanHistory(limit = 10): Promise<IdentityScanRun[]> {
   if (error) throw error;
   return data ?? [];
 }
-
 export async function fetchOverviewCounts(): Promise<ScanRunCounts> {
   const [docs, clusters, candidates, pending, approved] = await Promise.all([
     supabase.from('identity_documents').select('id', { count: 'exact', head: true }),
@@ -36,10 +35,12 @@ export async function fetchOverviewCounts(): Promise<ScanRunCounts> {
     supabase
       .from('identity_signals')
       .select('id', { count: 'exact', head: true })
+      .eq('review_eligible', true)
       .neq('review_status', 'rejected'),
     supabase
       .from('identity_signals')
       .select('id', { count: 'exact', head: true })
+      .eq('review_eligible', true)
       .eq('review_status', 'pending'),
     supabase
       .from('identity_signals')
@@ -57,7 +58,6 @@ export async function fetchOverviewCounts(): Promise<ScanRunCounts> {
     approved_signals: approved.count ?? 0,
   };
 }
-
 export async function fetchSources(): Promise<IdentitySource[]> {
   const { data, error } = await supabase
     .from('identity_sources')
@@ -67,7 +67,6 @@ export async function fetchSources(): Promise<IdentitySource[]> {
   if (error) throw error;
   return data ?? [];
 }
-
 export async function fetchEntities(): Promise<IdentityEntity[]> {
   const { data, error } = await supabase
     .from('identity_entities')
@@ -83,6 +82,7 @@ export async function fetchPendingSignals(): Promise<SignalWithRelations[]> {
     .select(
       '*, entity:identity_entities(name, slug), document:identity_documents(title, canonical_url, snippet, source_region)',
     )
+    .eq('review_eligible', true)
     .eq('review_status', 'pending')
     .order('created_at', { ascending: false });
   if (error) throw error;

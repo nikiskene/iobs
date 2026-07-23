@@ -7,7 +7,7 @@ import {
   loadEntities,
   loadSources,
 } from './db.ts';
-import { storeDocument, storeSignal } from './storage.ts';
+import { storeDocument } from './storage.ts';
 import { applyRetention } from './retention.ts';
 import { discoverCandidates } from './discovery.ts';
 import { analyzeCandidates } from './analysis.ts';
@@ -52,6 +52,7 @@ export async function runScan(mode: string): Promise<ScanResult> {
       what_signals: 0,
       how_signals: 0,
       context_signals: 0,
+      analysis_complete: 0,
     };
     const discovery = await discoverCandidates(supabase, entities, sources);
     Object.assign(counts, discovery.counts);
@@ -66,7 +67,6 @@ export async function runScan(mode: string): Promise<ScanResult> {
     }
 
     const signalCandidates = limited;
-    let useHeuristicFallback = !hasOpenAI;
     if (hasOpenAI) {
       const analysis = await analyzeCandidates(supabase, signalCandidates, entities);
       counts.ai_candidates = analysis.stored;
@@ -74,18 +74,7 @@ export async function runScan(mode: string): Promise<ScanResult> {
       counts.what_signals = analysis.what;
       counts.how_signals = analysis.how;
       counts.context_signals = analysis.context;
-      useHeuristicFallback = analysis.errors > 0 && analysis.stored === 0;
-    }
-
-    for (const candidate of signalCandidates) {
-      if (useHeuristicFallback) {
-        if (await storeSignal(supabase, candidate)) {
-          counts.heuristic_candidates++;
-          const key = `${candidate.signal.classification}_signals` as
-            'what_signals' | 'how_signals' | 'context_signals';
-          if (key in counts) counts[key]++;
-        }
-      }
+      counts.analysis_complete = analysis.errors === 0 ? 1 : 0;
     }
     counts.candidate_signals = counts.ai_candidates + counts.heuristic_candidates;
 
@@ -104,6 +93,7 @@ export async function runScan(mode: string): Promise<ScanResult> {
 }
 
 function formatMessage(c: Record<string, number>, hasAI: boolean): string {
-  const method = c.ai_candidates > 0 ? 'AI' : c.extraction_errors > 0 ? 'heuristic fallback' : hasAI ? 'AI, no qualifying signals' : 'heuristic';
+  const method = c.ai_candidates > 0 ? 'AI' : c.extraction_errors > 0
+    ? 'AI incomplete' : hasAI ? 'AI, no qualifying signals' : 'analysis unavailable';
   return `Discovery complete: ${c.documents_found} observed, ${c.what_signals} identity signals, ${c.how_signals} HOW signals (${method}).`;
 }

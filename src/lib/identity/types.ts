@@ -103,6 +103,7 @@ export type IdentitySignal = {
   extraction_model: string | null;
   prompt_version: string | null;
   review_status: IdentityReviewStatus;
+  review_eligible: boolean;
   visibility: IdentityVisibility | 'research_team';
   created_at: string;
   updated_at: string;

@@ -7,8 +7,9 @@ const PIPELINE_STEPS = [
   { label: 'Entity match', detail: 'Official domains map directly to entities; discovery items use names and aliases.' },
   { label: 'Cheap screening', detail: 'Local trigger grammar removes routine and low-value material before storage or AI use.' },
   { label: 'Deduplication', detail: 'Deduplicate by canonical URL and content hash. Semantic story clustering is planned after W01 validation.' },
-  { label: 'Assessment', detail: 'Strict WHAT / HOW / CONTEXT classification with separate identity-relevance and evidence-strength scores.' },
-  { label: 'Human review', detail: 'Admin approves, rewrites, rejects, or flags needs_evidence. Model output kept separate from human decision.' },
+  { label: 'Assessment', detail: 'AI classifies WHAT / HOW / CONTEXT. Identity relevance is 0 for ordinary facts, 20–49 for operational implication, and 70–100 for explicit identity.' },
+  { label: 'Review gate', detail: 'Only WHAT scoring at least 60 identity relevance, 40 evidence strength, and 55% model confidence enters human review.' },
+  { label: 'Human review', detail: 'Admin approves, rewrites, rejects, or flags needs_evidence. HOW and CONTEXT remain measurement data, not identity candidates.' },
   { label: 'Retention', detail: 'Raw rejected/low-value documents purged after 7 days. Approved evidence/provenance retained.' },
 ];
 

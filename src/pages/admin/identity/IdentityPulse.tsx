@@ -17,6 +17,8 @@ export function IdentityPulse({ signals, run, assessment, date }: Props) {
   const noise = Math.max(total - what - how, 0);
   const yieldRate = total > 0 ? (what / total) * 100 : 0;
   const approved = signals.filter((signal) => signal.final_classification === 'what').length;
+  const completeness = run?.counts?.analysis_complete;
+  const incomplete = completeness !== undefined && number(completeness) === 0;
 
   return (
     <section className="overflow-hidden rounded-3xl border border-white/10 bg-[#0d0d0e]">
@@ -29,7 +31,9 @@ export function IdentityPulse({ signals, run, assessment, date }: Props) {
       <div className="grid gap-10 p-6 sm:p-8 lg:grid-cols-[1fr_19rem] lg:p-10">
         <div>
           <p className="max-w-3xl font-serif text-4xl leading-tight text-white sm:text-5xl">
-            {total > 0
+            {incomplete
+              ? 'Today’s material was collected, but identity analysis is incomplete.'
+              : total > 0
               ? `${formatRate(yieldRate)} of today’s public output expressed identity.`
               : 'The scan has not measured today’s public output yet.'}
           </p>
@@ -60,8 +64,9 @@ export function IdentityPulse({ signals, run, assessment, date }: Props) {
           <Legend color="bg-sky-300" value={what} label="WHAT — identity" />
         </div>
         <p className="mt-6 border-l border-sky-400/50 pl-4 text-sm leading-6 text-zinc-400">
-          The engine’s deliverable is the blue remainder: evidence-backed identity language,
-          made visible against everything institutions push into the world.
+          {incomplete
+            ? 'No identity-yield conclusion is published when AI classification is unavailable or incomplete.'
+            : 'The engine’s deliverable is the blue remainder: evidence-backed identity language, made visible against everything institutions push into the world.'}
         </p>
       </div>
     </section>

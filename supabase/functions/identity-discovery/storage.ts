@@ -56,8 +56,17 @@ export async function storeSignal(
     extraction_model: candidate.signal.extraction_model,
     prompt_version: candidate.signal.prompt_version,
     review_status: 'pending',
+    review_eligible: isReviewEligible(candidate),
   });
   if (error?.code === '23505' || error?.message.includes('duplicate')) return false;
   if (error) throw error;
   return true;
+}
+
+function isReviewEligible(candidate: CandidateSignal): boolean {
+  return candidate.signal.classification === 'what'
+    && Number(candidate.signal.identity_relevance ?? 0) >= 60
+    && Number(candidate.signal.evidence_strength ?? 0) >= 40
+    && Number(candidate.signal.model_confidence ?? 0) >= 0.55
+    && !String(candidate.signal.extraction_model ?? '').startsWith('heuristic');
 }
