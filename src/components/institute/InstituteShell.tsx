@@ -1,6 +1,7 @@
 // src/components/institute/InstituteShell.tsx
 
 import { PropsWithChildren } from 'react';
+import InstituteHeader from './InstituteHeader';
 import { useImpactScale } from '../../providers/ImpactScaleProvider';
 import { getInstituteTheme } from '../../theme/instituteTheme';
 
@@ -17,16 +18,18 @@ export default function InstituteShell({
         background: theme.background,
         color: theme.text,
         transition:
-          'background-color .8s ease,color .8s ease',
+          'background-color .9s ease,color .9s ease',
       }}
     >
       <div
         style={{
           maxWidth: theme.maxWidth,
           margin: '0 auto',
-          padding: '48px 32px 96px',
+          padding: '0 40px 120px',
         }}
       >
+        <InstituteHeader />
+
         {children}
       </div>
     </div>
