@@ -4,40 +4,45 @@ import { useImpactScale } from '../../providers/ImpactScaleProvider';
 
 const COPY = {
   self: {
-    eyebrow: 'Institute of Beautiful Success',
-    title: 'If you could build yourself again, what would you keep?',
+    eyebrow: 'The Institute of Beautiful Success',
+    title: 'If you could build anything in the world, what would it be?',
     body:
-      'Beautiful success begins long before achievement. It begins with identity.',
+      'Most people optimize their lives. A few redesign them. Beautiful Success begins with choosing who you want to become.',
   },
+
   relationships: {
-    eyebrow: 'Institute of Beautiful Success',
-    title: 'Every relationship becomes a culture.',
+    eyebrow: 'The Institute of Beautiful Success',
+    title: 'Every relationship creates a tiny civilization.',
     body:
-      'The smallest unit of civilization is not the individual. It is two people.',
+      'Every conversation changes culture. Every interaction leaves an echo. Beautiful Success expands far beyond ourselves.',
   },
+
   team: {
-    eyebrow: 'Institute of Beautiful Success',
-    title: 'Teams inherit the identity of their conversations.',
+    eyebrow: 'The Institute of Beautiful Success',
+    title: 'Great teams share an identity before they share a strategy.',
     body:
-      'Performance follows clarity. Culture follows identity.',
+      'Alignment does not come from management. It comes from knowing what you are becoming together.',
   },
+
   organization: {
-    eyebrow: 'Institute of Beautiful Success',
+    eyebrow: 'The Institute of Beautiful Success',
     title: 'Organizations become what they repeatedly reward.',
     body:
-      'Beautiful organizations are intentionally designed, not accidentally grown.',
+      'Culture is architecture. Identity is infrastructure. Strategy merely follows both.',
   },
+
   industry: {
-    eyebrow: 'Institute of Beautiful Success',
-    title: 'Industries change when someone changes the question.',
+    eyebrow: 'The Institute of Beautiful Success',
+    title: 'Industries rarely change because of technology.',
     body:
-      'Innovation rarely starts with technology. It starts with a different identity.',
+      'They change when someone redefines what success looks like for everyone else.',
   },
+
   world: {
-    eyebrow: 'Institute of Beautiful Success',
-    title: 'What would you build if the whole world was your responsibility?',
+    eyebrow: 'The Institute of Beautiful Success',
+    title: 'The world is waiting for better questions.',
     body:
-      'The future belongs to people who can think beautifully across civilizations.',
+      'The Institute explores what humanity could become when Beautiful Success becomes the new operating system.',
   },
 } as const;
 
@@ -48,18 +53,18 @@ export default function EntranceHero() {
   return (
     <section
       style={{
-        maxWidth: 980,
-        margin: '80px auto',
+        maxWidth: 1100,
+        margin: '110px auto 0',
         textAlign: 'center',
       }}
     >
       <div
         style={{
-          letterSpacing: '0.22em',
+          fontSize: 14,
+          letterSpacing: '.32em',
           textTransform: 'uppercase',
-          fontSize: 13,
-          color: '#8a7862',
-          marginBottom: 24,
+          color: '#a78858',
+          marginBottom: 28,
         }}
       >
         {copy.eyebrow}
@@ -67,10 +72,11 @@ export default function EntranceHero() {
 
       <h1
         style={{
-          fontFamily: 'serif',
+          fontFamily: 'Cormorant Garamond, serif',
           fontWeight: 500,
-          fontSize: 'clamp(52px,7vw,92px)',
-          lineHeight: 1.02,
+          fontSize: 'clamp(62px,8vw,108px)',
+          lineHeight: 0.95,
+          letterSpacing: '-0.03em',
           margin: 0,
         }}
       >
@@ -79,10 +85,10 @@ export default function EntranceHero() {
 
       <p
         style={{
-          maxWidth: 720,
-          margin: '36px auto 0',
-          fontSize: 22,
-          lineHeight: 1.7,
+          maxWidth: 760,
+          margin: '42px auto 0',
+          fontSize: 24,
+          lineHeight: 1.75,
           color: '#645a4f',
         }}
       >
