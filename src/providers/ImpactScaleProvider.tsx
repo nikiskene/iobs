@@ -1,4 +1,4 @@
-// src/providers/ImpactScaleProvider.tsx
+//src/providers/ImpactScaleProvider.tsx
 
 import {
   createContext,
