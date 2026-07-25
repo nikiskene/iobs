@@ -1,8 +1,10 @@
 // src/pages/InstituteHomePage.tsx
 
-import InstituteShell from '../components/institute/InstituteShell';
 import EntranceHero from '../components/institute/EntranceHero';
 import ImpactDial from '../components/institute/ImpactDial';
+import ImpactStatement from '../components/institute/ImpactStatement';
+import InstituteFooter from '../components/institute/InstituteFooter';
+import InstituteShell from '../components/institute/InstituteShell';
 
 export default function InstituteHomePage() {
   return (
@@ -14,11 +16,12 @@ export default function InstituteHomePage() {
           display: 'flex',
           justifyContent: 'center',
           marginTop: 80,
-          marginBottom: 120,
         }}
       >
         <ImpactDial />
       </div>
+
+      <ImpactStatement />
 
       <section
         style={{
@@ -60,6 +63,8 @@ export default function InstituteHomePage() {
           text="A global community of people choosing to build something larger than themselves."
         />
       </section>
+
+      <InstituteFooter />
     </InstituteShell>
   );
 }
@@ -78,7 +83,6 @@ function FeatureCard({ title, text }: CardProps) {
         background: 'rgba(255,255,255,.55)',
         backdropFilter: 'blur(20px)',
         border: '1px solid rgba(184,138,59,.18)',
-        transition: '.25s',
       }}
     >
       <h3
