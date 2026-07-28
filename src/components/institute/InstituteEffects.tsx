@@ -2,11 +2,12 @@
 
 import Atmosphere from './Atmosphere';
 import FloatingOrnaments from './FloatingOrnaments';
+import FloatingQuote from './FloatingQuote';
 import GoldNoiseOverlay from './GoldNoiseOverlay';
+import LuxuryCursor from './LuxuryCursor';
 import MouseGlow from './MouseGlow';
 import ParallaxBackground from './ParallaxBackground';
 import ScrollProgress from './ScrollProgress';
-import FloatingQuote from './FloatingQuote';
 
 export default function InstituteEffects() {
   return (
@@ -20,6 +21,8 @@ export default function InstituteEffects() {
       <FloatingOrnaments />
 
       <MouseGlow />
+
+      <LuxuryCursor />
 
       <ScrollProgress />
 
