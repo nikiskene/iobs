@@ -18,32 +18,34 @@ export default function InstituteShell({
   return (
     <div
       style={{
-        minHeight: '100vh',
         position: 'relative',
-        overflow: 'hidden',
+        minHeight: '100vh',
+        overflowX: 'hidden',
+        overflowY: 'auto',
         background: theme.background,
         color: theme.text,
         transition:
-          'background-color .8s ease, color .8s ease',
+          'background .8s ease, color .8s ease',
       }}
     >
       <InstituteBackground />
 
       <InstituteEffects />
 
-      <div
+      <InstituteHeader />
+
+      <main
         style={{
           position: 'relative',
-          zIndex: 10,
+          zIndex: 20,
+          width: '100%',
           maxWidth: theme.maxWidth,
           margin: '0 auto',
-          padding: '0 40px 120px',
+          padding: '120px 40px 140px',
         }}
       >
-        <InstituteHeader />
-
         <PageFadeIn>{children}</PageFadeIn>
-      </div>
+      </main>
     </div>
   );
 }
