@@ -40,9 +40,15 @@ export async function searchCities(query: string): Promise<CityResult[]> {
   const data = await response.json();
   console.log('Mapbox city results:', data.features);
 
-  return (data.features || [])
-    .filter((feature: any) => Array.isArray(feature.center))
-    .map((feature: any) => {
+  const features = (data.features || []) as Array<{
+    center: [number, number];
+    place_name?: string;
+    text: string;
+  }>;
+
+  return features
+    .filter((feature) => Array.isArray(feature.center))
+    .map((feature) => {
       const [lng, lat] = feature.center;
 
       return {

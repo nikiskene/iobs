@@ -35,7 +35,10 @@ export default function FloatingOrnaments() {
           key={index}
           style={{
             position: "fixed",
-            ...item,
+            left: item.left,
+            right: item.right,
+            top: item.top,
+            bottom: item.bottom,
             opacity: 0.08,
             pointerEvents: "none",
             zIndex: 1,

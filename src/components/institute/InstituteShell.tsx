@@ -5,6 +5,7 @@ import InstituteBackground from './InstituteBackground';
 import InstituteHeader from './InstituteHeader';
 import { useImpactScale } from '../../providers/ImpactScaleProvider';
 import { getInstituteTheme } from '../../theme/instituteTheme';
+import './instituteHome.css';
 
 export default function InstituteShell({
   children,
@@ -14,6 +15,7 @@ export default function InstituteShell({
 
   return (
     <div
+      className={`institute-shell scale-${scale}`}
       style={{
         minHeight: '100vh',
         background: theme.background,
@@ -26,15 +28,7 @@ export default function InstituteShell({
     >
       <InstituteBackground />
 
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          maxWidth: theme.maxWidth,
-          margin: '0 auto',
-          padding: '0 40px 120px',
-        }}
-      >
+      <div className="institute-frame">
         <InstituteHeader />
         {children}
       </div>

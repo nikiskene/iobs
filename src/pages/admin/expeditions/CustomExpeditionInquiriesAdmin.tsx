@@ -1,6 +1,30 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../../lib/supabase';
-import type { CustomExpeditionInquiry } from '../../../lib/types';
+
+type InquiryStatus =
+  | 'draft' | 'submitted' | 'contacted' | 'qualified'
+  | 'proposal_sent' | 'confirmed' | 'declined' | 'archived';
+
+type CustomExpeditionInquiry = {
+  id: string;
+  status: InquiryStatus;
+  contact_name: string;
+  email: string;
+  phone?: string | null;
+  organization_name?: string | null;
+  organization_type?: string | null;
+  topic?: string | null;
+  other_topic?: string | null;
+  destination?: string | null;
+  suggested_location?: string | null;
+  duration_days?: number | null;
+  group_size?: number | null;
+  preferred_timing?: string | null;
+  context?: string | null;
+  estimated_price_usd?: number | null;
+  admin_notes?: string | null;
+  updated_at: string;
+};
 
 const statuses: CustomExpeditionInquiry['status'][] = [
   'draft',

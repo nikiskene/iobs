@@ -12,7 +12,6 @@ export default function ProfilePage() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [linkedinUrl, setLinkedinUrl] = useState('');
-  const [location, setLocation] = useState('');
   const [bio, setBio] = useState('');
   const [isPublic, setIsPublic] = useState(true);
 
@@ -32,7 +31,6 @@ export default function ProfilePage() {
     setFullName(profile.full_name || '');
     setEmail(profile.email || '');
     setLinkedinUrl(profile.linkedin_url || '');
-    setLocation(profile.location || '');
     setBio(profile.bio || '');
     setIsPublic(profile.is_public ?? true);
 
@@ -148,14 +146,12 @@ export default function ProfilePage() {
             onSelect={(result) => {
               setCity(result.city);
               setLocationLabel(result.label);
-              setLocation(result.label);
               setGeoLat(result.lat);
               setGeoLng(result.lng);
             }}
             onClear={() => {
               setCity('');
               setLocationLabel('');
-              setLocation('');
               setGeoLat(null);
               setGeoLng(null);
             }}

@@ -123,7 +123,7 @@ function AdminThesisEditor({
   const [status, setStatus] = useState(thesis.status);
   const [isFeatured, setIsFeatured] = useState(thesis.is_featured);
   const [displayOrder, setDisplayOrder] = useState(thesis.display_order);
-  const [media, setMedia] = useState<ThesisMedia[]>(thesis.thesis_media || []);
+  const [media] = useState<ThesisMedia[]>(thesis.thesis_media || []);
   const [files, setFiles] = useState<File[]>([]);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');

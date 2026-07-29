@@ -26,7 +26,7 @@ export default function ChatMessageGroup({
 
         const previousSameAuthor =
           previous &&
-          previous.author_id === message.author_id &&
+          previous.user_id === message.user_id &&
           !startsNewDay;
 
         return (
@@ -35,7 +35,7 @@ export default function ChatMessageGroup({
 
             <ChatMessage
               message={message}
-              isOwn={message.author_id === currentUserId}
+              isOwn={message.user_id === currentUserId}
               showAvatar={!previousSameAuthor}
             />
           </div>

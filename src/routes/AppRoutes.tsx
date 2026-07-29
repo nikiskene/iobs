@@ -1,27 +1,16 @@
 // src/routes/AppRoutes.tsx
 
-import { Routes, Route } from 'react-router-dom';
-
-import InstituteHomePage from '../pages/InstituteHomePage';
-
-// existing imports stay here...
+import { Routes } from 'react-router-dom';
+import PublicRoutes from './PublicRoutes';
+import DashboardRoutes from './DashboardRoutes';
+import AdminRoutes from './AdminRoutes';
 
 export default function AppRoutes() {
   return (
     <Routes>
-
-      {/* ==============================
-          Institute of Beautiful Success
-         ============================== */}
-
-      <Route path="/" element={<InstituteHomePage />} />
-
-      {/* Existing routes below.
-         Do NOT remove them. */}
-
-      {/* <Route ... /> */}
-      {/* <Route ... /> */}
-
+      {PublicRoutes()}
+      {DashboardRoutes()}
+      {AdminRoutes()}
     </Routes>
   );
 }

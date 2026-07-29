@@ -2,7 +2,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
-import type { SiteSettings } from '../lib/types';
 
 export default function Footer() {
   const [logoUrl, setLogoUrl] = useState('');

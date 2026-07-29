@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 
 import PublicLayout from './PublicLayout';
 
-import HomePage from '../pages/public/HomePage';
+import InstituteHomePage from '../pages/InstituteHomePage';
 import AboutPage from '../pages/public/AboutPage';
 import TeamPage from '../pages/public/TeamPage';
 import ThesisPage from '../pages/public/ThesisPage';
@@ -24,9 +24,7 @@ export default function PublicRoutes() {
       <Route
         path="/"
         element={
-          <PublicLayout>
-            <HomePage />
-          </PublicLayout>
+          <InstituteHomePage />
         }
       />
 

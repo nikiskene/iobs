@@ -1,99 +1,74 @@
 // src/components/institute/EntranceHero.tsx
 
 import { useImpactScale } from '../../providers/ImpactScaleProvider';
+import ImpactDial, { SCALE_STEPS } from './ImpactDial';
 
-const COPY = {
+const WORLDS = {
   self: {
-    eyebrow: 'The Institute of Beautiful Success',
-    title: 'If you could build anything in the world, what would it be?',
-    body:
-      'Most people optimize their lives. A few redesign them. Beautiful Success begins with choosing who you want to become.',
+    number: 'I',
+    eyebrow: 'A private beginning',
+    title: 'What would you build if success could be beautiful?',
+    body: 'Begin with the life you are becoming. Identity is the first architecture.',
+    word: 'BECOME',
   },
-
   relationships: {
-    eyebrow: 'The Institute of Beautiful Success',
+    number: 'II',
+    eyebrow: 'The intimate world',
     title: 'Every relationship creates a tiny civilization.',
-    body:
-      'Every conversation changes culture. Every interaction leaves an echo. Beautiful Success expands far beyond ourselves.',
+    body: 'Shape a circle where candour, imagination and belonging can flourish.',
+    word: 'BELONG',
   },
-
   team: {
-    eyebrow: 'The Institute of Beautiful Success',
-    title: 'Great teams share an identity before they share a strategy.',
-    body:
-      'Alignment does not come from management. It comes from knowing what you are becoming together.',
+    number: 'III',
+    eyebrow: 'The shared endeavour',
+    title: 'Build the company people wish existed.',
+    body: 'Turn collective identity into culture, decisions and uncommon momentum.',
+    word: 'CREATE',
   },
-
   organization: {
-    eyebrow: 'The Institute of Beautiful Success',
-    title: 'Organizations become what they repeatedly reward.',
-    body:
-      'Culture is architecture. Identity is infrastructure. Strategy merely follows both.',
+    number: 'IV',
+    eyebrow: 'The civic imagination',
+    title: 'Make your community feel newly possible.',
+    body: 'Gather people around a more generous vision of place, participation and progress.',
+    word: 'GATHER',
   },
-
   industry: {
-    eyebrow: 'The Institute of Beautiful Success',
-    title: 'Industries rarely change because of technology.',
-    body:
-      'They change when someone redefines what success looks like for everyone else.',
+    number: 'V',
+    eyebrow: 'The systems scale',
+    title: 'Redefine what society calls success.',
+    body: 'Change the incentives, stories and institutions that quietly design everyday life.',
+    word: 'REWRITE',
   },
-
   world: {
-    eyebrow: 'The Institute of Beautiful Success',
-    title: 'The world is waiting for better questions.',
-    body:
-      'The Institute explores what humanity could become when Beautiful Success becomes the new operating system.',
+    number: 'VI',
+    eyebrow: 'The beautiful impossible',
+    title: 'The whole world is still ours to imagine.',
+    body: 'Build the operating systems for a civilization worthy of its potential.',
+    word: 'TRANSFORM',
   },
 } as const;
 
 export default function EntranceHero() {
   const { scale } = useImpactScale();
-  const copy = COPY[scale];
+  const world = WORLDS[scale];
+  const label = SCALE_STEPS.find((step) => step.value === scale)?.label;
 
   return (
-    <section
-      style={{
-        maxWidth: 1100,
-        margin: '110px auto 0',
-        textAlign: 'center',
-      }}
-    >
-      <div
-        style={{
-          fontSize: 14,
-          letterSpacing: '.32em',
-          textTransform: 'uppercase',
-          color: '#a78858',
-          marginBottom: 28,
-        }}
-      >
-        {copy.eyebrow}
+    <main className="entrance">
+      <div className="hero-copy">
+        <p className="hero-kicker"><span>{world.number}</span>{world.eyebrow}</p>
+        <h1>{world.title}</h1>
+        <p className="hero-body">{world.body}</p>
+        <div className="hero-actions">
+          <a href="#method">Discover the method</a>
+          <a href="/expeditions">Enter an expedition <span>→</span></a>
+        </div>
       </div>
-
-      <h1
-        style={{
-          fontFamily: 'Cormorant Garamond, serif',
-          fontWeight: 500,
-          fontSize: 'clamp(62px,8vw,108px)',
-          lineHeight: 0.95,
-          letterSpacing: '-0.03em',
-          margin: 0,
-        }}
-      >
-        {copy.title}
-      </h1>
-
-      <p
-        style={{
-          maxWidth: 760,
-          margin: '42px auto 0',
-          fontSize: 24,
-          lineHeight: 1.75,
-          color: '#645a4f',
-        }}
-      >
-        {copy.body}
-      </p>
-    </section>
+      <div className="hero-instrument">
+        <span className="world-word" aria-hidden="true">{world.word}</span>
+        <ImpactDial />
+        <p className="current-world">Now viewing <strong>{label}</strong></p>
+      </div>
+    </main>
   );
 }

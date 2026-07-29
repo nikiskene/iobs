@@ -1,7 +1,7 @@
 // src/pages/admin/EventRsvpsAdmin.tsx
 import { useEffect, useMemo, useState } from 'react';
-import { supabase } from '../../lib/supabase';
-import type { Event, EventRsvp } from '../../lib/types';
+import { supabase } from '../../../lib/supabase';
+import type { Event, EventRsvp } from '../../../lib/types';
 
 type RsvpWithEvent = EventRsvp & {
   events?: Pick<Event, 'id' | 'title' | 'start_date'>;
