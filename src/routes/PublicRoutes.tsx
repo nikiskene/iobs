@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import PublicLayout from './PublicLayout';
 
 import InstituteHomePage from '../pages/InstituteHomePage';
+import TransitionPage from '../pages/TransitionPage';
 import AboutPage from '../pages/public/AboutPage';
 import TeamPage from '../pages/public/TeamPage';
 import ThesisPage from '../pages/public/ThesisPage';
@@ -21,12 +22,8 @@ import BuildSnapshot from '../pages/BuildSnapshot';
 export default function PublicRoutes() {
   return (
     <>
-      <Route
-        path="/"
-        element={
-          <InstituteHomePage />
-        }
-      />
+      <Route path="/" element={<TransitionPage />} />
+      <Route path="/institute" element={<InstituteHomePage />} />
 
       <Route
         path="/about"
