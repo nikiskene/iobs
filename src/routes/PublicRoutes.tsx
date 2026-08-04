@@ -17,6 +17,7 @@ import ExpeditionDetailPage from '../pages/public/ExpeditionDetailPage';
 import CustomExpeditionPage from '../pages/public/CustomExpeditionPage';
 import MethodWorldOSPage from '../pages/public/MethodWorldOSPage';
 import ContactPage from '../pages/public/ContactPage';
+import InstitutePublicFrame from '../components/institute/InstitutePublicFrame';
 
 import LoginPage from '../pages/auth/LoginPage';
 import BuildSnapshot from '../pages/BuildSnapshot';
@@ -68,9 +69,9 @@ export default function PublicRoutes() {
       <Route
         path="/expeditions"
         element={
-          <PublicLayout>
+          <InstitutePublicFrame>
             <ExpeditionsPage />
-          </PublicLayout>
+          </InstitutePublicFrame>
         }
       />
 
@@ -95,9 +96,9 @@ export default function PublicRoutes() {
       <Route
         path="/events"
         element={
-          <PublicLayout>
+          <InstitutePublicFrame>
             <EventsPage />
-          </PublicLayout>
+          </InstitutePublicFrame>
         }
       />
 
@@ -113,9 +114,9 @@ export default function PublicRoutes() {
       <Route
         path="/join"
         element={
-          <PublicLayout>
+          <InstitutePublicFrame>
             <JoinPage />
-          </PublicLayout>
+          </InstitutePublicFrame>
         }
       />
 

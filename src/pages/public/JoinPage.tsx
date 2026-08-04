@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
-import { ArrowRight } from 'lucide-react';
 
 export default function JoinPage() {
   const navigate = useNavigate();
@@ -34,53 +33,48 @@ export default function JoinPage() {
   };
 
   return (
-    <div className="bg-[#0A0A0A] text-white pt-16 min-h-screen flex items-center justify-center px-6">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold tracking-tight">Join WorldOS</h1>
-          <p className="mt-3 text-zinc-400">
-            Become an Explorer and start contributing theses.
-          </p>
-        </div>
-
-        <form onSubmit={handleSignup} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Full Name</label>
+    <main className="ibs-join">
+      <div className="ibs-join-copy">
+        <p className="ibs-eyebrow">Membership · Public beta</p>
+        <h1>Join the Institute.</h1>
+        <p>Enter the WorldOS community behind the Institute of Beautiful Success—a place for people building more beautiful definitions of success.</p>
+      </div>
+      <div>
+        <form onSubmit={handleSignup} className="ibs-join-form">
+          <div className="ibs-field">
+            <label>Full name</label>
             <input
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
-              className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-md text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
               placeholder="Your full name"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Email</label>
+          <div className="ibs-field">
+            <label>Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-md text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
               placeholder="you@example.com"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Password</label>
+          <div className="ibs-field">
+            <label>Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-md text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
               placeholder="At least 6 characters"
             />
           </div>
 
           {error && (
-            <div className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-md px-4 py-2">
+            <div className="ibs-form-error">
               {error}
             </div>
           )}
@@ -88,19 +82,19 @@ export default function JoinPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 bg-sky-500 text-white font-medium rounded-md hover:bg-sky-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            className="ibs-submit"
           >
-            {loading ? 'Creating account...' : <>Create Account <ArrowRight className="w-4 h-4" /></>}
+            {loading ? 'Preparing your membership…' : 'Enter the public beta'}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-zinc-500">
+        <p className="ibs-form-note">
           Already have an account?{' '}
-          <Link to="/login" className="text-sky-400 hover:text-sky-300 transition-colors">
+          <Link to="/login">
             Sign in
           </Link>
         </p>
       </div>
-    </div>
+    </main>
   );
 }
