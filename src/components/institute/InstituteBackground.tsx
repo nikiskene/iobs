@@ -6,7 +6,7 @@ export default function InstituteBackground() {
   const { scale } = useImpactScale();
 
   const opacity =
-    scale === 'self'
+    scale === 'me'
       ? 0.06
       : scale === 'world'
       ? 0.14

@@ -3,31 +3,31 @@
 import { useImpactScale } from '../../providers/ImpactScaleProvider';
 
 const CONTENT = {
-  self: {
+  me: {
     label: 'Impact',
     value: 'One Life',
     text:
       'Every civilization begins with one human deciding to build something beautiful.',
   },
-  relationships: {
+  circle: {
     label: 'Impact',
     value: 'Two People',
     text:
       'The quality of a relationship becomes the smallest unit of cultural change.',
   },
-  team: {
+  teams: {
     label: 'Impact',
     value: 'One Team',
     text:
       'Shared identity transforms groups of individuals into organizations capable of impossible things.',
   },
-  organization: {
+  organizations: {
     label: 'Impact',
     value: 'One Organization',
     text:
       'Companies shape the daily reality of millions. Their identity matters more than ever.',
   },
-  industry: {
+  society: {
     label: 'Impact',
     value: 'Entire Industries',
     text:

@@ -2,11 +2,14 @@
 
 import InstituteShell from '../components/institute/InstituteShell';
 import HomepageComposer from '../components/institute/HomepageComposer';
+import { ScaleWorldsProvider } from '../providers/ScaleWorldsProvider';
 
 export default function InstituteHomePage() {
   return (
-    <InstituteShell>
-      <HomepageComposer />
-    </InstituteShell>
+    <ScaleWorldsProvider>
+      <InstituteShell>
+        <HomepageComposer />
+      </InstituteShell>
+    </ScaleWorldsProvider>
   );
 }

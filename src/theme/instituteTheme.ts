@@ -39,23 +39,23 @@ const WORLD: InstituteTheme = {
 };
 
 const THEMES: Record<ImpactScale, InstituteTheme> = {
-  self: BASE,
-  relationships: {
+  me: BASE,
+  circle: {
     ...BASE,
     accent: '#7a4a47',
     accentSoft: '#b17b74',
   },
-  team: {
+  teams: {
     ...BASE,
     accent: '#4d5e37',
     accentSoft: '#80966a',
   },
-  organization: {
+  organizations: {
     ...BASE,
     accent: '#32475f',
     accentSoft: '#607891',
   },
-  industry: {
+  society: {
     ...BASE,
     accent: '#2d5160',
     accentSoft: '#5c8a96',
