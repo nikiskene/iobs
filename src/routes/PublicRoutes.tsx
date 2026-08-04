@@ -15,6 +15,8 @@ import EventDetailPage from '../pages/public/EventDetailPage';
 import ExpeditionsPage from '../pages/public/ExpeditionsPage';
 import ExpeditionDetailPage from '../pages/public/ExpeditionDetailPage';
 import CustomExpeditionPage from '../pages/public/CustomExpeditionPage';
+import MethodWorldOSPage from '../pages/public/MethodWorldOSPage';
+import ContactPage from '../pages/public/ContactPage';
 
 import LoginPage from '../pages/auth/LoginPage';
 import BuildSnapshot from '../pages/BuildSnapshot';
@@ -24,6 +26,8 @@ export default function PublicRoutes() {
     <>
       <Route path="/" element={<TransitionPage />} />
       <Route path="/institute" element={<InstituteHomePage />} />
+      <Route path="/method" element={<PublicLayout><MethodWorldOSPage /></PublicLayout>} />
+      <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
 
       <Route
         path="/about"

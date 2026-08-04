@@ -8,14 +8,14 @@ const LOGO =
 export default function InstituteHeader() {
   return (
     <header className="institute-header">
-      <Link className="institute-logo" to="/" aria-label="Institute of Beautiful Success">
+      <Link className="institute-logo" to="/institute" aria-label="Institute of Beautiful Success">
         <img src={LOGO} alt="Institute of Beautiful Success" />
       </Link>
       <nav aria-label="Main navigation">
-        <a href="/#method">The Method</a>
-        <Link to="/expeditions">Expeditions</Link>
-        <Link to="/join">Consulting</Link>
-        <Link to="/dashboard/explorers">Fellowship</Link>
+        <Link to="/method">Method / WorldOS</Link>
+        <Link to="/events">Events</Link>
+        <Link to="/dashboard/explorers">Community</Link>
+        <Link to="/contact">Contact</Link>
       </nav>
       <Link className="enter-link" to="/login">Enter <span>↗</span></Link>
     </header>

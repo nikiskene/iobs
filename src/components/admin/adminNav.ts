@@ -1,6 +1,6 @@
 // src/components/admin/adminNav.ts
 // src/components/admin/adminNav.ts
-import { BookOpen, CalendarDays, Clock, Compass, Database, FileText, LayoutGrid as Layout, MessageCircle, Newspaper, Palette, Settings, Shield, Telescope, Users } from 'lucide-react';
+import { BookOpen, CalendarDays, Compass, FileText, Globe2, LayoutGrid as Layout, MessageCircle, Palette, Settings, Shield, Users } from 'lucide-react';
 
 export type AdminNavLink = {
   to: string;
@@ -40,6 +40,12 @@ export const adminNavGroups: AdminNavGroup[] = [
         label: 'Homepage',
         icon: Layout,
         description: 'Edit homepage sections and positioning.',
+      },
+      {
+        to: '/admin/content/scale-worlds',
+        label: 'Scale Worlds',
+        icon: Globe2,
+        description: 'Edit the six knob worlds and their stories.',
       },
       {
         to: '/admin/content/about',
@@ -121,49 +127,6 @@ export const adminNavGroups: AdminNavGroup[] = [
         label: 'Conversations',
         icon: MessageCircle,
         description: 'Manage conversation content.',
-      },
-    ],
-  },
-  {
-    title: 'Identity Research',
-    to: '/admin/identity',
-    description: 'Internal north star and living methodology.',
-    links: [
-      {
-        to: '/admin/identity',
-        label: 'Engine',
-        icon: Shield,
-        description: 'Identity Engine overview and scan control.',
-      },
-      {
-        to: '/admin/identity/review',
-        label: 'Review',
-        icon: FileText,
-        description: 'Candidate signal review queue.',
-      },
-      {
-        to: '/admin/identity/daily-scan',
-        label: 'Daily Scan',
-        icon: Newspaper,
-        description: 'Reviewed identity signals and patterns by day.',
-      },
-      {
-        to: '/admin/identity/sources',
-        label: 'Sources',
-        icon: Database,
-        description: 'Configured sources and cohorts.',
-      },
-      {
-        to: '/admin/identity/method',
-        label: 'METHOD',
-        icon: Telescope,
-        description: 'WorldOS Identity Research methodology.',
-      },
-      {
-        to: '/admin/identity/settings',
-        label: 'Schedule',
-        icon: Clock,
-        description: 'Daily automation and source retention.',
       },
     ],
   },

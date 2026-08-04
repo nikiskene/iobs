@@ -17,6 +17,7 @@ import ThesesAdmin from '../pages/admin/ThesesAdmin';
 import TeamAdmin from '../pages/admin/TeamAdmin';
 import SiteSettingsAdmin from '../pages/admin/SiteSettingsAdmin';
 import GlossaryAdmin from '../pages/admin/GlossaryAdmin';
+import ScaleWorldsAdmin from '../pages/admin/ScaleWorldsAdmin';
 
 import EventsAdmin from '../pages/admin/events/EventsAdmin';
 import ExpeditionsAdmin from '../pages/admin/expeditions/ExpeditionsAdmin';
@@ -56,6 +57,7 @@ export default function AdminRoutes() {
       <Route path="settings" element={<AdminCategoryPage title="Settings" />} />
 
       <Route path="content/homepage" element={<HomepageCMS />} />
+      <Route path="content/scale-worlds" element={<ScaleWorldsAdmin />} />
       <Route path="content/about" element={<AboutCMS />} />
       <Route path="content/glossary" element={<GlossaryAdmin />} />
       <Route path="content/theses" element={<ThesesAdmin />} />
