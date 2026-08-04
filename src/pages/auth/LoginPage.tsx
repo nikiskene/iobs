@@ -1,7 +1,7 @@
+// src/pages/auth/LoginPage.tsx
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
-import { ArrowRight } from 'lucide-react';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -10,76 +10,35 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  async function handleLogin(event: React.FormEvent) {
+    event.preventDefault();
     setError('');
     setLoading(true);
-
     const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
-
     if (authError) {
       setError(authError.message);
       setLoading(false);
       return;
     }
-
     navigate('/dashboard');
-  };
+  }
 
   return (
-    <div className="bg-[#0A0A0A] text-white pt-16 min-h-screen flex items-center justify-center px-6">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold tracking-tight">Welcome Back</h1>
-          <p className="mt-3 text-zinc-400">Sign in to your Explorer account.</p>
-        </div>
-
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-md text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-              placeholder="you@example.com"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-md text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-              placeholder="Your password"
-            />
-          </div>
-
-          {error && (
-            <div className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-md px-4 py-2">
-              {error}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-2.5 bg-sky-500 text-white font-medium rounded-md hover:bg-sky-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
-          >
-            {loading ? 'Signing in...' : <>Sign In <ArrowRight className="w-4 h-4" /></>}
-          </button>
-        </form>
-
-        <p className="mt-6 text-center text-sm text-zinc-500">
-          Don't have an account?{' '}
-          <Link to="/join" className="text-sky-400 hover:text-sky-300 transition-colors">
-            Join WorldOS
-          </Link>
-        </p>
+    <main className="ibs-join">
+      <div className="ibs-join-copy">
+        <p className="ibs-eyebrow">WorldOS community</p>
+        <h1>Welcome back.</h1>
+        <p>Enter the private community behind the Institute of Beautiful Success.</p>
       </div>
-    </div>
+      <div>
+        <form onSubmit={handleLogin} className="ibs-join-form">
+          <div className="ibs-field"><label>Email</label><input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required placeholder="you@example.com" /></div>
+          <div className="ibs-field"><label>Password</label><input type="password" value={password} onChange={(event) => setPassword(event.target.value)} required placeholder="Your password" /></div>
+          {error && <div className="ibs-form-error">{error}</div>}
+          <button type="submit" disabled={loading} className="ibs-submit">{loading ? 'Opening the door…' : 'Enter'}</button>
+        </form>
+        <p className="ibs-form-note">Not yet a member? <Link to="/join">Join the Institute</Link></p>
+      </div>
+    </main>
   );
 }
