@@ -25,7 +25,7 @@ export const SCALE_WORLDS: ScaleWorld[] = [
     iAm: 'The author of my identity, attention and direction.',
     iCanBe: 'More intentional, more alive and more fully myself.',
     whatToDo: 'Explore public tours, intimate talks and personal expeditions.',
-    knobImageUrl: `${MEDIA}/Just%20me%20Knob.png`,
+    knobImageUrl: `${MEDIA}/Just%20me%20Knob.png?v=2`,
   },
   {
     slug: 'circle', label: 'My Community', eyebrow: 'The intimate world',
