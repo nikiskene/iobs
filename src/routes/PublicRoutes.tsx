@@ -27,8 +27,8 @@ export default function PublicRoutes() {
     <>
       <Route path="/" element={<TransitionPage />} />
       <Route path="/institute" element={<InstituteHomePage />} />
-      <Route path="/method" element={<PublicLayout><MethodWorldOSPage /></PublicLayout>} />
-      <Route path="/contact" element={<PublicLayout><ContactPage /></PublicLayout>} />
+      <Route path="/method" element={<InstitutePublicFrame><MethodWorldOSPage /></InstitutePublicFrame>} />
+      <Route path="/contact" element={<InstitutePublicFrame><ContactPage /></InstitutePublicFrame>} />
 
       <Route
         path="/about"
@@ -51,18 +51,14 @@ export default function PublicRoutes() {
       <Route
         path="/thesis"
         element={
-          <PublicLayout>
-            <ThesisPage />
-          </PublicLayout>
+          <InstitutePublicFrame><div className="ibs-cases"><ThesisPage /></div></InstitutePublicFrame>
         }
       />
 
       <Route
         path="/thesis/:slug"
         element={
-          <PublicLayout>
-            <ThesisPage />
-          </PublicLayout>
+          <InstitutePublicFrame><div className="ibs-cases"><ThesisPage /></div></InstitutePublicFrame>
         }
       />
 
@@ -129,7 +125,7 @@ export default function PublicRoutes() {
         }
       />
 
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/login" element={<InstitutePublicFrame><LoginPage /></InstitutePublicFrame>} />
       <Route path="/snapshot" element={<BuildSnapshot />} />
     </>
   );
