@@ -10,7 +10,6 @@ export default function ImpactDial() {
 
   return (
     <div className="scale-dial" aria-label="Choose the scale of your ambition">
-      <p className="dial-instruction">Turn the scale of possibility</p>
       <button
         className="rendered-knob"
         type="button"
@@ -27,18 +26,6 @@ export default function ImpactDial() {
           />
         ))}
       </button>
-      <div className="dial-labels" role="group" aria-label="Impact scales">
-        {worlds.map((item, index) => (
-          <button
-            className={index === active ? 'active' : ''}
-            key={item.slug}
-            type="button"
-            onClick={() => setScale(item.slug)}
-          >
-            <span>{String(index + 1).padStart(2, '0')}</span>{item.label}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
