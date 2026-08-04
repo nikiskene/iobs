@@ -3,7 +3,7 @@
 import { Link } from 'react-router-dom';
 
 const LOGO =
-  'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/logo/V2%20transparent.png';
+  'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V2a%20transparent.png';
 
 export default function InstituteHeader() {
   return (
@@ -17,7 +17,7 @@ export default function InstituteHeader() {
         <Link to="/dashboard/explorers">Community</Link>
         <Link to="/contact">Contact</Link>
       </nav>
-      <Link className="enter-link" to="/login">Enter <span>↗</span></Link>
+      <Link className="enter-link" to="/login">Enter</Link>
     </header>
   );
 }

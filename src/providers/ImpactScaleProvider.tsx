@@ -6,6 +6,7 @@ export const IMPACT_SCALE_ORDER = [
   'circle',
   'teams',
   'organizations',
+  'country',
   'society',
   'world',
 ] as const;
@@ -28,7 +29,7 @@ export function ImpactScaleProvider({ children }: { children: ReactNode }) {
     return {
       scale,
       setScale,
-      next: () => setScale(IMPACT_SCALE_ORDER[Math.min(index + 1, 5)]),
+      next: () => setScale(IMPACT_SCALE_ORDER[Math.min(index + 1, IMPACT_SCALE_ORDER.length - 1)]),
       previous: () => setScale(IMPACT_SCALE_ORDER[Math.max(index - 1, 0)]),
     };
   }, [scale]);

@@ -27,6 +27,12 @@ const CONTENT = {
     text:
       'Companies shape the daily reality of millions. Their identity matters more than ever.',
   },
+  country: {
+    label: 'Impact',
+    value: 'One Country',
+    text:
+      'A nation can turn shared identity into dignity, imagination and collective possibility.',
+  },
   society: {
     label: 'Impact',
     value: 'Entire Industries',

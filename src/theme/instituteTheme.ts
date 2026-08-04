@@ -55,6 +55,11 @@ const THEMES: Record<ImpactScale, InstituteTheme> = {
     accent: '#32475f',
     accentSoft: '#607891',
   },
+  country: {
+    ...BASE,
+    accent: '#354773',
+    accentSoft: '#7181a8',
+  },
   society: {
     ...BASE,
     accent: '#2d5160',

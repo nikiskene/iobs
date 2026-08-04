@@ -23,5 +23,5 @@ export default function EntranceHero() {
 }
 
 function scaleIndex(scale: string) {
-  return ['me', 'circle', 'teams', 'organizations', 'society', 'world'].indexOf(scale) + 1;
+  return ['me', 'circle', 'teams', 'organizations', 'country', 'society', 'world'].indexOf(scale) + 1;
 }
