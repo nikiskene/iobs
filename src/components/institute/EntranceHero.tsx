@@ -16,8 +16,6 @@ export default function EntranceHero() {
         <p className="hero-body">{world.introduction}</p>
       </div>
       <div className="hero-instrument">
-        {world.textImageUrl && <img className="scale-text-art" src={world.textImageUrl} alt="" />}
-        {world.iconUrl && <img className="scale-icon-art" src={world.iconUrl} alt="" />}
         <ImpactDial />
       </div>
     </main>
