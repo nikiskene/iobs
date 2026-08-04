@@ -55,6 +55,15 @@ export const SCALE_WORLDS: ScaleWorld[] = [
     knobImageUrl: `${MEDIA}/my%20company%20knob.png`,
   },
   {
+    slug: 'country', label: 'My Country', eyebrow: 'The national imagination',
+    title: 'What could a country make beautifully possible?',
+    introduction: 'A country is a shared promise expressed through culture, institutions and choice.',
+    iAm: 'A citizen with a stake in the character and direction of my country.',
+    iCanBe: 'Part of a nation that turns belonging into possibility.',
+    whatToDo: 'Explore national cases, public programmes and civic expeditions.',
+    knobImageUrl: `${MEDIA}/country%20knob.png`,
+  },
+  {
     slug: 'society', label: 'The World', eyebrow: 'The beautiful possible',
     title: 'The whole world is still ours to imagine.',
     introduction: 'At the widest human scale, beautiful success becomes a civilizational proposition.',
