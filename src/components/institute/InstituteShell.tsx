@@ -5,6 +5,7 @@ import InstituteBackground from './InstituteBackground';
 import InstituteHeader from './InstituteHeader';
 import { useImpactScale } from '../../providers/ImpactScaleProvider';
 import './instituteHome.css';
+import './awardSite.css';
 
 export default function InstituteShell({
   children,

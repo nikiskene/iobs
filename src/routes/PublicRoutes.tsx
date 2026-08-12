@@ -1,10 +1,9 @@
 // src/routes/PublicRoutes.tsx
-import { Route } from 'react-router-dom';
+import { Navigate, Route } from 'react-router-dom';
 
 import PublicLayout from './PublicLayout';
 
 import InstituteHomePage from '../pages/InstituteHomePage';
-import TransitionPage from '../pages/TransitionPage';
 import AboutPage from '../pages/public/AboutPage';
 import TeamPage from '../pages/public/TeamPage';
 import ThesisPage from '../pages/public/ThesisPage';
@@ -21,12 +20,28 @@ import InstitutePublicFrame from '../components/institute/InstitutePublicFrame';
 
 import LoginPage from '../pages/auth/LoginPage';
 import BuildSnapshot from '../pages/BuildSnapshot';
+import AwardPage from '../pages/awards/AwardPage';
+import CategoriesPage from '../pages/awards/CategoriesPage';
+import JudgingPage from '../pages/awards/JudgingPage';
+import NominatePage from '../pages/awards/NominatePage';
+import EnterAwardPage from '../pages/awards/EnterAwardPage';
+import PartnersPage from '../pages/awards/PartnersPage';
+import VoicesPage from '../pages/awards/VoicesPage';
+import AssemblyPage from '../pages/awards/AssemblyPage';
 
 export default function PublicRoutes() {
   return (
     <>
-      <Route path="/" element={<TransitionPage />} />
-      <Route path="/institute" element={<InstituteHomePage />} />
+      <Route path="/" element={<InstituteHomePage />} />
+      <Route path="/institute" element={<Navigate to="/" replace />} />
+      <Route path="/award" element={<InstitutePublicFrame><AwardPage /></InstitutePublicFrame>} />
+      <Route path="/categories" element={<InstitutePublicFrame><CategoriesPage /></InstitutePublicFrame>} />
+      <Route path="/judging" element={<InstitutePublicFrame><JudgingPage /></InstitutePublicFrame>} />
+      <Route path="/nominate" element={<InstitutePublicFrame><NominatePage /></InstitutePublicFrame>} />
+      <Route path="/enter" element={<InstitutePublicFrame><EnterAwardPage /></InstitutePublicFrame>} />
+      <Route path="/partners" element={<InstitutePublicFrame><PartnersPage /></InstitutePublicFrame>} />
+      <Route path="/voices" element={<InstitutePublicFrame><VoicesPage /></InstitutePublicFrame>} />
+      <Route path="/assembly" element={<InstitutePublicFrame><AssemblyPage /></InstitutePublicFrame>} />
       <Route path="/method" element={<InstitutePublicFrame><MethodWorldOSPage /></InstitutePublicFrame>} />
       <Route path="/contact" element={<InstitutePublicFrame><ContactPage /></InstitutePublicFrame>} />
 
