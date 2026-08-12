@@ -12,8 +12,8 @@ export default function EntranceHero() {
     <main className="entrance" key={world.slug}>
       <div className="hero-copy">
         <p className="hero-kicker"><span>{String(scaleIndex(scale)).padStart(2, '0')}</span>{world.eyebrow}</p>
-        <h1>{world.title}</h1>
-        <p className="hero-body">{world.introduction}</p>
+        <h1>What should the world celebrate as success?</h1>
+        <p className="hero-body">The Beautiful Success Awards recognize achievements that make the world better through their success.</p>
       </div>
       <div className="hero-instrument">
         <ImpactDial />
