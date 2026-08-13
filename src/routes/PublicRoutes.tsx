@@ -12,6 +12,9 @@ const TeamPage = lazy(() => import('../pages/public/TeamPage'));
 const ThesisPage = lazy(() => import('../pages/public/ThesisPage'));
 const JoinPage = lazy(() => import('../pages/public/JoinPage'));
 const LegalPage = lazy(() => import('../pages/public/LegalPage'));
+const PrivacyPage = lazy(() => import('../pages/public/PrivacyPage'));
+const CookiePage = lazy(() => import('../pages/public/CookiePage'));
+const TermsPage = lazy(() => import('../pages/public/TermsPage'));
 const EventsPage = lazy(() => import('../pages/public/EventsPage'));
 const EventDetailPage = lazy(() => import('../pages/public/EventDetailPage'));
 const ExpeditionsPage = lazy(() => import('../pages/public/ExpeditionsPage'));
@@ -134,12 +137,12 @@ export default function PublicRoutes() {
 
       <Route
         path="/legal"
-        element={
-          <PublicLayout>
-            <LegalPage />
-          </PublicLayout>
-        }
+        element={<InstitutePublicFrame><LegalPage /></InstitutePublicFrame>}
       />
+      <Route path="/imprint" element={<Navigate to="/legal" replace />} />
+      <Route path="/privacy" element={<InstitutePublicFrame><PrivacyPage /></InstitutePublicFrame>} />
+      <Route path="/cookies" element={<InstitutePublicFrame><CookiePage /></InstitutePublicFrame>} />
+      <Route path="/terms" element={<InstitutePublicFrame><TermsPage /></InstitutePublicFrame>} />
 
       <Route path="/login" element={<InstitutePublicFrame><LoginPage /></InstitutePublicFrame>} />
       <Route path="/snapshot" element={<BuildSnapshot />} />
