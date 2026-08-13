@@ -17,6 +17,7 @@ export default function PartnerLogoStripe() {
   if (!logos.length) return null;
 
   return <section className="partner-logo-stripe" aria-label="Partners">
+    <h2>Grateful for our Beautiful Partners</h2>
     <div>{logos.map((logo) => <img key={logo.id} src={logo.media_url} alt="" loading="lazy" decoding="async" />)}</div>
   </section>;
 }
