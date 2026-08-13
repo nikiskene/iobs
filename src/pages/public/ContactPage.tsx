@@ -21,7 +21,7 @@ export default function ContactPage() {
       reason: String(form.get('reason') || '').trim(),
       message: String(form.get('message') || '').trim(),
     });
-    if (insertError) { setError('Your message could not be sent. Please email hello@worldos.institute.'); setState('error'); return; }
+    if (insertError) { setError('Your message could not be sent. Please email worldos@iacy.com.'); setState('error'); return; }
     formElement.reset(); setState('sent');
   }
 
@@ -29,7 +29,7 @@ export default function ContactPage() {
     <main>
       <section className="ibs-page-hero"><p className="ibs-eyebrow">The founding invitation</p><div><h1>Begin a beautiful conversation.</h1><p>Tell us how you would like to help establish what the world celebrates as success.</p></div></section>
       <section className="ibs-section nomination-layout">
-        <div><p className="award-label">Contact the Institute</p><h2>It begins with one conversation.</h2><p>Founding host, partner, media, award and press inquiries arrive directly in the Institute's private inbox.</p><a className="ibs-contact-link" href="mailto:hello@worldos.institute">hello@worldos.institute</a></div>
+        <div><p className="award-label">Contact the Institute</p><h2>It begins with one conversation.</h2><p>Founding host, partner, media, award and press inquiries arrive directly in the Institute's private inbox.</p><a className="ibs-contact-link" href="mailto:worldos@iacy.com">worldos@iacy.com</a></div>
         {state === 'sent' ? <div className="award-form award-form-success"><h2>Thank you.</h2><p>Your message has reached the Institute. We will be in touch personally.</p><button className="award-text-link" onClick={() => setState('idle')}>Send another message</button></div> :
         <form className="award-form" onSubmit={submit}>
           <label>Name<input name="name" required maxLength={120} /></label>

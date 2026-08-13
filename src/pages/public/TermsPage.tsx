@@ -9,6 +9,6 @@ export default function TermsPage() {
     <section><h2>Accounts</h2><p>You are responsible for keeping login details confidential and for activity under your account. Tell us promptly if you suspect unauthorised use. We may restrict access where reasonably necessary to protect users, the service, or comply with law.</p></section>
     <section><h2>Availability and liability</h2><p>The website is provided on an “as available” basis. To the extent permitted by law, we exclude implied warranties and liability for indirect or consequential loss. Nothing in these terms excludes liability that cannot lawfully be excluded.</p></section>
     <section><h2>Governing law</h2><p>These terms are governed by the laws applicable in the Emirate of Dubai and the federal laws of the United Arab Emirates, without limiting mandatory consumer or data-protection rights that apply in your place of residence.</p></section>
-    <section><h2>Contact</h2><p>Questions about these terms can be sent to <a href="mailto:hello@worldos.institute">hello@worldos.institute</a>.</p></section>
+    <section><h2>Contact</h2><p>Questions about these terms can be sent to <a href="mailto:worldos@iacy.com">worldos@iacy.com</a>.</p></section>
   </PolicyPage>;
 }
