@@ -9,3 +9,7 @@ export const AWARD_ASSETS = {
   oneLineLight: `${BASE}/IOBS%20Award%20V2.png`,
   oneLineDark: `${BASE}/IOBS%20Award%20V2%20neg.png`,
 };
+
+export function optimizedAwardAsset(url: string, width: number) {
+  return `${url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')}?width=${width}&quality=80&resize=contain`;
+}
