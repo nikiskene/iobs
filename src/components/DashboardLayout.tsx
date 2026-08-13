@@ -2,7 +2,7 @@
 // src/components/DashboardLayout.tsx
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { ArrowLeft, BookOpen, CalendarDays, Clock, Compass, Database, FileText, Globe2, Inbox, LayoutGrid as Layout, MessageCircle, Newspaper, Palette, Shield, Telescope, User, Users } from 'lucide-react';
+import { ArrowLeft, BookOpen, CalendarDays, Clock, Compass, Database, FileText, Globe2, Image, Inbox, LayoutGrid as Layout, MessageCircle, Newspaper, Palette, Shield, Telescope, User, Users } from 'lucide-react';
 
 type SidebarLink = {
   to: string;
@@ -39,6 +39,7 @@ export default function DashboardLayout() {
         { to: '/admin/content/about', label: 'About Page', icon: Layout },
         { to: '/admin/content/theses', label: 'Cases', icon: BookOpen },
         { to: '/admin/content/categories', label: 'Case Topics', icon: FileText },
+        { to: '/admin/content/partners', label: 'Partner Logos', icon: Image },
         { to: '/admin/content/glossary', label: 'Glossary', icon: BookOpen },
       ],
     },

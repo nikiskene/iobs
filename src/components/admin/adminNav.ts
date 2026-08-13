@@ -1,6 +1,6 @@
 // src/components/admin/adminNav.ts
 // src/components/admin/adminNav.ts
-import { BookOpen, CalendarDays, Compass, FileText, Globe2, Inbox, LayoutGrid as Layout, MessageCircle, Palette, Settings, Shield, Users } from 'lucide-react';
+import { BookOpen, CalendarDays, Compass, FileText, Globe2, Image, Inbox, LayoutGrid as Layout, MessageCircle, Palette, Settings, Shield, Users } from 'lucide-react';
 
 export type AdminNavLink = {
   to: string;
@@ -64,6 +64,12 @@ export const adminNavGroups: AdminNavGroup[] = [
         label: 'Case Topics',
         icon: FileText,
         description: 'Manage thesis categories.',
+      },
+      {
+        to: '/admin/content/partners',
+        label: 'Partner Logos',
+        icon: Image,
+        description: 'Upload and order logos in the public partner stripe.',
       },
       {
         to: '/admin/content/glossary',

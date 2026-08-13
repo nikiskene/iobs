@@ -18,6 +18,7 @@ const TeamAdmin = lazy(() => import('../pages/admin/TeamAdmin'));
 const SiteSettingsAdmin = lazy(() => import('../pages/admin/SiteSettingsAdmin'));
 const GlossaryAdmin = lazy(() => import('../pages/admin/GlossaryAdmin'));
 const ScaleWorldsAdmin = lazy(() => import('../pages/admin/ScaleWorldsAdmin'));
+const PartnerLogosAdmin = lazy(() => import('../pages/admin/PartnerLogosAdmin'));
 const EventsAdmin = lazy(() => import('../pages/admin/events/EventsAdmin'));
 const ExpeditionsAdmin = lazy(() => import('../pages/admin/expeditions/ExpeditionsAdmin'));
 const ExpeditionInquiriesAdmin = lazy(() => import('../pages/admin/expeditions/ExpeditionInquiriesAdmin'));
@@ -62,6 +63,7 @@ export default function AdminRoutes() {
       <Route path="content/glossary" element={<GlossaryAdmin />} />
       <Route path="content/theses" element={<ThesesAdmin />} />
       <Route path="content/categories" element={<CategoriesAdmin />} />
+      <Route path="content/partners" element={<PartnerLogosAdmin />} />
 
       <Route path="members/team" element={<TeamAdmin />} />
 
