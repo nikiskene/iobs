@@ -1,47 +1,12 @@
 // src/pages/public/LegalPage.tsx
-import { useEffect, useState } from 'react';
-import { supabase } from '../../lib/supabase';
-import type { HomepageSection } from '../../lib/types';
+import PolicyPage from '../../components/legal/PolicyPage';
 
 export default function LegalPage() {
-  const [section, setSection] = useState<HomepageSection | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchLegal = async () => {
-      const { data } = await supabase
-        .from('homepage_sections')
-        .select('*')
-        .eq('section_key', 'legal_impressum')
-        .eq('is_active', true)
-        .maybeSingle();
-
-      setSection((data as HomepageSection) || null);
-      setLoading(false);
-    };
-
-    fetchLegal();
-  }, []);
-
-  if (loading) {
-    return <div className="min-h-screen bg-[#0A0A0A]" />;
-  }
-
-  return (
-    <main className="min-h-screen bg-[#0A0A0A] px-6 py-32 text-white">
-      <div className="mx-auto max-w-3xl">
-        <p className="text-sm uppercase tracking-[0.3em] text-sky-300/80">
-          {section?.subheadline || 'Legal'}
-        </p>
-
-        <h1 className="mt-5 text-4xl font-bold tracking-tight md:text-5xl">
-          {section?.headline || 'Legal / Impressum'}
-        </h1>
-
-        <div className="mt-10 whitespace-pre-line text-base leading-relaxed text-zinc-300">
-          {section?.body || 'Legal information will be added shortly.'}
-        </div>
-      </div>
-    </main>
-  );
+  return <PolicyPage eyebrow="Legal notice" title="Imprint">
+    <section><h2>Website operator</h2><p>IACy International FZCO<br />Private Freezone Limited Liability Company<br />Dubai Airport Freezone<br />Dubai, United Arab Emirates</p></section>
+    <section><h2>Registration</h2><p>Service Licence No. 05573<br />Issuing authority: Dubai Integrated Economic Zones Authority (DIEZA)<br />Company manager: Nikolaus Skene</p></section>
+    <section><h2>Contact</h2><p>Email: <a href="mailto:hello@worldos.institute">hello@worldos.institute</a></p><p>The Institute of Beautiful Success and the Beautiful Success Award are initiatives operated by IACy International FZCO.</p></section>
+    <section><h2>Responsible for content</h2><p>IACy International FZCO, represented by its company manager, at the address stated above.</p></section>
+    <section><h2>Liability and copyright</h2><p>We prepare this website with care, but do not warrant that all information is complete, accurate, or continuously available. Linked third-party websites remain the responsibility of their operators.</p><p>Unless otherwise stated, the content, design, text, and visual materials on this website are protected by intellectual-property law. Reproduction or commercial use requires prior written permission.</p></section>
+  </PolicyPage>;
 }

@@ -6,6 +6,7 @@ const COLUMNS = [
   ['The Award', [['Categories', '/categories'], ['Judging', '/judging'], ['Nominate', '/nominate'], ['Enter', '/enter']]],
   ['The Institute', [['Founding Voices', '/voices'], ['Assembly', '/assembly'], ['Experiences', '/expeditions'], ['Contact', '/contact']]],
   ['Institutional', [['Founding Partners', '/partners'], ['Governance', '/judging'], ['Partner Briefing', '/partners'], ['Contact', '/contact'], ['Login', '/login']]],
+  ['Legal', [['Imprint', '/legal'], ['Privacy', '/privacy'], ['Cookies', '/cookies'], ['Terms', '/terms']]],
 ];
 
 export default function InstituteFooter() {
