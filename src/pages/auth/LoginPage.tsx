@@ -14,21 +14,26 @@ export default function LoginPage() {
     event.preventDefault();
     setError('');
     setLoading(true);
-    const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
+    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({ email, password });
     if (authError) {
       setError(authError.message);
       setLoading(false);
       return;
     }
-    navigate('/dashboard');
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', authData.user.id)
+      .maybeSingle();
+    navigate(profile?.role === 'admin' ? '/admin' : '/dashboard');
   }
 
   return (
     <main className="ibs-join">
       <div className="ibs-join-copy">
-        <p className="ibs-eyebrow">WorldOS community</p>
+        <p className="ibs-eyebrow">Private access</p>
         <h1>Welcome back.</h1>
-        <p>Enter the private community behind the Institute of Beautiful Success.</p>
+        <p>Enter the private administration and community behind the Beautiful Success Awards.</p>
       </div>
       <div>
         <form onSubmit={handleLogin} className="ibs-join-form">

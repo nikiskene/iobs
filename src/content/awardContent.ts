@@ -20,14 +20,16 @@ export const AWARD_CATEGORIES: AwardCategory[] = [
 ];
 
 export const AWARD_TEST = [
-  { number: '01', title: 'Is it successful?', copy: 'What has demonstrably been achieved—and for whom?' },
-  { number: '02', title: 'Is it beautiful?', copy: 'Are the means, relationships and consequences worthy of admiration?' },
-  { number: '03', title: 'Does it improve with scale?', copy: 'If it becomes ten or one thousand times more successful, does the world become better?' },
+  { number: '01', title: 'What became possible?', copy: 'What do you offer?' },
+  { number: '02', title: 'Who benefits as it grows?', copy: 'What is the echo you create?' },
+  { number: '03', title: 'What does success cost?', copy: 'What did you unlock - and what did it require?' },
+  { number: '04', title: 'Can the value endure?', copy: 'Is your growth good for humans and non-humans?' },
+  { number: '05', title: 'Does growth improve the system?', copy: 'What outlasts you?' },
 ];
 
 export const RECOGNITION_LEVELS = [
-  ['Official Selection', 'Verified work worthy of the global archive.'],
-  ['Finalist', 'Up to seven exceptional successes at each scale.'],
-  ['Laureate', 'One Beautiful Success Laureate at each scale.'],
-  ['Grand Laureate', 'One defining achievement across all seven scales.'],
+  ['Selected', 'Meets the standard and enters the annual record.'],
+  ['Distinguished', 'A defining example within its scale.'],
+  ['Beautiful Success Laureate', 'The rare achievement that changes what success can mean.'],
+  ['Grand Prix', 'The most distinguished approach to create and scale beautiful success.'],
 ];
