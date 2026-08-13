@@ -54,7 +54,7 @@ export default function AdminThesisEditor({ thesis, categories, onClose }: { the
   return (
     <div>
       <button onClick={onClose} className="mb-6 text-sm text-zinc-400 hover:text-white">Back</button>
-      <h1 className="text-2xl font-bold">Edit Thesis</h1>
+      <h1 className="text-2xl font-bold">Edit Case</h1>
       <div className="mt-6 max-w-3xl space-y-5">
         <Field label="Category"><select value={form.category_id} onChange={(event) => set('category_id', event.target.value)} className={inputClass}><option value="">Select a category</option>{categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}</select></Field>
         <TextField label="Title" value={form.title} onChange={(value) => set('title', value)} />
@@ -69,7 +69,7 @@ export default function AdminThesisEditor({ thesis, categories, onClose }: { the
         <label className="flex items-center gap-3 text-sm text-zinc-300"><input type="checkbox" checked={form.is_featured} onChange={(event) => set('is_featured', event.target.checked)} /> Featured</label>
         <Field label="Images"><div className="grid grid-cols-3 gap-3">{media.map((item) => <img key={item.id} src={item.file_url} alt="" className="h-24 w-full rounded-md object-cover" />)}</div><label className="mt-3 inline-flex cursor-pointer items-center gap-2 rounded-md border border-white/10 px-4 py-2 text-sm"><Upload className="h-4 w-4" /> Upload<input type="file" accept="image/*" multiple className="hidden" onChange={(event) => setFiles(Array.from(event.target.files || []).slice(0, Math.max(0, 3 - media.length)))} /></label></Field>
         {error && <p className="rounded-md border border-red-400/20 bg-red-400/10 px-4 py-2 text-sm text-red-400">{error}</p>}
-        <button onClick={save} disabled={saving} className="rounded-md bg-amber-600 px-5 py-2.5 font-medium text-white hover:bg-amber-500 disabled:opacity-50">{saving ? 'Saving...' : 'Update Thesis'}</button>
+        <button onClick={save} disabled={saving} className="rounded-md bg-amber-600 px-5 py-2.5 font-medium text-white hover:bg-amber-500 disabled:opacity-50">{saving ? 'Saving...' : 'Update Case'}</button>
       </div>
     </div>
   );

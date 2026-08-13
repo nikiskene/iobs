@@ -43,9 +43,9 @@ export const adminNavGroups: AdminNavGroup[] = [
       },
       {
         to: '/admin/content/scale-worlds',
-        label: 'Scale Worlds',
+        label: 'Award Categories',
         icon: Globe2,
-        description: 'Edit the six knob worlds and their stories.',
+        description: 'Edit the seven award scales and their stories.',
       },
       {
         to: '/admin/content/about',
@@ -55,13 +55,13 @@ export const adminNavGroups: AdminNavGroup[] = [
       },
       {
         to: '/admin/content/theses',
-        label: 'Theses',
+        label: 'Cases',
         icon: BookOpen,
-        description: 'Manage published theses.',
+        description: 'Manage cases and their award categories.',
       },
       {
         to: '/admin/content/categories',
-        label: 'Categories',
+        label: 'Case Topics',
         icon: FileText,
         description: 'Manage thesis categories.',
       },
