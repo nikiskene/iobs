@@ -2,23 +2,23 @@
 import { Link } from 'react-router-dom';
 import { adminNavGroups } from '../../components/admin/adminNav';
 
+const LOGO = 'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V2a%20transparent.png';
+
 export default function AdminHome() {
   const groups = adminNavGroups.filter((group) => group.title !== 'Home');
 
   return (
     <div className="space-y-8">
       <div>
-        <p className="text-sm uppercase tracking-[0.3em] text-zinc-500">
-          Admin
-        </p>
+        <img src={LOGO} alt="Institute of Beautiful Success" className="mb-8 h-24 w-auto object-contain object-left" />
+        <p className="text-sm uppercase tracking-[0.3em] text-amber-400">Private administration</p>
 
         <h1 className="mt-3 text-3xl font-semibold text-white">
-          WorldOS Control Center
+          Institute of Beautiful Success
         </h1>
 
         <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-400">
-          Manage content, members, experiences, messaging and platform settings
-          from one structured admin system.
+          Manage the Beautiful Success Awards, cases, experiences, messages and the existing community from one private administration.
         </p>
       </div>
 
