@@ -1,6 +1,6 @@
 // src/components/admin/adminNav.ts
 // src/components/admin/adminNav.ts
-import { BookOpen, CalendarDays, Compass, FileText, Globe2, LayoutGrid as Layout, MessageCircle, Palette, Settings, Shield, Users } from 'lucide-react';
+import { BookOpen, CalendarDays, Compass, FileText, Globe2, Inbox, LayoutGrid as Layout, MessageCircle, Palette, Settings, Shield, Users } from 'lucide-react';
 
 export type AdminNavLink = {
   to: string;
@@ -122,6 +122,12 @@ export const adminNavGroups: AdminNavGroup[] = [
     to: '/admin/messaging',
     description: 'Inbox, community and future announcements.',
     links: [
+      {
+        to: '/admin/messaging/contact',
+        label: 'Contact Inbox',
+        icon: Inbox,
+        description: 'Read and manage public contact messages.',
+      },
       {
         to: '/admin/messaging/conversations',
         label: 'Conversations',

@@ -24,6 +24,7 @@ import ExpeditionsAdmin from '../pages/admin/expeditions/ExpeditionsAdmin';
 import ExpeditionInquiriesAdmin from '../pages/admin/expeditions/ExpeditionInquiriesAdmin';
 import CustomExpeditionInquiriesAdmin from '../pages/admin/expeditions/CustomExpeditionInquiriesAdmin';
 import ConversationsAdmin from '../pages/admin/conversations/ConversationsAdmin';
+import ContactMessagesAdmin from '../pages/admin/ContactMessagesAdmin';
 import IdentityOverview from '../pages/admin/identity/IdentityOverview';
 import IdentityReview from '../pages/admin/identity/IdentityReview';
 import IdentitySources from '../pages/admin/identity/IdentitySources';
@@ -77,6 +78,7 @@ export default function AdminRoutes() {
       />
 
       <Route path="messaging/conversations" element={<ConversationsAdmin />} />
+      <Route path="messaging/contact" element={<ContactMessagesAdmin />} />
 
       <Route path="identity" element={<IdentityOverview />} />
       <Route path="identity/review" element={<IdentityReview />} />
