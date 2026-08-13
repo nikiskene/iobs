@@ -72,3 +72,5 @@
   object-fit: cover;
   width: 100%;
 }
+/* src/index.css */
+.route-loader{position:fixed;inset:0;background:#35131f}

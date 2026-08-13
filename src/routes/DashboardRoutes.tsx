@@ -1,4 +1,5 @@
 // src/routes/DashboardRoutes.tsx
+import { lazy } from 'react';
 import { Route, Navigate } from 'react-router-dom';
 
 import Navigation from '../components/Navigation';
@@ -6,10 +7,10 @@ import DashboardLayout from '../components/DashboardLayout';
 
 import ProtectedRoute from './ProtectedRoute';
 
-import ProfilePage from '../pages/dashboard/ProfilePage';
-import MembersPage from '../pages/dashboard/MembersPage';
-import MyThesesPage from '../pages/dashboard/MyThesesPage';
-import InboxPage from '../pages/dashboard/InboxPage';
+const ProfilePage = lazy(() => import('../pages/dashboard/ProfilePage'));
+const MembersPage = lazy(() => import('../pages/dashboard/MembersPage'));
+const MyThesesPage = lazy(() => import('../pages/dashboard/MyThesesPage'));
+const InboxPage = lazy(() => import('../pages/dashboard/InboxPage'));
 
 export default function DashboardRoutes() {
   return (
