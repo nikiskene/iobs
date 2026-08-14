@@ -75,7 +75,7 @@ export default function HomePage() {
         .select(`
           *,
           thesis_categories(id, name, slug, color_hex),
-          thesis_media(id, file_url, alt_text, display_order)
+          thesis_media(id, file_url, alt_text, display_order, is_featured)
         `)
         .eq('status', 'published')
         .eq('is_featured', true)
