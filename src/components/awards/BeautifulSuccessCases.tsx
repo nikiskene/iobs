@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { useImpactScale } from '../../providers/ImpactScaleProvider';
-import { AWARD_CATEGORIES } from '../../content/awardContent';
+import { useLocale } from '../../providers/LocaleProvider';
+import { getAwardLocaleContent } from '../../content/awardLocaleContent';
 
 type CaseMedia = { file_url:string; alt_text:string|null; display_order:number; is_featured:boolean };
 type CaseItem = {
@@ -13,7 +14,9 @@ type CaseItem = {
 
 export default function BeautifulSuccessCases() {
   const { scale } = useImpactScale();
-  const category = AWARD_CATEGORIES.find((item) => item.slug === scale) ?? AWARD_CATEGORIES[0];
+  const { locale, t } = useLocale();
+  const localized = getAwardLocaleContent(locale);
+  const category = localized.categories.find((item) => item.slug === scale) ?? localized.categories[0];
   const [cases, setCases] = useState<CaseItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -34,9 +37,9 @@ export default function BeautifulSuccessCases() {
   const layoutClass = cases.length === 1 ? 'single' : cases.length === 2 ? 'double' : cases.length === 3 ? 'triple' : 'multi';
 
   return <section className="award-home-section success-cases">
-    <div className="award-section-title"><p className="award-label">{category.name}</p><h2>What Beautiful Success Looks Like</h2></div>
-    {loading ? <p className="case-status">Selecting cases…</p> : cases.length ? <div className={`success-case-grid ${layoutClass}`}>{cases.map((item) => <CaseCard key={item.id} item={item} />)}</div> : <p className="case-status">The first defining cases for this category are being selected.</p>}
-    <Link className="award-text-link" to="/thesis">Explore all cases →</Link>
+    <div className="award-section-title"><p className="award-label">{category.name}</p><h2>{t('cases.title')}</h2></div>
+    {loading ? <p className="case-status">{t('cases.loading')}</p> : cases.length ? <div className={`success-case-grid ${layoutClass}`}>{cases.map((item) => <CaseCard key={item.id} item={item} />)}</div> : <p className="case-status">{t('cases.empty')}</p>}
+    <Link className="award-text-link" to="/thesis">{t('cases.all')}</Link>
   </section>;
 }
 
