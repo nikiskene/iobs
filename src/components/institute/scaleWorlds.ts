@@ -20,7 +20,7 @@ export type ScaleWorld = {
 export const SCALE_WORLDS: ScaleWorld[] = [
   {
     slug: 'me', label: 'Just Me', eyebrow: 'A private beginning',
-    title: 'What would you build if success could be beautiful?',
+    title: 'What would you celebrate as success?',
     introduction: 'Every world begins with a person willing to imagine a different life.',
     iAm: 'The author of my identity, attention and direction.',
     iCanBe: 'More intentional, more alive and more fully myself.',
@@ -29,7 +29,7 @@ export const SCALE_WORLDS: ScaleWorld[] = [
   },
   {
     slug: 'circle', label: 'My Community', eyebrow: 'The intimate world',
-    title: 'Every relationship creates a tiny civilization.',
+    title: 'What would your community celebrate as success?',
     introduction: 'Beautiful success grows through the people who shape and challenge us.',
     iAm: 'A friend, peer, partner and participant in something shared.',
     iCanBe: 'Part of a circle where candour, imagination and belonging flourish.',
@@ -38,7 +38,7 @@ export const SCALE_WORLDS: ScaleWorld[] = [
   },
   {
     slug: 'teams', label: 'My Team', eyebrow: 'The shared endeavour',
-    title: 'Turn a group of people into a beautiful force.',
+    title: 'What would your team celebrate as success?',
     introduction: 'Teams are where identity becomes trust, rhythm and collective possibility.',
     iAm: 'A contributor to a purpose none of us can reach alone.',
     iCanBe: 'Part of a team that combines excellence with humanity.',
@@ -47,7 +47,7 @@ export const SCALE_WORLDS: ScaleWorld[] = [
   },
   {
     slug: 'organizations', label: 'My Company', eyebrow: 'The living institution',
-    title: 'Build the organization people wish existed.',
+    title: 'What would your company celebrate as success?',
     introduction: 'Organizations turn repeated choices into culture, systems and consequence.',
     iAm: 'A steward of culture, resources and institutional possibility.',
     iCanBe: 'Part of an organization designed around a more generous definition of success.',
@@ -56,7 +56,7 @@ export const SCALE_WORLDS: ScaleWorld[] = [
   },
   {
     slug: 'country', label: 'My Country', eyebrow: 'The national imagination',
-    title: 'What could a country make beautifully possible?',
+    title: 'What would your country celebrate as success?',
     introduction: 'A country is a shared promise expressed through culture, institutions and choice.',
     iAm: 'A citizen with a stake in the character and direction of my country.',
     iCanBe: 'Part of a nation that turns belonging into possibility.',
@@ -65,7 +65,7 @@ export const SCALE_WORLDS: ScaleWorld[] = [
   },
   {
     slug: 'society', label: 'The World', eyebrow: 'The beautiful possible',
-    title: 'The whole world is still ours to imagine.',
+    title: 'What would our world celebrate as success?',
     introduction: 'At the widest human scale, beautiful success becomes a civilizational proposition.',
     iAm: 'A temporary custodian of a living planet and a shared future.',
     iCanBe: 'Part of a civilization worthy of its extraordinary potential.',
@@ -74,7 +74,7 @@ export const SCALE_WORLDS: ScaleWorld[] = [
   },
   {
     slug: 'world', label: 'Beyond World', eyebrow: 'The beautiful impossible',
-    title: 'What becomes possible beyond the world we know?',
+    title: 'What would the universe celebrate as success?',
     introduction: 'The final position is the courage to imagine beyond inherited limits.',
     iAm: 'An explorer at the edge of what humanity believes it can become.',
     iCanBe: 'Part of a future that does not yet have a name.',
