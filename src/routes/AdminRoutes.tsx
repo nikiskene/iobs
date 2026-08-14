@@ -6,6 +6,7 @@ import DashboardLayout from '../components/DashboardLayout';
 import AdminRoute from './AdminRoute';
 import AdminHome from '../pages/admin/AdminHome';
 import AdminCategoryPage from '../pages/admin/AdminCategoryPage';
+import AwardSiteContentAdmin from '../pages/admin/AwardSiteContentAdmin';
 import AboutCMS from '../pages/admin/AboutCMS';
 import CategoriesAdmin from '../pages/admin/CategoriesAdmin';
 import ThesesAdmin from '../pages/admin/ThesesAdmin';
@@ -36,7 +37,8 @@ export default function AdminRoutes() {
       <Route path="experiences" element={<AdminCategoryPage title="Experiences" />} />
       <Route path="messaging" element={<AdminCategoryPage title="Messaging" />} />
       <Route path="settings" element={<AdminCategoryPage title="Settings" />} />
-      <Route path="content/homepage" element={<Navigate to="/admin/content/scale-worlds" replace />} />
+      <Route path="content/homepage" element={<Navigate to="/admin/content/site-copy" replace />} />
+      <Route path="content/site-copy" element={<AwardSiteContentAdmin />} />
       <Route path="content/scale-worlds" element={<ScaleWorldsAdmin />} />
       <Route path="content/about" element={<AboutCMS />} />
       <Route path="content/glossary" element={<GlossaryAdmin />} />
