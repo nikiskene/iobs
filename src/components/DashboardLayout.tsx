@@ -34,29 +34,33 @@ export default function DashboardLayout() {
     {
       title: 'Content',
       links: [
-        { to: '/admin/homepage', label: 'Homepage', icon: Layout },
-        { to: '/admin/about', label: 'About Page', icon: Layout },
-        { to: '/admin/theses', label: 'Theses', icon: BookOpen },
-        { to: '/admin/categories', label: 'Categories', icon: FileText },
-        { to: '/admin/glossary', label: 'Glossary', icon: BookOpen },
+        { to: '/admin/content/homepage', label: 'Homepage', icon: Layout },
+        { to: '/admin/content/scale-worlds', label: 'Scale Worlds', icon: Layout },
+        { to: '/admin/content/about', label: 'About Page', icon: Layout },
+        { to: '/admin/content/theses', label: 'Theses', icon: BookOpen },
+        { to: '/admin/content/categories', label: 'Categories', icon: FileText },
+        { to: '/admin/content/glossary', label: 'Glossary', icon: BookOpen },
       ],
     },
     {
       title: 'Members',
-      links: [{ to: '/admin/team', label: 'Team', icon: Users }],
+      links: [{ to: '/admin/members/team', label: 'Team', icon: Users }],
     },
     {
       title: 'Experiences',
       links: [
-        { to: '/admin/expeditions', label: 'Expeditions', icon: Compass },
-        { to: '/admin/expedition-inquiries', label: 'Applications', icon: FileText },
-        { to: '/admin/custom-expedition-inquiries', label: 'Custom Expeditions', icon: Compass },
-        { to: '/admin/events', label: 'Events', icon: CalendarDays },
+        { to: '/admin/experiences/expeditions', label: 'Expeditions', icon: Compass },
+        { to: '/admin/experiences/applications', label: 'Applications', icon: FileText },
+        { to: '/admin/experiences/custom', label: 'Custom Expeditions', icon: Compass },
+        { to: '/admin/experiences/events', label: 'Events', icon: CalendarDays },
       ],
     },
     {
       title: 'Messaging',
-      links: [{ to: '/admin/conversations', label: 'Conversations', icon: MessageCircle }],
+      links: [
+        { to: '/admin/messaging/contact', label: 'Contact Inbox', icon: FileText },
+        { to: '/admin/messaging/conversations', label: 'Conversations', icon: MessageCircle },
+      ],
     },
     {
       title: 'Identity Research',
@@ -72,8 +76,8 @@ export default function DashboardLayout() {
     {
       title: 'Settings',
       links: [
-        { to: '/admin/settings', label: 'Design', icon: Palette },
-        { to: '/admin/settings', label: 'Site Settings', icon: Shield },
+        { to: '/admin/settings/design', label: 'Design', icon: Palette },
+        { to: '/admin/settings/design', label: 'Site Settings', icon: Shield },
       ],
     },
   ];
