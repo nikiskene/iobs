@@ -10,6 +10,7 @@ import './instituteHome.css';
 import './awardSite.css';
 import './foundingStripFix.css';
 import './compactAwardLayout.css';
+import './locale.css';
 
 export default function InstituteShell({ children }: PropsWithChildren) {
   const { scale } = useImpactScale();
