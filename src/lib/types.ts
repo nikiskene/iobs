@@ -61,7 +61,6 @@ export interface ThesisMedia {
   file_path: string | null;
   alt_text: string | null;
   display_order: number;
-  is_featured: boolean;
   created_at: string;
 }
 
