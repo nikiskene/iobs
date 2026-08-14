@@ -13,12 +13,11 @@ export default function AdminHome() {
         </p>
 
         <h1 className="mt-3 text-3xl font-semibold text-white">
-          WorldOS Control Center
+          Beautiful Success Control Center
         </h1>
 
         <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-400">
-          Manage content, members, experiences, messaging and platform settings
-          from one structured admin system.
+          Manage the Award, cases, partners, experiences, inquiries and site settings from one place.
         </p>
       </div>
 
