@@ -25,6 +25,7 @@ export const AWARD_TEST = [
   { number: '03', title: 'What does success cost?', copy: 'What did you unlock - and what did it require?' },
   { number: '04', title: 'Can the value endure?', copy: 'Is your growth good for humans and non-humans?' },
   { number: '05', title: 'Does growth improve the system?', copy: 'What outlasts you?' },
+  { number: '06', title: 'Moonshot', copy: 'Your idea does not fit the criteria — yet creates Beautiful Success in a way we did not see coming.' },
 ];
 
 export const RECOGNITION_LEVELS = [
