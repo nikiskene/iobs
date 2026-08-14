@@ -41,26 +41,29 @@ export default function ThesesAdmin() {
       <div className="mt-8 space-y-3">
         {loading && <p className="text-zinc-500">Loading...</p>}
         {!loading && theses.length === 0 && <p className="text-zinc-500">No theses yet.</p>}
-        {theses.map((thesis) => (
-          <article key={thesis.id} className="flex items-center gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-5">
-            {thesis.thesis_media?.[0]?.file_url
-              ? <img src={thesis.thesis_media[0].file_url} alt="" className="h-16 w-24 rounded-md object-cover" />
-              : <div className="h-16 w-24 rounded-md bg-white/5" />}
-            <div className="min-w-0 flex-1">
-              <div className="mb-1 flex flex-wrap items-center gap-2 text-xs text-zinc-400">
-                {thesis.thesis_categories && <span>{thesis.thesis_categories.name}</span>}
-                <span>{thesis.status}</span>
-                {thesis.is_featured && <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />}
-                {thesis.thesis_impact_scales?.map((item) => <span key={item.scale_slug} className="rounded-full bg-amber-400/10 px-2 py-0.5 text-amber-300">{item.scale_slug}</span>)}
+        {theses.map((thesis) => {
+          const image = thesis.thesis_media?.find((item) => item.is_featured) || thesis.thesis_media?.[0];
+          return (
+            <article key={thesis.id} className="flex items-center gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-5">
+              {image?.file_url
+                ? <img src={image.file_url} alt="" className="h-16 w-24 rounded-md object-cover" />
+                : <div className="h-16 w-24 rounded-md bg-white/5" />}
+              <div className="min-w-0 flex-1">
+                <div className="mb-1 flex flex-wrap items-center gap-2 text-xs text-zinc-400">
+                  {thesis.thesis_categories && <span>{thesis.thesis_categories.name}</span>}
+                  <span>{thesis.status}</span>
+                  {thesis.is_featured && <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />}
+                  {thesis.thesis_impact_scales?.map((item) => <span key={item.scale_slug} className="rounded-full bg-amber-400/10 px-2 py-0.5 text-amber-300">{item.scale_slug}</span>)}
+                </div>
+                <h3 className="font-semibold">{thesis.title}</h3>
+                <p className="mt-1 text-xs text-zinc-500">by {thesis.profiles?.full_name || 'Unknown'} · {new Date(thesis.updated_at).toLocaleDateString()}</p>
               </div>
-              <h3 className="font-semibold">{thesis.title}</h3>
-              <p className="mt-1 text-xs text-zinc-500">by {thesis.profiles?.full_name || 'Unknown'} · {new Date(thesis.updated_at).toLocaleDateString()}</p>
-            </div>
-            <button onClick={() => setEditing(thesis)} className="rounded-md p-2 text-zinc-500 hover:bg-white/5 hover:text-white" aria-label={`Edit ${thesis.title}`}>
-              <Pencil className="h-4 w-4" />
-            </button>
-          </article>
-        ))}
+              <button onClick={() => setEditing(thesis)} className="rounded-md p-2 text-zinc-500 hover:bg-white/5 hover:text-white" aria-label={`Edit ${thesis.title}`}>
+                <Pencil className="h-4 w-4" />
+              </button>
+            </article>
+          );
+        })}
       </div>
     </div>
   );
