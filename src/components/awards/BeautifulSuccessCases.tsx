@@ -3,13 +3,15 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { useImpactScale } from '../../providers/ImpactScaleProvider';
-import { useLocale } from '../../providers/LocaleProvider';
+import { useLocale, type Locale } from '../../providers/LocaleProvider';
 import { getAwardLocaleContent } from '../../content/awardLocaleContent';
 
 type CaseMedia = { file_url:string; alt_text:string|null; display_order:number; is_featured:boolean };
+type CaseTranslation = { locale:string; title:string|null; subheadline:string|null; short_explanation:string|null };
 type CaseItem = {
   id:string; title:string; subheadline:string|null; short_explanation:string|null;
   thesis_media?: CaseMedia[];
+  thesis_translations?: CaseTranslation[];
 };
 
 export default function BeautifulSuccessCases() {
@@ -24,7 +26,7 @@ export default function BeautifulSuccessCases() {
     let current = true;
     setLoading(true);
     supabase.from('theses')
-      .select('id,title,subheadline,short_explanation,thesis_media(file_url,alt_text,display_order,is_featured),thesis_impact_scales!inner(scale_slug)')
+      .select('id,title,subheadline,short_explanation,thesis_media(file_url,alt_text,display_order,is_featured),thesis_translations(locale,title,subheadline,short_explanation),thesis_impact_scales!inner(scale_slug)')
       .eq('status', 'published')
       .eq('thesis_impact_scales.scale_slug', scale)
       .order('is_featured', { ascending: false })
@@ -38,15 +40,18 @@ export default function BeautifulSuccessCases() {
 
   return <section className="award-home-section success-cases">
     <div className="award-section-title"><p className="award-label">{category.name}</p><h2>{t('cases.title')}</h2></div>
-    {loading ? <p className="case-status">{t('cases.loading')}</p> : cases.length ? <div className={`success-case-grid ${layoutClass}`}>{cases.map((item) => <CaseCard key={item.id} item={item} />)}</div> : <p className="case-status">{t('cases.empty')}</p>}
+    {loading ? <p className="case-status">{t('cases.loading')}</p> : cases.length ? <div className={`success-case-grid ${layoutClass}`}>{cases.map((item) => <CaseCard key={item.id} item={item} locale={locale} />)}</div> : <p className="case-status">{t('cases.empty')}</p>}
     <Link className="award-text-link" to="/thesis">{t('cases.all')}</Link>
   </section>;
 }
 
-function CaseCard({ item }: { item: CaseItem }) {
+function CaseCard({ item, locale }: { item: CaseItem; locale: Locale }) {
   const ordered = [...(item.thesis_media || [])].sort((a, b) => a.display_order - b.display_order);
   const media = ordered.find((image) => image.is_featured) || ordered[0];
-  return <article>{media && <img src={caseImage(media.file_url)} alt={media.alt_text || ''} loading="lazy" decoding="async" />}<div><h3>{item.title}</h3><p>{item.subheadline || item.short_explanation}</p></div></article>;
+  const translation = locale === 'en' ? undefined : item.thesis_translations?.find((entry) => entry.locale === locale);
+  const title = translation?.title || item.title;
+  const summary = translation?.subheadline || translation?.short_explanation || item.subheadline || item.short_explanation;
+  return <article>{media && <img src={caseImage(media.file_url)} alt={media.alt_text || title} loading="lazy" decoding="async" />}<div><h3>{title}</h3>{summary && <p>{summary}</p>}</div></article>;
 }
 
 function caseImage(url: string) {
