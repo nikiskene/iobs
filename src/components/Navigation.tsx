@@ -17,8 +17,6 @@ export default function Navigation() {
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const unreadCount = useUnreadMessages();
-  const isAdminRoute = location.pathname.startsWith('/admin');
-  const instituteLogo = 'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V2a%20transparent.png';
 
   useEffect(() => {
     supabase.from('site_settings').select('logo_url').eq('is_active', true).maybeSingle()
@@ -43,9 +41,7 @@ export default function Navigation() {
     { to: '/dashboard/explorers', label: 'Explorers' },
     { to: '/dashboard/inbox', label: 'Inbox', badge: unreadCount },
   ] : [];
-  const links = isAdminRoute
-    ? [{ to: '/admin/messaging/contact', label: 'Contact Inbox' }]
-    : [...publicLinks, ...userLinks];
+  const links = [...publicLinks, ...userLinks];
   const isActive = (path: string) => path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
 
   async function handleLogout() {
@@ -58,7 +54,7 @@ export default function Navigation() {
   return (
     <nav className="fixed left-0 right-0 top-0 z-50 border-b border-white/5 bg-[#0A0A0A]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Logo logoUrl={isAdminRoute ? instituteLogo : logoUrl} label={isAdminRoute ? 'Institute of Beautiful Success' : 'WorldOS'} />
+        <Logo logoUrl={logoUrl} />
         <div className="hidden items-center gap-1 lg:flex">
           {links.map((link) => <NavItem key={link.to} link={link} active={isActive(link.to)} />)}
           {isAdmin && <IdentityMenu active={isActive('/admin/identity')} />}

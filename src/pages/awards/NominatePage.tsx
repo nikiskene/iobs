@@ -10,7 +10,7 @@ export default function NominatePage() {
     const data = new FormData(event.currentTarget);
     const subject = encodeURIComponent(`Beautiful Success nomination: ${data.get('name')}`);
     const body = encodeURIComponent(`Category: ${data.get('category')}\nNominee: ${data.get('name')}\nWhy beautiful: ${data.get('why')}\nEvidence: ${data.get('link')}\nNominator: ${data.get('email')}`);
-    window.location.href = `mailto:worldos@iacy.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:hello@worldos.institute?subject=${subject}&body=${body}`;
     setSent(true);
   }
   return (

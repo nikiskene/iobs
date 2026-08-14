@@ -8,8 +8,8 @@ export default function ThesisScaleSelector({ selected, onChange }: { selected: 
 
   return (
     <fieldset>
-      <legend className="mb-2 text-sm font-medium text-zinc-300">Beautiful Success Award categories</legend>
-      <p className="mb-3 text-xs text-zinc-500">Select every category in which this case should appear. Multiple selections are allowed.</p>
+      <legend className="mb-2 text-sm font-medium text-zinc-300">Scale worlds</legend>
+      <p className="mb-3 text-xs text-zinc-500">A case may appear in more than one world.</p>
       <div className="grid gap-2 sm:grid-cols-3">
         {SCALE_WORLDS.map((world) => (
           <label key={world.slug} className="flex cursor-pointer items-center gap-3 rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-zinc-300">

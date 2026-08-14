@@ -8,7 +8,7 @@ export default function ProtectedRoute({
 }) {
   const { user, loading } = useAuth();
 
-  if (loading) return <div className="auth-loader">Opening your private space…</div>;
+  if (loading) return null;
   if (!user) return <Navigate to="/login" replace />;
 
   return <>{children}</>;

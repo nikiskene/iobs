@@ -1,37 +1,33 @@
 // src/routes/PublicRoutes.tsx
-import { lazy } from 'react';
 import { Navigate, Route } from 'react-router-dom';
 
 import PublicLayout from './PublicLayout';
 
+import InstituteHomePage from '../pages/InstituteHomePage';
+import AboutPage from '../pages/public/AboutPage';
+import TeamPage from '../pages/public/TeamPage';
+import ThesisPage from '../pages/public/ThesisPage';
+import JoinPage from '../pages/public/JoinPage';
+import LegalPage from '../pages/public/LegalPage';
+import EventsPage from '../pages/public/EventsPage';
+import EventDetailPage from '../pages/public/EventDetailPage';
+import ExpeditionsPage from '../pages/public/ExpeditionsPage';
+import ExpeditionDetailPage from '../pages/public/ExpeditionDetailPage';
+import CustomExpeditionPage from '../pages/public/CustomExpeditionPage';
+import MethodWorldOSPage from '../pages/public/MethodWorldOSPage';
+import ContactPage from '../pages/public/ContactPage';
 import InstitutePublicFrame from '../components/institute/InstitutePublicFrame';
 
-const InstituteHomePage = lazy(() => import('../pages/InstituteHomePage'));
-const AboutPage = lazy(() => import('../pages/public/AboutPage'));
-const TeamPage = lazy(() => import('../pages/public/TeamPage'));
-const ThesisPage = lazy(() => import('../pages/public/ThesisPage'));
-const JoinPage = lazy(() => import('../pages/public/JoinPage'));
-const LegalPage = lazy(() => import('../pages/public/LegalPage'));
-const PrivacyPage = lazy(() => import('../pages/public/PrivacyPage'));
-const CookiePage = lazy(() => import('../pages/public/CookiePage'));
-const TermsPage = lazy(() => import('../pages/public/TermsPage'));
-const EventsPage = lazy(() => import('../pages/public/EventsPage'));
-const EventDetailPage = lazy(() => import('../pages/public/EventDetailPage'));
-const ExpeditionsPage = lazy(() => import('../pages/public/ExpeditionsPage'));
-const ExpeditionDetailPage = lazy(() => import('../pages/public/ExpeditionDetailPage'));
-const CustomExpeditionPage = lazy(() => import('../pages/public/CustomExpeditionPage'));
-const MethodWorldOSPage = lazy(() => import('../pages/public/MethodWorldOSPage'));
-const ContactPage = lazy(() => import('../pages/public/ContactPage'));
-const LoginPage = lazy(() => import('../pages/auth/LoginPage'));
-const BuildSnapshot = lazy(() => import('../pages/BuildSnapshot'));
-const AwardPage = lazy(() => import('../pages/awards/AwardPage'));
-const CategoriesPage = lazy(() => import('../pages/awards/CategoriesPage'));
-const JudgingPage = lazy(() => import('../pages/awards/JudgingPage'));
-const NominatePage = lazy(() => import('../pages/awards/NominatePage'));
-const EnterAwardPage = lazy(() => import('../pages/awards/EnterAwardPage'));
-const PartnersPage = lazy(() => import('../pages/awards/PartnersPage'));
-const VoicesPage = lazy(() => import('../pages/awards/VoicesPage'));
-const AssemblyPage = lazy(() => import('../pages/awards/AssemblyPage'));
+import LoginPage from '../pages/auth/LoginPage';
+import BuildSnapshot from '../pages/BuildSnapshot';
+import AwardPage from '../pages/awards/AwardPage';
+import CategoriesPage from '../pages/awards/CategoriesPage';
+import JudgingPage from '../pages/awards/JudgingPage';
+import NominatePage from '../pages/awards/NominatePage';
+import EnterAwardPage from '../pages/awards/EnterAwardPage';
+import PartnersPage from '../pages/awards/PartnersPage';
+import VoicesPage from '../pages/awards/VoicesPage';
+import AssemblyPage from '../pages/awards/AssemblyPage';
 
 export default function PublicRoutes() {
   return (
@@ -137,12 +133,12 @@ export default function PublicRoutes() {
 
       <Route
         path="/legal"
-        element={<InstitutePublicFrame><LegalPage /></InstitutePublicFrame>}
+        element={
+          <PublicLayout>
+            <LegalPage />
+          </PublicLayout>
+        }
       />
-      <Route path="/imprint" element={<Navigate to="/legal" replace />} />
-      <Route path="/privacy" element={<InstitutePublicFrame><PrivacyPage /></InstitutePublicFrame>} />
-      <Route path="/cookies" element={<InstitutePublicFrame><CookiePage /></InstitutePublicFrame>} />
-      <Route path="/terms" element={<InstitutePublicFrame><TermsPage /></InstitutePublicFrame>} />
 
       <Route path="/login" element={<InstitutePublicFrame><LoginPage /></InstitutePublicFrame>} />
       <Route path="/snapshot" element={<BuildSnapshot />} />

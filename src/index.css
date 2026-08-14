@@ -72,6 +72,3 @@
   object-fit: cover;
   width: 100%;
 }
-/* src/index.css */
-.route-loader{position:fixed;inset:0;background:#35131f}
-.auth-loader{display:grid;min-height:100vh;place-items:center;background:#0a0a0a;color:#d5aa58;font-family:Georgia,serif;font-size:22px;letter-spacing:.08em}

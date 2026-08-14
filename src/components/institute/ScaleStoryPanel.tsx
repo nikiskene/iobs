@@ -11,7 +11,7 @@ export default function ScaleStoryPanel() {
   const award = AWARD_CATEGORIES.find((item) => item.slug === scale) ?? AWARD_CATEGORIES[0];
 
   return (
-    <section className="scale-story" aria-label={`${world.label} possibilities`}>
+    <section className="scale-story" key={world.slug} aria-label={`${world.label} possibilities`}>
       <div className="story-heading">
         <p>{award.name} · award category</p>
         <h2>{award.definition}</h2>

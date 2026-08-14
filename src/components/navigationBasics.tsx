@@ -4,8 +4,8 @@ import { Globe, LogOut, Shield, User } from 'lucide-react';
 
 export type NavLinkItem = { to: string; label: string; badge?: number };
 
-export function Logo({ logoUrl, label = 'WorldOS' }: { logoUrl: string | null; label?: string }) {
-  return <Link to="/" className="group flex items-center gap-2">{logoUrl ? <img src={logoUrl} alt={label} className="h-12 w-auto object-contain" /> : <Globe className="h-6 w-6 text-amber-400 group-hover:text-amber-300" />}</Link>;
+export function Logo({ logoUrl }: { logoUrl: string | null }) {
+  return <Link to="/" className="group flex items-center gap-2">{logoUrl ? <img src={logoUrl} alt="WorldOS" className="h-10 w-auto object-contain" /> : <Globe className="h-6 w-6 text-sky-400 group-hover:text-sky-300" />}</Link>;
 }
 
 export function NavItem({ link, active }: { link: NavLinkItem; active: boolean }) {

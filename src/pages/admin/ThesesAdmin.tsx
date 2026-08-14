@@ -36,11 +36,11 @@ export default function ThesesAdmin() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Cases</h1>
-      <p className="mt-1 text-sm text-zinc-400">Choose one or more Beautiful Success Award categories for every case.</p>
+      <h1 className="text-2xl font-bold">All Theses</h1>
+      <p className="mt-1 text-sm text-zinc-400">Manage cases and connect them to one or more scale worlds.</p>
       <div className="mt-8 space-y-3">
         {loading && <p className="text-zinc-500">Loading...</p>}
-        {!loading && theses.length === 0 && <p className="text-zinc-500">No cases yet.</p>}
+        {!loading && theses.length === 0 && <p className="text-zinc-500">No theses yet.</p>}
         {theses.map((thesis) => (
           <article key={thesis.id} className="flex items-center gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-5">
             {thesis.thesis_media?.[0]?.file_url

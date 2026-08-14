@@ -40,7 +40,7 @@ export default function ScaleWorldsAdmin() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Beautiful Success Award Categories</h1>
+      <h1 className="text-2xl font-bold">Scale Worlds</h1>
       <p className="mt-1 text-sm text-zinc-400">Edit the six editorial worlds behind the homepage knob.</p>
       <div className="mt-8 space-y-3">
         {loading && <p className="text-zinc-500">Loading...</p>}

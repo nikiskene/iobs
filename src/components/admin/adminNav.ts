@@ -1,6 +1,6 @@
 // src/components/admin/adminNav.ts
 // src/components/admin/adminNav.ts
-import { BookOpen, CalendarDays, Compass, FileText, Globe2, Image, Inbox, LayoutGrid as Layout, MessageCircle, Palette, Settings, Shield, Users } from 'lucide-react';
+import { BookOpen, CalendarDays, Compass, FileText, Globe2, Inbox, LayoutGrid as Layout, MessageCircle, Palette, Settings, Shield, Users } from 'lucide-react';
 
 export type AdminNavLink = {
   to: string;
@@ -43,9 +43,9 @@ export const adminNavGroups: AdminNavGroup[] = [
       },
       {
         to: '/admin/content/scale-worlds',
-        label: 'Award Categories',
+        label: 'Scale Worlds',
         icon: Globe2,
-        description: 'Edit the seven award scales and their stories.',
+        description: 'Edit the six knob worlds and their stories.',
       },
       {
         to: '/admin/content/about',
@@ -55,21 +55,15 @@ export const adminNavGroups: AdminNavGroup[] = [
       },
       {
         to: '/admin/content/theses',
-        label: 'Cases',
+        label: 'Theses',
         icon: BookOpen,
-        description: 'Manage cases and their award categories.',
+        description: 'Manage published theses.',
       },
       {
         to: '/admin/content/categories',
-        label: 'Case Topics',
+        label: 'Categories',
         icon: FileText,
         description: 'Manage thesis categories.',
-      },
-      {
-        to: '/admin/content/partners',
-        label: 'Partner Logos',
-        icon: Image,
-        description: 'Upload and order logos in the public partner stripe.',
       },
       {
         to: '/admin/content/glossary',

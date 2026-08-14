@@ -8,7 +8,7 @@ export default function AdminRoute({
 }) {
   const { isAdmin, loading } = useAuth();
 
-  if (loading) return <div className="auth-loader">Opening the Institute…</div>;
+  if (loading) return null;
   if (!isAdmin) return <Navigate to="/dashboard" replace />;
 
   return <>{children}</>;

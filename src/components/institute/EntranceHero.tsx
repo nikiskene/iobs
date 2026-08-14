@@ -9,7 +9,7 @@ export default function EntranceHero() {
   const world = worlds.find((item) => item.slug === scale) ?? worlds[0];
 
   return (
-    <main className="entrance">
+    <main className="entrance" key={world.slug}>
       <div className="hero-copy">
         <p className="hero-kicker"><span>{String(scaleIndex(scale)).padStart(2, '0')}</span>{world.eyebrow}</p>
         <h1>What should the world celebrate as success?</h1>
