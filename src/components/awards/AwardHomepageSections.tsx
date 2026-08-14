@@ -1,4 +1,5 @@
 // src/components/awards/AwardHomepageSections.tsx
+import { Rocket } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { AWARD_TEST, RECOGNITION_LEVELS } from '../../content/awardContent';
 import AwardMethodSections from './AwardMethodSections';
@@ -14,7 +15,7 @@ export default function AwardHomepageSections() {
       <AwardMethodSections />
       <section className="award-home-section">
         <div className="award-section-title"><p className="award-label">A new social contract, measured</p><h2>Recognition begins where ordinary success metrics end.</h2></div>
-        <div className="award-test-grid">{AWARD_TEST.map((item) => <article key={item.number}><span>{item.number}</span><h3>{item.title}</h3><p>{item.copy}</p></article>)}</div>
+        <div className="award-test-grid">{AWARD_TEST.map((item) => <article key={item.number} className={item.number === '06' ? 'award-test-moonshot' : undefined}>{item.number === '06' && <Rocket className="moonshot-icon" aria-hidden="true" />}<span>{item.number}</span><h3>{item.title}</h3><p>{item.copy}</p></article>)}</div>
         <Link className="award-text-link" to="/judging">Explore the judging standard →</Link>
       </section>
       <section className="award-home-section">
