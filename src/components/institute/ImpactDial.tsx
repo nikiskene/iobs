@@ -26,6 +26,7 @@ export default function ImpactDial() {
           />
         ))}
       </button>
+      <p className="dial-hint">Click the dial. Change the perspective.</p>
     </div>
   );
 }
