@@ -37,7 +37,7 @@ export default function FeaturedThesesSection({ theses }: { theses: Thesis[] }) 
 }
 
 function ThesisCard({ thesis }: { thesis: Thesis }) {
-  const image = thesis.thesis_media?.[0];
+  const image = thesis.thesis_media?.find((item) => item.is_featured) || thesis.thesis_media?.[0];
 
   return (
     <Link
