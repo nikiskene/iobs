@@ -75,11 +75,17 @@ function ScaleEditor({ world, onClose }: { world: ScaleRow; onClose: () => void 
   const save = async () => {
     setSaving(true);
     setError('');
-    const { slug, position, ...payload } = draft;
     const { error: updateError } = await supabase
       .from('impact_scales')
-      .update({ ...payload, updated_at: new Date().toISOString() })
-      .eq('slug', slug);
+      .update({
+        label: draft.label,
+        eyebrow: draft.eyebrow,
+        title: draft.title,
+        knob_image_url: draft.knob_image_url,
+        is_published: draft.is_published,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('slug', draft.slug);
     if (updateError) { setError(updateError.message); setSaving(false); return; }
     onClose();
   };
