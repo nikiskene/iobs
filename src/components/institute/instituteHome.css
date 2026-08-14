@@ -17,7 +17,7 @@
 .institute-header nav a{padding:12px 0;border-bottom:1px solid transparent}.institute-header nav a:hover{border-color:var(--accent)}
 .enter-link{justify-self:end}
 .institute-claim{margin:10px 0 0;text-align:center;color:var(--accent);font-size:9px;font-weight:400;letter-spacing:.22em;text-transform:uppercase}
-.entrance{min-height:calc(100svh - 112px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(480px,1.1fr);gap:4vw;align-items:start;padding:92px 0 70px}
+.entrance{min-height:calc(100svh - 112px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(480px,1.1fr);gap:4vw;align-items:start;padding:92px 0 35px}
 .hero-copy{position:relative;z-index:2;animation:world-reveal .65s ease both}.hero-kicker{min-height:52px;color:var(--accent);font-size:20px;letter-spacing:.2em;text-transform:uppercase}
 .hero-kicker span{display:inline-grid;place-items:center;width:52px;height:52px;margin-right:20px;border:1px solid var(--accent);border-radius:50%}
 .hero-copy h1{min-height:3.64em;font:500 clamp(65px,6.96vw,110px)/.91 'Cormorant Garamond',serif;letter-spacing:-.045em;max-width:860px;margin:30px 0;text-wrap:balance}
