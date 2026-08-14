@@ -2,11 +2,14 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { PARTNER_GROUPS, partnerRole } from '../../content/partnerRoles';
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 
 type PartnerLogo = { id:string; media_url:string; subheadline:string|null };
 
 export default function PartnerLogoStripe() {
   const [logos, setLogos] = useState<PartnerLogo[]>([]);
+  const { get } = useAwardSiteContent();
+  const intro = get('partners_intro');
 
   useEffect(() => {
     supabase.from('homepage_sections').select('id,media_url,subheadline')
@@ -18,7 +21,7 @@ export default function PartnerLogoStripe() {
   if (!logos.length) return null;
 
   return <section className="partner-logo-stripe" aria-label="Partners">
-    <h2>Grateful for our Beautiful Partners</h2>
+    <h2>{intro?.headline || 'Grateful for our Beautiful Partners'}</h2>
     <div className="partner-logo-groups">{PARTNER_GROUPS.map((group) => {
       const groupLogos = logos.filter((logo) => group.roles.includes(partnerRole(logo.subheadline)));
       if (!groupLogos.length) return null;
