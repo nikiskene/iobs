@@ -7,6 +7,7 @@ import { useImpactScale } from '../../providers/ImpactScaleProvider';
 import './instituteHome.css';
 import './awardSite.css';
 import './foundingStripFix.css';
+import './compactAwardLayout.css';
 
 export default function InstituteShell({
   children,
