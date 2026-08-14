@@ -2,24 +2,22 @@
 import { useState } from 'react';
 import AwardPageHero from '../../components/awards/AwardPageHero';
 import InvestorDeckRequestModal from '../../components/awards/InvestorDeckRequestModal';
-
-const ROLES = [
-  ['Founding Host', 'Convene the inaugural assembly and give the award a place in history.'],
-  ['Founding Partner', 'Build and co-manage the global Institute, its reach and long-term independence.'],
-  ['Category Partner', 'Advance one scale of beautiful success with relevant expertise.'],
-  ['Media Partner', 'Take responsibility for a new narrative and bring it to a global audience.'],
-];
+import { useLocale } from '../../providers/LocaleProvider';
+import { getAwardLocaleContent } from '../../content/awardLocaleContent';
 
 export default function PartnersPage() {
   const [deckOpen, setDeckOpen] = useState(false);
+  const { locale } = useLocale();
+  const content = getAwardLocaleContent(locale);
+  const p = content.pages;
 
   return (
     <main>
-      <AwardPageHero eyebrow="Founding roles" title="Each founding role carries a distinct institutional contribution.">What begins at the top shapes everything below.</AwardPageHero>
-      <section className="ibs-section partner-roles">{ROLES.map(([title, copy], index) => <article key={title}><span>0{index + 1}</span><h2>{title}</h2><p>{copy}</p></article>)}</section>
-      <div className="partner-deck-shared"><button onClick={() => setDeckOpen(true)}>Request the Partnership Deck</button></div>
-      <section className="ibs-section award-copy-grid"><h2>Global from the beginning.</h2><div><p>Our founding network connects Dubai, Shenzhen, Hong Kong, Vienna, London, San Francisco and Lithuania.</p><p>Dubai is being explored as the natural home of the inaugural assembly: a city where beauty, ambition and future-building belong in the same conversation.</p></div></section>
-      <section className="ibs-section award-cta"><p className="award-label">The founding invitation</p><h2>It is in your hands to make success beautiful.</h2><p>Together we can envision, create, shape, execute and celebrate a new social contract embracing Beautiful Success.</p><a className="award-text-link" href="/contact">Begin a partner conversation →</a></section>
+      <AwardPageHero eyebrow={p.partnersEyebrow} title={p.partnersTitle}>{p.partnersIntro}</AwardPageHero>
+      <section className="ibs-section partner-roles">{content.partnerRoles.map(([title, copy], index) => <article key={title}><span>0{index + 1}</span><h2>{title}</h2><p>{copy}</p></article>)}</section>
+      <div className="partner-deck-shared"><button onClick={() => setDeckOpen(true)}>{p.requestDeck}</button></div>
+      <section className="ibs-section award-copy-grid"><h2>{p.globalTitle}</h2><div><p>{p.global1}</p><p>{p.global2}</p></div></section>
+      <section className="ibs-section award-cta"><p className="award-label">{p.invitationLabel}</p><h2>{p.invitationTitle}</h2><p>{p.invitationCopy}</p><a className="award-text-link" href="/contact">{p.partnerConversation}</a></section>
       <InvestorDeckRequestModal open={deckOpen} onClose={() => setDeckOpen(false)} />
     </main>
   );
