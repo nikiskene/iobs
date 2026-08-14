@@ -2,8 +2,12 @@
 
 import { Link } from 'react-router-dom';
 import { AWARD_ASSETS } from '../../content/awardAssets';
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 
 export default function InstituteHeader() {
+  const { get } = useAwardSiteContent();
+  const claim = get('site_claim');
+
   return (
     <>
       <header className="institute-header">
@@ -19,7 +23,7 @@ export default function InstituteHeader() {
         </nav>
         <Link className="enter-link" to="/nominate">Nominate</Link>
       </header>
-      <p className="institute-claim">Celebrating a better world, one Beautiful Success at a time.</p>
+      {claim?.headline && <p className="institute-claim">{claim.headline}</p>}
     </>
   );
 }
