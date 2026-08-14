@@ -5,18 +5,21 @@ import { AWARD_ASSETS } from '../../content/awardAssets';
 
 export default function InstituteHeader() {
   return (
-    <header className="institute-header">
-      <Link className="institute-logo" to="/" aria-label="Institute of Beautiful Success">
-        <img src={AWARD_ASSETS.circleDark} alt="Beautiful Success Award" />
-      </Link>
-      <nav aria-label="Main navigation">
-        <Link to="/award">The Award</Link>
-        <Link to="/categories">Categories</Link>
-        <Link to="/judging">How We Judge</Link>
-        <Link to="/voices">Founding Voices</Link>
-        <Link to="/partners">Partners</Link>
-      </nav>
-      <Link className="enter-link" to="/nominate">Nominate</Link>
-    </header>
+    <>
+      <header className="institute-header">
+        <Link className="institute-logo" to="/" aria-label="Institute of Beautiful Success">
+          <img src={AWARD_ASSETS.circleDark} alt="Beautiful Success Award" />
+        </Link>
+        <nav aria-label="Main navigation">
+          <Link to="/award">The Award</Link>
+          <Link to="/categories">Categories</Link>
+          <Link to="/judging">How We Judge</Link>
+          <Link to="/voices">Founding Voices</Link>
+          <Link to="/partners">Partners</Link>
+        </nav>
+        <Link className="enter-link" to="/nominate">Nominate</Link>
+      </header>
+      <p className="institute-claim">Celebrating a better world, one Beautiful Success at a time.</p>
+    </>
   );
 }
