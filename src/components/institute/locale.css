@@ -1,0 +1,53 @@
+/* src/components/institute/locale.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap');
+
+html[lang='ar'] .institute-shell{font-family:'Noto Naskh Arabic','DM Sans',sans-serif}
+html[lang='ar'] .hero-copy h1,
+html[lang='ar'] .story-heading h2,
+html[lang='ar'] .award-principle h2,
+html[lang='ar'] .award-section-title h2,
+html[lang='ar'] .award-copy-grid h2,
+html[lang='ar'] .award-cta h2,
+html[lang='ar'] .founding-voices h2,
+html[lang='ar'] .category-index h2,
+html[lang='ar'] .voice-prompts h2,
+html[lang='ar'] .award-test-grid h3,
+html[lang='ar'] .recognition-list h3,
+html[lang='ar'] .story-chapters h3{font-family:'Noto Naskh Arabic',serif;letter-spacing:0}
+html[lang='ar'] .award-label,
+html[lang='ar'] .hero-kicker,
+html[lang='ar'] .institute-header a,
+html[lang='ar'] .institute-claim,
+html[lang='ar'] .story-heading>p,
+html[lang='ar'] .story-links a,
+html[lang='ar'] .dial-hint{text-transform:none;letter-spacing:.04em}
+
+html[lang='zh'] .institute-shell{font-family:'Noto Sans SC','DM Sans',sans-serif}
+html[lang='zh'] .hero-copy h1,
+html[lang='zh'] .story-heading h2,
+html[lang='zh'] .award-principle h2,
+html[lang='zh'] .award-section-title h2,
+html[lang='zh'] .award-copy-grid h2,
+html[lang='zh'] .award-cta h2,
+html[lang='zh'] .founding-voices h2,
+html[lang='zh'] .category-index h2,
+html[lang='zh'] .voice-prompts h2,
+html[lang='zh'] .award-test-grid h3,
+html[lang='zh'] .recognition-list h3,
+html[lang='zh'] .story-chapters h3{font-family:'Noto Serif SC',serif;letter-spacing:0}
+html[lang='zh'] .award-label,
+html[lang='zh'] .hero-kicker,
+html[lang='zh'] .institute-header a,
+html[lang='zh'] .institute-claim,
+html[lang='zh'] .story-heading>p,
+html[lang='zh'] .story-links a,
+html[lang='zh'] .dial-hint{text-transform:none;letter-spacing:.08em}
+
+html[dir='rtl'] .award-section-title,
+html[dir='rtl'] .award-copy-grid,
+html[dir='rtl'] .nomination-layout,
+html[dir='rtl'] .voice-prompts{direction:rtl}
+html[dir='rtl'] .award-text-link{direction:rtl}
+html[dir='rtl'] input,
+html[dir='rtl'] textarea,
+html[dir='rtl'] select{text-align:right}
