@@ -1,14 +1,22 @@
 // src/pages/awards/VoicesPage.tsx
+import { Link } from 'react-router-dom';
 import AwardPageHero from '../../components/awards/AwardPageHero';
+import { useLocale, type Locale } from '../../providers/LocaleProvider';
 
-const QUESTIONS = ['Beautiful success is…', 'A success I consider beautiful is…', 'We need to stop celebrating…', 'We should begin celebrating…'];
+const COPY: Record<Locale,{eyebrow:string;title:string;intro:string;label:string;promptTitle:string;questions:string[];announce:string;invite:string;button:string}> = {
+  en:{eyebrow:'Founding Voices',title:'What does beautiful success mean to you?',intro:'A growing global archive of leaders, builders, artists and citizens defining what humanity should celebrate as success.',label:'The Beautiful Success Question',promptTitle:'Four prompts. One defining conversation.',questions:['Beautiful success is…','A success I consider beautiful is…','We need to stop celebrating…','We should begin celebrating…'],announce:'Founding voices will be announced here.',invite:'Contributions are invitation-led during the founding phase.',button:'Contribute a perspective'},
+  de:{eyebrow:'Gründungsstimmen',title:'Was bedeutet Beautiful Success für dich?',intro:'Ein wachsendes globales Archiv von Führungspersönlichkeiten, Gestaltern, Künstlern und Bürgern, die definieren, was die Menschheit als Erfolg feiern sollte.',label:'Die Beautiful Success Frage',promptTitle:'Vier Impulse. Ein prägendes Gespräch.',questions:['Beautiful Success ist…','Ein Erfolg, den ich schön finde, ist…','Wir sollten aufhören, … zu feiern.','Wir sollten beginnen, … zu feiern.'],announce:'Die Gründungsstimmen werden hier vorgestellt.',invite:'Beiträge entstehen in der Gründungsphase auf Einladung.',button:'Perspektive beitragen'},
+  fr:{eyebrow:'Voix fondatrices',title:'Que signifie Beautiful Success pour vous ?',intro:'Une archive mondiale grandissante de dirigeants, bâtisseurs, artistes et citoyens qui définissent ce que l’humanité devrait célébrer comme réussite.',label:'La question Beautiful Success',promptTitle:'Quatre questions. Une conversation déterminante.',questions:['Beautiful Success, c’est…','Une réussite que je trouve belle est…','Nous devons arrêter de célébrer…','Nous devrions commencer à célébrer…'],announce:'Les voix fondatrices seront annoncées ici.',invite:'Durant la phase fondatrice, les contributions se font sur invitation.',button:'Partager une perspective'},
+  ar:{eyebrow:'الأصوات المؤسسة',title:'ماذا يعني Beautiful Success بالنسبة لك؟',intro:'أرشيف عالمي متنامٍ من القادة والبنّائين والفنانين والمواطنين الذين يعرّفون ما ينبغي للبشرية أن تحتفي به بوصفه نجاحاً.',label:'سؤال Beautiful Success',promptTitle:'أربعة أسئلة. محادثة واحدة حاسمة.',questions:['Beautiful Success هو…','نجاح أراه جميلاً هو…','علينا أن نتوقف عن الاحتفاء بـ…','علينا أن نبدأ بالاحتفاء بـ…'],announce:'سيتم الإعلان عن الأصوات المؤسسة هنا.',invite:'المساهمات في المرحلة التأسيسية تتم بالدعوة.',button:'شارك منظوراً'},
+  zh:{eyebrow:'创始之声',title:'Beautiful Success 对你意味着什么？',intro:'一个不断增长的全球档案：领导者、建设者、艺术家与普通公民共同定义人类应该庆祝怎样的成功。',label:'Beautiful Success 之问',promptTitle:'四个提示，一场定义未来的对话。',questions:['Beautiful Success 是……','我认为美好的成功是……','我们应该停止庆祝……','我们应该开始庆祝……'],announce:'创始之声将在这里公布。',invite:'创始阶段的贡献将以邀请制进行。',button:'分享你的视角'},
+  es:{eyebrow:'Voces fundadoras',title:'¿Qué significa Beautiful Success para ti?',intro:'Un archivo global en crecimiento de líderes, creadores, artistas y ciudadanos que definen qué debería celebrar la humanidad como éxito.',label:'La pregunta Beautiful Success',promptTitle:'Cuatro preguntas. Una conversación definitoria.',questions:['Beautiful Success es…','Un éxito que considero bello es…','Debemos dejar de celebrar…','Deberíamos empezar a celebrar…'],announce:'Las voces fundadoras se anunciarán aquí.',invite:'Durante la fase fundadora, las contribuciones son por invitación.',button:'Aportar una perspectiva'},
+};
 
 export default function VoicesPage() {
-  return (
-    <main>
-      <AwardPageHero eyebrow="Founding Voices" title="What does beautiful success mean to you?">A growing global archive of leaders, builders, artists and citizens defining what humanity should celebrate as success.</AwardPageHero>
-      <section className="ibs-section voice-prompts"><div><p className="award-label">The Beautiful Success Question</p><h2>Four prompts. One defining conversation.</h2></div><ol>{QUESTIONS.map((question, index) => <li key={question}><span>0{index + 1}</span>{question}</li>)}</ol></section>
-      <section className="ibs-section award-cta"><h2>Founding voices will be announced here.</h2><p>Contributions are invitation-led during the founding phase.</p><a className="award-button" href="mailto:hello@worldos.institute?subject=Founding%20Voices">Contribute a perspective</a></section>
-    </main>
-  );
+  const { locale } = useLocale(); const copy = COPY[locale];
+  return <main>
+    <AwardPageHero eyebrow={copy.eyebrow} title={copy.title}>{copy.intro}</AwardPageHero>
+    <section className="ibs-section voice-prompts"><div><p className="award-label">{copy.label}</p><h2>{copy.promptTitle}</h2></div><ol>{copy.questions.map((question,index) => <li key={question}><span>0{index + 1}</span>{question}</li>)}</ol></section>
+    <section className="ibs-section award-cta"><h2>{copy.announce}</h2><p>{copy.invite}</p><Link className="award-button" to="/contact?reason=Founding%20Voices">{copy.button}</Link></section>
+  </main>;
 }
