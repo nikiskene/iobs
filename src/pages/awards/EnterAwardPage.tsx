@@ -1,14 +1,18 @@
 // src/pages/awards/EnterAwardPage.tsx
 import { Link } from 'react-router-dom';
 import AwardPageHero from '../../components/awards/AwardPageHero';
-import { AWARD_CATEGORIES } from '../../content/awardContent';
+import { useLocale } from '../../providers/LocaleProvider';
+import { getAwardLocaleContent } from '../../content/awardLocaleContent';
 
 export default function EnterAwardPage() {
+  const { locale } = useLocale();
+  const content = getAwardLocaleContent(locale);
+  const p = content.pages;
   return (
     <main>
-      <AwardPageHero eyebrow="Founding Edition entries" title="Enter a beautiful success.">Paid submissions will open after the Founding Jury and integrity standards are announced. Register an expression of interest now.</AwardPageHero>
-      <section className="ibs-section category-index">{AWARD_CATEGORIES.map((item, index) => <article key={item.slug}><span>0{index + 1}</span><div><h2>{item.name}</h2><p>{item.definition}</p></div><strong>{item.fee}</strong></article>)}</section>
-      <section className="ibs-section award-cta"><h2>Have an achievement ready?</h2><p>Tell us what you intend to enter and we will include you in the Founding Edition briefing.</p><a className="award-button" href="mailto:hello@worldos.institute?subject=Founding%20Edition%20entry%20interest">Register interest</a><Link className="award-text-link" to="/judging">Review the judging standard →</Link></section>
+      <AwardPageHero eyebrow={p.enterEyebrow} title={p.enterTitle}>{p.enterIntro}</AwardPageHero>
+      <section className="ibs-section category-index">{content.categories.map((item, index) => <article key={item.slug}><span>0{index + 1}</span><div><h2>{item.name}</h2><p>{item.definition}</p></div><strong>{item.fee}</strong></article>)}</section>
+      <section className="ibs-section award-cta"><h2>{p.readyTitle}</h2><p>{p.readyCopy}</p><Link className="award-button" to="/contact?reason=Founding%20Edition%20entry">{p.register}</Link><Link className="award-text-link" to="/judging">{p.reviewJudging}</Link></section>
     </main>
   );
 }
