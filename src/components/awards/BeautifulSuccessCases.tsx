@@ -31,9 +31,11 @@ export default function BeautifulSuccessCases() {
     return () => { current = false; };
   }, [scale]);
 
+  const layoutClass = cases.length === 1 ? 'single' : cases.length === 2 ? 'double' : cases.length === 3 ? 'triple' : 'multi';
+
   return <section className="award-home-section success-cases">
     <div className="award-section-title"><p className="award-label">{category.name}</p><h2>What Beautiful Success Looks Like</h2></div>
-    {loading ? <p className="case-status">Selecting cases…</p> : cases.length ? <div className="success-case-grid">{cases.map((item) => <CaseCard key={item.id} item={item} />)}</div> : <p className="case-status">The first defining cases for this category are being selected.</p>}
+    {loading ? <p className="case-status">Selecting cases…</p> : cases.length ? <div className={`success-case-grid ${layoutClass}`}>{cases.map((item) => <CaseCard key={item.id} item={item} />)}</div> : <p className="case-status">The first defining cases for this category are being selected.</p>}
     <Link className="award-text-link" to="/thesis">Explore all cases →</Link>
   </section>;
 }
@@ -46,5 +48,5 @@ function CaseCard({ item }: { item: CaseItem }) {
 
 function caseImage(url: string) {
   if (!url.includes('/storage/v1/object/public/')) return url;
-  return `${url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')}?width=720&quality=75&resize=cover`;
+  return `${url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')}?width=900&quality=78&resize=cover`;
 }
