@@ -95,7 +95,14 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   });
   const setLocale = (next: Locale) => { setLocaleState(next); window.localStorage.setItem('beautiful-success-locale', next); };
   const isRtl = locale === 'ar';
-  useEffect(() => { document.documentElement.lang = locale; document.documentElement.dir = isRtl ? 'rtl' : 'ltr'; }, [locale, isRtl]);
+  useEffect(() => {
+    document.documentElement.lang = locale;
+    document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+    return () => {
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+    };
+  }, [locale, isRtl]);
   const value = useMemo(() => ({ locale, setLocale, isRtl, t:(key:string, vars:Record<string,string>={}) => {
     let value = DICTIONARIES[locale][key] || EN[key] || key;
     Object.entries(vars).forEach(([name,replacement]) => { value = value.replace(`{${name}}`, replacement); });
