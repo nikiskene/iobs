@@ -5,8 +5,8 @@ import { Navigate, Route } from 'react-router-dom';
 import PublicLayout from './PublicLayout';
 
 import InstitutePublicFrame from '../components/institute/InstitutePublicFrame';
+import InstituteHomePage from '../pages/InstituteHomePage';
 
-const InstituteHomePage = lazy(() => import('../pages/InstituteHomePage'));
 const AboutPage = lazy(() => import('../pages/public/AboutPage'));
 const TeamPage = lazy(() => import('../pages/public/TeamPage'));
 const ThesisPage = lazy(() => import('../pages/public/ThesisPage'));

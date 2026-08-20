@@ -6,7 +6,8 @@ const MuxPlayer = lazy(() => import('@mux/mux-player-react'));
 
 const PLAYBACK_ID = 'ozIj7reZjM7uaKi01AT582khjGBQhiDrreD3mRlN02hdk';
 const INTRO_SEEN_KEY = 'beautiful-success-intro-seen';
-const MOBILE_QUERY = '(max-width: 560px)';
+const MOBILE_VIEWPORT_QUERY = '(max-width: 900px)';
+const TOUCH_DEVICE_QUERY = '(hover: none) and (pointer: coarse)';
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 
 type PlaybackMode = 'autoplay' | 'manual' | null;
@@ -31,7 +32,10 @@ export default function BeautifulSuccessIntro() {
   }, []);
 
   useEffect(() => {
-    const isMobile = window.matchMedia(MOBILE_QUERY).matches;
+    const hasMobileViewport = window.matchMedia(MOBILE_VIEWPORT_QUERY).matches;
+    const isTouchDevice = window.matchMedia(TOUCH_DEVICE_QUERY).matches;
+    const hasMobileUserAgent = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    const isMobile = hasMobileViewport || isTouchDevice || hasMobileUserAgent;
     const reducesMotion = window.matchMedia(REDUCED_MOTION_QUERY).matches;
     let hasSeenIntro = false;
 
@@ -81,7 +85,7 @@ export default function BeautifulSuccessIntro() {
         console.error('Beautiful Success intro playback did not begin in time.');
         closeOverlay();
       }
-    }, 8000);
+    }, mode === 'autoplay' ? 4000 : 8000);
     return () => window.clearTimeout(startupTimeout);
   }, [closeOverlay, mode]);
 
