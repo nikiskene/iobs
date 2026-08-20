@@ -1,7 +1,7 @@
 // src/App.tsx
 
+import { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthProvider } from './hooks/useAuth';
 import { ImpactScaleProvider } from './providers/ImpactScaleProvider';
 import AppRoutes from './routes/AppRoutes';
 import ScrollToTop from './routes/ScrollToTop';
@@ -10,11 +10,11 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <AuthProvider>
-        <ImpactScaleProvider>
+      <ImpactScaleProvider>
+        <Suspense fallback={<div className="route-loader" aria-label="Loading" />}>
           <AppRoutes />
-        </ImpactScaleProvider>
-      </AuthProvider>
+        </Suspense>
+      </ImpactScaleProvider>
     </BrowserRouter>
   );
 }

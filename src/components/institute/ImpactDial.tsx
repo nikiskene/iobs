@@ -18,9 +18,15 @@ export default function ImpactDial() {
         onClick={() => setScale(worlds[(active + 1) % worlds.length].slug)}
         aria-label={`Current scale: ${world.label}. Select next scale.`}
       >
-        {worlds.map((item, index) => (
-          <img className={index === active ? 'active' : ''} key={item.slug} src={item.knobImageUrl} alt="" aria-hidden="true" />
-        ))}
+        <img
+          className="active"
+          key={world.slug}
+          src={world.knobImageUrl}
+          alt=""
+          aria-hidden="true"
+          decoding="async"
+          fetchPriority="high"
+        />
       </button>
       <p className="dial-hint">{t('dial.hint')}</p>
     </div>

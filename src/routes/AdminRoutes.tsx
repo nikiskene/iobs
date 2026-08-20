@@ -1,32 +1,33 @@
 // src/routes/AdminRoutes.tsx
+import { lazy } from 'react';
 import { Route, Navigate } from 'react-router-dom';
 
 import Navigation from '../components/Navigation';
 import DashboardLayout from '../components/DashboardLayout';
 import AdminRoute from './AdminRoute';
-import AdminHome from '../pages/admin/AdminHome';
-import AdminCategoryPage from '../pages/admin/AdminCategoryPage';
-import AwardSiteContentAdmin from '../pages/admin/AwardSiteContentAdmin';
-import AboutCMS from '../pages/admin/AboutCMS';
-import CategoriesAdmin from '../pages/admin/CategoriesAdmin';
-import ThesesAdmin from '../pages/admin/ThesesAdmin';
-import TeamAdmin from '../pages/admin/TeamAdmin';
-import SiteSettingsAdmin from '../pages/admin/SiteSettingsAdmin';
-import GlossaryAdmin from '../pages/admin/GlossaryAdmin';
-import ScaleWorldsAdmin from '../pages/admin/ScaleWorldsAdmin';
-import PartnerLogosAdmin from '../pages/admin/PartnerLogosAdmin';
-import EventsAdmin from '../pages/admin/events/EventsAdmin';
-import ExpeditionsAdmin from '../pages/admin/expeditions/ExpeditionsAdmin';
-import ExpeditionInquiriesAdmin from '../pages/admin/expeditions/ExpeditionInquiriesAdmin';
-import CustomExpeditionInquiriesAdmin from '../pages/admin/expeditions/CustomExpeditionInquiriesAdmin';
-import ConversationsAdmin from '../pages/admin/conversations/ConversationsAdmin';
-import ContactMessagesAdmin from '../pages/admin/ContactMessagesAdmin';
-import IdentityOverview from '../pages/admin/identity/IdentityOverview';
-import IdentityReview from '../pages/admin/identity/IdentityReview';
-import IdentitySources from '../pages/admin/identity/IdentitySources';
-import MethodPage from '../pages/admin/identity/MethodPage';
-import DailyIdentityScan from '../pages/admin/identity/DailyIdentityScan';
-import IdentitySettingsPage from '../pages/admin/identity/IdentitySettingsPage';
+const AdminHome = lazy(() => import('../pages/admin/AdminHome'));
+const AdminCategoryPage = lazy(() => import('../pages/admin/AdminCategoryPage'));
+const AwardSiteContentAdmin = lazy(() => import('../pages/admin/AwardSiteContentAdmin'));
+const AboutCMS = lazy(() => import('../pages/admin/AboutCMS'));
+const CategoriesAdmin = lazy(() => import('../pages/admin/CategoriesAdmin'));
+const ThesesAdmin = lazy(() => import('../pages/admin/ThesesAdmin'));
+const TeamAdmin = lazy(() => import('../pages/admin/TeamAdmin'));
+const SiteSettingsAdmin = lazy(() => import('../pages/admin/SiteSettingsAdmin'));
+const GlossaryAdmin = lazy(() => import('../pages/admin/GlossaryAdmin'));
+const ScaleWorldsAdmin = lazy(() => import('../pages/admin/ScaleWorldsAdmin'));
+const PartnerLogosAdmin = lazy(() => import('../pages/admin/PartnerLogosAdmin'));
+const EventsAdmin = lazy(() => import('../pages/admin/events/EventsAdmin'));
+const ExpeditionsAdmin = lazy(() => import('../pages/admin/expeditions/ExpeditionsAdmin'));
+const ExpeditionInquiriesAdmin = lazy(() => import('../pages/admin/expeditions/ExpeditionInquiriesAdmin'));
+const CustomExpeditionInquiriesAdmin = lazy(() => import('../pages/admin/expeditions/CustomExpeditionInquiriesAdmin'));
+const ConversationsAdmin = lazy(() => import('../pages/admin/conversations/ConversationsAdmin'));
+const ContactMessagesAdmin = lazy(() => import('../pages/admin/ContactMessagesAdmin'));
+const IdentityOverview = lazy(() => import('../pages/admin/identity/IdentityOverview'));
+const IdentityReview = lazy(() => import('../pages/admin/identity/IdentityReview'));
+const IdentitySources = lazy(() => import('../pages/admin/identity/IdentitySources'));
+const MethodPage = lazy(() => import('../pages/admin/identity/MethodPage'));
+const DailyIdentityScan = lazy(() => import('../pages/admin/identity/DailyIdentityScan'));
+const IdentitySettingsPage = lazy(() => import('../pages/admin/identity/IdentitySettingsPage'));
 
 export default function AdminRoutes() {
   return (
