@@ -1,0 +1,95 @@
+.beautiful-success-watch-film {
+  position: fixed;
+  right: 24px;
+  bottom: 20px;
+  z-index: 30;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 42%, transparent);
+  padding: 4px 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.beautiful-success-watch-film:hover,
+.beautiful-success-watch-film:focus-visible {
+  border-bottom-color: currentColor;
+}
+
+.beautiful-success-watch-film:focus-visible,
+.beautiful-success-intro button:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 5px;
+}
+
+.beautiful-success-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  background: #000;
+  opacity: 1;
+  transition: opacity 800ms ease;
+}
+
+.beautiful-success-intro.is-fading {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.beautiful-success-intro__player {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  object-fit: cover;
+  --controls: none;
+  --media-object-fit: cover;
+}
+
+.beautiful-success-intro__close,
+.beautiful-success-intro__sound {
+  position: absolute;
+  z-index: 2;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, .78);
+  cursor: pointer;
+}
+
+.beautiful-success-intro__close {
+  top: max(18px, env(safe-area-inset-top));
+  right: max(22px, env(safe-area-inset-right));
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font: 300 32px/1 sans-serif;
+}
+
+.beautiful-success-intro__sound {
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(22px, env(safe-area-inset-bottom));
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .45);
+  font: 500 11px/1.2 sans-serif;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 560px) {
+  .beautiful-success-watch-film {
+    right: 18px;
+    bottom: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beautiful-success-intro {
+    transition-duration: 1ms;
+  }
+}
