@@ -2,7 +2,7 @@ import MuxPlayer, { type MuxPlayerRefAttributes } from '@mux/mux-player-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { IntroPlaybackMode } from './BeautifulSuccessIntro';
 
-const PLAYBACK_ID = 'rR8P8mSaKDzz02TsftugTUdI00cQPJX00oy';
+const PLAYBACK_ID = '01iIe5ylvu00vtH01yByKIvbpZICmH027X79kqYUI1HyhIc';
 
 type Props = { mode: IntroPlaybackMode; onClosed: () => void };
 
@@ -72,7 +72,7 @@ export default function BeautifulSuccessFilmOverlay({ mode, onClosed }: Props) {
         nohotkeys
         noMutedPref
         noVolumePref
-        metadata={{ video_title: 'Beautiful Success Award is here' }}
+        metadata={{ video_title: 'The Beautiful Success Award' }}
         onPlaying={syncMutedState}
         onVolumeChange={syncMutedState}
         onEnded={() => closeOverlay(true)}
