@@ -2,7 +2,7 @@ import MuxPlayer, { type MuxPlayerRefAttributes } from '@mux/mux-player-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { IntroPlaybackMode } from './BeautifulSuccessIntro';
 
-const PLAYBACK_ID = 'ozIj7reZjM7uaKi01AT582khjGBQhiDrreD3mRlN02hdk';
+const PLAYBACK_ID = 'rR8P8mSaKDzz02TsftugTUdI00cQPJX00oy';
 
 type Props = { mode: IntroPlaybackMode; onClosed: () => void };
 
