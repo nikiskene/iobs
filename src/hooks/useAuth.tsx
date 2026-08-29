@@ -10,6 +10,7 @@ interface AuthState {
   profile: Profile | null;
   loading: boolean;
   isAdmin: boolean;
+  hasTeamAccess: boolean;
   refreshProfile: () => Promise<void>;
 }
 
@@ -19,6 +20,7 @@ const AuthContext = createContext<AuthState>({
   profile: null,
   loading: true,
   isAdmin: false,
+  hasTeamAccess: false,
   refreshProfile: async () => {},
 });
 
@@ -83,6 +85,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         profile,
         loading,
         isAdmin: profile?.role === 'admin',
+        hasTeamAccess: Boolean(profile?.is_active && (profile.role === 'admin' || profile.is_team_member)),
         refreshProfile,
       }}
     >

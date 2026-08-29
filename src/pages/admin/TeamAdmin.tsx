@@ -38,7 +38,7 @@ export default function TeamAdmin() {
     <div>
       <h1 className="text-2xl font-bold">Profile Management</h1>
       <p className="mt-1 text-sm text-zinc-400">
-        Edit profiles, team visibility and admin access.
+        Control Team Momentum access separately from administrator access.
       </p>
 
       <ProfileSection
@@ -115,6 +115,11 @@ function ProfileRow({
             {profile.role === 'admin' && (
               <span className="rounded-full bg-sky-500/10 px-2 py-0.5 text-xs text-sky-300">
                 Admin
+              </span>
+            )}
+            {profile.is_team_member && (
+              <span className="rounded-full bg-amber-500/10 px-2 py-0.5 text-xs text-amber-300">
+                Team Member
               </span>
             )}
           </div>
@@ -202,8 +207,9 @@ function ProfileEditor({ profile, onClose }: { profile: Profile; onClose: () => 
 
         <label className="flex items-center gap-3 text-sm text-zinc-300">
           <input type="checkbox" checked={isTeamMember} onChange={(e) => setIsTeamMember(e.target.checked)} />
-          Show on Team page
+          Team Member — grants access to /team
         </label>
+        <p className="-mt-3 text-xs text-zinc-500">This does not grant administrator or CMS access.</p>
 
         <div>
           <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-zinc-300">

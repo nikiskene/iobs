@@ -1,13 +1,13 @@
 // src/components/DashboardLayout.tsx
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { ArrowLeft, BookOpen, CalendarDays, Clock, Compass, Database, FileText, Image, LayoutGrid as Layout, MessageCircle, Newspaper, Palette, Shield, Telescope, User, Users } from 'lucide-react';
+import { ArrowLeft, BookOpen, CalendarDays, Clock, Compass, Database, FileText, Image, LayoutGrid as Layout, MessageCircle, Newspaper, Palette, Shield, Sparkles, Telescope, User, Users } from 'lucide-react';
 
 type SidebarLink = { to:string; label:string; icon:React.ElementType };
 type SidebarGroup = { title:string; links:SidebarLink[] };
 
 export default function DashboardLayout() {
-  const { profile, isAdmin } = useAuth();
+  const { profile, isAdmin, hasTeamAccess } = useAuth();
   const location = useLocation();
   const explorerLinks: SidebarLink[] = [
     { to: '/dashboard/profile', label: 'Profile', icon: User },
@@ -51,6 +51,7 @@ export default function DashboardLayout() {
     ]},
   ];
   const isAdminRoute = location.pathname.startsWith('/admin');
+  if (hasTeamAccess) explorerLinks.unshift({ to: '/team', label: 'Team Momentum', icon: Sparkles });
   const isInboxRoute = location.pathname.startsWith('/dashboard/inbox');
 
   return <div className="min-h-screen bg-[#0A0A0A] pt-16"><div className={`mx-auto max-w-7xl px-4 py-4 md:px-6 md:py-8 ${isInboxRoute ? 'md:max-w-7xl' : ''}`}><div className="flex flex-col gap-8 lg:flex-row">

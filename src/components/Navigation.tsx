@@ -9,7 +9,7 @@ import { Logo, NavItem, ProfileMenu, SignInLink, type NavLinkItem } from './navi
 import { IdentityMenu, MobileMenu } from './navigationMenus';
 
 export default function Navigation() {
-  const { user, profile, isAdmin } = useAuth();
+  const { user, profile, isAdmin, hasTeamAccess } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -38,6 +38,7 @@ export default function Navigation() {
     ...(!user ? [{ to: '/join', label: 'Join' }] : []),
   ];
   const userLinks: NavLinkItem[] = user ? [
+    ...(hasTeamAccess ? [{ to: '/team', label: 'Team' }] : []),
     { to: '/dashboard/explorers', label: 'Explorers' },
     { to: '/dashboard/inbox', label: 'Inbox', badge: unreadCount },
   ] : [];
