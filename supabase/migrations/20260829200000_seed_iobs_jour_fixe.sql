@@ -1,25 +1,25 @@
 -- Seed: IOBS Jour Fixe held on 2026-08-29.
 -- Safe to rerun: source_key is unique and every row uses ON CONFLICT DO NOTHING.
--- Aborts without inserting anything unless Niki, Dietmar and Silje each resolve
--- to exactly one active public.profiles row by full_name.
+-- Aborts without inserting anything unless the supplied Niki and Dietmar UUIDs
+-- match their active profiles and Silje resolves uniquely by full_name.
 
 begin;
 
 do $$
 declare
-  niki_id uuid;
-  dietmar_id uuid;
+  niki_id uuid := '872c29d5-6581-4dc8-ac08-441d1c3c06fc';
+  dietmar_id uuid := 'b3cc5ebd-60a1-4019-a86f-f3478f10c40c';
   silje_id uuid;
   match_count integer;
   meeting_at timestamptz := timestamptz '2026-08-29 12:00:00+02';
 begin
-  select count(*), (array_agg(id))[1] into match_count, niki_id
-  from public.profiles where lower(btrim(full_name)) = lower('Niki Skene') and coalesce(is_active, true);
-  if match_count <> 1 then raise exception 'Expected exactly one active profile for Niki Skene; found %.', match_count; end if;
+  select count(*) into match_count from public.profiles
+  where id = niki_id and lower(btrim(full_name)) = lower('Niki Skene') and coalesce(is_active, true);
+  if match_count <> 1 then raise exception 'Niki Skene UUID % does not resolve to the expected active profile.', niki_id; end if;
 
-  select count(*), (array_agg(id))[1] into match_count, dietmar_id
-  from public.profiles where lower(btrim(full_name)) = lower('Dietmar Dahmen') and coalesce(is_active, true);
-  if match_count <> 1 then raise exception 'Expected exactly one active profile for Dietmar Dahmen; found %.', match_count; end if;
+  select count(*) into match_count from public.profiles
+  where id = dietmar_id and lower(btrim(full_name)) = lower('Dietmar Dahmen') and coalesce(is_active, true);
+  if match_count <> 1 then raise exception 'Dietmar Dahmen UUID % does not resolve to the expected active profile.', dietmar_id; end if;
 
   select count(*), (array_agg(id))[1] into match_count, silje_id
   from public.profiles where lower(btrim(full_name)) = lower('Silje Høegmark') and coalesce(is_active, true);
