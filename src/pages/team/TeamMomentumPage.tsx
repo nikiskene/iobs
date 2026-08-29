@@ -2,14 +2,16 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { AlertTriangle, ArrowUpRight, CheckCircle2, Hourglass, Plus, Sparkles } from 'lucide-react';
 import MomentumCard from '../../components/team/MomentumCard';
 import MomentumForm from '../../components/team/MomentumForm';
+import DocumentRepository from '../../components/team/DocumentRepository';
 import { useAuth } from '../../hooks/useAuth';
 import { supabase } from '../../lib/supabase';
-import type { MomentumItem, MomentumOwner, MomentumStatus } from '../../lib/momentumTypes';
+import type { MomentumDocument, MomentumItem, MomentumOwner, MomentumStatus } from '../../lib/momentumTypes';
 
 export default function TeamMomentumPage() {
   const { user } = useAuth();
   const [items, setItems] = useState<MomentumItem[]>([]);
   const [owners, setOwners] = useState<MomentumOwner[]>([]);
+  const [documents, setDocuments] = useState<MomentumDocument[]>([]);
   const [editing, setEditing] = useState<MomentumItem | null | undefined>(undefined);
   const [ownerFilter, setOwnerFilter] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -17,12 +19,13 @@ export default function TeamMomentumPage() {
 
   const load = useCallback(async () => {
     setError('');
-    const [itemsResult, ownersResult] = await Promise.all([
+    const [itemsResult, ownersResult, documentsResult] = await Promise.all([
       supabase.from('momentum_items').select('*').order('updated_at', { ascending: false }),
       supabase.from('profiles').select('id, full_name, photo_url, role, is_team_member').eq('is_active', true).or('is_team_member.eq.true,role.eq.admin').order('full_name'),
+      supabase.from('momentum_documents').select('*').order('created_at', { ascending: false }),
     ]);
-    if (itemsResult.error || ownersResult.error) setError(itemsResult.error?.message || ownersResult.error?.message || 'Could not load momentum.');
-    else { setItems((itemsResult.data as MomentumItem[]) || []); setOwners((ownersResult.data as MomentumOwner[]) || []); }
+    if (itemsResult.error || ownersResult.error || documentsResult.error) setError(itemsResult.error?.message || ownersResult.error?.message || documentsResult.error?.message || 'Could not load momentum.');
+    else { setItems((itemsResult.data as MomentumItem[]) || []); setOwners((ownersResult.data as MomentumOwner[]) || []); setDocuments((documentsResult.data as MomentumDocument[]) || []); }
     setLoading(false);
   }, []);
 
@@ -73,6 +76,8 @@ export default function TeamMomentumPage() {
     <section className="mt-12"><SectionHead eyebrow="Scoreboard" title="Facts created" icon={<CheckCircle2 className="h-4 w-4" />} /><div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">{facts.length ? facts.slice(0, 12).map((item) => <MomentumCard key={item.id} item={item} owner={ownerMap.get(item.owner_user_id || '')} onClick={() => setEditing(item)} compact />) : <Empty text="The first fact is waiting to become real." />}</div></section>
 
     <section className="mt-12"><SectionHead eyebrow="Who is pushing what" title="Team view" icon={<Sparkles className="h-4 w-4" />} /><div className="mt-4 flex gap-3 overflow-x-auto pb-2"><TeamChip active={!ownerFilter} name="Everyone" stats={`${items.filter((item) => item.status !== 'fact').length} active`} onClick={() => setOwnerFilter(null)} />{owners.map((owner) => <TeamChip key={owner.id} active={ownerFilter === owner.id} name={owner.full_name || 'Unnamed'} stats={`${count('pushing', owner.id)} pushing · ${count('waiting', owner.id)} waiting · ${factsThisWeek.filter((item) => item.owner_user_id === owner.id).length} facts`} onClick={() => setOwnerFilter(owner.id)} />)}</div></section>
+
+    <DocumentRepository documents={documents} items={items} />
 
     {editing !== undefined && user && <MomentumForm item={editing} owners={owners} currentUserId={user.id} onClose={() => setEditing(undefined)} onSaved={() => { setEditing(undefined); void load(); }} />}
   </div>;

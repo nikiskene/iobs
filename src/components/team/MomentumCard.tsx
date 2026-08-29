@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, Clock3 } from 'lucide-react';
+import { ArrowRight, Calendar, Clock3, Paperclip } from 'lucide-react';
 import type { MomentumItem, MomentumOwner } from '../../lib/momentumTypes';
 
 const statusStyle = {
@@ -19,7 +19,7 @@ export default function MomentumCard({ item, owner, onClick, compact = false }: 
     {!compact && item.next_move && <p className="mt-3 text-sm leading-relaxed text-stone-400"><span className="text-stone-600">Next:</span> {item.next_move}</p>}
     {!compact && item.status === 'waiting' && item.waiting_on && <p className="mt-2 text-sm text-sky-200/75">Waiting on {item.waiting_on}</p>}
     {!compact && item.status === 'stuck' && item.stuck_reason && <p className="mt-2 text-sm text-rose-200/75">{item.stuck_reason}</p>}
-    <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-stone-600"><span>{owner?.full_name || 'Unassigned'}</span>{item.target_date && <span className="inline-flex items-center gap-1"><Calendar className="h-3 w-3" />{formatDate(item.target_date)}</span>}{item.status === 'waiting' && <span className="inline-flex items-center gap-1"><Clock3 className="h-3 w-3" />{waitingDays === 0 ? 'Today' : `${waitingDays}d waiting`}</span>}</div>
+    <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-stone-600"><span>{owner?.full_name || 'Unassigned'}</span>{item.target_date && <span className="inline-flex items-center gap-1"><Calendar className="h-3 w-3" />{formatDate(item.target_date)}</span>}{item.target_period && !item.target_date && <span className="inline-flex items-center gap-1"><Calendar className="h-3 w-3" />{item.target_period}</span>}{item.requires_document && <span className="inline-flex items-center gap-1 text-amber-300/60"><Paperclip className="h-3 w-3" />Document required</span>}{item.status === 'waiting' && <span className="inline-flex items-center gap-1"><Clock3 className="h-3 w-3" />{waitingDays === 0 ? 'Today' : `${waitingDays}d waiting`}</span>}</div>
   </button>;
 }
 

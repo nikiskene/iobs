@@ -18,11 +18,32 @@ export interface MomentumItem {
   intervention_needed: string | null;
   category: string | null;
   fact_summary: string | null;
+  desired_output: string | null;
+  definition_of_done: string | null;
+  dependency_note: string | null;
+  target_period: string | null;
+  requires_document: boolean;
+  document_requirement_note: string | null;
+  source_key: string | null;
   created_by: string | null;
   completed_by: string | null;
   created_at: string;
   updated_at: string;
   completed_at: string | null;
+}
+
+export interface MomentumDocument {
+  id: string;
+  momentum_item_id: string;
+  title: string;
+  description: string | null;
+  file_name: string;
+  storage_path: string;
+  mime_type: string | null;
+  file_size: number | null;
+  uploaded_by: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 export type MomentumOwner = Pick<Profile, 'id' | 'full_name' | 'photo_url' | 'role' | 'is_team_member'>;
