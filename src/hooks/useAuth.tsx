@@ -63,12 +63,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!active) return;
       setSession(s);
       setUser(s?.user ?? null);
+      setLoading(true);
       if (s?.user) {
-        void fetchProfile(s.user.id);
+        void fetchProfile(s.user.id).finally(() => {
+          if (active) setLoading(false);
+        });
       } else {
         setProfile(null);
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => {
