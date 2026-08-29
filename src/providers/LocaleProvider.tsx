@@ -23,7 +23,7 @@ const EN: Dictionary = {
   'cases.title':'What Beautiful Success Looks Like','cases.loading':'Selecting cases…','cases.empty':'The first defining cases for this category are being selected.','cases.all':'Explore all cases →',
   'home.judgingLink':'Explore the judging standard →','home.voicesButton':'Discover Founding Voices','home.nominate':'Nominate a beautiful success','home.partner':'Become a Founding Partner →',
   'partners.aria':'Partners',
-  'footer.award':'The Award','footer.institute':'The Institute','footer.institutional':'Institutional','footer.categories':'Categories','footer.judging':'Judging','footer.nominate':'Nominate','footer.enter':'Enter','footer.voices':'Founding Voices','footer.assembly':'Assembly','footer.experiences':'Experiences','footer.contact':'Contact','footer.foundingPartners':'Founding Partners','footer.governance':'Governance','footer.partnerBriefing':'Partner Briefing','footer.login':'Login','footer.claim':'Celebrating Beautiful Success globally.','footer.edition':'Founding Edition',
+  'footer.award':'The Award','footer.institute':'The Institute','footer.institutional':'Institutional','footer.categories':'Categories','footer.judging':'Judging','footer.nominate':'Nominate','footer.enter':'Enter','footer.voices':'Founding Voices','footer.assembly':'Assembly','footer.experiences':'Experiences','footer.contact':'Contact','footer.foundingPartners':'Founding Partners','footer.governance':'Governance','footer.partnerBriefing':'Partner Briefing','footer.login':'Login','footer.claim':'Celebrating a better world, one Beautiful Success at a time.','footer.edition':'Founding Edition',
 };
 
 const DE: Dictionary = {
@@ -34,7 +34,7 @@ const DE: Dictionary = {
   'cases.title':'So sieht Beautiful Success aus','cases.loading':'Fälle werden ausgewählt…','cases.empty':'Die ersten prägenden Fälle für diese Kategorie werden derzeit ausgewählt.','cases.all':'Alle Fälle entdecken →',
   'home.judgingLink':'Bewertungsmaßstab entdecken →','home.voicesButton':'Gründungsstimmen entdecken','home.nominate':'Beautiful Success nominieren','home.partner':'Founding Partner werden →',
   'partners.aria':'Partner',
-  'footer.award':'Der Award','footer.institute':'Das Institut','footer.institutional':'Institutionell','footer.categories':'Kategorien','footer.judging':'Bewertung','footer.nominate':'Nominieren','footer.enter':'Einreichen','footer.voices':'Gründungsstimmen','footer.assembly':'Assembly','footer.experiences':'Experiences','footer.contact':'Kontakt','footer.foundingPartners':'Founding Partner','footer.governance':'Governance','footer.partnerBriefing':'Partner Briefing','footer.login':'Login','footer.claim':'Beautiful Success weltweit feiern.','footer.edition':'Founding Edition',
+  'footer.award':'Der Award','footer.institute':'Das Institut','footer.institutional':'Institutionell','footer.categories':'Kategorien','footer.judging':'Bewertung','footer.nominate':'Nominieren','footer.enter':'Einreichen','footer.voices':'Gründungsstimmen','footer.assembly':'Assembly','footer.experiences':'Experiences','footer.contact':'Kontakt','footer.foundingPartners':'Founding Partner','footer.governance':'Governance','footer.partnerBriefing':'Partner Briefing','footer.login':'Login','footer.claim':'Eine bessere Welt feiern – ein Beautiful Success nach dem anderen.','footer.edition':'Founding Edition',
 };
 
 const FR: Dictionary = {
@@ -45,7 +45,7 @@ const FR: Dictionary = {
   'cases.title':'À quoi ressemble Beautiful Success','cases.loading':'Sélection des cas…','cases.empty':'Les premiers cas emblématiques de cette catégorie sont en cours de sélection.','cases.all':'Découvrir tous les cas →',
   'home.judgingLink':'Découvrir le standard d’évaluation →','home.voicesButton':'Découvrir les voix fondatrices','home.nominate':'Nominer un Beautiful Success','home.partner':'Devenir partenaire fondateur →',
   'partners.aria':'Partenaires',
-  'footer.award':'Le Prix','footer.institute':'L’Institut','footer.institutional':'Institutionnel','footer.categories':'Catégories','footer.judging':'Évaluation','footer.nominate':'Nominer','footer.enter':'Candidater','footer.voices':'Voix fondatrices','footer.assembly':'Assemblée','footer.experiences':'Expériences','footer.contact':'Contact','footer.foundingPartners':'Partenaires fondateurs','footer.governance':'Gouvernance','footer.partnerBriefing':'Dossier partenaires','footer.login':'Connexion','footer.claim':'Célébrer Beautiful Success dans le monde.','footer.edition':'Édition fondatrice',
+  'footer.award':'Le Prix','footer.institute':'L’Institut','footer.institutional':'Institutionnel','footer.categories':'Catégories','footer.judging':'Évaluation','footer.nominate':'Nominer','footer.enter':'Candidater','footer.voices':'Voix fondatrices','footer.assembly':'Assemblée','footer.experiences':'Expériences','footer.contact':'Contact','footer.foundingPartners':'Partenaires fondateurs','footer.governance':'Gouvernance','footer.partnerBriefing':'Dossier partenaires','footer.login':'Connexion','footer.claim':'Célébrer un monde meilleur, un Beautiful Success à la fois.','footer.edition':'Édition fondatrice',
 };
 
 const AR: Dictionary = {
@@ -56,7 +56,7 @@ const AR: Dictionary = {
   'cases.title':'كيف يبدو النجاح الجميل','cases.loading':'جارٍ اختيار الحالات…','cases.empty':'يجري اختيار أولى الحالات المعرِّفة لهذه الفئة.','cases.all':'استكشف جميع الحالات ←',
   'home.judgingLink':'استكشف معيار التحكيم ←','home.voicesButton':'اكتشف الأصوات المؤسسة','home.nominate':'رشّح نجاحاً جميلاً','home.partner':'كن شريكاً مؤسساً ←',
   'partners.aria':'الشركاء',
-  'footer.award':'الجائزة','footer.institute':'المعهد','footer.institutional':'المؤسسة','footer.categories':'الفئات','footer.judging':'التحكيم','footer.nominate':'رشّح','footer.enter':'تقدّم','footer.voices':'الأصوات المؤسسة','footer.assembly':'الجمعية','footer.experiences':'التجارب','footer.contact':'تواصل','footer.foundingPartners':'الشركاء المؤسسون','footer.governance':'الحوكمة','footer.partnerBriefing':'ملف الشركاء','footer.login':'تسجيل الدخول','footer.claim':'نحتفي بالنجاح الجميل حول العالم.','footer.edition':'النسخة التأسيسية',
+  'footer.award':'الجائزة','footer.institute':'المعهد','footer.institutional':'المؤسسة','footer.categories':'الفئات','footer.judging':'التحكيم','footer.nominate':'رشّح','footer.enter':'تقدّم','footer.voices':'الأصوات المؤسسة','footer.assembly':'الجمعية','footer.experiences':'التجارب','footer.contact':'تواصل','footer.foundingPartners':'الشركاء المؤسسون','footer.governance':'الحوكمة','footer.partnerBriefing':'ملف الشركاء','footer.login':'تسجيل الدخول','footer.claim':'نحتفي بعالم أفضل، نجاح جميل واحداً تلو الآخر.','footer.edition':'النسخة التأسيسية',
 };
 
 const ZH: Dictionary = {
@@ -67,7 +67,7 @@ const ZH: Dictionary = {
   'cases.title':'Beautiful Success 的真实模样','cases.loading':'正在选择案例…','cases.empty':'本类别的首批代表性案例正在遴选中。','cases.all':'查看全部案例 →',
   'home.judgingLink':'查看评审标准 →','home.voicesButton':'发现创始之声','home.nominate':'提名 Beautiful Success','home.partner':'成为创始合作伙伴 →',
   'partners.aria':'合作伙伴',
-  'footer.award':'奖项','footer.institute':'研究院','footer.institutional':'机构','footer.categories':'类别','footer.judging':'评审','footer.nominate':'提名','footer.enter':'申报','footer.voices':'创始之声','footer.assembly':'大会','footer.experiences':'体验','footer.contact':'联系','footer.foundingPartners':'创始合作伙伴','footer.governance':'治理','footer.partnerBriefing':'合作伙伴资料','footer.login':'登录','footer.claim':'在全球庆祝 Beautiful Success。','footer.edition':'创始届',
+  'footer.award':'奖项','footer.institute':'研究院','footer.institutional':'机构','footer.categories':'类别','footer.judging':'评审','footer.nominate':'提名','footer.enter':'申报','footer.voices':'创始之声','footer.assembly':'大会','footer.experiences':'体验','footer.contact':'联系','footer.foundingPartners':'创始合作伙伴','footer.governance':'治理','footer.partnerBriefing':'合作伙伴资料','footer.login':'登录','footer.claim':'一次庆祝一个 Beautiful Success，让世界变得更好。','footer.edition':'创始届',
 };
 
 const ES: Dictionary = {
@@ -78,7 +78,7 @@ const ES: Dictionary = {
   'cases.title':'Cómo se ve Beautiful Success','cases.loading':'Seleccionando casos…','cases.empty':'Se están seleccionando los primeros casos que definirán esta categoría.','cases.all':'Explorar todos los casos →',
   'home.judgingLink':'Explorar el estándar de evaluación →','home.voicesButton':'Descubrir las voces fundadoras','home.nominate':'Nominar un Beautiful Success','home.partner':'Convertirse en socio fundador →',
   'partners.aria':'Socios',
-  'footer.award':'El Premio','footer.institute':'El Instituto','footer.institutional':'Institucional','footer.categories':'Categorías','footer.judging':'Evaluación','footer.nominate':'Nominar','footer.enter':'Participar','footer.voices':'Voces fundadoras','footer.assembly':'Asamblea','footer.experiences':'Experiencias','footer.contact':'Contacto','footer.foundingPartners':'Socios fundadores','footer.governance':'Gobernanza','footer.partnerBriefing':'Dossier para socios','footer.login':'Acceso','footer.claim':'Celebrando Beautiful Success en todo el mundo.','footer.edition':'Edición Fundadora',
+  'footer.award':'El Premio','footer.institute':'El Instituto','footer.institutional':'Institucional','footer.categories':'Categorías','footer.judging':'Evaluación','footer.nominate':'Nominar','footer.enter':'Participar','footer.voices':'Voces fundadoras','footer.assembly':'Asamblea','footer.experiences':'Experiencias','footer.contact':'Contacto','footer.foundingPartners':'Socios fundadores','footer.governance':'Gobernanza','footer.partnerBriefing':'Dossier para socios','footer.login':'Acceso','footer.claim':'Celebrando un mundo mejor, un Beautiful Success a la vez.','footer.edition':'Edición Fundadora',
 };
 
 const DICTIONARIES: Record<Locale, Dictionary> = { en: EN, de: DE, fr: FR, ar: AR, zh: ZH, es: ES };
