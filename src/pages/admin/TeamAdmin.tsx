@@ -1,6 +1,6 @@
 // src/pages/admin/TeamAdmin.tsx
 import { useEffect, useState } from 'react';
-import { Save, Shield, X, UserCheck, UserX } from 'lucide-react';
+import { Save, Search, Shield, X, UserCheck, UserX } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { supabase } from '../../lib/supabase';
 import type { Profile } from '../../lib/types';
@@ -8,6 +8,7 @@ import type { Profile } from '../../lib/types';
 export default function TeamAdmin() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [editing, setEditing] = useState<Profile | null>(null);
+  const [search, setSearch] = useState('');
 
   const fetchProfiles = async () => {
     const { data } = await supabase
@@ -34,6 +35,19 @@ export default function TeamAdmin() {
     );
   }
 
+  const normalizedSearch = search.trim().toLowerCase();
+  const visibleProfiles = normalizedSearch
+    ? profiles.filter((profile) => [
+        profile.full_name,
+        profile.email,
+        profile.profile_name,
+        profile.team_role,
+        profile.location,
+        profile.city,
+        profile.location_label,
+      ].some((value) => value?.toLowerCase().includes(normalizedSearch)))
+    : profiles;
+
   return (
     <div>
       <h1 className="text-2xl font-bold">Profile Management</h1>
@@ -41,19 +55,31 @@ export default function TeamAdmin() {
         Control Team Momentum access separately from administrator access.
       </p>
 
+      <label className="relative mt-6 block max-w-xl">
+        <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
+        <input
+          type="search"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          placeholder="Find by name, email, profile name, role or location…"
+          className="w-full rounded-xl border border-white/10 bg-white/[0.04] py-3 pl-11 pr-4 text-sm text-white placeholder-zinc-600 outline-none transition focus:border-amber-400/40 focus:ring-2 focus:ring-amber-400/10"
+        />
+      </label>
+      {normalizedSearch && <p className="mt-2 text-xs text-zinc-500">{visibleProfiles.length} {visibleProfiles.length === 1 ? 'member' : 'members'} found</p>}
+
       <ProfileSection
         title="Team Members"
         icon={<UserCheck className="h-5 w-5 text-emerald-400" />}
-        profiles={profiles.filter((p) => p.is_team_member)}
-        empty="No team members yet."
+        profiles={visibleProfiles.filter((p) => p.is_team_member)}
+        empty={normalizedSearch ? 'No matching team members.' : 'No team members yet.'}
         onEdit={setEditing}
       />
 
       <ProfileSection
         title="Other Profiles"
         icon={<UserX className="h-5 w-5 text-zinc-500" />}
-        profiles={profiles.filter((p) => !p.is_team_member)}
-        empty="No other profiles."
+        profiles={visibleProfiles.filter((p) => !p.is_team_member)}
+        empty={normalizedSearch ? 'No matching profiles.' : 'No other profiles.'}
         onEdit={setEditing}
       />
     </div>
