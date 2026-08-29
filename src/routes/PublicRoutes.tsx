@@ -56,7 +56,7 @@ export default function PublicRoutes() {
       />
 
       <Route
-        path="/team"
+        path="/our-team"
         element={
           <PublicLayout>
             <TeamPage />
