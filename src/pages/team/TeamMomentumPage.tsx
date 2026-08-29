@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { AlertTriangle, ArrowUpRight, CheckCircle2, Hourglass, Plus, Sparkles } from 'lucide-react';
+import { AlertTriangle, Archive, ArrowLeft, ArrowUpRight, CheckCircle2, ChevronDown, Hourglass, Plus, Sparkles } from 'lucide-react';
 import MomentumCard from '../../components/team/MomentumCard';
 import MomentumForm from '../../components/team/MomentumForm';
 import DocumentRepository from '../../components/team/DocumentRepository';
 import { useAuth } from '../../hooks/useAuth';
 import { supabase } from '../../lib/supabase';
 import type { MomentumDocument, MomentumItem, MomentumOwner, MomentumStatus } from '../../lib/momentumTypes';
+
+type DashboardView = 'factsToday' | 'factsWeek' | 'factsAll' | 'pushing' | 'waiting' | 'stuck';
 
 export default function TeamMomentumPage() {
   const { user } = useAuth();
@@ -14,6 +16,7 @@ export default function TeamMomentumPage() {
   const [documents, setDocuments] = useState<MomentumDocument[]>([]);
   const [editing, setEditing] = useState<MomentumItem | null | undefined>(undefined);
   const [ownerFilter, setOwnerFilter] = useState<string | null>(null);
+  const [dashboardView, setDashboardView] = useState<DashboardView | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -35,14 +38,23 @@ export default function TeamMomentumPage() {
   const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const weekStart = new Date(startToday); weekStart.setDate(startToday.getDate() - ((startToday.getDay() + 6) % 7));
   const weekEnd = new Date(weekStart); weekEnd.setDate(weekStart.getDate() + 7);
-  const facts = items.filter((item) => item.status === 'fact');
-  const active = items.filter((item) => item.status !== 'fact' && (!ownerFilter || item.owner_user_id === ownerFilter));
+  const facts = items.filter((item) => item.status === 'fact' && !item.archived_at);
+  const archivedFacts = items.filter((item) => item.status === 'fact' && item.archived_at);
+  const active = items.filter((item) => item.status !== 'fact' && !item.archived_at && (!ownerFilter || item.owner_user_id === ownerFilter));
   const factsThisWeek = facts.filter((item) => item.completed_at && new Date(item.completed_at) >= weekStart);
   const factsToday = facts.filter((item) => item.completed_at && new Date(item.completed_at) >= startToday);
   const thisWeek = active.filter((item) => item.target_date && dateAtNoon(item.target_date) >= weekStart && dateAtNoon(item.target_date) < weekEnd);
   const undatedActive = active.filter((item) => !item.target_date);
   const weeklyFocus = [...thisWeek, ...undatedActive].slice(0, 8);
   const ownerMap = useMemo(() => new Map(owners.map((owner) => [owner.id, owner])), [owners]);
+  const dashboardLists: Record<DashboardView, { title: string; items: MomentumItem[] }> = {
+    factsToday: { title: 'Facts today', items: factsToday },
+    factsWeek: { title: 'Facts this week', items: factsThisWeek },
+    factsAll: { title: 'All current facts', items: facts },
+    pushing: { title: 'Pushing', items: items.filter((item) => item.status === 'pushing' && !item.archived_at) },
+    waiting: { title: 'Waiting', items: items.filter((item) => item.status === 'waiting' && !item.archived_at) },
+    stuck: { title: 'Stuck', items: items.filter((item) => item.status === 'stuck' && !item.archived_at) },
+  };
 
   function count(status: MomentumStatus, ownerId?: string) {
     return items.filter((item) => item.status === status && (!ownerId || item.owner_user_id === ownerId)).length;
@@ -58,14 +70,15 @@ export default function TeamMomentumPage() {
     {error && <div className="mt-5 rounded-2xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm text-red-300">{error}</div>}
 
     <section className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-6">
-      <Score label="Facts today" value={factsToday.length} accent />
-      <Score label="This week" value={factsThisWeek.length} note="Target 7" accent />
-      <Score label="Total facts" value={facts.length} accent />
-      <Score label="Pushing" value={count('pushing')} />
-      <Score label="Waiting" value={count('waiting')} />
-      <Score label="Stuck" value={count('stuck')} warning={count('stuck') > 0} />
+      <Score label="Facts today" value={factsToday.length} accent active={dashboardView === 'factsToday'} onClick={() => setDashboardView('factsToday')} />
+      <Score label="This week" value={factsThisWeek.length} note="Target 7" accent active={dashboardView === 'factsWeek'} onClick={() => setDashboardView('factsWeek')} />
+      <Score label="Total facts" value={facts.length} accent active={dashboardView === 'factsAll'} onClick={() => setDashboardView('factsAll')} />
+      <Score label="Pushing" value={count('pushing')} active={dashboardView === 'pushing'} onClick={() => setDashboardView('pushing')} />
+      <Score label="Waiting" value={count('waiting')} active={dashboardView === 'waiting'} onClick={() => setDashboardView('waiting')} />
+      <Score label="Stuck" value={count('stuck')} warning={count('stuck') > 0} active={dashboardView === 'stuck'} onClick={() => setDashboardView('stuck')} />
     </section>
 
+    {dashboardView ? <section className="mt-10"><button onClick={() => setDashboardView(null)} className="mb-5 inline-flex items-center gap-2 text-sm text-stone-500 hover:text-amber-200"><ArrowLeft className="h-4 w-4" />Back to dashboard</button><SectionHead eyebrow="Dashboard list" title={dashboardLists[dashboardView].title} icon={<CheckCircle2 className="h-4 w-4" />} /><div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">{dashboardLists[dashboardView].items.length ? dashboardLists[dashboardView].items.map((item) => <MomentumCard key={item.id} item={item} owner={ownerMap.get(item.owner_user_id || '')} onClick={() => setEditing(item)} />) : <Empty text="Nothing in this list yet." />}</div></section> : <>
     <div className="mt-10 grid gap-10 xl:grid-cols-[1.35fr_0.85fr]">
       <section><SectionHead eyebrow="This week" title="What we are making real" icon={<ArrowUpRight className="h-4 w-4" />} /><div className="mt-4 grid gap-3 md:grid-cols-2">{weeklyFocus.length ? weeklyFocus.map((item) => <MomentumCard key={item.id} item={item} owner={ownerMap.get(item.owner_user_id || '')} onClick={() => setEditing(item)} />) : <Empty text="No active momentum yet. Create the first move." />}</div></section>
       <section><SectionHead eyebrow="Waiting on" title="Where follow-up matters" icon={<Hourglass className="h-4 w-4" />} /><div className="mt-4 space-y-3">{active.filter((item) => item.status === 'waiting').length ? active.filter((item) => item.status === 'waiting').map((item) => <MomentumCard key={item.id} item={item} owner={ownerMap.get(item.owner_user_id || '')} onClick={() => setEditing(item)} />) : <Empty text="Nothing is waiting externally." />}</div></section>
@@ -75,16 +88,19 @@ export default function TeamMomentumPage() {
 
     <section className="mt-12"><SectionHead eyebrow="Scoreboard" title="Facts created" icon={<CheckCircle2 className="h-4 w-4" />} /><div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">{facts.length ? facts.slice(0, 12).map((item) => <MomentumCard key={item.id} item={item} owner={ownerMap.get(item.owner_user_id || '')} onClick={() => setEditing(item)} compact />) : <Empty text="The first fact is waiting to become real." />}</div></section>
 
+    <details className="group/archive mt-6 rounded-2xl border border-white/[0.07] bg-white/[0.02]"><summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4"><span className="inline-flex items-center gap-2 text-sm font-medium text-stone-300"><Archive className="h-4 w-4 text-stone-600" />Archived Facts <span className="text-xs font-normal text-stone-600">{archivedFacts.length}</span></span><ChevronDown className="h-4 w-4 text-stone-600 transition group-open/archive:rotate-180" /></summary>{archivedFacts.length ? <div className="grid gap-3 border-t border-white/[0.06] p-4 md:grid-cols-2 xl:grid-cols-3">{archivedFacts.map((item) => <MomentumCard key={item.id} item={item} owner={ownerMap.get(item.owner_user_id || '')} onClick={() => setEditing(item)} compact />)}</div> : <div className="border-t border-white/[0.06] px-5 py-6 text-sm text-stone-600">No archived facts.</div>}</details>
+
     <section className="mt-12"><SectionHead eyebrow="Who is pushing what" title="Team view" icon={<Sparkles className="h-4 w-4" />} /><div className="mt-4 flex gap-3 overflow-x-auto pb-2"><TeamChip active={!ownerFilter} name="Everyone" stats={`${items.filter((item) => item.status !== 'fact').length} active`} onClick={() => setOwnerFilter(null)} />{owners.map((owner) => <TeamChip key={owner.id} active={ownerFilter === owner.id} name={owner.full_name || 'Unnamed'} stats={`${count('pushing', owner.id)} pushing · ${count('waiting', owner.id)} waiting · ${factsThisWeek.filter((item) => item.owner_user_id === owner.id).length} facts`} onClick={() => setOwnerFilter(owner.id)} />)}</div></section>
 
     <DocumentRepository documents={documents} items={items} />
+    </>}
 
     {editing !== undefined && user && <MomentumForm item={editing} owners={owners} currentUserId={user.id} onClose={() => setEditing(undefined)} onSaved={() => { setEditing(undefined); void load(); }} />}
   </div>;
 }
 
-function Score({ label, value, note, accent, warning }: { label: string; value: number; note?: string; accent?: boolean; warning?: boolean }) {
-  return <div className={`rounded-2xl border p-4 ${warning ? 'border-rose-400/20 bg-rose-400/[0.07]' : accent ? 'border-amber-300/15 bg-amber-300/[0.05]' : 'border-white/[0.07] bg-white/[0.025]'}`}><p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500">{label}</p><div className="mt-2 flex items-end justify-between gap-2"><strong className={`font-serif text-3xl ${warning ? 'text-rose-300' : accent ? 'text-amber-300' : 'text-stone-200'}`}>{value}</strong>{note && <span className="pb-1 text-[10px] text-stone-600">{note}</span>}</div></div>;
+function Score({ label, value, note, accent, warning, active, onClick }: { label: string; value: number; note?: string; accent?: boolean; warning?: boolean; active?: boolean; onClick: () => void }) {
+  return <button onClick={onClick} aria-pressed={active} className={`rounded-2xl border p-4 text-left transition hover:-translate-y-0.5 hover:border-amber-300/30 ${active ? 'ring-2 ring-amber-300/30' : ''} ${warning ? 'border-rose-400/20 bg-rose-400/[0.07]' : accent ? 'border-amber-300/15 bg-amber-300/[0.05]' : 'border-white/[0.07] bg-white/[0.025]'}`}><p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500">{label}</p><div className="mt-2 flex items-end justify-between gap-2"><strong className={`font-serif text-3xl ${warning ? 'text-rose-300' : accent ? 'text-amber-300' : 'text-stone-200'}`}>{value}</strong>{note && <span className="pb-1 text-[10px] text-stone-600">{note}</span>}</div></button>;
 }
 
 function SectionHead({ eyebrow, title, icon }: { eyebrow: string; title: string; icon: React.ReactNode }) {

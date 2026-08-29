@@ -2,6 +2,7 @@ import type { Profile } from './types';
 
 export type MomentumStatus = 'pushing' | 'waiting' | 'stuck' | 'fact';
 export type MomentumPriority = 'low' | 'normal' | 'high';
+export type MomentumDocumentCategory = 'legal' | 'pitch' | 'partner' | 'sales' | 'research' | 'interview_media' | 'event' | 'operations' | 'case_content' | 'other';
 
 export interface MomentumItem {
   id: string;
@@ -30,6 +31,8 @@ export interface MomentumItem {
   created_at: string;
   updated_at: string;
   completed_at: string | null;
+  archived_at: string | null;
+  archived_by: string | null;
 }
 
 export interface MomentumDocument {
@@ -44,6 +47,7 @@ export interface MomentumDocument {
   uploaded_by: string | null;
   created_at: string;
   updated_at: string;
+  category: MomentumDocumentCategory;
 }
 
 export type MomentumOwner = Pick<Profile, 'id' | 'full_name' | 'photo_url' | 'role' | 'is_team_member'>;
@@ -51,4 +55,17 @@ export type MomentumOwner = Pick<Profile, 'id' | 'full_name' | 'photo_url' | 'ro
 export const momentumCategories = [
   'Interviews', 'Events', 'Partnerships', 'Award', 'Cases', 'Content',
   'Dubai', 'Nordics', 'China', 'Operations', 'Other',
+];
+
+export const momentumDocumentCategories: { value: MomentumDocumentCategory; label: string }[] = [
+  { value: 'legal', label: 'Legal' },
+  { value: 'pitch', label: 'Pitch & presentations' },
+  { value: 'partner', label: 'Partners & sponsorships' },
+  { value: 'sales', label: 'Sales & outreach' },
+  { value: 'research', label: 'Research & methodology' },
+  { value: 'interview_media', label: 'Interviews & media' },
+  { value: 'event', label: 'Events & production' },
+  { value: 'operations', label: 'Operations & governance' },
+  { value: 'case_content', label: 'Cases & content' },
+  { value: 'other', label: 'Other' },
 ];

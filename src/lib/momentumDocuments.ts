@@ -1,7 +1,7 @@
 import { supabase } from './supabase';
-import type { MomentumDocument } from './momentumTypes';
+import type { MomentumDocument, MomentumDocumentCategory } from './momentumTypes';
 
-export async function uploadMomentumDocument(itemId: string, file: File, title: string) {
+export async function uploadMomentumDocument(itemId: string, file: File, title: string, category: MomentumDocumentCategory) {
   const safeName = file.name.replace(/[^a-zA-Z0-9._-]+/g, '-');
   const storagePath = `${itemId}/${crypto.randomUUID()}-${safeName}`;
   const { error: uploadError } = await supabase.storage.from('momentum-documents').upload(storagePath, file, {
@@ -16,6 +16,7 @@ export async function uploadMomentumDocument(itemId: string, file: File, title: 
     storage_path: storagePath,
     mime_type: file.type || null,
     file_size: file.size,
+    category,
   }).select('*').single();
   if (recordError) {
     await supabase.storage.from('momentum-documents').remove([storagePath]);

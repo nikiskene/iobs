@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Check, FileText, FileUp, X } from 'lucide-react';
+import { Archive, ArchiveRestore, Check, FileText, FileUp, X } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { openMomentumDocument, uploadMomentumDocument } from '../../lib/momentumDocuments';
-import { momentumCategories, type MomentumDocument, type MomentumItem, type MomentumOwner, type MomentumStatus } from '../../lib/momentumTypes';
+import { momentumCategories, momentumDocumentCategories, type MomentumDocument, type MomentumDocumentCategory, type MomentumItem, type MomentumOwner, type MomentumStatus } from '../../lib/momentumTypes';
 
 export default function MomentumForm({ item, owners, currentUserId, onClose, onSaved }: {
   item: MomentumItem | null; owners: MomentumOwner[]; currentUserId: string;
@@ -26,6 +26,7 @@ export default function MomentumForm({ item, owners, currentUserId, onClose, onS
   const [requiresDocument, setRequiresDocument] = useState(item?.requires_document || false);
   const [documentNote, setDocumentNote] = useState(item?.document_requirement_note || '');
   const [documents, setDocuments] = useState<MomentumDocument[]>([]);
+  const [documentCategory, setDocumentCategory] = useState<MomentumDocumentCategory | ''>('');
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -69,15 +70,27 @@ export default function MomentumForm({ item, owners, currentUserId, onClose, onS
   async function upload(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (!file || !item) return;
+    if (!documentCategory) { setError('Select one document category before uploading.'); event.target.value = ''; return; }
     setUploading(true); setError('');
     try {
-      const document = await uploadMomentumDocument(item.id, file, desiredOutput || item.title);
+      const document = await uploadMomentumDocument(item.id, file, desiredOutput || item.title, documentCategory);
       setDocuments((current) => [document, ...current]);
+      setDocumentCategory('');
     } catch (uploadError) {
       setError(uploadError instanceof Error ? uploadError.message : 'Document upload failed.');
     } finally {
       setUploading(false); event.target.value = '';
     }
+  }
+
+  async function toggleArchive() {
+    if (!item || item.status !== 'fact') return;
+    setSaving(true); setError('');
+    const { error: archiveError } = await supabase.from('momentum_items')
+      .update({ archived_at: item.archived_at ? null : new Date().toISOString() })
+      .eq('id', item.id);
+    if (archiveError) { setError(archiveError.message); setSaving(false); return; }
+    onSaved();
   }
 
   const input = 'w-full rounded-xl border border-white/10 bg-black/30 px-3.5 py-3 text-sm text-white outline-none transition focus:border-amber-400/50 focus:ring-2 focus:ring-amber-400/10';
@@ -102,11 +115,11 @@ export default function MomentumForm({ item, owners, currentUserId, onClose, onS
         <div className="sm:col-span-2 rounded-2xl border border-white/10 bg-black/20 p-4">
           <label className="flex items-start gap-3"><input type="checkbox" checked={requiresDocument} onChange={(e) => setRequiresDocument(e.target.checked)} className="mt-1" /><span><strong className="block text-sm text-stone-200">Document required for completion</strong><span className="mt-1 block text-xs leading-relaxed text-stone-500">This item cannot become FACT until a linked file is in the Work repository.</span></span></label>
           {requiresDocument && <input value={documentNote} onChange={(e) => setDocumentNote(e.target.value)} className={`${input} mt-3`} placeholder="What document or evidence is required?" />}
-          {item ? <div className="mt-4"><label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-amber-300/20 bg-amber-300/10 px-4 py-2 text-xs font-semibold text-amber-200 hover:bg-amber-300/15"><FileUp className="h-4 w-4" />{uploading ? 'Uploading…' : 'Upload document'}<input type="file" disabled={uploading} onChange={upload} className="hidden" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.md,.jpg,.jpeg,.png,.webp" /></label>{documents.length > 0 && <div className="mt-3 space-y-2">{documents.map((document) => <button type="button" key={document.id} onClick={() => void openMomentumDocument(document)} className="flex w-full items-center gap-2 rounded-lg bg-white/[0.04] px-3 py-2 text-left text-xs text-stone-400 hover:text-white"><FileText className="h-4 w-4 text-amber-300" /><span className="truncate">{document.title}</span></button>)}</div>}</div> : requiresDocument && <p className="mt-3 text-xs text-amber-300/70">Save this item first, then reopen it to upload the required document.</p>}
+          {item ? <div className="mt-4"><div className="grid gap-3 sm:grid-cols-[1fr_auto]"><select value={documentCategory} onChange={(e) => setDocumentCategory(e.target.value as MomentumDocumentCategory | '')} className={input} aria-label="Document category"><option value="">Select document category…</option>{momentumDocumentCategories.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}</select><label className={`inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-xs font-semibold ${documentCategory ? 'cursor-pointer border-amber-300/20 bg-amber-300/10 text-amber-200 hover:bg-amber-300/15' : 'cursor-not-allowed border-white/5 bg-white/[0.02] text-stone-600'}`}><FileUp className="h-4 w-4" />{uploading ? 'Uploading…' : 'Upload'}<input type="file" disabled={uploading || !documentCategory} onChange={upload} className="hidden" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.md,.jpg,.jpeg,.png,.webp" /></label></div>{documents.length > 0 && <div className="mt-3 space-y-2">{documents.map((document) => <button type="button" key={document.id} onClick={() => void openMomentumDocument(document)} className="flex w-full items-center gap-2 rounded-lg bg-white/[0.04] px-3 py-2 text-left text-xs text-stone-400 hover:text-white"><FileText className="h-4 w-4 text-amber-300" /><span className="truncate">{document.title}</span><span className="ml-auto shrink-0 text-[10px] uppercase tracking-wider text-stone-600">{momentumDocumentCategories.find(({ value }) => value === document.category)?.label || 'Other'}</span></button>)}</div>}</div> : requiresDocument && <p className="mt-3 text-xs text-amber-300/70">Save this item first, then reopen it to upload the required document.</p>}
         </div>
       </div>
       {error && <p className="mt-4 rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm text-red-300">{error}</p>}
-      <div className="mt-6 flex justify-end gap-3"><button onClick={onClose} className="rounded-full px-5 py-2.5 text-sm text-stone-400 hover:text-white">Cancel</button><button onClick={save} disabled={saving} className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-stone-950 hover:bg-amber-300 disabled:opacity-50"><Check className="h-4 w-4" />{saving ? 'Saving…' : item ? 'Save changes' : 'Create item'}</button></div>
+      <div className="mt-6 flex flex-wrap items-center justify-end gap-3">{item?.status === 'fact' && <button onClick={toggleArchive} disabled={saving} className="mr-auto inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2.5 text-sm text-stone-400 hover:border-amber-300/20 hover:text-amber-200">{item.archived_at ? <ArchiveRestore className="h-4 w-4" /> : <Archive className="h-4 w-4" />}{item.archived_at ? 'Restore fact' : 'Archive fact'}</button>}<button onClick={onClose} className="rounded-full px-5 py-2.5 text-sm text-stone-400 hover:text-white">Cancel</button><button onClick={save} disabled={saving} className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-stone-950 hover:bg-amber-300 disabled:opacity-50"><Check className="h-4 w-4" />{saving ? 'Saving…' : item ? 'Save changes' : 'Create item'}</button></div>
     </div>
   </div>;
 }
