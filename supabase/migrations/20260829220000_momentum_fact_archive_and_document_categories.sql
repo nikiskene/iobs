@@ -43,7 +43,7 @@ revoke all on function public.prepare_momentum_fact_archive() from public, anon,
 
 drop trigger if exists prepare_momentum_fact_archive on public.momentum_items;
 create trigger prepare_momentum_fact_archive
-before update of archived_at on public.momentum_items
+before update of archived_at, archived_by on public.momentum_items
 for each row execute function public.prepare_momentum_fact_archive();
 
 alter table public.momentum_documents
