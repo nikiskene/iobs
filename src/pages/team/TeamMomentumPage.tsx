@@ -17,6 +17,7 @@ export default function TeamMomentumPage() {
   const [editing, setEditing] = useState<MomentumItem | null | undefined>(undefined);
   const [ownerFilter, setOwnerFilter] = useState<string | null>(null);
   const [dashboardView, setDashboardView] = useState<DashboardView | null>(null);
+  const [ownerView, setOwnerView] = useState<string | null>(null);
   const [mobileMode, setMobileMode] = useState<'overview' | 'facts'>('overview');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -63,13 +64,22 @@ export default function TeamMomentumPage() {
 
   function openDashboardView(view: DashboardView) {
     setDashboardView(view);
+    setOwnerView(null);
     setMobileMode('facts');
+  }
+
+  function openOwnerView(ownerId: string | null) {
+    setOwnerFilter(ownerId);
+    setOwnerView(ownerId);
+    setDashboardView(null);
+    setMobileMode('facts');
+    requestAnimationFrame(() => document.getElementById('facts-engine')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   }
 
   if (loading) return <div className="py-24 text-center text-sm text-stone-500">Gathering momentum…</div>;
 
   return <div className="pb-20 text-stone-200">
-    <div className="sticky top-2 z-30 mb-4 flex items-center gap-2 rounded-2xl border border-white/10 bg-[#171310]/95 p-1.5 shadow-xl backdrop-blur sm:hidden"><button onClick={() => { setMobileMode('overview'); setDashboardView(null); }} className={`flex-1 rounded-xl px-3 py-2 text-xs font-semibold ${mobileMode === 'overview' ? 'bg-amber-400 text-stone-950' : 'text-stone-500'}`}>Overview</button><button onClick={() => { setMobileMode('facts'); setDashboardView(null); }} className={`flex-1 rounded-xl px-3 py-2 text-xs font-semibold ${mobileMode === 'facts' ? 'bg-amber-400 text-stone-950' : 'text-stone-500'}`}>Facts Engine</button><button onClick={() => setEditing(null)} className="rounded-xl border border-amber-300/20 p-2 text-amber-300" aria-label="Add momentum"><Plus className="h-4 w-4" /></button></div>
+    <div className="sticky top-2 z-30 mb-4 flex items-center gap-2 rounded-2xl border border-white/10 bg-[#171310]/95 p-1.5 shadow-xl backdrop-blur sm:hidden"><button onClick={() => { setMobileMode('overview'); setDashboardView(null); setOwnerView(null); }} className={`flex-1 rounded-xl px-3 py-2 text-xs font-semibold ${mobileMode === 'overview' ? 'bg-amber-400 text-stone-950' : 'text-stone-500'}`}>Overview</button><button onClick={() => { setMobileMode('facts'); setDashboardView(null); setOwnerView(null); }} className={`flex-1 rounded-xl px-3 py-2 text-xs font-semibold ${mobileMode === 'facts' ? 'bg-amber-400 text-stone-950' : 'text-stone-500'}`}>Facts Engine</button><button onClick={() => setEditing(null)} className="rounded-xl border border-amber-300/20 p-2 text-amber-300" aria-label="Add momentum"><Plus className="h-4 w-4" /></button></div>
 
     <div className={mobileMode === 'overview' ? 'block' : 'hidden sm:block'}>
     <header className="relative overflow-hidden rounded-3xl border border-amber-300/10 bg-[radial-gradient(circle_at_top_right,rgba(180,123,42,0.18),transparent_42%),linear-gradient(135deg,#1b1510,#100e0c)] p-6 sm:p-9">
@@ -88,8 +98,8 @@ export default function TeamMomentumPage() {
     </section>
     </div>
 
-    {dashboardView ? <section className="mt-5 sm:mt-10"><button onClick={() => setDashboardView(null)} className="mb-4 inline-flex items-center gap-2 text-sm text-stone-500 hover:text-amber-200"><ArrowLeft className="h-4 w-4" />All Facts Engine lists</button><SectionHead eyebrow="Dashboard list" title={dashboardLists[dashboardView].title} icon={<CheckCircle2 className="h-4 w-4" />} /><div className="mt-3 grid gap-2 sm:mt-4 sm:gap-3 md:grid-cols-2 xl:grid-cols-3">{dashboardLists[dashboardView].items.length ? dashboardLists[dashboardView].items.map((item) => <MomentumCard key={item.id} item={item} owner={ownerMap.get(item.owner_user_id || '')} onClick={() => setEditing(item)} />) : <Empty text="Nothing in this list yet." />}</div></section> : <>
-    <div className={mobileMode === 'facts' ? 'block' : 'hidden sm:block'}>
+    {dashboardView || ownerView ? <section id="facts-engine" className="scroll-mt-20 mt-5 sm:mt-10"><button onClick={() => { setDashboardView(null); setOwnerView(null); setOwnerFilter(null); }} className="mb-4 inline-flex items-center gap-2 text-sm text-stone-500 hover:text-amber-200"><ArrowLeft className="h-4 w-4" />All Facts Engine lists</button><SectionHead eyebrow={ownerView ? 'Team member' : 'Dashboard list'} title={ownerView ? ownerMap.get(ownerView)?.full_name || 'Team member' : dashboardLists[dashboardView!].title} icon={<CheckCircle2 className="h-4 w-4" />} /><div className="mt-3 grid gap-2 sm:mt-4 sm:gap-3 md:grid-cols-2 xl:grid-cols-3">{(ownerView ? items.filter((item) => item.owner_user_id === ownerView && !item.archived_at) : dashboardLists[dashboardView!].items).length ? (ownerView ? items.filter((item) => item.owner_user_id === ownerView && !item.archived_at) : dashboardLists[dashboardView!].items).map((item) => <MomentumCard key={item.id} item={item} owner={ownerMap.get(item.owner_user_id || '')} onClick={() => setEditing(item)} />) : <Empty text="Nothing assigned here yet." />}</div></section> : <>
+    <div id="facts-engine" className={`scroll-mt-20 ${mobileMode === 'facts' ? 'block' : 'hidden sm:block'}`}>
     <div className="mt-5 grid gap-7 sm:mt-10 sm:gap-10 xl:grid-cols-[1.35fr_0.85fr]">
       <section><SectionHead eyebrow="This week" title="What we are making real" icon={<ArrowUpRight className="h-4 w-4" />} /><div className="mt-3 grid gap-2 sm:mt-4 sm:gap-3 md:grid-cols-2">{weeklyFocus.length ? weeklyFocus.map((item) => <MomentumCard key={item.id} item={item} owner={ownerMap.get(item.owner_user_id || '')} onClick={() => setEditing(item)} />) : <Empty text="No active momentum yet. Create the first move." />}</div></section>
       <section><SectionHead eyebrow="Waiting on" title="Where follow-up matters" icon={<Hourglass className="h-4 w-4" />} /><div className="mt-3 space-y-2 sm:mt-4 sm:space-y-3">{active.filter((item) => item.status === 'waiting').length ? active.filter((item) => item.status === 'waiting').map((item) => <MomentumCard key={item.id} item={item} owner={ownerMap.get(item.owner_user_id || '')} onClick={() => setEditing(item)} />) : <Empty text="Nothing is waiting externally." />}</div></section>
@@ -103,7 +113,7 @@ export default function TeamMomentumPage() {
     </div>
 
     <div className={mobileMode === 'overview' ? 'block' : 'hidden sm:block'}>
-    <section className="mt-12"><SectionHead eyebrow="Who is pushing what" title="Team view" icon={<Sparkles className="h-4 w-4" />} /><div className="mt-4 flex gap-3 overflow-x-auto pb-2"><TeamChip active={!ownerFilter} name="Everyone" stats={`${items.filter((item) => item.status !== 'fact').length} active`} onClick={() => setOwnerFilter(null)} />{owners.map((owner) => <TeamChip key={owner.id} active={ownerFilter === owner.id} name={owner.full_name || 'Unnamed'} stats={`${count('pushing', owner.id)} pushing · ${count('waiting', owner.id)} waiting · ${factsThisWeek.filter((item) => item.owner_user_id === owner.id).length} facts`} onClick={() => setOwnerFilter(owner.id)} />)}</div></section>
+    <section className="mt-12"><SectionHead eyebrow="Who is pushing what" title="Team view" icon={<Sparkles className="h-4 w-4" />} /><div className="mt-4 flex gap-3 overflow-x-auto pb-2"><TeamChip active={!ownerFilter} name="Everyone" stats={`${items.filter((item) => item.status !== 'fact').length} active`} onClick={() => openOwnerView(null)} />{owners.map((owner) => <TeamChip key={owner.id} active={ownerFilter === owner.id} name={owner.full_name || 'Unnamed'} stats={`${count('pushing', owner.id)} pushing · ${count('waiting', owner.id)} waiting · ${factsThisWeek.filter((item) => item.owner_user_id === owner.id).length} facts`} onClick={() => openOwnerView(owner.id)} />)}</div></section>
 
     <DocumentRepository documents={documents} items={items} />
     </div>
