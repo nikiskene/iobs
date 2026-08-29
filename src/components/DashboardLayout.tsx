@@ -11,7 +11,7 @@ export default function DashboardLayout() {
   const location = useLocation();
   const explorerLinks: SidebarLink[] = [
     { to: '/dashboard/profile', label: 'Profile', icon: User },
-    { to: '/dashboard/members', label: 'Explorers', icon: Users },
+    { to: '/members', label: 'Members', icon: Users },
     { to: '/dashboard/theses', label: 'My Theses', icon: BookOpen },
     { to: '/dashboard/inbox', label: 'Messages', icon: MessageCircle },
   ];

@@ -58,10 +58,10 @@ export default function Footer() {
             </Link>
 
             <Link
-              to="/our-team"
+              to="/members"
               className="text-zinc-400 transition-colors hover:text-white"
             >
-              Team
+              Members
             </Link>
 
             <Link

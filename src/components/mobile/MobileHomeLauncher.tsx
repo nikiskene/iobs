@@ -91,8 +91,8 @@ export default function MobileHomeLauncher() {
       image: thesisImage,
     },
     {
-      to: '/our-team',
-      label: 'Team',
+      to: '/members',
+      label: 'Members',
       description: 'People',
       icon: Users,
       image: teamImage,

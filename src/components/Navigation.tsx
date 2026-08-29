@@ -33,13 +33,13 @@ export default function Navigation() {
 
   const publicLinks: NavLinkItem[] = [
     { to: '/thesis', label: 'Thesis' },
+    { to: '/members', label: 'Members' },
     { to: '/expeditions', label: 'Expeditions' },
     { to: '/events', label: 'Events' },
     ...(!user ? [{ to: '/join', label: 'Join' }] : []),
   ];
   const userLinks: NavLinkItem[] = user ? [
     ...(hasTeamAccess ? [{ to: '/team', label: 'Team' }] : []),
-    { to: '/dashboard/explorers', label: 'Explorers' },
     { to: '/dashboard/inbox', label: 'Inbox', badge: unreadCount },
   ] : [];
   const links = [...publicLinks, ...userLinks];

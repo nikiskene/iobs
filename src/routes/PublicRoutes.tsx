@@ -8,7 +8,8 @@ import InstitutePublicFrame from '../components/institute/InstitutePublicFrame';
 import InstituteHomePage from '../pages/InstituteHomePage';
 
 const AboutPage = lazy(() => import('../pages/public/AboutPage'));
-const TeamPage = lazy(() => import('../pages/public/TeamPage'));
+const MembersDirectoryPage = lazy(() => import('../pages/public/MembersDirectoryPage'));
+const MemberProfilePage = lazy(() => import('../pages/public/MemberProfilePage'));
 const ThesisPage = lazy(() => import('../pages/public/ThesisPage'));
 const JoinPage = lazy(() => import('../pages/public/JoinPage'));
 const LegalPage = lazy(() => import('../pages/public/LegalPage'));
@@ -55,14 +56,9 @@ export default function PublicRoutes() {
         }
       />
 
-      <Route
-        path="/our-team"
-        element={
-          <PublicLayout>
-            <TeamPage />
-          </PublicLayout>
-        }
-      />
+      <Route path="/our-team" element={<Navigate to="/members" replace />} />
+      <Route path="/members" element={<PublicLayout><MembersDirectoryPage /></PublicLayout>} />
+      <Route path="/members/:profileName" element={<PublicLayout><MemberProfilePage /></PublicLayout>} />
 
       <Route
         path="/thesis"

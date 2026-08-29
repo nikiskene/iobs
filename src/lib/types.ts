@@ -1,6 +1,7 @@
 // src/lib/types.ts
 export interface Profile {
   id: string;
+  profile_name: string;
   full_name: string | null;
   photo_url: string | null;
   email: string | null;

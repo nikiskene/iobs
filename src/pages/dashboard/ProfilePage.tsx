@@ -1,6 +1,6 @@
 // src/pages/dashboard/ProfilePage.tsx
 import { useEffect, useRef, useState } from 'react';
-import { Camera, Save } from 'lucide-react';
+import { Camera, ExternalLink, Save } from 'lucide-react';
 
 import CityAutocomplete from '../../components/location/CityAutocomplete';
 import { useAuth } from '../../hooks/useAuth';
@@ -10,6 +10,7 @@ export default function ProfilePage() {
   const { user, profile, refreshProfile } = useAuth();
 
   const [fullName, setFullName] = useState('');
+  const [profileName, setProfileName] = useState('');
   const [email, setEmail] = useState('');
   const [linkedinUrl, setLinkedinUrl] = useState('');
   const [bio, setBio] = useState('');
@@ -29,6 +30,7 @@ export default function ProfilePage() {
     if (!profile) return;
 
     setFullName(profile.full_name || '');
+    setProfileName(profile.profile_name || '');
     setEmail(profile.email || '');
     setLinkedinUrl(profile.linkedin_url || '');
     setBio(profile.bio || '');
@@ -51,6 +53,7 @@ export default function ProfilePage() {
       .from('profiles')
       .update({
         full_name: fullName,
+        profile_name: profileName,
         email,
         linkedin_url: linkedinUrl,
         location: locationLabel,
@@ -66,7 +69,7 @@ export default function ProfilePage() {
       .eq('id', user.id);
 
     if (error) {
-      setMessage('Failed to save profile.');
+      setMessage(error.code === '23505' ? 'Error: that profile name is already in use.' : `Error: ${error.message}`);
     } else {
       setMessage('Profile saved.');
       await refreshProfile();
@@ -121,6 +124,13 @@ export default function ProfilePage() {
         />
 
         <VisibilityToggle checked={isPublic} onChange={setIsPublic} />
+        <section className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+          <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
+            <TextInput label="Profile name" value={profileName} onChange={setProfileName} placeholder="firstnamelastname" />
+            {profileName && isPublic && <a href={`/members/${profileName}`} target="_blank" rel="noopener noreferrer" className="inline-flex h-[42px] items-center justify-center gap-2 rounded-md border border-white/10 px-4 text-sm text-zinc-300 hover:border-sky-400/30 hover:text-white"><ExternalLink className="h-4 w-4" />View profile</a>}
+          </div>
+          <p className="mt-2 text-xs text-zinc-500">Your unique public URL: /members/{profileName || 'profilename'}. Letters and numbers only.</p>
+        </section>
         <MapVisibilityToggle checked={showOnMap} onChange={setShowOnMap} />
 
         <div className="grid gap-4 sm:grid-cols-2">
@@ -185,7 +195,7 @@ export default function ProfilePage() {
           {message && (
             <span
               className={`text-sm ${
-                message.includes('Failed') ? 'text-red-400' : 'text-emerald-400'
+                message.startsWith('Error') ? 'text-red-400' : 'text-emerald-400'
               }`}
             >
               {message}
@@ -210,7 +220,7 @@ function VisibilityToggle({
         <div>
           <h2 className="text-sm font-semibold text-white">Public directory</h2>
           <p className="mt-1 text-sm leading-relaxed text-zinc-400">
-            Allow other members to find you and start a direct message.
+            Allow people to find your profile in the member directory.
           </p>
         </div>
 
