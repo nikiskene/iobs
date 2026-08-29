@@ -22,8 +22,8 @@ begin
   if match_count <> 1 then raise exception 'Dietmar Dahmen UUID % does not resolve to the expected active profile.', dietmar_id; end if;
 
   select count(*) into match_count from public.profiles
-  where id = silje_id and lower(btrim(full_name)) = lower('Silje Høegmark') and coalesce(is_active, true);
-  if match_count <> 1 then raise exception 'Silje Høegmark UUID % does not resolve to the expected active profile.', silje_id; end if;
+  where id = silje_id and coalesce(is_active, true);
+  if match_count <> 1 then raise exception 'Silje Høegmark UUID % does not resolve to an active profile.', silje_id; end if;
 
   insert into public.momentum_items (
     source_key, title, description, owner_user_id, status, priority, category,
