@@ -38,7 +38,7 @@ export default function Footer() {
             </Link>
 
             <p className="mt-3 max-w-xs text-sm text-zinc-500">
-              A platform for rethinking the systems that shape our future.
+              Celebrating a better world, one Beautiful Success at a time.
             </p>
           </div>
 
