@@ -7,7 +7,7 @@ export async function fetchMessages(conversationId: string) {
     .from('messages')
     .select('*')
     .eq('conversation_id', conversationId)
-    .eq('is_deleted', false)
+    .or('is_deleted.eq.false,is_deleted.is.null')
     .order('created_at', { ascending: true });
 
   if (error) throw error;

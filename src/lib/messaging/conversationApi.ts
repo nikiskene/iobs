@@ -58,6 +58,8 @@ export async function markConversationRead(conversationId: string) {
   });
 
   if (error) throw error;
+
+  window.dispatchEvent(new Event('inbox-read-state-changed'));
 }
 
 export async function getUnreadMessageCount() {

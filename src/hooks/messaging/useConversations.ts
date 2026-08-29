@@ -50,7 +50,7 @@ export function useConversations() {
         }
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load inbox.');
+      setError(getErrorMessage(err, 'Failed to load inbox.'));
     } finally {
       setLoading(false);
     }
@@ -68,4 +68,10 @@ export function useConversations() {
     error,
     reload: loadConversations,
   };
+}
+
+function getErrorMessage(error: unknown, fallback: string) {
+  if (error instanceof Error) return error.message;
+  if (error && typeof error === 'object' && 'message' in error && typeof error.message === 'string') return error.message;
+  return fallback;
 }

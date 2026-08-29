@@ -22,9 +22,13 @@ export function useConversation(conversationId: string | null) {
 
       const data = await fetchMessages(conversationId);
       setMessages(data);
-      await markConversationRead(conversationId);
+      try {
+        await markConversationRead(conversationId);
+      } catch (readError) {
+        console.error('Could not update conversation read state:', readError);
+      }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load messages.');
+      setError(getErrorMessage(err, 'Failed to load messages.'));
     } finally {
       setLoading(false);
     }
@@ -40,7 +44,7 @@ export function useConversation(conversationId: string | null) {
       await sendMessage({ conversationId, body });
       await loadMessages();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to send message.');
+      setError(getErrorMessage(err, 'Failed to send message.'));
     } finally {
       setSending(false);
     }
@@ -59,4 +63,10 @@ export function useConversation(conversationId: string | null) {
     sendMessage: handleSendMessage,
     reload: loadMessages,
   };
+}
+
+function getErrorMessage(error: unknown, fallback: string) {
+  if (error instanceof Error) return error.message;
+  if (error && typeof error === 'object' && 'message' in error && typeof error.message === 'string') return error.message;
+  return fallback;
 }

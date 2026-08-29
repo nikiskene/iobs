@@ -8,7 +8,11 @@ export function useUnreadMessages() {
 
   useEffect(() => {
     async function load() {
-      setCount(await getUnreadMessageCount());
+      try {
+        setCount(await getUnreadMessageCount());
+      } catch {
+        setCount(0);
+      }
     }
 
     load();
@@ -26,7 +30,10 @@ export function useUnreadMessages() {
       )
       .subscribe();
 
+    window.addEventListener('inbox-read-state-changed', load);
+
     return () => {
+      window.removeEventListener('inbox-read-state-changed', load);
       supabase.removeChannel(channel);
     };
   }, []);
