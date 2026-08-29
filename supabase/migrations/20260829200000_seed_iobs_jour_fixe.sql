@@ -13,15 +13,15 @@ declare
   match_count integer;
   meeting_at timestamptz := timestamptz '2026-08-29 12:00:00+02';
 begin
-  select count(*), min(id) into match_count, niki_id
+  select count(*), (array_agg(id))[1] into match_count, niki_id
   from public.profiles where lower(btrim(full_name)) = lower('Niki Skene') and coalesce(is_active, true);
   if match_count <> 1 then raise exception 'Expected exactly one active profile for Niki Skene; found %.', match_count; end if;
 
-  select count(*), min(id) into match_count, dietmar_id
+  select count(*), (array_agg(id))[1] into match_count, dietmar_id
   from public.profiles where lower(btrim(full_name)) = lower('Dietmar Dahmen') and coalesce(is_active, true);
   if match_count <> 1 then raise exception 'Expected exactly one active profile for Dietmar Dahmen; found %.', match_count; end if;
 
-  select count(*), min(id) into match_count, silje_id
+  select count(*), (array_agg(id))[1] into match_count, silje_id
   from public.profiles where lower(btrim(full_name)) = lower('Silje Høegmark') and coalesce(is_active, true);
   if match_count <> 1 then raise exception 'Expected exactly one active profile for Silje Høegmark; found %.', match_count; end if;
 
