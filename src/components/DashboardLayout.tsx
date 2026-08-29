@@ -51,7 +51,7 @@ export default function DashboardLayout() {
     ]},
   ];
   const isAdminRoute = location.pathname.startsWith('/admin');
-  if (hasTeamAccess) explorerLinks.unshift({ to: '/team', label: 'Team Momentum', icon: Sparkles });
+  if (hasTeamAccess) explorerLinks.unshift({ to: '/work', label: 'Work', icon: Sparkles });
   const isInboxRoute = location.pathname.startsWith('/dashboard/inbox');
 
   return <div className="min-h-screen bg-[#0A0A0A] pt-16"><div className={`mx-auto max-w-7xl px-4 py-4 md:px-6 md:py-8 ${isInboxRoute ? 'md:max-w-7xl' : ''}`}><div className="flex flex-col gap-8 lg:flex-row">

@@ -233,7 +233,7 @@ function ProfileEditor({ profile, onClose }: { profile: Profile; onClose: () => 
 
         <label className="flex items-center gap-3 text-sm text-zinc-300">
           <input type="checkbox" checked={isTeamMember} onChange={(e) => setIsTeamMember(e.target.checked)} />
-          Team Member — grants access to /team
+          Team Member — grants access to /work
         </label>
         <p className="-mt-3 text-xs text-zinc-500">This does not grant administrator or CMS access.</p>
 
