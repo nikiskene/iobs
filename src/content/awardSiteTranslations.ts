@@ -21,15 +21,15 @@ const BASE: Record<string, Omit<AwardSiteContent,'label'|'headline'|'subheadline
   partners_intro:{content_key:'partners_intro',section:'partners',media_url:null,media_path:null,display_order:150,is_active:true},
   v3_hero:{content_key:'v3_hero',section:'homepage_v3',media_url:null,media_path:null,display_order:200,is_active:true},
   v3_hero_images:{content_key:'v3_hero_images',section:'homepage_v3',media_url:null,media_path:null,display_order:210,is_active:true},
-  v3_principle:{content_key:'v3_principle',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/06.png',media_path:'V3/06.png',display_order:220,is_active:true},
+  v3_principle:{content_key:'v3_principle',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/principle.png',media_path:'V3/principle.png',display_order:220,is_active:true},
   v3_principles_intro:{content_key:'v3_principles_intro',section:'homepage_v3',media_url:null,media_path:null,display_order:225,is_active:true},
-  v3_principle_philanthropy:{content_key:'v3_principle_philanthropy',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/07.png',media_path:'V3/07.png',display_order:230,is_active:true},
-  v3_principle_new_focus:{content_key:'v3_principle_new_focus',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/08.png',media_path:'V3/08.png',display_order:240,is_active:true},
-  v3_principle_echo:{content_key:'v3_principle_echo',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/09.png',media_path:'V3/09.png',display_order:250,is_active:true},
-  v3_principle_momentum:{content_key:'v3_principle_momentum',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/10.png',media_path:'V3/10.png',display_order:260,is_active:true},
-  v3_principle_legacy:{content_key:'v3_principle_legacy',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/11.png',media_path:'V3/11.png',display_order:270,is_active:true},
-  v3_scale:{content_key:'v3_scale',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/12.png',media_path:'V3/12.png',display_order:280,is_active:true},
-  v3_question:{content_key:'v3_question',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/05.png',media_path:'V3/05.png',display_order:290,is_active:true},
+  v3_principle_philanthropy:{content_key:'v3_principle_philanthropy',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/philantropy.png',media_path:'V3/philantropy.png',display_order:230,is_active:true},
+  v3_principle_new_focus:{content_key:'v3_principle_new_focus',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/new%20focus.png',media_path:'V3/new focus.png',display_order:240,is_active:true},
+  v3_principle_echo:{content_key:'v3_principle_echo',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/echo.png',media_path:'V3/echo.png',display_order:250,is_active:true},
+  v3_principle_momentum:{content_key:'v3_principle_momentum',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/momentum.png',media_path:'V3/momentum.png',display_order:260,is_active:true},
+  v3_principle_legacy:{content_key:'v3_principle_legacy',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/legacy.png',media_path:'V3/legacy.png',display_order:270,is_active:true},
+  v3_scale:{content_key:'v3_scale',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/scale-of-impact.png',media_path:'V3/scale-of-impact.png',display_order:280,is_active:true},
+  v3_question:{content_key:'v3_question',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/closing-question-background.png',media_path:'V3/closing-question-background.png',display_order:290,is_active:true},
 };
 
 const heroBody: Record<Locale,string> = {
