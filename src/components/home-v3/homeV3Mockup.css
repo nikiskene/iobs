@@ -4,6 +4,8 @@
 .home-v3-portrait::after{background:linear-gradient(90deg,#050406 0%,#050406e8 28%,#05040633 62%,#05040611 100%)}
 .home-v3-portrait img{object-position:center 32%}
 .home-v3-hero-statement span{color:#eaecec}
+.home-v3-hero h1 strong{font-weight:700;letter-spacing:-.055em}
+.home-v3-hero h1 em{font-style:italic;font-weight:600;letter-spacing:-.055em;text-transform:none}
 
 .home-v3-proposition{min-height:430px;align-items:flex-start;padding:54px max(7vw,calc((100vw - 1440px)/2));background-color:#030609;background-size:cover;background-position:center;text-align:left}
 .home-v3-proposition h2{display:flex;max-width:880px;margin:30px 0 0;flex-direction:column;font:500 clamp(38px,5vw,76px)/.98 'Bodoni Moda',serif;letter-spacing:-.04em}

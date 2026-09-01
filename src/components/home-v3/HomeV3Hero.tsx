@@ -36,7 +36,7 @@ export default function HomeV3Hero({ content, images, onImageChange }: { content
   return <section className="home-v3-hero" aria-labelledby="home-v3-title">
     <div className="home-v3-hero-copy">
       <p className="home-v3-label">{content?.label}</p>
-      <h1 id="home-v3-title"><em>{content?.headline?.split(' ')[0]}</em><strong>{content?.headline?.split(' ').slice(1).join(' ')}</strong></h1>
+      <h1 id="home-v3-title"><strong>{content?.headline?.split(' ')[0].toUpperCase()}</strong><em>{content?.headline?.split(' ').slice(1).join(' ')}</em></h1>
       <p className="home-v3-hero-statement">{content?.subheadline?.split('\n').map((line) => <span key={line}>{line}<br /></span>)}</p>
       <a className="home-v3-text-cta" href="#the-principle">{content?.body} <span aria-hidden="true">↓</span></a>
     </div>
