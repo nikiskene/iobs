@@ -6,6 +6,10 @@ export const HOME_V3_HERO_IMAGES = Array.from({ length: 12 }, (_, index) =>
   `${MEDIA}/${String(index + 1).padStart(2, '0')}.png`
 );
 
+export function cmsLines(value?: string | null) {
+  return value?.split(/\\n|\r?\n/).map((line) => line.trim()).filter(Boolean) ?? [];
+}
+
 export type HomeV3Scale = {
   id: ImpactScale;
   urlId: 'me' | 'community' | 'team' | 'company' | 'country' | 'world' | 'beyond';

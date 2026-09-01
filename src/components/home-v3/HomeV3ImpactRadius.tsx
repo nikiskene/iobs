@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import BeautifulSuccessCases from '../awards/BeautifulSuccessCases';
-import { HOME_V3_SCALES } from '../../content/homeV3Content';
+import { cmsLines, HOME_V3_SCALES } from '../../content/homeV3Content';
 import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { useImpactScale } from '../../providers/ImpactScaleProvider';
 import { useScaleWorlds } from '../../providers/ScaleWorldsProvider';
@@ -46,7 +46,7 @@ export default function HomeV3ImpactRadius() {
       <p className="home-v3-label">{content?.label}</p>
       <h2 id="impact-radius-title">{content?.headline}</h2>
       <strong>{content?.subheadline}</strong>
-      <div>{content?.body?.split('\n').map((line) => <p key={line}>{line}</p>)}</div>
+      <div>{cmsLines(content?.body).map((line) => <p key={line}>{line}</p>)}</div>
     </div>
     <div className="home-v3-radius" role="radiogroup" aria-label="Scale of impact" onKeyDown={onKeyDown}>
       <div className="home-v3-radius-arcs" aria-hidden="true"><i /><i /><i /></div>

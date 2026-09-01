@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
-import { HOME_V3_HERO_IMAGES } from '../../content/homeV3Content';
+import { cmsLines, HOME_V3_HERO_IMAGES } from '../../content/homeV3Content';
 import HomeV3Hero from './HomeV3Hero';
 import HomeV3FivePrinciples from './HomeV3FivePrinciples';
 import HomeV3ImpactRadius from './HomeV3ImpactRadius';
@@ -12,7 +12,7 @@ import './homeV3Mockup.css';
 export default function HomeV3() {
   const { get } = useAwardSiteContent();
   const hero = get('v3_hero');
-  const configuredImages = get('v3_hero_images')?.body?.split('\n').map((url) => url.trim()).filter(Boolean);
+  const configuredImages = cmsLines(get('v3_hero_images')?.body);
   const heroImages = configuredImages?.length ? configuredImages : HOME_V3_HERO_IMAGES;
   const principle = get('v3_principle');
   const question = get('v3_question');
