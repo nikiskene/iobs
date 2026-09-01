@@ -82,15 +82,29 @@ export default function ProfilePage() {
     const file = event.target.files?.[0];
     if (!file || !user) return;
 
-    const ext = file.name.split('.').pop();
-    const path = `${user.id}/avatar.${ext}`;
+    setMessage('');
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      setMessage('Error: choose a JPG, PNG, or WebP image.');
+      event.target.value = '';
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setMessage('Error: the photo must be smaller than 5 MB.');
+      event.target.value = '';
+      return;
+    }
+
+    const extension = file.type === 'image/jpeg' ? 'jpg' : file.type.split('/')[1];
+    const path = `${user.id}/avatar.${extension}`;
 
     const { error: uploadError } = await supabase.storage
       .from('profile-photos')
-      .upload(path, file, { upsert: true });
+      .upload(path, file, { upsert: true, contentType: file.type, cacheControl: '3600' });
 
     if (uploadError) {
-      setMessage('Failed to upload photo.');
+      setMessage(`Error: failed to upload photo. ${uploadError.message}`);
+      event.target.value = '';
       return;
     }
 
@@ -98,13 +112,21 @@ export default function ProfilePage() {
       .from('profile-photos')
       .getPublicUrl(path);
 
-    await supabase
+    const publicUrl = `${urlData.publicUrl}?v=${Date.now()}`;
+    const { error: profileError } = await supabase
       .from('profiles')
-      .update({ photo_url: urlData.publicUrl })
+      .update({ photo_url: publicUrl, updated_at: new Date().toISOString() })
       .eq('id', user.id);
+
+    if (profileError) {
+      setMessage(`Error: photo uploaded, but the profile could not be updated. ${profileError.message}`);
+      event.target.value = '';
+      return;
+    }
 
     await refreshProfile();
     setMessage('Photo updated.');
+    event.target.value = '';
   }
 
   return (
@@ -312,6 +334,7 @@ function ProfilePhoto({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
+          aria-label="Upload profile photo"
           className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-sky-500 text-white transition-colors hover:bg-sky-400"
         >
           <Camera className="h-3.5 w-3.5" />
@@ -320,7 +343,7 @@ function ProfilePhoto({
         <input
           ref={fileInputRef}
           type="file"
-          accept="image/*"
+          accept="image/jpeg,image/png,image/webp"
           onChange={onUpload}
           className="hidden"
         />
