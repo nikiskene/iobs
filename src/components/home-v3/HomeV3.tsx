@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
-import { HOME_V3_COPY } from '../../content/homeV3Content';
+import { HOME_V3_COPY, HOME_V3_HERO_IMAGES } from '../../content/homeV3Content';
 import HomeV3Hero from './HomeV3Hero';
 import HomeV3FivePrinciples from './HomeV3FivePrinciples';
 import HomeV3ImpactRadius from './HomeV3ImpactRadius';
@@ -12,10 +12,12 @@ export default function HomeV3() {
   const { get } = useAwardSiteContent();
   const principle = get('principle');
   const principleOutcome = outcomeFrom(principle?.headline);
+  const [heroImage, setHeroImage] = useState(0);
+  const stripeImage = (heroImage + 5) % HOME_V3_HERO_IMAGES.length;
   useBetaMetadata();
 
   return <main className="home-v3">
-    <HomeV3Hero />
+    <HomeV3Hero onImageChange={setHeroImage} />
     <section id="the-principle" className="home-v3-proposition" aria-labelledby="principle-title">
       <p className="home-v3-label">02 — THE PRINCIPLE</p>
       <h2 id="principle-title">THE MORE SUCCESSFUL<br />IT BECOMES,</h2>
@@ -23,6 +25,9 @@ export default function HomeV3() {
       <p className="home-v3-proposition-support">{HOME_V3_COPY.principleSupport}</p>
     </section>
     <HomeV3FivePrinciples />
+    <div className="home-v3-image-stripe" aria-hidden="true">
+      <img src={HOME_V3_HERO_IMAGES[stripeImage]} alt="" decoding="async" />
+    </div>
     <HomeV3ImpactRadius />
     <section className="home-v3-question" aria-labelledby="opening-question-title">
       <p className="home-v3-label">05 — SO LET&apos;S BEGIN.</p>

@@ -8,8 +8,8 @@ export default function HomeV3FivePrinciples() {
     </header>
     <div className="home-v3-principle-territories">
       {HOME_V3_PRINCIPLES.map((principle) => <article className={`tone-${principle.tone}`} key={principle.number}>
-        <span>{principle.number}</span>
-        <div><h3>{principle.name}</h3><p>{principle.question}</p></div>
+        <div><span>{principle.number}</span><h3>{principle.name}</h3></div>
+        <p>{principle.question}</p>
       </article>)}
     </div>
   </section>;

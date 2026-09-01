@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { HOME_V3_COPY, HOME_V3_HERO_IMAGES } from '../../content/homeV3Content';
 
-export default function HomeV3Hero() {
+export default function HomeV3Hero({ onImageChange }: { onImageChange: (index: number) => void }) {
   const [current, setCurrent] = useState(0);
   const [previous, setPrevious] = useState<number | null>(null);
   const currentRef = useRef(0);
@@ -16,6 +16,7 @@ export default function HomeV3Hero() {
       setPrevious(currentRef.current);
       currentRef.current = next;
       setCurrent(next);
+      onImageChange(next);
       if (clearRef.current) window.clearTimeout(clearRef.current);
       clearRef.current = window.setTimeout(() => setPrevious(null), 850);
     };
@@ -24,7 +25,7 @@ export default function HomeV3Hero() {
       window.clearInterval(interval);
       if (clearRef.current) window.clearTimeout(clearRef.current);
     };
-  }, [reducedMotion]);
+  }, [onImageChange, reducedMotion]);
 
   useEffect(() => {
     if (reducedMotion) return;

@@ -10,7 +10,7 @@ const STORAGE_KEY = 'beautiful-success-v3-scale';
 export default function HomeV3ImpactRadius() {
   const { scale, setScale } = useImpactScale();
   const worlds = useScaleWorlds();
-  const [params, setParams] = useSearchParams();
+  const [params] = useSearchParams();
   const initialized = useRef(false);
   const active = Math.max(0, HOME_V3_SCALES.findIndex((item) => item.id === scale));
   const world = worlds.find((item) => item.slug === scale) ?? worlds[0];
@@ -29,9 +29,6 @@ export default function HomeV3ImpactRadius() {
     const selected = HOME_V3_SCALES[index];
     setScale(selected.id);
     window.sessionStorage.setItem(STORAGE_KEY, selected.urlId);
-    const next = new URLSearchParams(params);
-    next.set('scale', selected.urlId);
-    setParams(next, { replace: true });
   }
 
   function onKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
