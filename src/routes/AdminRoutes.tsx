@@ -22,12 +22,6 @@ const ExpeditionInquiriesAdmin = lazy(() => import('../pages/admin/expeditions/E
 const CustomExpeditionInquiriesAdmin = lazy(() => import('../pages/admin/expeditions/CustomExpeditionInquiriesAdmin'));
 const ConversationsAdmin = lazy(() => import('../pages/admin/conversations/ConversationsAdmin'));
 const ContactMessagesAdmin = lazy(() => import('../pages/admin/ContactMessagesAdmin'));
-const IdentityOverview = lazy(() => import('../pages/admin/identity/IdentityOverview'));
-const IdentityReview = lazy(() => import('../pages/admin/identity/IdentityReview'));
-const IdentitySources = lazy(() => import('../pages/admin/identity/IdentitySources'));
-const MethodPage = lazy(() => import('../pages/admin/identity/MethodPage'));
-const DailyIdentityScan = lazy(() => import('../pages/admin/identity/DailyIdentityScan'));
-const IdentitySettingsPage = lazy(() => import('../pages/admin/identity/IdentitySettingsPage'));
 
 export default function AdminRoutes() {
   return (
@@ -53,12 +47,6 @@ export default function AdminRoutes() {
       <Route path="experiences/custom" element={<CustomExpeditionInquiriesAdmin />} />
       <Route path="messaging/conversations" element={<ConversationsAdmin />} />
       <Route path="messaging/contact" element={<ContactMessagesAdmin />} />
-      <Route path="identity" element={<IdentityOverview />} />
-      <Route path="identity/review" element={<IdentityReview />} />
-      <Route path="identity/daily-scan" element={<DailyIdentityScan />} />
-      <Route path="identity/settings" element={<IdentitySettingsPage />} />
-      <Route path="identity/sources" element={<IdentitySources />} />
-      <Route path="identity/method" element={<MethodPage />} />
       <Route path="settings/design" element={<SiteSettingsAdmin />} />
       <Route path="*" element={<Navigate to="/admin" replace />} />
     </Route>

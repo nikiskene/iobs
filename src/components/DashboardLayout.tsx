@@ -1,7 +1,7 @@
 // src/components/DashboardLayout.tsx
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { ArrowLeft, BookOpen, CalendarDays, Clock, Compass, Database, FileText, Image, LayoutGrid as Layout, MessageCircle, Newspaper, Palette, Shield, Sparkles, Telescope, User, Users } from 'lucide-react';
+import { ArrowLeft, BookOpen, CalendarDays, Compass, FileText, Image, LayoutGrid as Layout, MessageCircle, Palette, Shield, Sparkles, User, Users } from 'lucide-react';
 
 type SidebarLink = { to:string; label:string; icon:React.ElementType };
 type SidebarGroup = { title:string; links:SidebarLink[] };
@@ -36,14 +36,6 @@ export default function DashboardLayout() {
     { title: 'Messaging', links: [
       { to: '/admin/messaging/contact', label: 'Contact Inbox', icon: FileText },
       { to: '/admin/messaging/conversations', label: 'Conversations', icon: MessageCircle },
-    ]},
-    { title: 'Identity Research', links: [
-      { to: '/admin/identity', label: 'Engine', icon: Shield },
-      { to: '/admin/identity/review', label: 'Review', icon: FileText },
-      { to: '/admin/identity/daily-scan', label: 'Daily Scan', icon: Newspaper },
-      { to: '/admin/identity/sources', label: 'Sources', icon: Database },
-      { to: '/admin/identity/method', label: 'METHOD', icon: Telescope },
-      { to: '/admin/identity/settings', label: 'Schedule', icon: Clock },
     ]},
     { title: 'Settings', links: [
       { to: '/admin/settings/design', label: 'Design', icon: Palette },

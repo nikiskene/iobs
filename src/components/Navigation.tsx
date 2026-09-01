@@ -6,7 +6,7 @@ import { useUnreadMessages } from '../hooks/messaging/useUnreadMessages';
 import { useAuth } from '../hooks/useAuth';
 import { supabase } from '../lib/supabase';
 import { Logo, NavItem, ProfileMenu, SignInLink, type NavLinkItem } from './navigationBasics';
-import { IdentityMenu, MobileMenu } from './navigationMenus';
+import { MobileMenu } from './navigationMenus';
 
 export default function Navigation() {
   const { user, profile, isAdmin, hasTeamAccess } = useAuth();
@@ -58,7 +58,6 @@ export default function Navigation() {
         <Logo logoUrl={logoUrl} />
         <div className="hidden items-center gap-1 lg:flex">
           {links.map((link) => <NavItem key={link.to} link={link} active={isActive(link.to)} />)}
-          {isAdmin && <IdentityMenu active={isActive('/admin/identity')} />}
           <div className="ml-3 h-5 w-px bg-white/10" />
           {user ? <ProfileMenu refElement={menuRef} open={profileOpen} onToggle={() => setProfileOpen((value) => !value)} onLogout={handleLogout} name={profile?.full_name || 'Explorer'} email={user.email || null} photoUrl={profile?.photo_url || null} isAdmin={isAdmin} /> : <SignInLink />}
         </div>

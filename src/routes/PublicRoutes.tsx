@@ -31,11 +31,13 @@ const EnterAwardPage = lazy(() => import('../pages/awards/EnterAwardPage'));
 const PartnersPage = lazy(() => import('../pages/awards/PartnersPage'));
 const VoicesPage = lazy(() => import('../pages/awards/VoicesPage'));
 const AssemblyPage = lazy(() => import('../pages/awards/AssemblyPage'));
+const HomeV3Page = lazy(() => import('../pages/HomeV3Page'));
 
 export default function PublicRoutes() {
   return (
     <>
       <Route path="/" element={<InstituteHomePage />} />
+      <Route path="/beta" element={<HomeV3Page />} />
       <Route path="/institute" element={<Navigate to="/" replace />} />
       <Route path="/award" element={<InstitutePublicFrame><AwardPage /></InstitutePublicFrame>} />
       <Route path="/categories" element={<InstitutePublicFrame><CategoriesPage /></InstitutePublicFrame>} />

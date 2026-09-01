@@ -7,7 +7,6 @@ import {
   Compass,
   Info,
   MessageCircle,
-  ScanSearch,
   Shield,
   User,
   Users,
@@ -113,13 +112,6 @@ export default function MobileHomeLauncher() {
   ];
 
   if (profile?.role === 'admin') {
-    items.push({
-      to: '/admin/identity',
-      label: 'Identity Scanner',
-      description: 'Research signals',
-      icon: ScanSearch,
-      highlight: true,
-    });
     items.push({
       to: '/admin',
       label: 'Admin',
