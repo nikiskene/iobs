@@ -7,7 +7,7 @@ import { awardSiteDefaults } from '../../content/awardSiteTranslations';
 import { localizedContentKey, type AwardSiteContent } from '../../providers/AwardSiteContentProvider';
 
 const inputClass = 'w-full rounded-md border border-white/10 bg-white/5 px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-amber-500';
-const sectionLabels: Record<string,string> = { global:'Global', hero:'Homepage Hero', homepage:'Homepage Sections', partners:'Partners', general:'General' };
+const sectionLabels: Record<string,string> = { global:'Global', hero:'Homepage Hero', homepage:'Homepage Sections', homepage_v3:'Homepage V3', partners:'Partners', general:'General' };
 
 export default function AwardSiteContentAdmin() {
   const [locale, setLocale] = useState<Locale>('en');
@@ -51,7 +51,7 @@ function ContentEditor({ row, locale, onClose }: { row:AwardSiteContent; locale:
   const save = async () => {
     setSaving(true); setError('');
     const payload = { content_key:localizedContentKey(row.content_key,locale), section:draft.section, label:draft.label || null, headline:draft.headline || null, subheadline:draft.subheadline || null, body:draft.body || null, media_url:draft.media_url || null, media_path:draft.media_path || null, display_order:draft.display_order, is_active:draft.is_active, updated_at:new Date().toISOString() };
-    const { error:updateError } = await supabase.from('award_site_content').upsert(payload,{ onConflict:'content_key' });
+    const { error:updateError } = await supabase.from('award_site_content').upsert(payload,{ onConflict:'content_key,locale' });
     if (updateError) { setError(updateError.message); setSaving(false); return; } onClose();
   };
   return <div><button onClick={onClose} className="mb-6 inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white"><X className="h-4 w-4" /> Back</button><p className="font-mono text-xs text-zinc-500">{row.content_key} · {locale.toUpperCase()}</p><h1 className="mt-2 text-2xl font-bold">Edit Site Copy</h1><div className="mt-6 max-w-3xl space-y-5">

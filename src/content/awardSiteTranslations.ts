@@ -19,6 +19,17 @@ const BASE: Record<string, Omit<AwardSiteContent,'label'|'headline'|'subheadline
   voices_intro:{content_key:'voices_intro',section:'homepage',media_url:null,media_path:null,display_order:130,is_active:true},
   founding_edition:{content_key:'founding_edition',section:'homepage',media_url:null,media_path:null,display_order:140,is_active:true},
   partners_intro:{content_key:'partners_intro',section:'partners',media_url:null,media_path:null,display_order:150,is_active:true},
+  v3_hero:{content_key:'v3_hero',section:'homepage_v3',media_url:null,media_path:null,display_order:200,is_active:true},
+  v3_hero_images:{content_key:'v3_hero_images',section:'homepage_v3',media_url:null,media_path:null,display_order:210,is_active:true},
+  v3_principle:{content_key:'v3_principle',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/06.png',media_path:'V3/06.png',display_order:220,is_active:true},
+  v3_principles_intro:{content_key:'v3_principles_intro',section:'homepage_v3',media_url:null,media_path:null,display_order:225,is_active:true},
+  v3_principle_philanthropy:{content_key:'v3_principle_philanthropy',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/07.png',media_path:'V3/07.png',display_order:230,is_active:true},
+  v3_principle_new_focus:{content_key:'v3_principle_new_focus',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/08.png',media_path:'V3/08.png',display_order:240,is_active:true},
+  v3_principle_echo:{content_key:'v3_principle_echo',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/09.png',media_path:'V3/09.png',display_order:250,is_active:true},
+  v3_principle_momentum:{content_key:'v3_principle_momentum',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/10.png',media_path:'V3/10.png',display_order:260,is_active:true},
+  v3_principle_legacy:{content_key:'v3_principle_legacy',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/11.png',media_path:'V3/11.png',display_order:270,is_active:true},
+  v3_scale:{content_key:'v3_scale',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/12.png',media_path:'V3/12.png',display_order:280,is_active:true},
+  v3_question:{content_key:'v3_question',section:'homepage_v3',media_url:'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/05.png',media_path:'V3/05.png',display_order:290,is_active:true},
 };
 
 const heroBody: Record<Locale,string> = {
@@ -34,6 +45,13 @@ const COPY: Record<Locale,Record<string,Copy>> = {
   en:{
     hero_me:{label:'A private beginning',headline:'What would you celebrate as success?'},hero_community:{label:'The intimate world',headline:'What would your community celebrate as success?'},hero_team:{label:'The shared endeavour',headline:'What would your team celebrate as success?'},hero_company:{label:'The living institution',headline:'What would your company celebrate as success?'},hero_country:{label:'The national imagination',headline:'What would your country celebrate as success?'},hero_world:{label:'The beautiful possible',headline:'What would our world celebrate as success?'},hero_universe:{label:'The beautiful impossible',headline:'What would the universe celebrate as success?'},
     site_claim:{headline:'Celebrating a better world, one Beautiful Success at a time.'},principle:{label:'The Beautiful Success Principle',headline:'The more successful it becomes, the better the world becomes.',body:'Not every success deserves to be celebrated. We recognize achievements whose positive value compounds as they grow.'},judging_intro:{label:'A new social contract, measured',headline:'Recognition begins where ordinary success metrics end.'},recognition_intro:{label:'Recognition',headline:'Scarce by design.'},voices_intro:{label:'The Beautiful Success Question',headline:'What does beautiful success mean to you?',body:'Founding voices from business, culture, science and public life will help define what humanity should celebrate as success.'},founding_edition:{label:'The Founding Edition',headline:'One global search. Seven scales. One Grand Prix.',subheadline:'Dubai · Shenzhen · Hong Kong · Vienna · London · San Francisco · Lithuania'},partners_intro:{headline:'Grateful for our Beautiful Partners'},
+    v3_hero:{label:'The Institute of Beautiful Success',headline:'Beautiful Success',subheadline:'Success is not the problem.\nOur definition of it is.',body:'Discover the Institute'},
+    v3_hero_images:{body:Array.from({length:12},(_,index)=>`https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/${String(index+1).padStart(2,'0')}.png`).join('\n')},
+    v3_principle:{label:'02 — The Principle',headline:'The more successful it becomes, the better the world becomes.',body:'For humans. For non-humans. For society. For the planet. For what comes after us.'},
+    v3_principles_intro:{label:'03',headline:'The five principles that define Beautiful Success'},
+    v3_principle_philanthropy:{label:'Philanthropy',headline:'What can I offer?'},v3_principle_new_focus:{label:'New Focus',headline:'What can I create?'},v3_principle_echo:{label:'Echo',headline:'Whose choices do I influence?'},v3_principle_momentum:{label:'Momentum',headline:'What can my assets set in motion?'},v3_principle_legacy:{label:'Legacy',headline:'What outlasts me?'},
+    v3_scale:{label:'04 — The Scale of Impact',headline:'How far does your success reach?',subheadline:'Scale is not score.',body:'Beautiful Success is not measured by how large it becomes.\nScale tells us how far it reaches.\nThe principles tell us whether it is beautiful.'},
+    v3_question:{label:'05',headline:'If you could build anything in the world…',subheadline:'what would you build?',body:'Explore the Institute|Nominate / Enter'},
   },
   de:{
     hero_me:{label:'Ein persönlicher Anfang',headline:'Was würdest du als Erfolg feiern?'},hero_community:{label:'Die Welt der Nähe',headline:'Was würde deine Community als Erfolg feiern?'},hero_team:{label:'Das gemeinsame Vorhaben',headline:'Was würde dein Team als Erfolg feiern?'},hero_company:{label:'Die lebendige Institution',headline:'Was würde dein Unternehmen als Erfolg feiern?'},hero_country:{label:'Die nationale Vorstellungskraft',headline:'Was würde dein Land als Erfolg feiern?'},hero_world:{label:'Das schön Mögliche',headline:'Was würde unsere Welt als Erfolg feiern?'},hero_universe:{label:'Das schön Unmögliche',headline:'Was würde das Universum als Erfolg feiern?'},
@@ -61,9 +79,9 @@ export function awardSiteDefaults(locale: Locale): AwardSiteContent[] {
   return Object.keys(BASE).map((key) => ({
     ...BASE[key],
     locale,
-    label: COPY[locale][key]?.label ?? null,
-    headline: COPY[locale][key]?.headline ?? null,
-    subheadline: COPY[locale][key]?.subheadline ?? null,
-    body: key.startsWith('hero_') ? heroBody[locale] : COPY[locale][key]?.body ?? null,
+    label: COPY[locale][key]?.label ?? COPY.en[key]?.label ?? null,
+    headline: COPY[locale][key]?.headline ?? COPY.en[key]?.headline ?? null,
+    subheadline: COPY[locale][key]?.subheadline ?? COPY.en[key]?.subheadline ?? null,
+    body: key.startsWith('hero_') ? heroBody[locale] : COPY[locale][key]?.body ?? COPY.en[key]?.body ?? null,
   }));
 }

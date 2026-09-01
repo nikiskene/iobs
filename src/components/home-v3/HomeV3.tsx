@@ -1,48 +1,46 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
-import { HOME_V3_COPY, HOME_V3_HERO_IMAGES } from '../../content/homeV3Content';
+import { HOME_V3_HERO_IMAGES } from '../../content/homeV3Content';
 import HomeV3Hero from './HomeV3Hero';
 import HomeV3FivePrinciples from './HomeV3FivePrinciples';
 import HomeV3ImpactRadius from './HomeV3ImpactRadius';
 import InstituteFooter from '../institute/InstituteFooter';
 import './homeV3.css';
+import './homeV3Mockup.css';
 
 export default function HomeV3() {
   const { get } = useAwardSiteContent();
-  const principle = get('principle');
-  const principleOutcome = outcomeFrom(principle?.headline);
+  const hero = get('v3_hero');
+  const configuredImages = get('v3_hero_images')?.body?.split('\n').map((url) => url.trim()).filter(Boolean);
+  const heroImages = configuredImages?.length ? configuredImages : HOME_V3_HERO_IMAGES;
+  const principle = get('v3_principle');
+  const question = get('v3_question');
   const [heroImage, setHeroImage] = useState(0);
-  const stripeImage = (heroImage + 5) % HOME_V3_HERO_IMAGES.length;
+  const principleImage = principle?.media_url === heroImages[heroImage]
+    ? heroImages[(heroImage + 5) % heroImages.length]
+    : principle?.media_url;
+  const questionActions = question?.body?.split('|') ?? [];
+  const principleParts = principle?.headline?.split(',') ?? [];
   useBetaMetadata();
 
   return <main className="home-v3">
-    <HomeV3Hero onImageChange={setHeroImage} />
-    <section id="the-principle" className="home-v3-proposition" aria-labelledby="principle-title">
-      <p className="home-v3-label">02 — THE PRINCIPLE</p>
-      <h2 id="principle-title">THE MORE SUCCESSFUL<br />IT BECOMES,</h2>
-      <p className="home-v3-script">{principleOutcome}</p>
-      <p className="home-v3-proposition-support">{HOME_V3_COPY.principleSupport}</p>
+    <HomeV3Hero content={hero} images={heroImages} onImageChange={setHeroImage} />
+    <section id="the-principle" className="home-v3-proposition" aria-labelledby="principle-title" style={principleImage ? { backgroundImage:`linear-gradient(90deg,#030609 0%,#030609ee 38%,#03060922 72%),url(${principleImage})` } : undefined}>
+      <p className="home-v3-label">{principle?.label}</p>
+      <h2 id="principle-title"><span>{principleParts[0]}{principleParts.length > 1 ? ',' : ''}</span>{principleParts.length > 1 && <em>{principleParts.slice(1).join(',').trim()}</em>}</h2>
+      <p className="home-v3-proposition-support">{principle?.body}</p>
     </section>
     <HomeV3FivePrinciples />
-    <div className="home-v3-image-stripe" aria-hidden="true">
-      <img src={HOME_V3_HERO_IMAGES[stripeImage]} alt="" decoding="async" />
-    </div>
     <HomeV3ImpactRadius />
-    <section className="home-v3-question" aria-labelledby="opening-question-title">
-      <p className="home-v3-label">05 — SO LET&apos;S BEGIN.</p>
-      <h2 id="opening-question-title">If you could build<br />anything in the world…</h2>
-      <p>what would you build?</p>
-      <div><Link to="/about">EXPLORE THE INSTITUTE</Link><Link to="/nominate">NOMINATE / ENTER</Link></div>
+    <section className="home-v3-question" aria-labelledby="opening-question-title" style={question?.media_url ? { backgroundImage:`linear-gradient(90deg,#20000ddd,#20000d88),url(${question.media_url})` } : undefined}>
+      <p className="home-v3-label">{question?.label}</p>
+      <h2 id="opening-question-title">{question?.headline}</h2>
+      <p>{question?.subheadline}</p>
+      <div><Link to="/about">{questionActions[0]}</Link><Link to="/nominate">{questionActions[1]}</Link></div>
     </section>
     <InstituteFooter />
   </main>;
-}
-
-function outcomeFrom(headline?: string | null) {
-  if (!headline) return 'the better the world becomes.';
-  const [, ...outcome] = headline.split(',');
-  return outcome.join(',').trim() || 'the better the world becomes.';
 }
 
 function useBetaMetadata() {

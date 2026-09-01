@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { HOME_V3_COPY, HOME_V3_HERO_IMAGES } from '../../content/homeV3Content';
+import type { AwardSiteContent } from '../../providers/AwardSiteContentProvider';
 
-export default function HomeV3Hero({ onImageChange }: { onImageChange: (index: number) => void }) {
+export default function HomeV3Hero({ content, images, onImageChange }: { content?: AwardSiteContent; images: string[]; onImageChange: (index: number) => void }) {
   const [current, setCurrent] = useState(0);
   const [previous, setPrevious] = useState<number | null>(null);
   const currentRef = useRef(0);
@@ -12,7 +12,7 @@ export default function HomeV3Hero({ onImageChange }: { onImageChange: (index: n
     if (reducedMotion) return;
     const advance = () => {
       if (document.hidden) return;
-      const next = (currentRef.current + 1) % HOME_V3_HERO_IMAGES.length;
+      const next = (currentRef.current + 1) % images.length;
       setPrevious(currentRef.current);
       currentRef.current = next;
       setCurrent(next);
@@ -25,24 +25,24 @@ export default function HomeV3Hero({ onImageChange }: { onImageChange: (index: n
       window.clearInterval(interval);
       if (clearRef.current) window.clearTimeout(clearRef.current);
     };
-  }, [onImageChange, reducedMotion]);
+  }, [images.length, onImageChange, reducedMotion]);
 
   useEffect(() => {
     if (reducedMotion) return;
     const preload = new Image();
-    preload.src = HOME_V3_HERO_IMAGES[(current + 1) % HOME_V3_HERO_IMAGES.length];
-  }, [current, reducedMotion]);
+    preload.src = images[(current + 1) % images.length];
+  }, [current, images, reducedMotion]);
 
   return <section className="home-v3-hero" aria-labelledby="home-v3-title">
     <div className="home-v3-hero-copy">
-      <p className="home-v3-label">{HOME_V3_COPY.heroEyebrow}</p>
-      <h1 id="home-v3-title"><em>Beautiful</em><strong>SUCCESS</strong></h1>
-      <p className="home-v3-hero-statement">{HOME_V3_COPY.heroLead}<br /><span>{HOME_V3_COPY.heroFollow}</span></p>
-      <a className="home-v3-text-cta" href="#the-principle">DISCOVER BEAUTIFUL SUCCESS <span aria-hidden="true">↓</span></a>
+      <p className="home-v3-label">{content?.label}</p>
+      <h1 id="home-v3-title"><em>{content?.headline?.split(' ')[0]}</em><strong>{content?.headline?.split(' ').slice(1).join(' ')}</strong></h1>
+      <p className="home-v3-hero-statement">{content?.subheadline?.split('\n').map((line) => <span key={line}>{line}<br /></span>)}</p>
+      <a className="home-v3-text-cta" href="#the-principle">{content?.body} <span aria-hidden="true">↓</span></a>
     </div>
     <div className="home-v3-portrait" aria-hidden="true">
-      {previous !== null && <img className="leaving" src={HOME_V3_HERO_IMAGES[previous]} alt="" />}
-      <img className="arriving" key={current} src={HOME_V3_HERO_IMAGES[current]} alt="" decoding="async" fetchPriority={current === 0 ? 'high' : 'auto'} />
+      {previous !== null && <img className="leaving" src={images[previous]} alt="" />}
+      <img className="arriving" key={current} src={images[current]} alt="" decoding="async" fetchPriority={current === 0 ? 'high' : 'auto'} />
     </div>
   </section>;
 }
