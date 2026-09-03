@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { cmsLines } from '../../content/homeV3Content';
+import { optimizedImageUrl, viewportImageWidth } from '../../lib/media';
 import type { AwardSiteContent } from '../../providers/AwardSiteContentProvider';
 
 export default function HomeV3Hero({ content, images, onImageChange }: { content?: AwardSiteContent; images: string[]; onImageChange: (index: number) => void }) {
@@ -8,6 +9,8 @@ export default function HomeV3Hero({ content, images, onImageChange }: { content
   const currentRef = useRef(0);
   const clearRef = useRef<number | null>(null);
   const reducedMotion = useReducedMotion();
+  const imageWidth = viewportImageWidth();
+  const optimizedImages = useMemo(() => images.map((image) => optimizedImageUrl(image, imageWidth)), [imageWidth, images]);
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -30,9 +33,11 @@ export default function HomeV3Hero({ content, images, onImageChange }: { content
 
   useEffect(() => {
     if (reducedMotion) return;
-    const preload = new Image();
-    preload.src = images[(current + 1) % images.length];
-  }, [current, images, reducedMotion]);
+    if ('connection' in navigator && (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData) return;
+    const preload = () => { const image = new Image(); image.src = optimizedImages[(current + 1) % optimizedImages.length]; };
+    const timer = window.setTimeout(preload, 1800);
+    return () => window.clearTimeout(timer);
+  }, [current, optimizedImages, reducedMotion]);
 
   return <section className="home-v3-hero" aria-labelledby="home-v3-title">
     <div className="home-v3-hero-copy">
@@ -42,8 +47,8 @@ export default function HomeV3Hero({ content, images, onImageChange }: { content
       <a className="home-v3-text-cta" href="#the-principle">{content?.body} <span aria-hidden="true">↓</span></a>
     </div>
     <div className="home-v3-portrait" aria-hidden="true">
-      {previous !== null && <img className="leaving" src={images[previous]} alt="" />}
-      <img className="arriving" key={current} src={images[current]} alt="" decoding="async" fetchPriority={current === 0 ? 'high' : 'auto'} />
+      {previous !== null && <img className="leaving" src={optimizedImages[previous]} alt="" decoding="async" />}
+      <img className="arriving" key={current} src={optimizedImages[current]} alt="" loading="eager" decoding="async" fetchPriority={current === 0 ? 'high' : 'auto'} />
     </div>
   </section>;
 }

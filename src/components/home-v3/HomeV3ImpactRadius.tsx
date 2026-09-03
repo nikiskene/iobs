@@ -5,6 +5,8 @@ import { cmsLines, HOME_V3_SCALES } from '../../content/homeV3Content';
 import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { useImpactScale } from '../../providers/ImpactScaleProvider';
 import { useScaleWorlds } from '../../providers/ScaleWorldsProvider';
+import { useNearViewport } from '../../hooks/useNearViewport';
+import { optimizedImageUrl, viewportImageWidth } from '../../lib/media';
 
 const STORAGE_KEY = 'beautiful-success-v3-scale';
 
@@ -15,6 +17,8 @@ export default function HomeV3ImpactRadius() {
   const content = get('v3_scale');
   const [params] = useSearchParams();
   const initialized = useRef(false);
+  const section = useNearViewport<HTMLElement>('500px');
+  const imageWidth = viewportImageWidth();
   const active = Math.max(0, HOME_V3_SCALES.findIndex((item) => item.id === scale));
   const world = worlds.find((item) => item.slug === scale) ?? worlds[0];
 
@@ -41,7 +45,7 @@ export default function HomeV3ImpactRadius() {
     select((active + direction + HOME_V3_SCALES.length) % HOME_V3_SCALES.length);
   }
 
-  return <section id="scale-of-impact" className="home-v3-scale" aria-labelledby="impact-radius-title" style={content?.media_url ? { backgroundImage:`linear-gradient(90deg,#020407 0%,#020407dd 25%,#02040744),url(${content.media_url})` } : undefined}>
+  return <section ref={section.ref} id="scale-of-impact" className="home-v3-scale" aria-labelledby="impact-radius-title" style={section.isNear && content?.media_url ? { backgroundImage:`linear-gradient(90deg,#020407 0%,#020407dd 25%,#02040744),url(${optimizedImageUrl(content.media_url, imageWidth)})` } : undefined}>
     <div className="home-v3-scale-intro">
       <p className="home-v3-label">{content?.label}</p>
       <h2 id="impact-radius-title">{content?.headline}</h2>
@@ -52,7 +56,7 @@ export default function HomeV3ImpactRadius() {
       <div className="home-v3-radius-arcs" aria-hidden="true"><i /><i /><i /></div>
       <div className="home-v3-radius-line" aria-hidden="true" />
       {HOME_V3_SCALES.map((item, index) => <button key={item.id} type="button" role="radio" aria-checked={index === active} tabIndex={index === active ? 0 : -1} className={index === active ? 'selected' : ''} onClick={() => select(index)}>
-        <img src={worlds[index]?.knobImageUrl} alt="" /><strong>{worlds[index]?.label || item.label}</strong>
+        <img src={optimizedImageUrl(worlds[index]?.knobImageUrl, 160, 70)} alt="" loading="lazy" decoding="async" /><strong>{worlds[index]?.label || item.label}</strong>
       </button>)}
     </div>
     <article className="home-v3-scale-story" key={world.slug}>
