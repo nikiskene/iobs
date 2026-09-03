@@ -9,7 +9,7 @@ export default function HomeV3Hero({ content, images, onImageChange }: { content
   const currentRef = useRef(0);
   const clearRef = useRef<number | null>(null);
   const reducedMotion = useReducedMotion();
-  const imageWidth = viewportImageWidth();
+  const imageWidth = viewportImageWidth(0, 900);
   const optimizedImages = useMemo(() => images.map((image) => optimizedImageUrl(image, imageWidth)), [imageWidth, images]);
 
   useEffect(() => {
