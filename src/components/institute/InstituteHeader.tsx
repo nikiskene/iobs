@@ -7,7 +7,6 @@ import { AWARD_ASSETS } from '../../content/awardAssets';
 import { useAuth } from '../../hooks/useAuth';
 import { useUnreadMessages } from '../../hooks/messaging/useUnreadMessages';
 import { supabase } from '../../lib/supabase';
-import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { LANGUAGE_OPTIONS, useLocale, type Locale } from '../../providers/LocaleProvider';
 
 const PUBLIC_LINKS = [
@@ -16,7 +15,6 @@ const PUBLIC_LINKS = [
 ] as const;
 
 export default function InstituteHeader() {
-  const { get } = useAwardSiteContent();
   const { locale, setLocale, t } = useLocale();
   const { user, profile, isAdmin, hasTeamAccess } = useAuth();
   const unreadCount = useUnreadMessages();
@@ -25,7 +23,6 @@ export default function InstituteHeader() {
   const menuRef = useRef<HTMLDivElement>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
-  const claim = get('site_claim');
 
   useEffect(() => { setMobileOpen(false); setAccountOpen(false); }, [location.pathname, location.hash]);
   useEffect(() => {
@@ -65,7 +62,6 @@ export default function InstituteHeader() {
         <Link to="/nominate">{t('nav.nominate')}</Link>
         {user ? <><Link to="/dashboard/profile">Profile</Link><Link to="/dashboard/inbox">Inbox{unreadCount ? ` (${unreadCount})` : ''}</Link>{hasTeamAccess && <Link to="/work">Work</Link>}{isAdmin && <Link to="/admin">Admin</Link>}<button type="button" onClick={logout}>Log out</button></> : <Link to="/login">Log in</Link>}
       </div>}
-      {claim?.headline && <p className="institute-claim">{claim.headline}</p>}
     </>
   );
 }
