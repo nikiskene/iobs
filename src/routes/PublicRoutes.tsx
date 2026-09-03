@@ -52,9 +52,9 @@ export default function PublicRoutes() {
       <Route
         path="/about"
         element={
-          <PublicLayout>
+          <InstitutePublicFrame>
             <AboutPage />
-          </PublicLayout>
+          </InstitutePublicFrame>
         }
       />
 

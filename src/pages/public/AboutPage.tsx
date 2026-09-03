@@ -1,90 +1,36 @@
-import { Globe, Target, Eye, Lightbulb } from 'lucide-react';
-
 export default function AboutPage() {
   return (
-    <div className="bg-[#0A0A0A] text-white pt-16">
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">About WorldOS</h1>
-          <p className="mt-6 text-xl text-zinc-400 leading-relaxed">
-            WorldOS is a public platform designed to help governments, institutions, and individuals
-            start conversations about systems that no longer fit the world they are supposed to serve.
-          </p>
+    <main className="ibs-about">
+      <section className="ibs-page-hero ibs-about-hero">
+        <p className="ibs-eyebrow">01 — The Institute</p>
+        <div>
+          <h1>Changing what the world celebrates.</h1>
+          <p>The Institute of Beautiful Success discovers, defines and celebrates achievements whose positive value grows with their success.</p>
         </div>
       </section>
-
-      <section className="py-16 px-6 border-t border-white/5">
-        <div className="max-w-4xl mx-auto space-y-16">
-          <div className="flex gap-6">
-            <div className="shrink-0 w-12 h-12 rounded-lg bg-sky-500/10 flex items-center justify-center">
-              <Target className="w-6 h-6 text-sky-400" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold">Our Mission</h2>
-              <p className="mt-3 text-zinc-400 leading-relaxed">
-                We believe the most important step in changing any system is having the courage to
-                question it. WorldOS exists to make that step possible — by giving thinkers, builders,
-                and leaders a place to articulate what they see, propose what could be, and invite
-                others into the conversation.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-6">
-            <div className="shrink-0 w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-              <Eye className="w-6 h-6 text-emerald-400" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold">Our Vision</h2>
-              <p className="mt-3 text-zinc-400 leading-relaxed">
-                The systems we inherited were designed for a world that no longer exists. WorldOS is
-                not a blueprint — it is an invitation. An invitation to think clearly, speak honestly,
-                and build together toward systems that serve the many, not the few.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-6">
-            <div className="shrink-0 w-12 h-12 rounded-lg bg-amber-500/10 flex items-center justify-center">
-              <Lightbulb className="w-6 h-6 text-amber-400" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold">Our Approach</h2>
-              <p className="mt-3 text-zinc-400 leading-relaxed">
-                Every conversation on WorldOS begins with a thesis — a clear, reasoned argument about
-                what is broken and what could be better. Theses are organized by category, open to
-                challenge, and built to evolve. This is not opinion without structure. It is conviction
-                with rigor.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-6">
-            <div className="shrink-0 w-12 h-12 rounded-lg bg-rose-500/10 flex items-center justify-center">
-              <Globe className="w-6 h-6 text-rose-400" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold">Why Now</h2>
-              <p className="mt-3 text-zinc-400 leading-relaxed">
-                The gap between the systems we have and the systems we need has never been wider.
-                Climate, governance, education, health — the old architectures are failing. The
-                conversation about what replaces them cannot wait. WorldOS is where it begins.
-              </p>
-            </div>
-          </div>
+      <section className="ibs-section ibs-about-principle">
+        <p className="ibs-eyebrow">02 — The Principle</p>
+        <div>
+          <h2>The more successful it becomes, <em>the better the world becomes.</em></h2>
+          <p>For humans. For non-humans. For society. For the planet. For what comes after us.</p>
         </div>
       </section>
-
-      <section className="py-24 px-6 border-t border-white/5">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold">Built for Serious People</h2>
-          <p className="mt-4 text-zinc-400 text-lg max-w-2xl mx-auto">
-            WorldOS is not a social network. It is not a think tank. It is a structured space for
-            structured thinking — where the quality of the argument matters more than the volume of
-            the voice.
-          </p>
+      <section className="ibs-section">
+        <div className="ibs-section-head">
+          <div><p className="ibs-eyebrow">03 — What we build</p><h2>Not an event. An institution.</h2></div>
+          <p>An operating system for discovering and multiplying Beautiful Success—through recognition, evidence, stories and practical application.</p>
+        </div>
+        <div className="ibs-about-grid">
+          <article><span>01</span><h3>The Award</h3><p>A global stage for achievements whose consequences deserve to be seen and multiplied.</p></article>
+          <article><span>02</span><h3>The Principles</h3><p>Five questions that reveal whether success gives, creates, influences, mobilizes and outlasts.</p></article>
+          <article><span>03</span><h3>The Scale of Impact</h3><p>A way to understand how far success reaches—from one person to beyond our world.</p></article>
+          <article><span>04</span><h3>Cases &amp; Application</h3><p>Stories, research and tools that translate a new definition of success into everyday decisions.</p></article>
         </div>
       </section>
-    </div>
+      <section className="ibs-section ibs-about-closing">
+        <p className="ibs-eyebrow">04 — The invitation</p>
+        <h2>If you could build anything in the world… <em>what would you build?</em></h2>
+      </section>
+    </main>
   );
 }
