@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { cmsLines, HOME_V3_HERO_IMAGES } from '../../content/homeV3Content';
@@ -22,8 +22,6 @@ export default function HomeV3() {
     : principle?.media_url;
   const questionActions = question?.body?.split('|') ?? [];
   const principleParts = principle?.headline?.split(',') ?? [];
-  useBetaMetadata();
-
   return <main className="home-v3">
     <HomeV3Hero content={hero} images={heroImages} onImageChange={setHeroImage} />
     <section id="the-principle" className="home-v3-proposition" aria-labelledby="principle-title" style={principleImage ? { backgroundImage:`linear-gradient(90deg,#030609 0%,#030609ee 38%,#03060922 72%),url(${principleImage})` } : undefined}>
@@ -41,21 +39,4 @@ export default function HomeV3() {
     </section>
     <InstituteFooter />
   </main>;
-}
-
-function useBetaMetadata() {
-  useEffect(() => {
-    const previousTitle = document.title;
-    const existing = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
-    const previousRobots = existing?.content;
-    const robots = existing ?? document.head.appendChild(document.createElement('meta'));
-    robots.name = 'robots';
-    robots.content = 'noindex, nofollow';
-    document.title = 'Beautiful Success — Homepage V3 Beta';
-    return () => {
-      document.title = previousTitle;
-      if (existing && previousRobots !== undefined) existing.content = previousRobots;
-      else robots.remove();
-    };
-  }, []);
 }

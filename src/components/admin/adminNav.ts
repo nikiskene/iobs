@@ -13,7 +13,6 @@ export const adminNavGroups: AdminNavGroup[] = [
     { to:'/admin/content/partners', label:'Partner Logos', icon:Image, description:'Upload, categorize and order logos in the public partner stripe.' },
     { to:'/admin/content/about', label:'About Page', icon:FileText, description:'Edit the public About page.' },
     { to:'/admin/content/categories', label:'Case Topics', icon:FileText, description:'Manage internal case-topic taxonomy.' },
-    { to:'/admin/content/glossary', label:'Glossary', icon:BookOpen, description:'Manage glossary entries.' },
   ]},
   { title:'Members', to:'/admin/members', description:'People, team and access.', links:[{ to:'/admin/members/team', label:'Team', icon:Users, description:'Manage visible team profiles.' }] },
   { title:'Experiences', to:'/admin/experiences', description:'Expeditions, events and applications.', links:[

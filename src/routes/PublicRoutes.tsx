@@ -5,7 +5,6 @@ import { Navigate, Route } from 'react-router-dom';
 import PublicLayout from './PublicLayout';
 
 import InstitutePublicFrame from '../components/institute/InstitutePublicFrame';
-import InstituteHomePage from '../pages/InstituteHomePage';
 
 const AboutPage = lazy(() => import('../pages/public/AboutPage'));
 const MembersDirectoryPage = lazy(() => import('../pages/public/MembersDirectoryPage'));
@@ -36,8 +35,8 @@ const HomeV3Page = lazy(() => import('../pages/HomeV3Page'));
 export default function PublicRoutes() {
   return (
     <>
-      <Route path="/" element={<InstituteHomePage />} />
-      <Route path="/beta" element={<HomeV3Page />} />
+      <Route path="/" element={<HomeV3Page />} />
+      <Route path="/beta" element={<Navigate to="/" replace />} />
       <Route path="/institute" element={<Navigate to="/" replace />} />
       <Route path="/award" element={<InstitutePublicFrame><AwardPage /></InstitutePublicFrame>} />
       <Route path="/categories" element={<InstitutePublicFrame><CategoriesPage /></InstitutePublicFrame>} />

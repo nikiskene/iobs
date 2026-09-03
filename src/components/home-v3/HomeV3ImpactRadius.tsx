@@ -41,7 +41,7 @@ export default function HomeV3ImpactRadius() {
     select((active + direction + HOME_V3_SCALES.length) % HOME_V3_SCALES.length);
   }
 
-  return <section className="home-v3-scale" aria-labelledby="impact-radius-title" style={content?.media_url ? { backgroundImage:`linear-gradient(90deg,#020407 0%,#020407dd 25%,#02040744),url(${content.media_url})` } : undefined}>
+  return <section id="scale-of-impact" className="home-v3-scale" aria-labelledby="impact-radius-title" style={content?.media_url ? { backgroundImage:`linear-gradient(90deg,#020407 0%,#020407dd 25%,#02040744),url(${content.media_url})` } : undefined}>
     <div className="home-v3-scale-intro">
       <p className="home-v3-label">{content?.label}</p>
       <h2 id="impact-radius-title">{content?.headline}</h2>

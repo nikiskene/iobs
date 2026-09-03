@@ -24,7 +24,6 @@ export default function DashboardLayout() {
       { to: '/admin/content/theses', label: 'Cases', icon: BookOpen },
       { to: '/admin/content/categories', label: 'Case Topics', icon: FileText },
       { to: '/admin/content/partners', label: 'Partner Logos', icon: Image },
-      { to: '/admin/content/glossary', label: 'Glossary', icon: BookOpen },
     ]},
     { title: 'Members', links: [{ to: '/admin/members/team', label: 'Team', icon: Users }] },
     { title: 'Experiences', links: [
@@ -38,8 +37,7 @@ export default function DashboardLayout() {
       { to: '/admin/messaging/conversations', label: 'Conversations', icon: MessageCircle },
     ]},
     { title: 'Settings', links: [
-      { to: '/admin/settings/design', label: 'Design', icon: Palette },
-      { to: '/admin/settings/design', label: 'Site Settings', icon: Shield },
+      { to: '/admin/settings/design', label: 'Design & Site Settings', icon: Palette },
     ]},
   ];
   const isAdminRoute = location.pathname.startsWith('/admin');

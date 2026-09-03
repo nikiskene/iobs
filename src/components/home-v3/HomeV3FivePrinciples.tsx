@@ -14,7 +14,7 @@ export default function HomeV3FivePrinciples() {
     document.addEventListener('keydown', close);
     return () => document.removeEventListener('keydown', close);
   }, [openPrinciple]);
-  return <section className="home-v3-principles" aria-labelledby="five-principles-title">
+  return <section id="principles" className="home-v3-principles" aria-labelledby="five-principles-title">
     <header className="home-v3-section-head">
       <p className="home-v3-label">{intro?.label}</p>
       <h2 id="five-principles-title">{intro?.headline}</h2>

@@ -12,7 +12,7 @@ export default function InstituteFooter() {
   const columns = [
     [t('footer.award'), [[t('footer.categories'), '/categories'], [t('footer.judging'), '/judging'], [t('footer.nominate'), '/nominate'], [t('footer.enter'), '/enter']]],
     [t('footer.institute'), [[t('footer.voices'), '/voices'], [t('footer.assembly'), '/assembly'], [t('footer.experiences'), '/expeditions'], [t('footer.contact'), '/contact']]],
-    [t('footer.institutional'), [[t('footer.foundingPartners'), '/partners'], [t('footer.governance'), '/judging'], [t('footer.partnerBriefing'), '/partners'], [t('footer.contact'), '/contact'], [t('footer.login'), '/login']]],
+    [t('footer.institutional'), [[t('footer.foundingPartners'), '/partners'], [t('footer.governance'), '/judging'], [t('footer.partnerBriefing'), '/partners'], [t('footer.contact'), '/contact']]],
   ];
 
   return <>
