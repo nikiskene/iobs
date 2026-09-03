@@ -2,11 +2,18 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { getUnreadMessageCount } from '../../lib/messaging/messagingApi';
+import { useAuth } from '../useAuth';
 
 export function useUnreadMessages() {
   const [count, setCount] = useState(0);
+  const { user } = useAuth();
 
   useEffect(() => {
+    if (!user) {
+      setCount(0);
+      return;
+    }
+
     async function load() {
       try {
         setCount(await getUnreadMessageCount());
@@ -36,7 +43,7 @@ export function useUnreadMessages() {
       window.removeEventListener('inbox-read-state-changed', load);
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [user]);
 
   return count;
 }
