@@ -6,12 +6,10 @@ export type Locale = typeof LOCALES[number];
 
 export const LANGUAGE_OPTIONS: { code: Locale; label: string; short: string }[] = [
   { code: 'en', label: 'English', short: 'EN' },
-  { code: 'de', label: 'Deutsch', short: 'DE' },
-  { code: 'fr', label: 'Français', short: 'FR' },
   { code: 'ar', label: 'العربية', short: 'AR' },
-  { code: 'zh', label: '中文', short: '中文' },
-  { code: 'es', label: 'Español', short: 'ES' },
 ];
+
+const ACTIVE_LOCALES: Locale[] = ['en', 'ar'];
 
 type Dictionary = Record<string, string>;
 
@@ -89,9 +87,9 @@ const LocaleContext = createContext<LocaleContextValue>({ locale:'en', setLocale
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(() => {
     const stored = typeof window !== 'undefined' ? window.localStorage.getItem('beautiful-success-locale') : null;
-    if (stored && LOCALES.includes(stored as Locale)) return stored as Locale;
+    if (stored && ACTIVE_LOCALES.includes(stored as Locale)) return stored as Locale;
     const browser = typeof navigator !== 'undefined' ? navigator.language.slice(0,2).toLowerCase() : 'en';
-    return LOCALES.includes(browser as Locale) ? browser as Locale : 'en';
+    return ACTIVE_LOCALES.includes(browser as Locale) ? browser as Locale : 'en';
   });
   const setLocale = (next: Locale) => { setLocaleState(next); window.localStorage.setItem('beautiful-success-locale', next); };
   const isRtl = locale === 'ar';
