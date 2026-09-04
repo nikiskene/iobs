@@ -18,6 +18,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#050406" />
 
+    <style>
+      #iobs-boot{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;overflow:hidden;background:#050406;color:#f5f0e8;font-family:Georgia,serif}
+      #iobs-boot::before{content:"";position:absolute;inset:-20%;background:repeating-radial-gradient(circle at 50% 50%,transparent 0 85px,#f5f0e81f 86px 87px,transparent 88px 126px),repeating-linear-gradient(94deg,transparent 0 13%,#fff1 13.15%,transparent 13.35% 29%);animation:iobs-film-jitter .22s steps(2) infinite}
+      #iobs-boot::after{content:"";position:absolute;inset:0;background:linear-gradient(112deg,transparent 0 47%,#fff 49% 51%,transparent 53%);opacity:0;animation:iobs-film-flash 3s steps(1) infinite}
+      .iobs-boot-ring{position:relative;width:min(54vw,210px);aspect-ratio:1;border:1px solid #f5f0e899;border-radius:50%;box-shadow:0 0 0 1px #050406,0 0 0 2px #f5f0e838}
+      .iobs-boot-ring::before,.iobs-boot-ring::after{content:"";position:absolute;background:#f5f0e84f}.iobs-boot-ring::before{top:50%;left:-30vw;right:-30vw;height:1px}.iobs-boot-ring::after{left:50%;top:-30vh;bottom:-30vh;width:1px}
+      .iobs-boot-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#f5f0e830 0 54deg,transparent 55deg);animation:iobs-film-sweep 1s linear infinite}
+      .iobs-boot-number{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(74px,24vw,118px);font-weight:400;line-height:1;opacity:0;animation:iobs-film-count 3s steps(1) infinite}
+      .iobs-boot-number:nth-child(3){animation-delay:1s}.iobs-boot-number:nth-child(4){animation-delay:2s}
+      .iobs-boot-label{position:absolute;bottom:max(8vh,42px);font:500 9px/1.4 Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#d7a64b}
+      @keyframes iobs-film-count{0%,33.32%{opacity:1}33.33%,100%{opacity:0}}
+      @keyframes iobs-film-sweep{to{transform:rotate(360deg)}}
+      @keyframes iobs-film-jitter{0%{transform:translate(0)}50%{transform:translate(2px,-1px)}100%{transform:translate(-1px,1px)}}
+      @keyframes iobs-film-flash{0%,31%,34%,64%,67%,97%{opacity:0}32%,65%,98%{opacity:.18}}
+      @media(prefers-reduced-motion:reduce){#iobs-boot::before,#iobs-boot::after,.iobs-boot-sweep,.iobs-boot-number{animation:none}.iobs-boot-number{opacity:0}.iobs-boot-number:first-of-type{opacity:1}}
+    </style>
+
     <link rel="preconnect" href="https://bunfdlazirfheomhvjdz.supabase.co" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -85,7 +102,7 @@
 </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root"><div id="iobs-boot" role="status" aria-label="Loading the Institute of Beautiful Success"><div class="iobs-boot-ring"><div class="iobs-boot-sweep"></div><span class="iobs-boot-number">3</span><span class="iobs-boot-number">2</span><span class="iobs-boot-number">1</span></div><span class="iobs-boot-label">Beautiful Success</span></div></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
