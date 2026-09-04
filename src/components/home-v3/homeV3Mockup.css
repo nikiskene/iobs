@@ -1,8 +1,9 @@
-.home-v3-hero{min-height:min(760px,calc(88svh - 80px));background:#050406}
-.home-v3-hero-copy{width:min(52%,760px);padding:clamp(64px,8vh,100px) 0 60px max(5vw,calc((100vw - 1540px)/2 + 5vw))}
-.home-v3-portrait{inset:0;background:#050406}
-.home-v3-portrait::after{background:linear-gradient(90deg,#050406 0%,#050406e8 28%,#05040633 62%,#05040611 100%)}
-.home-v3-portrait img{object-position:center 32%;will-change:opacity}
+.home-v3-hero{isolation:isolate;min-height:min(720px,calc(88svh - 80px));background:radial-gradient(circle at 78% 42%,#281322 0,transparent 34%),linear-gradient(112deg,#050406 0%,#090509 58%,#020203 100%)}
+.home-v3-hero::before{content:"";position:absolute;z-index:0;inset:0;opacity:.34;background:repeating-radial-gradient(ellipse at 82% 105%,transparent 0 105px,#b88a4424 106px 107px,transparent 108px 162px);pointer-events:none}
+.home-v3-hero-copy{width:min(49%,720px);padding:clamp(58px,7vh,88px) 0 54px max(5vw,calc((100vw - 1540px)/2 + 5vw))}
+.home-v3-portrait{inset:0;background:transparent;pointer-events:none}
+.home-v3-portrait::after{z-index:2;background:linear-gradient(90deg,#050406 0%,#050406f2 24%,#0504068f 39%,transparent 61%),linear-gradient(0deg,#05040699 0%,transparent 18%)}
+.home-v3-portrait img{z-index:1;inset:auto -3% 0 auto;width:min(70vw,1180px);height:100%;object-fit:contain;object-position:right bottom;will-change:opacity}
 .home-v3-portrait img.arriving{animation:v3-fade-in 1.2s ease both}
 .home-v3-portrait img.leaving{animation:v3-fade-out 1.2s ease both}
 @keyframes v3-fade-in{from{opacity:0}to{opacity:1}}
@@ -92,16 +93,17 @@
 }
 @media(max-width:600px){
   .home-v3{overflow:hidden}
-  .home-v3-hero{display:flex;min-height:0;flex-direction:column;background:#050406}
-  .home-v3-hero-copy{width:100%;padding:30px 24px 28px;background:#050406}
+  .home-v3-hero{display:flex;min-height:0;flex-direction:column;background:radial-gradient(circle at 58% 73%,#281322 0,transparent 38%),#050406}
+  .home-v3-hero::before{opacity:.24;background:repeating-radial-gradient(ellipse at 50% 105%,transparent 0 66px,#b88a4424 67px 68px,transparent 69px 101px)}
+  .home-v3-hero-copy{width:100%;padding:28px 24px 24px;background:linear-gradient(180deg,#050406 80%,transparent);}
   .home-v3-hero h1{margin:22px 0 16px}
   .home-v3-hero h1 strong{font-size:54px;line-height:.88}
   .home-v3-hero h1 em{font-size:48px;line-height:.9}
   .home-v3-hero-statement{margin-bottom:22px;font-size:13px;line-height:1.45}
   .home-v3-text-cta{font-size:9px}
-  .home-v3-portrait{position:relative;inset:auto;width:100%;height:clamp(320px,105vw,440px)}
-  .home-v3-portrait::after{background:linear-gradient(180deg,#05040655 0%,transparent 24%,transparent 80%,#05040633 100%)}
-  .home-v3-portrait img{object-position:center 18%}
+  .home-v3-portrait{position:relative;inset:auto;width:100%;height:clamp(270px,78vw,390px);background:transparent}
+  .home-v3-portrait::after{background:linear-gradient(180deg,#050406 0%,transparent 16%,transparent 80%,#0504068a 100%)}
+  .home-v3-portrait img{inset:auto 50% 0 auto;width:118%;height:100%;transform:translateX(50%);object-fit:contain;object-position:center bottom}
   .home-v3-proposition{min-height:300px;padding:34px 24px;background-position:68% center}
   .home-v3-proposition h2{max-width:100%;margin-top:22px;font-size:clamp(17px,5.2vw,24px);line-height:1}
   .home-v3-proposition h2 em{margin-top:5px;font-size:clamp(18px,5.5vw,25px)}

@@ -10,23 +10,43 @@ export default function HomeV3Hero({ content, images, onImageChange }: { content
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (reducedMotion) return;
-    const advance = () => {
-      if (document.hidden) return;
+    if (reducedMotion || images.length < 2) return;
+    let cancelled = false;
+    let timer: number | null = null;
+
+    const schedule = () => {
+      timer = window.setTimeout(advance, 5000);
+    };
+    const advance = async () => {
+      if (document.hidden) {
+        schedule();
+        return;
+      }
       const next = (currentRef.current + 1) % images.length;
+      const preload = new Image();
+      preload.src = images[next];
+      try {
+        if (!preload.complete) await preload.decode();
+      } catch {
+        schedule();
+        return;
+      }
+      if (cancelled) return;
       setPrevious(currentRef.current);
       currentRef.current = next;
       setCurrent(next);
       onImageChange(next);
       if (clearRef.current) window.clearTimeout(clearRef.current);
       clearRef.current = window.setTimeout(() => setPrevious(null), 1250);
+      schedule();
     };
-    const interval = window.setInterval(advance, 5000);
+    schedule();
     return () => {
-      window.clearInterval(interval);
+      cancelled = true;
+      if (timer) window.clearTimeout(timer);
       if (clearRef.current) window.clearTimeout(clearRef.current);
     };
-  }, [images.length, onImageChange, reducedMotion]);
+  }, [images, onImageChange, reducedMotion]);
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -43,7 +63,7 @@ export default function HomeV3Hero({ content, images, onImageChange }: { content
     </div>
     <div className="home-v3-portrait" aria-hidden="true">
       {previous !== null && <img className="leaving" src={images[previous]} alt="" />}
-      <img className="arriving" key={current} src={images[current]} alt="" decoding="async" fetchPriority={current === 0 ? 'high' : 'auto'} />
+      <img className="arriving" key={current} src={images[current]} alt="" loading="eager" decoding="async" fetchPriority={current === 0 ? 'high' : 'auto'} />
     </div>
   </section>;
 }

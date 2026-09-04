@@ -3,7 +3,7 @@ import type { ImpactScale } from '../providers/ImpactScaleProvider';
 const MEDIA = 'https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3';
 
 export const HOME_V3_HERO_IMAGES = Array.from({ length: 12 }, (_, index) =>
-  `${MEDIA}/${String(index + 1).padStart(2, '0')}.png`
+  `${MEDIA}/hero-${String(index + 1).padStart(2, '0')}.webp`
 );
 
 export function cmsLines(value?: string | null) {

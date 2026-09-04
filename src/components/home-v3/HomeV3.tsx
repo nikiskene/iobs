@@ -17,7 +17,9 @@ export default function HomeV3() {
   const heroImageConfig = get('v3_hero_images')?.body;
   const heroImages = useMemo(() => {
     const configuredImages = cmsLines(heroImageConfig);
-    return configuredImages.length ? configuredImages : HOME_V3_HERO_IMAGES;
+    const isCurrentHeroSet = configuredImages.length > 0
+      && configuredImages.every((url) => /\/hero-\d{2}\.webp(?:\?|$)/i.test(url));
+    return isCurrentHeroSet ? configuredImages : HOME_V3_HERO_IMAGES;
   }, [heroImageConfig]);
   const principle = get('v3_principle');
   const question = get('v3_question');
