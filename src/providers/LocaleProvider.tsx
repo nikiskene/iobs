@@ -94,6 +94,18 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   const setLocale = (next: Locale) => { setLocaleState(next); window.localStorage.setItem('beautiful-success-locale', next); };
   const isRtl = locale === 'ar';
   useEffect(() => {
+    const id = 'iobs-secondary-fonts';
+    const timer = window.setTimeout(() => {
+      if (document.getElementById(id)) return;
+      const link = document.createElement('link');
+      link.id = id;
+      link.rel = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=DM+Sans:wght@300;400;500&display=swap';
+      document.head.appendChild(link);
+    }, 2500);
+    return () => { window.clearTimeout(timer); document.getElementById(id)?.remove(); };
+  }, []);
+  useEffect(() => {
     document.documentElement.lang = locale;
     document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
     const id = 'iobs-locale-fonts';
