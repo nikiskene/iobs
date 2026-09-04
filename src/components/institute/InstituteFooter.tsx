@@ -18,9 +18,11 @@ export default function InstituteFooter() {
   return <>
     <PartnerLogoStripe />
     <footer className="award-footer">
-      <div className="award-footer-intro"><img src={AWARD_ASSETS.twoLineDark} alt="Beautiful Success Award" />{claim?.headline && <p>{claim.headline}</p>}</div>
-      <div className="award-footer-columns">{columns.map(([title, links]) => <div key={title as string}><h3>{title as string}</h3>{(links as string[][]).map(([label, href]) => <Link to={href} key={`${label}-${href}`}>{label}</Link>)}</div>)}</div>
-      <div className="award-footer-base"><span>© {new Date().getFullYear()} Institute of Beautiful Success</span><span>{t('footer.edition')}</span></div>
+      <div className="award-footer-inner">
+        <div className="award-footer-intro"><img src={AWARD_ASSETS.twoLineDark} alt="Beautiful Success Award" />{claim?.headline && <p>{claim.headline}</p>}</div>
+        <div className="award-footer-columns">{columns.map(([title, links]) => <div key={title as string}><h3>{title as string}</h3>{(links as string[][]).map(([label, href]) => <Link to={href} key={`${label}-${href}`}>{label}</Link>)}</div>)}</div>
+        <div className="award-footer-base"><span>© {new Date().getFullYear()} Institute of Beautiful Success</span><span>{t('footer.edition')}</span></div>
+      </div>
     </footer>
   </>;
 }
