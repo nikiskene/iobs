@@ -5,6 +5,7 @@ import { Navigate, Route } from 'react-router-dom';
 import PublicLayout from './PublicLayout';
 
 import InstitutePublicFrame from '../components/institute/InstitutePublicFrame';
+import HomeV3Page from '../pages/HomeV3Page';
 
 const AboutPage = lazy(() => import('../pages/public/AboutPage'));
 const MembersDirectoryPage = lazy(() => import('../pages/public/MembersDirectoryPage'));
@@ -30,8 +31,6 @@ const EnterAwardPage = lazy(() => import('../pages/awards/EnterAwardPage'));
 const PartnersPage = lazy(() => import('../pages/awards/PartnersPage'));
 const VoicesPage = lazy(() => import('../pages/awards/VoicesPage'));
 const AssemblyPage = lazy(() => import('../pages/awards/AssemblyPage'));
-const HomeV3Page = lazy(() => import('../pages/HomeV3Page'));
-
 export default function PublicRoutes() {
   return (
     <>

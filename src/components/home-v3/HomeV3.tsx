@@ -27,13 +27,17 @@ export default function HomeV3() {
   const proposition = useNearViewport<HTMLElement>('250px');
   const closing = useNearViewport<HTMLElement>('150px');
   const mediaWidth = viewportImageWidth();
+  const heroDisplayImages = useMemo(
+    () => heroImages.map((url) => optimizedImageUrl(url, mediaWidth, 78)),
+    [heroImages, mediaWidth],
+  );
   const principleImage = principle?.media_url === heroImages[heroImage]
     ? heroImages[(heroImage + 5) % heroImages.length]
     : principle?.media_url;
   const questionActions = question?.body?.split('|') ?? [];
   const principleParts = principle?.headline?.split(',') ?? [];
   return <main className="home-v3">
-    <HomeV3Hero content={hero} images={heroImages} onImageChange={setHeroImage} />
+    <HomeV3Hero content={hero} images={heroDisplayImages} onImageChange={setHeroImage} />
     <section ref={proposition.ref} id="the-principle" className="home-v3-proposition" aria-labelledby="principle-title" style={proposition.isNear && principleImage ? { backgroundImage:`linear-gradient(90deg,#030609 0%,#030609ee 38%,#03060922 72%),url(${optimizedImageUrl(principleImage, mediaWidth)})` } : undefined}>
       <p className="home-v3-label">{principle?.label}</p>
       <h2 id="principle-title"><span>{principleParts[0]}{principleParts.length > 1 ? ',' : ''}</span>{principleParts.length > 1 && <em>{principleParts.slice(1).join(',').trim()}</em>}</h2>
