@@ -7,6 +7,7 @@ import { AWARD_ASSETS } from '../../content/awardAssets';
 import { useAuth } from '../../hooks/useAuth';
 import { useUnreadMessages } from '../../hooks/messaging/useUnreadMessages';
 import { supabase } from '../../lib/supabase';
+import { optimizedImageUrl } from '../../lib/media';
 import { LANGUAGE_OPTIONS, useLocale, type Locale } from '../../providers/LocaleProvider';
 
 const PUBLIC_LINKS = [
@@ -38,7 +39,7 @@ export default function InstituteHeader() {
     <>
       <header className="institute-header">
         <Link className="institute-logo" to="/" aria-label="Institute of Beautiful Success">
-          <img src={AWARD_ASSETS.circleDark} alt="" /><span>Institute of<br />Beautiful Success</span>
+          <img src={optimizedImageUrl(AWARD_ASSETS.circleDark, 120, 78, 120)} alt="" width="60" height="60" decoding="async" /><span>Institute of<br />Beautiful Success</span>
         </Link>
         <nav aria-label="Main navigation">
           {PUBLIC_LINKS.map(([to, label]) => <Link to={to} key={to}>{label}</Link>)}

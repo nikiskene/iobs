@@ -10,7 +10,7 @@ export default function HomeV3FivePrinciples() {
   const { get } = useAwardSiteContent();
   const intro = get('v3_principles_intro');
   const [openPrinciple, setOpenPrinciple] = useState<AwardSiteContent | null>(null);
-  const section = useNearViewport<HTMLElement>('450px');
+  const section = useNearViewport<HTMLElement>('150px');
   const imageWidth = viewportImageWidth(700, 420);
   useEffect(() => {
     if (!openPrinciple) return;

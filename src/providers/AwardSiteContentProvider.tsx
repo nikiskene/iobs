@@ -34,25 +34,27 @@ export function AwardSiteContentProvider({ children }: { children: ReactNode }) 
   useEffect(() => {
     let active = true;
     setRows(defaults);
-    supabase.from('award_site_content')
-      .select('id,content_key,section,label,headline,subheadline,body,media_url,media_path,display_order,is_active')
-      .eq('is_active', true)
-      .order('display_order')
-      .then(({ data, error }) => {
-        if (!active || error || !data) return;
-        const byKey = new Map(defaults.map((item) => [item.content_key, item]));
-        const stored = data as AwardSiteContent[];
-        if (locale === 'en') {
-          stored.filter((item) => !/__(de|fr|ar|zh|es)$/.test(item.content_key)).forEach((item) => byKey.set(item.content_key, { ...item, locale:'en' }));
-        } else {
-          stored.filter((item) => item.content_key.endsWith(`__${locale}`)).forEach((item) => {
-            const key = baseContentKey(item.content_key);
-            byKey.set(key, { ...item, content_key:key, locale });
-          });
-        }
-        setRows(Array.from(byKey.values()).sort((a, b) => a.display_order - b.display_order));
-      });
-    return () => { active = false; };
+    const timer = window.setTimeout(() => {
+      supabase.from('award_site_content')
+        .select('id,content_key,section,label,headline,subheadline,body,media_url,media_path,display_order,is_active')
+        .eq('is_active', true)
+        .order('display_order')
+        .then(({ data, error }) => {
+          if (!active || error || !data) return;
+          const byKey = new Map(defaults.map((item) => [item.content_key, item]));
+          const stored = data as AwardSiteContent[];
+          if (locale === 'en') {
+            stored.filter((item) => !/__(de|fr|ar|zh|es)$/.test(item.content_key)).forEach((item) => byKey.set(item.content_key, { ...item, locale:'en' }));
+          } else {
+            stored.filter((item) => item.content_key.endsWith(`__${locale}`)).forEach((item) => {
+              const key = baseContentKey(item.content_key);
+              byKey.set(key, { ...item, content_key:key, locale });
+            });
+          }
+          setRows(Array.from(byKey.values()).sort((a, b) => a.display_order - b.display_order));
+        });
+    }, 900);
+    return () => { active = false; window.clearTimeout(timer); };
   }, [locale, defaults]);
 
   const value = useMemo<ContentContextValue>(() => ({ rows, get: (key) => rows.find((item) => item.content_key === key) }), [rows]);

@@ -17,7 +17,8 @@ export default function HomeV3ImpactRadius() {
   const content = get('v3_scale');
   const [params] = useSearchParams();
   const initialized = useRef(false);
-  const section = useNearViewport<HTMLElement>('500px');
+  const section = useNearViewport<HTMLElement>('150px');
+  const cases = useNearViewport<HTMLDivElement>('200px');
   const imageWidth = viewportImageWidth();
   const active = Math.max(0, HOME_V3_SCALES.findIndex((item) => item.id === scale));
   const world = worlds.find((item) => item.slug === scale) ?? worlds[0];
@@ -56,12 +57,12 @@ export default function HomeV3ImpactRadius() {
       <div className="home-v3-radius-arcs" aria-hidden="true"><i /><i /><i /></div>
       <div className="home-v3-radius-line" aria-hidden="true" />
       {HOME_V3_SCALES.map((item, index) => <button key={item.id} type="button" role="radio" aria-checked={index === active} tabIndex={index === active ? 0 : -1} className={index === active ? 'selected' : ''} onClick={() => select(index)}>
-        <img src={optimizedImageUrl(worlds[index]?.knobImageUrl, 160, 70)} alt="" loading="lazy" decoding="async" /><strong>{worlds[index]?.label || item.label}</strong>
+        {section.isNear && <img src={optimizedImageUrl(worlds[index]?.knobImageUrl, 160, 70)} alt="" loading="lazy" decoding="async" width="80" height="80" />}<strong>{worlds[index]?.label || item.label}</strong>
       </button>)}
     </div>
     <article className="home-v3-scale-story" key={world.slug}>
       <p className="home-v3-label">{world.label}</p><h3>{world.title}</h3><p>{world.introduction}</p>
     </article>
-    <div className="home-v3-cases"><BeautifulSuccessCases /></div>
+    <div ref={cases.ref} className="home-v3-cases">{cases.isNear && <BeautifulSuccessCases />}</div>
   </section>;
 }

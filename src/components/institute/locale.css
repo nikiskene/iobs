@@ -1,6 +1,4 @@
 /* src/components/institute/locale.css */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap');
-
 html[lang='ar'] .institute-shell{font-family:'Noto Naskh Arabic','DM Sans',sans-serif}
 html[lang='ar'] .hero-copy h1,
 html[lang='ar'] .story-heading h2,

@@ -1,6 +1,4 @@
 /* src/components/institute/instituteHome.css */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap');
-
 .institute-shell{--ink:#24171a;--muted:#735e61;--accent:#79283c;--paper:#ead4b5;min-height:100vh;position:relative;overflow:hidden;color:var(--ink);background-color:var(--paper);font-family:'DM Sans',sans-serif;transition:background-color 1.25s cubic-bezier(.4,0,.2,1),color .9s ease}
 .scale-me{--ink:#f8ecd8;--muted:#d9c1ad;--accent:#d5aa58;--paper:#35131f}
 .scale-circle{--ink:#f8ecd8;--muted:#ddbdc7;--accent:#d5aa58;--paper:#5a1933}

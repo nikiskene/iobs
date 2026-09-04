@@ -48,12 +48,6 @@ export default function HomeV3Hero({ content, images, onImageChange }: { content
     };
   }, [images, onImageChange, reducedMotion]);
 
-  useEffect(() => {
-    if (reducedMotion) return;
-    const preload = new Image();
-    preload.src = images[(current + 1) % images.length];
-  }, [current, images, reducedMotion]);
-
   return <section className="home-v3-hero" aria-labelledby="home-v3-title">
     <div className="home-v3-hero-copy">
       <p className="home-v3-label">{content?.label}</p>

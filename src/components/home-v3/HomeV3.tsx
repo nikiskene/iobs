@@ -25,7 +25,7 @@ export default function HomeV3() {
   const question = get('v3_question');
   const [heroImage, setHeroImage] = useState(0);
   const proposition = useNearViewport<HTMLElement>('250px');
-  const closing = useNearViewport<HTMLElement>('500px');
+  const closing = useNearViewport<HTMLElement>('150px');
   const mediaWidth = viewportImageWidth();
   const principleImage = principle?.media_url === heroImages[heroImage]
     ? heroImages[(heroImage + 5) % heroImages.length]

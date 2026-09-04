@@ -24,16 +24,20 @@ export function ScaleWorldsProvider({ children }: { children: ReactNode }) {
   const [worlds, setWorlds] = useState(SCALE_WORLDS);
 
   useEffect(() => {
-    supabase
-      .from('impact_scales')
-      .select('slug,label,eyebrow,title,introduction,i_am,i_can_be,what_to_do,knob_image_url,icon_url,text_image_url')
-      .eq('is_published', true)
-      .order('position')
-      .then(({ data, error }) => {
-        if (!error && data?.length === SCALE_WORLDS.length) {
-          setWorlds((data as ScaleRow[]).map(toScaleWorld));
-        }
-      });
+    let active = true;
+    const timer = window.setTimeout(() => {
+      supabase
+        .from('impact_scales')
+        .select('slug,label,eyebrow,title,introduction,i_am,i_can_be,what_to_do,knob_image_url,icon_url,text_image_url')
+        .eq('is_published', true)
+        .order('position')
+        .then(({ data, error }) => {
+          if (active && !error && data?.length === SCALE_WORLDS.length) {
+            setWorlds((data as ScaleRow[]).map(toScaleWorld));
+          }
+        });
+    }, 1200);
+    return () => { active = false; window.clearTimeout(timer); };
   }, []);
 
   return <ScaleWorldsContext.Provider value={worlds}>{children}</ScaleWorldsContext.Provider>;

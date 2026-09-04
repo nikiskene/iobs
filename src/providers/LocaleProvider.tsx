@@ -98,7 +98,19 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = locale;
     document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+    const id = 'iobs-locale-fonts';
+    document.getElementById(id)?.remove();
+    if (locale === 'ar' || locale === 'zh') {
+      const link = document.createElement('link');
+      link.id = id;
+      link.rel = 'stylesheet';
+      link.href = locale === 'ar'
+        ? 'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600&display=swap'
+        : 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&display=swap';
+      document.head.appendChild(link);
+    }
     return () => {
+      document.getElementById(id)?.remove();
       document.documentElement.lang = 'en';
       document.documentElement.dir = 'ltr';
     };
