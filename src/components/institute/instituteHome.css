@@ -37,7 +37,8 @@ html[dir='rtl'] .institute-shell{text-align:right}html[dir='rtl'] .institute-log
 @media(prefers-reduced-motion:reduce){.institute-shell,.rendered-knob img,.hero-copy,.scale-story{transition:none;animation:none}}
 
 /* Shared V3 public navigation */
-.institute-header{position:relative;z-index:1000;height:88px;grid-template-columns:minmax(210px,1fr) auto minmax(210px,1fr);border-color:#d7a64b42;background:#050406;color:#f5f0e8;box-shadow:0 0 0 100vmax #050406;isolation:isolate}
+.institute-header{position:relative;z-index:1000;height:88px;grid-template-columns:minmax(210px,1fr) auto minmax(210px,1fr);border-color:#d7a64b42;background:#050406;color:#f5f0e8;isolation:isolate}
+.institute-header::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);background:#050406}
 .institute-account{z-index:1001}.institute-account-menu{z-index:1002;background:#09070a}
 .institute-logo{display:flex;align-items:center;gap:12px}.institute-logo img{width:54px;height:54px}.institute-logo span{color:#d7a64b;font:500 9px/1.35 'Montserrat','DM Sans',sans-serif;letter-spacing:.11em}
 .institute-header a{color:#f5f0e8;font-size:9px}.institute-header nav{gap:clamp(18px,2.2vw,34px)}.institute-header nav a:hover{border-color:#d7a64b;color:#d7a64b}
