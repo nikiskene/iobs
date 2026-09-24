@@ -1,90 +1,59 @@
 import { useEffect, useState } from 'react';
+import { Linkedin, BookOpen } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
-import type { Profile } from '../../lib/types';
-import { Linkedin } from 'lucide-react';
+import { TEAM_CATEGORIES, safeWebUrl, type TeamPerson } from '../../lib/team';
+import AwardPageHero from '../../components/awards/AwardPageHero';
+import './team.css';
 
 export default function TeamPage() {
-  const [members, setMembers] = useState<Profile[]>([]);
+  const [members, setMembers] = useState<TeamPerson[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    supabase
-      .from('profiles')
-      .select('*')
-      .eq('is_team_member', true)
-      .eq('is_active', true)
-      .order('team_sort_order')
-      .then(({ data }) => {
-        setMembers((data as Profile[]) || []);
-        setLoading(false);
-      });
+    let active = true;
+    async function load() {
+      try {
+        const result = await supabase.from('team_people')
+          .select('id,full_name,category,status,title,description,photo_url,linkedin_url,substack_url,sort_order')
+          .eq('status', 'published').order('sort_order').order('full_name');
+        if (!active) return;
+        setError(!!result.error);
+        setMembers(result.data || []);
+      } catch { if (active) setError(true); }
+      finally { if (active) setLoading(false); }
+    }
+    load();
+    return () => { active = false; };
   }, []);
 
-  return (
-    <div className="bg-[#0A0A0A] text-white pt-16">
-      <section className="py-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Our Team</h1>
-          <p className="mt-4 text-xl text-zinc-400">
-            The people shaping the conversation.
-          </p>
-        </div>
-      </section>
-
-      <section className="pb-24 px-6">
-        <div className="max-w-6xl mx-auto">
-          {loading ? (
-            <div className="text-zinc-500">Loading...</div>
-          ) : members.length === 0 ? (
-            <div className="text-zinc-500 text-center py-16">
-              <p>Team members will be announced soon.</p>
-            </div>
-          ) : (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {members.map((member) => (
-                <div
-                  key={member.id}
-                  className="bg-white/[0.03] border border-white/5 rounded-xl p-6 hover:border-white/10 transition-colors"
-                >
-                  <div className="w-20 h-20 rounded-full bg-zinc-800 flex items-center justify-center text-2xl font-semibold text-zinc-400 overflow-hidden mx-auto">
-                    {member.photo_url ? (
-                      <img
-                        src={member.photo_url}
-                        alt={member.full_name || 'Team member'}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      (member.full_name?.[0] || '?').toUpperCase()
-                    )}
-                  </div>
-                  <div className="mt-4 text-center">
-                    <h3 className="text-lg font-semibold">{member.full_name || 'Team Member'}</h3>
-                    {member.team_role && (
-                      <p className="text-sm text-sky-400 mt-1">{member.team_role}</p>
-                    )}
-            {member.bio && (
-              <p className="text-sm text-zinc-400 mt-3 leading-relaxed">
-                {member.bio}
-              </p>
-            )}
-                    {member.linkedin_url && (
-                      <a
-                        href={member.linkedin_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 mt-3 text-sm text-zinc-500 hover:text-sky-400 transition-colors"
-                      >
-                        <Linkedin className="w-4 h-4" />
-                        LinkedIn
-                      </a>
-                    )}
-                  </div>
+  return <main>
+    <AwardPageHero eyebrow="The Institute" title="The people behind IOBS">
+      The founders, team, supporters and advisers shaping the Institute of Beautiful Success.
+    </AwardPageHero>
+    <div className="ibs-section team-directory">
+      {loading ? <p role="status">Loading the people behind IOBS…</p> : error ?
+        <p role="alert">We couldn’t load the team. Please try again shortly.</p> :
+        TEAM_CATEGORIES.map(([category, label]) => {
+          const people = members.filter((member) => member.category === category);
+          return <section className="team-category" key={category} aria-labelledby={`team-${category}`}>
+            <h2 id={`team-${category}`}>{label}</h2>
+            {people.length === 0 ? <p className="team-empty">To be announced.</p> :
+              <div className="team-grid">{people.map((person) => <article className="team-person" key={person.id}>
+                <div className="team-portrait">
+                  {safeWebUrl(person.photo_url) ? <img src={person.photo_url} alt={person.full_name} loading="lazy" /> :
+                    <span aria-hidden="true">{person.full_name.charAt(0).toUpperCase()}</span>}
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
+                <h3>{person.full_name}</h3>
+                {person.title && <p className="team-title">{person.title}</p>}
+                {person.description && <p className="team-description">{person.description}</p>}
+                <div className="team-socials">
+                  {safeWebUrl(person.linkedin_url) && <a href={person.linkedin_url} target="_blank" rel="noopener noreferrer" aria-label={`${person.full_name} on LinkedIn`}><Linkedin size={16} />LinkedIn</a>}
+                  {safeWebUrl(person.substack_url) && <a href={person.substack_url} target="_blank" rel="noopener noreferrer" aria-label={`${person.full_name} on Substack`}><BookOpen size={16} />Substack</a>}
+                </div>
+              </article>)}</div>}
+          </section>;
+        })}
     </div>
-  );
+  </main>;
 }

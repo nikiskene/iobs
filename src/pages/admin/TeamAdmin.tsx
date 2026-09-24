@@ -3,9 +3,21 @@ import { useEffect, useState } from 'react';
 import { Save, Search, Shield, X, UserCheck, UserX } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { supabase } from '../../lib/supabase';
+import TeamPeopleAdmin from './TeamPeopleAdmin';
 import type { Profile } from '../../lib/types';
 
 export default function TeamAdmin() {
+  const [tab, setTab] = useState<'public' | 'access'>('public');
+  return <div>
+    <div className="mb-8 flex flex-wrap gap-3" aria-label="Team management">
+      <button onClick={() => setTab('public')} aria-pressed={tab === 'public'} className={`rounded-lg px-4 py-2 text-sm ${tab === 'public' ? 'bg-white/10 text-white' : 'text-zinc-400'}`}>Public team page</button>
+      <button onClick={() => setTab('access')} aria-pressed={tab === 'access'} className={`rounded-lg px-4 py-2 text-sm ${tab === 'access' ? 'bg-white/10 text-white' : 'text-zinc-400'}`}>Profiles & workspace access</button>
+    </div>
+    {tab === 'public' ? <TeamPeopleAdmin /> : <ProfileManagement />}
+  </div>;
+}
+
+function ProfileManagement() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [editing, setEditing] = useState<Profile | null>(null);
   const [search, setSearch] = useState('');
