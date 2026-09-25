@@ -14,7 +14,7 @@ export const adminNavGroups: AdminNavGroup[] = [
     { to:'/admin/content/about', label:'About Page', icon:FileText, description:'Edit the public About page.' },
     { to:'/admin/content/categories', label:'Case Topics', icon:FileText, description:'Manage internal case-topic taxonomy.' },
   ]},
-  { title:'Members', to:'/admin/members', description:'People, team and access.', links:[{ to:'/admin/members/team', label:'Team', icon:Users, description:'Manage visible team profiles.' }] },
+  { title:'Members', to:'/admin/members', description:'People, team and access.', links:[{ to:'/admin/members/team', label:'Member Directory', icon:Users, description:'One list for public details, team categories and login access.' }] },
   { title:'Experiences', to:'/admin/experiences', description:'Expeditions, events and applications.', links:[
     { to:'/admin/experiences/expeditions', label:'Expeditions', icon:Compass, description:'Manage expedition pages.' },
     { to:'/admin/experiences/applications', label:'Applications', icon:FileText, description:'Review expedition applications.' },

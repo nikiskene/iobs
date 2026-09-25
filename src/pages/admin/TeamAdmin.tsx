@@ -1,295 +1,63 @@
-// src/pages/admin/TeamAdmin.tsx
 import { useEffect, useState } from 'react';
-import { Save, Search, Shield, X, UserCheck, UserX } from 'lucide-react';
-import { useAuth } from '../../hooks/useAuth';
+import { Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
-import TeamPeopleAdmin from './TeamPeopleAdmin';
-import type { Profile } from '../../lib/types';
+import { TEAM_CATEGORIES, safeWebUrl } from '../../lib/team';
+import { memberMatches, newMember, type ManagedMember } from '../../lib/memberAdmin';
+import MemberEditor from './MemberEditor';
 
 export default function TeamAdmin() {
-  const [tab, setTab] = useState<'public' | 'access'>('public');
-  return <div>
-    <div className="mb-8 flex flex-wrap gap-3" aria-label="Team management">
-      <button onClick={() => setTab('public')} aria-pressed={tab === 'public'} className={`rounded-lg px-4 py-2 text-sm ${tab === 'public' ? 'bg-white/10 text-white' : 'text-zinc-400'}`}>Public team page</button>
-      <button onClick={() => setTab('access')} aria-pressed={tab === 'access'} className={`rounded-lg px-4 py-2 text-sm ${tab === 'access' ? 'bg-white/10 text-white' : 'text-zinc-400'}`}>Profiles & workspace access</button>
-    </div>
-    {tab === 'public' ? <TeamPeopleAdmin /> : <ProfileManagement />}
-  </div>;
-}
-
-function ProfileManagement() {
-  const [profiles, setProfiles] = useState<Profile[]>([]);
-  const [editing, setEditing] = useState<Profile | null>(null);
+  const [members, setMembers] = useState<ManagedMember[]>([]);
+  const [editing, setEditing] = useState<ManagedMember | null>(null);
   const [search, setSearch] = useState('');
-
-  const fetchProfiles = async () => {
-    const { data } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('is_active', true)
-      .order('full_name');
-    setProfiles((data as Profile[]) || []);
-  };
-
-  useEffect(() => {
-    fetchProfiles();
-  }, []);
-
-  if (editing) {
-    return (
-      <ProfileEditor
-        profile={editing}
-        onClose={() => {
-          setEditing(null);
-          fetchProfiles();
-        }}
-      />
-    );
-  }
-
-  const normalizedSearch = search.trim().toLowerCase();
-  const visibleProfiles = normalizedSearch
-    ? profiles.filter((profile) => [
-        profile.full_name,
-        profile.email,
-        profile.profile_name,
-        profile.team_role,
-        profile.location,
-        profile.city,
-        profile.location_label,
-      ].some((value) => value?.toLowerCase().includes(normalizedSearch)))
-    : profiles;
-
-  return (
-    <div>
-      <h1 className="text-2xl font-bold">Profile Management</h1>
-      <p className="mt-1 text-sm text-zinc-400">
-        Control Team Momentum access separately from administrator access.
-      </p>
-
-      <label className="relative mt-6 block max-w-xl">
-        <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
-        <input
-          type="search"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          placeholder="Find by name, email, profile name, role or location…"
-          className="w-full rounded-xl border border-white/10 bg-white/[0.04] py-3 pl-11 pr-4 text-sm text-white placeholder-zinc-600 outline-none transition focus:border-amber-400/40 focus:ring-2 focus:ring-amber-400/10"
-        />
-      </label>
-      {normalizedSearch && <p className="mt-2 text-xs text-zinc-500">{visibleProfiles.length} {visibleProfiles.length === 1 ? 'member' : 'members'} found</p>}
-
-      <ProfileSection
-        title="Team Members"
-        icon={<UserCheck className="h-5 w-5 text-emerald-400" />}
-        profiles={visibleProfiles.filter((p) => p.is_team_member)}
-        empty={normalizedSearch ? 'No matching team members.' : 'No team members yet.'}
-        onEdit={setEditing}
-      />
-
-      <ProfileSection
-        title="Other Profiles"
-        icon={<UserX className="h-5 w-5 text-zinc-500" />}
-        profiles={visibleProfiles.filter((p) => !p.is_team_member)}
-        empty={normalizedSearch ? 'No matching profiles.' : 'No other profiles.'}
-        onEdit={setEditing}
-      />
-    </div>
-  );
-}
-
-function ProfileSection({
-  title,
-  icon,
-  profiles,
-  empty,
-  onEdit,
-}: {
-  title: string;
-  icon: React.ReactNode;
-  profiles: Profile[];
-  empty: string;
-  onEdit: (profile: Profile) => void;
-}) {
-  return (
-    <section className="mt-8">
-      <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold">{icon} {title}</h2>
-      {profiles.length === 0 ? (
-        <p className="text-sm text-zinc-500">{empty}</p>
-      ) : (
-        <div className="space-y-2">
-          {profiles.map((profile) => (
-            <ProfileRow key={profile.id} profile={profile} onEdit={onEdit} />
-          ))}
-        </div>
-      )}
-    </section>
-  );
-}
-
-function ProfileRow({
-  profile,
-  onEdit,
-}: {
-  profile: Profile;
-  onEdit: (profile: Profile) => void;
-}) {
-  return (
-    <div className="flex items-center justify-between rounded-lg border border-white/5 bg-white/[0.02] p-4">
-      <div className="flex min-w-0 items-center gap-3">
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-zinc-800 text-xs text-zinc-400">
-          {profile.photo_url ? (
-            <img src={profile.photo_url} alt="" className="h-full w-full object-cover" />
-          ) : (
-            (profile.full_name?.[0] || profile.email?.[0] || '?').toUpperCase()
-          )}
-        </div>
-
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm font-medium">
-              {profile.full_name || profile.email || 'Explorer'}
-            </span>
-            {profile.role === 'admin' && (
-              <span className="rounded-full bg-sky-500/10 px-2 py-0.5 text-xs text-sky-300">
-                Admin
-              </span>
-            )}
-            {profile.is_team_member && (
-              <span className="rounded-full bg-amber-500/10 px-2 py-0.5 text-xs text-amber-300">
-                Team Member
-              </span>
-            )}
-          </div>
-          <p className="mt-0.5 text-xs text-zinc-500">
-            {profile.team_role || profile.location || 'No role/location set'}
-          </p>
-        </div>
-      </div>
-
-      <button
-        onClick={() => onEdit(profile)}
-        className="rounded-md px-3 py-1.5 text-xs text-zinc-400 hover:bg-white/5 hover:text-white"
-      >
-        Edit
-      </button>
-    </div>
-  );
-}
-
-function ProfileEditor({ profile, onClose }: { profile: Profile; onClose: () => void }) {
-  const { user } = useAuth();
-  const isSelf = user?.id === profile.id;
-
-  const [fullName, setFullName] = useState(profile.full_name || '');
-  const [photoUrl, setPhotoUrl] = useState(profile.photo_url || '');
-  const [linkedinUrl, setLinkedinUrl] = useState(profile.linkedin_url || '');
-  const [location, setLocation] = useState(profile.location || '');
-  const [bio, setBio] = useState(profile.bio || '');
-  const [isTeamMember, setIsTeamMember] = useState(profile.is_team_member);
-  const [role, setRole] = useState<'explorer' | 'admin'>(profile.role);
-  const [teamRole, setTeamRole] = useState(profile.team_role || '');
-  const [teamSortOrder, setTeamSortOrder] = useState(profile.team_sort_order ?? 0);
-  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const inputClass =
-    'w-full rounded-md border border-white/10 bg-white/5 px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-sky-500';
-
-  const handleSave = async () => {
-    setSaving(true);
+  async function load(editId?: string) {
+    setLoading(true);
     setError('');
+    try {
+      const result = await supabase.rpc('admin_list_members');
+      if (result.error) throw result.error;
+      const people = (result.data || []) as ManagedMember[];
+      setMembers(people);
+      setEditing(editId ? people.find((person) => person.id === editId) || null : null);
+    } catch {
+      setError('Unable to load members. Please retry.');
+    } finally { setLoading(false); }
+  }
+  useEffect(() => { void load(); }, []);
 
-    const { error: updateError } = await supabase
-      .from('profiles')
-      .update({
-        full_name: fullName,
-        photo_url: photoUrl,
-        linkedin_url: linkedinUrl,
-        location,
-        bio,
-        is_team_member: isTeamMember,
-        role: isSelf ? profile.role : role,
-        team_role: teamRole,
-        team_sort_order: teamSortOrder,
-        updated_at: new Date().toISOString(),
-      })
-      .eq('id', profile.id);
+  if (editing) return <MemberEditor key={`${editing.id}:${editing.updated_at}`} member={editing} members={members}
+    onCancel={() => { setEditing(null); void load(); }} onSaved={() => load()} onCombined={() => load(editing.id)} />;
 
-    if (updateError) {
-      setError(updateError.message);
-      setSaving(false);
-      return;
-    }
-
-    onClose();
-  };
-
-  return (
-    <div>
-      <button onClick={onClose} className="mb-6 inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white">
-        <X className="h-4 w-4" /> Back
-      </button>
-
-      <h1 className="text-2xl font-bold">Edit Profile</h1>
-      <p className="mt-1 text-sm text-zinc-400">
-        {profile.email || profile.id}
-      </p>
-      <div className="mt-6 max-w-2xl space-y-5">
-        <TextInput label="Full Name" value={fullName} onChange={setFullName} inputClass={inputClass} />
-        <TextInput label="Photo URL" value={photoUrl} onChange={setPhotoUrl} inputClass={inputClass} />
-        <TextInput label="LinkedIn URL" value={linkedinUrl} onChange={setLinkedinUrl} inputClass={inputClass} />
-        <TextInput label="Location" value={location} onChange={setLocation} inputClass={inputClass} />
-
-        <TextArea label="Bio" value={bio} onChange={setBio} inputClass={inputClass} rows={4} />
-
-        <label className="flex items-center gap-3 text-sm text-zinc-300">
-          <input type="checkbox" checked={isTeamMember} onChange={(e) => setIsTeamMember(e.target.checked)} />
-          Team Member — grants access to /work
-        </label>
-        <p className="-mt-3 text-xs text-zinc-500">This does not grant administrator or CMS access.</p>
-
-        <div>
-          <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-zinc-300">
-            <Shield className="h-4 w-4" /> Access Role
-          </label>
-          <select value={role} onChange={(e) => setRole(e.target.value as 'explorer' | 'admin')} disabled={isSelf} className={inputClass}>
-            <option value="explorer" className="bg-zinc-900">Explorer</option>
-            <option value="admin" className="bg-zinc-900">Admin</option>
-          </select>
-          {isSelf && <p className="mt-2 text-xs text-zinc-500">You cannot remove your own admin access here.</p>}
-        </div>
-
-        <TextInput label="Team Role" value={teamRole} onChange={setTeamRole} inputClass={inputClass} />
-        <TextInput label="Sort Order" value={String(teamSortOrder)} onChange={(value) => setTeamSortOrder(Number(value))} inputClass={inputClass} type="number" />
-
-        {error && <div className="rounded-md border border-red-400/20 bg-red-400/10 px-4 py-2 text-sm text-red-400">{error}</div>}
-
-        <button onClick={handleSave} disabled={saving} className="inline-flex items-center gap-2 rounded-md bg-sky-500 px-5 py-2.5 font-medium text-white hover:bg-sky-400 disabled:opacity-50">
-          <Save className="h-4 w-4" />
-          {saving ? 'Saving...' : 'Save Profile'}
-        </button>
-      </div>
+  const visible = members.filter((member) => memberMatches(member, search));
+  return <div className="space-y-6">
+    <div><h1 className="text-2xl font-bold">Members</h1><p className="mt-2 text-sm text-zinc-400">One entry per person. Edit public details, team category and login access together.</p></div>
+    <div className="flex flex-wrap gap-3">
+      <button className="rounded-lg bg-white/10 px-4 py-2 text-sm disabled:opacity-50" disabled={loading || !!error} onClick={() => setEditing(newMember())}>Add member</button>
+      <Link className="rounded-lg border border-white/15 px-4 py-2 text-sm" to="/team" target="_blank" rel="noopener noreferrer">View public team page</Link>
     </div>
-  );
-}
-
-function TextInput({ label, value, onChange, inputClass, type = 'text' }: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  inputClass: string;
-  type?: string;
-}) {
-  return <div><label className="mb-1.5 block text-sm font-medium text-zinc-300">{label}</label><input type={type} value={value} onChange={(e) => onChange(e.target.value)} className={inputClass} /></div>;
-}
-
-function TextArea({ label, value, onChange, inputClass, rows }: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  inputClass: string;
-  rows: number;
-}) {
-  return <div><label className="mb-1.5 block text-sm font-medium text-zinc-300">{label}</label><textarea value={value} onChange={(e) => onChange(e.target.value)} rows={rows} className={`${inputClass} resize-none`} /></div>;
+    <label className="block max-w-xl text-sm text-zinc-300">Find a member
+      <input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Name, email, title or location…"
+        className="mt-2 w-full rounded-lg border border-white/10 bg-zinc-900 px-4 py-3 text-white" />
+    </label>
+    {error && <p role="alert" className="text-red-300">{error} <button className="underline" onClick={() => load()}>Retry</button></p>}
+    {loading ? <p role="status">Loading members…</p> : !error && <>
+      <p className="text-xs text-zinc-500">{visible.length} {visible.length === 1 ? 'member' : 'members'}</p>
+      <div className="space-y-3">{visible.map((member) => <div key={member.id} className="flex items-start gap-4 rounded-xl border border-white/10 p-4">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-zinc-800 text-zinc-400">
+          {safeWebUrl(member.photo_url) ? <img src={member.photo_url} alt="" className="h-full w-full object-cover" /> : member.full_name.charAt(0)}
+        </div>
+        <div className="min-w-0 flex-1"><h2 className="break-words font-medium">{member.full_name}</h2>
+          {member.title && <p className="text-sm text-zinc-400">{member.title}</p>}
+          <p className="mt-1 text-xs text-zinc-400">{TEAM_CATEGORIES.find(([value]) => value === member.category)?.[1]} · {member.status === 'published' ? 'Public team page' : member.status === 'archived' ? 'Archived from team page' : 'Not published on team page'}</p>
+          {member.accounts.length ? member.accounts.map((account) => <p key={account.id} className="mt-1 break-words text-xs text-zinc-500">
+            {account.email}{account.id === member.primary_profile_id && member.accounts.length > 1 ? ' · Primary' : ''} · {account.role === 'admin' ? 'Admin' : account.is_team_member ? 'Workspace access' : 'Explorer'}{!account.is_active ? ' · Inactive' : ''}
+          </p>) : <p className="mt-1 text-xs text-zinc-500">No login account</p>}
+        </div>
+        <button className="shrink-0 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10" onClick={() => setEditing(member)}>Edit</button>
+      </div>)}</div>
+      {!visible.length && <p className="text-zinc-400">No members found.</p>}
+    </>}
+  </div>;
 }

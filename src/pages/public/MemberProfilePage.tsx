@@ -10,7 +10,7 @@ export default function MemberProfilePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.from('member_directory').select('*').eq('profile_name', profileName.toLowerCase()).maybeSingle().then(({ data }) => {
+    supabase.from('member_profile_directory').select('*').eq('profile_name', profileName.toLowerCase()).maybeSingle().then(({ data }) => {
       setMember(data as DirectoryMember | null); setLoading(false);
     });
   }, [profileName]);

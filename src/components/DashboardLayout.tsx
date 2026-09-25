@@ -25,7 +25,7 @@ export default function DashboardLayout() {
       { to: '/admin/content/categories', label: 'Case Topics', icon: FileText },
       { to: '/admin/content/partners', label: 'Partner Logos', icon: Image },
     ]},
-    { title: 'Members', links: [{ to: '/admin/members/team', label: 'Team', icon: Users }] },
+    { title: 'Members', links: [{ to: '/admin/members/team', label: 'Member Directory', icon: Users }] },
     { title: 'Experiences', links: [
       { to: '/admin/experiences/expeditions', label: 'Expeditions', icon: Compass },
       { to: '/admin/experiences/applications', label: 'Applications', icon: FileText },
