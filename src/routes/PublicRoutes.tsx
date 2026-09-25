@@ -89,18 +89,18 @@ export default function PublicRoutes() {
       <Route
         path="/expeditions/custom"
         element={
-          <PublicLayout>
+          <InstitutePublicFrame>
             <CustomExpeditionPage />
-          </PublicLayout>
+          </InstitutePublicFrame>
         }
       />
 
       <Route
         path="/expeditions/:slug"
         element={
-          <PublicLayout>
+          <InstitutePublicFrame>
             <ExpeditionDetailPage />
-          </PublicLayout>
+          </InstitutePublicFrame>
         }
       />
 
