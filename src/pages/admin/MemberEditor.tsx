@@ -110,9 +110,9 @@ export default function MemberEditor({ member, members, onCancel, onSaved, onCom
       <section className="space-y-4 rounded-xl border border-white/10 p-5">
         <h2 className="text-lg font-semibold">Login & workspace access</h2>
         {draft.accounts.length === 0 ? <p className="text-sm text-zinc-400">This member has no login account. Public team members do not need a login. An existing account can be linked using “Combine duplicate member” after saving.</p> : <>
-          {draft.accounts.length > 1 && <label className="block text-sm">Primary login<select className={inputClass} value={draft.primary_profile_id || ''} onChange={(e) => change('primary_profile_id', e.target.value)}>
+          {draft.accounts.length > 1 && <label className="block text-sm">Active public profile<select className={inputClass} value={draft.primary_profile_id || ''} onChange={(e) => change('primary_profile_id', e.target.value)}>
             {draft.accounts.map((account) => <option key={account.id} value={account.id}>{account.email}</option>)}
-          </select><span className="text-xs text-zinc-400">Chooses the main public member link. Other logins and their history remain available.</span></label>}
+          </select><span className="text-xs text-zinc-400">Choose which linked account represents this person in the public member directory. The other account stays active, keeps its history and can be selected again later.</span></label>}
           {draft.accounts.map((account) => <div key={account.id} className="space-y-3 rounded-lg border border-white/10 p-4">
             <p className="break-words text-sm font-medium">{account.email}</p>
             <label className="block text-sm">Access role<select className={inputClass} value={account.role} disabled={account.id === user?.id} onChange={(e) => changeAccount(account.id, 'role', e.target.value as MemberAccount['role'])}><option value="explorer">Explorer</option><option value="admin">Admin</option></select></label>

@@ -52,7 +52,7 @@ export default function TeamAdmin() {
           {member.title && <p className="text-sm text-zinc-400">{member.title}</p>}
           <p className="mt-1 text-xs text-zinc-400">{TEAM_CATEGORIES.find(([value]) => value === member.category)?.[1]} · {member.status === 'published' ? 'Public team page' : member.status === 'archived' ? 'Archived from team page' : 'Not published on team page'}</p>
           {member.accounts.length ? member.accounts.map((account) => <p key={account.id} className="mt-1 break-words text-xs text-zinc-500">
-            {account.email}{account.id === member.primary_profile_id && member.accounts.length > 1 ? ' · Primary' : ''} · {account.role === 'admin' ? 'Admin' : account.is_team_member ? 'Workspace access' : 'Explorer'}{!account.is_active ? ' · Inactive' : ''}
+            {account.email}{account.id === member.primary_profile_id && member.accounts.length > 1 ? ' · Active public profile' : ''} · {account.role === 'admin' ? 'Admin' : account.is_team_member ? 'Workspace access' : 'Explorer'}{!account.is_active ? ' · Inactive' : ''}
           </p>) : <p className="mt-1 text-xs text-zinc-500">No login account</p>}
         </div>
         <button className="shrink-0 rounded-lg border border-white/15 px-3 py-2 text-sm hover:bg-white/10" onClick={() => setEditing(member)}>Edit</button>
