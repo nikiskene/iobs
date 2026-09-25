@@ -11,7 +11,7 @@ export default function ApplicationStepMotivation({
     <div>
       <h3 className="text-xl font-bold">Why now?</h3>
       <p className="mt-1 text-sm leading-relaxed text-zinc-500">
-        Why do you believe this expedition matters for you right now?
+        Why do you believe this expedition matters for you right now? Optional.
       </p>
 
       <textarea

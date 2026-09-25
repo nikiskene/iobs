@@ -30,7 +30,7 @@ export default function ApplicationStepCommitment({
           className="mt-1"
         />
         <span className="text-sm leading-relaxed text-zinc-300">
-          I commit to these principles.
+          I commit to these principles. <span className="text-zinc-500">Optional.</span>
         </span>
       </label>
     </div>

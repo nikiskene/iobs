@@ -11,8 +11,8 @@ export default function ApplicationStepBasics({
     <div className="space-y-4">
       <StepHeader title="Who are you?" body="A few basics so we know who is applying." />
 
-      <Input label="Full Name" value={data.name} onChange={(value) => update({ name: value })} />
-      <Input label="Email" value={data.email} onChange={(value) => update({ email: value })} type="email" />
+      <Input label="Full Name" required value={data.name} onChange={(value) => update({ name: value })} />
+      <Input label="Email" required value={data.email} onChange={(value) => update({ email: value })} type="email" />
       <Input label="Company" value={data.company} onChange={(value) => update({ company: value })} />
       <Input label="Position" value={data.position} onChange={(value) => update({ position: value })} />
       <Input label="LinkedIn" value={data.linkedin_url} onChange={(value) => update({ linkedin_url: value })} />
@@ -34,16 +34,18 @@ function Input({
   value,
   onChange,
   type = 'text',
+  required = false,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   type?: string;
+  required?: boolean;
 }) {
   return (
     <label className="block">
       <span className="mb-1.5 block text-xs uppercase tracking-[0.2em] text-zinc-500">
-        {label}
+        {label}{required ? ' *' : <span className="normal-case tracking-normal text-zinc-600"> · optional</span>}
       </span>
       <input
         type={type}

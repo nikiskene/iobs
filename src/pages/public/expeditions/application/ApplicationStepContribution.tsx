@@ -12,7 +12,7 @@ export default function ApplicationStepContribution({
       <h3 className="text-xl font-bold">Your contribution</h3>
       <p className="mt-1 text-sm leading-relaxed text-zinc-500">
         What perspective, experience or question would you bring that could make
-        this expedition better for everyone else?
+        this expedition better for everyone else? Optional.
       </p>
 
       <textarea

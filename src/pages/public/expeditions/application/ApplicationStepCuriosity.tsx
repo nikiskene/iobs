@@ -12,7 +12,7 @@ export default function ApplicationStepCuriosity({
       <h3 className="text-xl font-bold">One conversation</h3>
       <p className="mt-1 text-sm leading-relaxed text-zinc-500">
         If you could spend one uninterrupted hour with anyone in the innovation
-        ecosystem, who would it be — and what would you ask?
+        ecosystem, who would it be — and what would you ask? Optional.
       </p>
 
       <textarea
