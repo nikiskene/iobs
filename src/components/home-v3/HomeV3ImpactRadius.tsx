@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import BeautifulSuccessCases from '../awards/BeautifulSuccessCases';
+import RecognitionStrip from './RecognitionStrip';
 import { cmsLines, HOME_V3_SCALES } from '../../content/homeV3Content';
 import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { useImpactScale } from '../../providers/ImpactScaleProvider';
@@ -18,7 +18,7 @@ export default function HomeV3ImpactRadius() {
   const [params] = useSearchParams();
   const initialized = useRef(false);
   const section = useNearViewport<HTMLElement>('150px');
-  const cases = useNearViewport<HTMLDivElement>('200px');
+  const recognitions = useNearViewport<HTMLDivElement>('200px');
   const imageWidth = viewportImageWidth();
   const active = Math.max(0, HOME_V3_SCALES.findIndex((item) => item.id === scale));
   const world = worlds.find((item) => item.slug === scale) ?? worlds[0];
@@ -63,6 +63,6 @@ export default function HomeV3ImpactRadius() {
     <article className="home-v3-scale-story" key={world.slug}>
       <p className="home-v3-label">{world.label}</p><h3>{world.title}</h3><p>{world.introduction}</p>
     </article>
-    <div ref={cases.ref} className="home-v3-cases">{cases.isNear && <BeautifulSuccessCases />}</div>
+    <div ref={recognitions.ref} className="home-v3-recognitions">{recognitions.isNear && <RecognitionStrip />}</div>
   </section>;
 }

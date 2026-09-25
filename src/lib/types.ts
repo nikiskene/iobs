@@ -81,6 +81,19 @@ export interface HomepageSection {
   updated_at: string;
 }
 
+export interface Recognition {
+  id: string;
+  company_name: string;
+  acknowledgement: string;
+  photo_url: string;
+  photo_path: string | null;
+  photo_alt: string;
+  status: 'draft' | 'published' | 'archived';
+  display_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface ChatMessage {
   id: string;
   user_id: string;

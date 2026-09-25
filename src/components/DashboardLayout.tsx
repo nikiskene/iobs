@@ -1,7 +1,7 @@
 // src/components/DashboardLayout.tsx
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { ArrowLeft, BookOpen, CalendarDays, Compass, FileText, Image, LayoutGrid as Layout, MessageCircle, Palette, Shield, Sparkles, User, Users } from 'lucide-react';
+import { ArrowLeft, Award, BookOpen, CalendarDays, Compass, FileText, Image, LayoutGrid as Layout, MessageCircle, Palette, Shield, Sparkles, User, Users } from 'lucide-react';
 
 type SidebarLink = { to:string; label:string; icon:React.ElementType };
 type SidebarGroup = { title:string; links:SidebarLink[] };
@@ -22,6 +22,7 @@ export default function DashboardLayout() {
       { to: '/admin/content/scale-worlds', label: 'Award Categories', icon: Layout },
       { to: '/admin/content/about', label: 'About Page', icon: Layout },
       { to: '/admin/content/theses', label: 'Cases', icon: BookOpen },
+      { to: '/admin/content/recognitions', label: 'Recognitions', icon: Award },
       { to: '/admin/content/categories', label: 'Case Topics', icon: FileText },
       { to: '/admin/content/partners', label: 'Partner Logos', icon: Image },
     ]},
