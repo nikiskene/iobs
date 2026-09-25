@@ -36,16 +36,18 @@ export default function TeamPage() {
         <p role="alert">We couldn’t load the team. Please try again shortly.</p> :
         TEAM_CATEGORIES.map(([category, label]) => {
           const people = members.filter((member) => member.category === category);
-          return <section className="team-category" key={category} aria-labelledby={`team-${category}`}>
-            <h2 id={`team-${category}`}>{label}</h2>
+          return <section className={`team-category team-category--${category}`} key={category} aria-labelledby={`team-${category}`}>
+            <header className="team-category-heading">
+              <div><p className="team-category-number" aria-hidden="true">{String(TEAM_CATEGORIES.findIndex(([value]) => value === category) + 1).padStart(2, '0')}</p><h2 id={`team-${category}`}>{label}</h2></div>
+              <p>{people.length === 1 ? '1 person' : `${people.length} people`}</p>
+            </header>
             {people.length === 0 ? <p className="team-empty">To be announced.</p> :
               <div className="team-grid">{people.map((person) => <article className="team-person" key={person.id}>
                 <div className="team-portrait">
                   {safeWebUrl(person.photo_url) ? <img src={person.photo_url} alt={person.full_name} loading="lazy" /> :
                     <span aria-hidden="true">{person.full_name.charAt(0).toUpperCase()}</span>}
                 </div>
-                <h3>{person.full_name}</h3>
-                {person.title && <p className="team-title">{person.title}</p>}
+                <div className="team-person-heading"><h3>{person.full_name}</h3>{person.title && <p className="team-title">{person.title}</p>}</div>
                 {person.description && <p className="team-description">{person.description}</p>}
                 <div className="team-socials">
                   {safeWebUrl(person.linkedin_url) && <a href={person.linkedin_url} target="_blank" rel="noopener noreferrer" aria-label={`${person.full_name} on LinkedIn`}><Linkedin size={16} />LinkedIn</a>}
