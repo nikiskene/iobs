@@ -1,6 +1,6 @@
 // src/pages/auth/LoginPage.tsx
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 import { useLocale, type Locale } from "../../providers/LocaleProvider";
 
@@ -15,6 +15,7 @@ const COPY: Record<Locale, Record<string, string>> = {
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { locale } = useLocale();
   const copy = COPY[locale];
   const [email, setEmail] = useState("");
@@ -29,7 +30,7 @@ export default function LoginPage() {
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({ email, password });
     if (authError) { setError(authError.message); setLoading(false); return; }
     const { data: profile } = await supabase.from("profiles").select("role").eq("id", authData.user.id).maybeSingle();
-    navigate(profile?.role === "admin" ? "/admin" : "/dashboard");
+    navigate(searchParams.get("returnTo") === "/acknowledgement" ? "/acknowledgement" : profile?.role === "admin" ? "/admin" : "/dashboard");
   }
 
   return (

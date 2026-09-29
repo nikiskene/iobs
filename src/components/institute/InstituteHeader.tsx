@@ -10,12 +10,16 @@ import { supabase } from '../../lib/supabase';
 import { optimizedImageUrl } from '../../lib/media';
 import { LANGUAGE_OPTIONS, useLocale, type Locale } from '../../providers/LocaleProvider';
 
+import { useNominationMode } from '../../providers/NominationModeProvider';
+
 const PUBLIC_LINKS = [
   ['/about', 'The Institute'], ['/award', 'The Award'], ['/#principles', 'The Principles'],
   ['/#scale-of-impact', 'Scales of Impact'], ['/thesis', 'Insights'],
 ] as const;
 
 export default function InstituteHeader() {
+  const { mode } = useNominationMode();
+  const nominationLink = mode === 'acknowledgement' ? '/acknowledgement' : '/nominate';
   const { locale, setLocale, t } = useLocale();
   const { user, profile, isAdmin, hasTeamAccess } = useAuth();
   const unreadCount = useUnreadMessages();
@@ -48,7 +52,7 @@ export default function InstituteHeader() {
           <select className="language-switcher" value={locale} onChange={(event) => setLocale(event.target.value as Locale)} aria-label="Language">
             {LANGUAGE_OPTIONS.map((option) => <option value={option.code} key={option.code}>{option.short}</option>)}
           </select>
-          <Link className="enter-link" to="/nominate">{t('nav.nominate')}</Link>
+          <Link className={`enter-link${mode === 'acknowledgement' ? ' acknowledgement-link' : ''}`} to={nominationLink}>{mode === 'acknowledgement' ? 'Acknowledgement' : t('nav.nominate')}</Link>
           {user ? <div className="institute-account" ref={menuRef}>
             <button type="button" className="institute-account-trigger" onClick={() => setAccountOpen((open) => !open)} aria-label={`Open account menu for ${accountName}`} aria-expanded={accountOpen}>
               {profile?.photo_url ? <img src={profile.photo_url} alt="" /> : <span>{initial}</span>}{!!unreadCount && <b>{unreadCount > 9 ? '9+' : unreadCount}</b>}
@@ -60,7 +64,7 @@ export default function InstituteHeader() {
       </header>
       {mobileOpen && <div className="institute-mobile-nav">
         {PUBLIC_LINKS.map(([to, label]) => <Link to={to} key={to}>{label}</Link>)}
-        <Link to="/nominate">{t('nav.nominate')}</Link>
+        <Link to={nominationLink}>{mode === 'acknowledgement' ? 'Acknowledgement' : t('nav.nominate')}</Link>
         {user ? <><Link to="/dashboard/profile">Profile</Link><Link to="/dashboard/inbox">Inbox{unreadCount ? ` (${unreadCount})` : ''}</Link>{hasTeamAccess && <Link to="/work">Work</Link>}{isAdmin && <Link to="/admin">Admin</Link>}<button type="button" onClick={logout}>Log out</button></> : <Link to="/login">Log in</Link>}
       </div>}
     </>

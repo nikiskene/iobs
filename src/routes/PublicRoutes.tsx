@@ -27,7 +27,9 @@ const BuildSnapshot = lazy(() => import('../pages/BuildSnapshot'));
 const AwardPage = lazy(() => import('../pages/awards/AwardPage'));
 const CategoriesPage = lazy(() => import('../pages/awards/CategoriesPage'));
 const JudgingPage = lazy(() => import('../pages/awards/JudgingPage'));
-const NominatePage = lazy(() => import('../pages/awards/NominatePage'));
+const NominationEntry = lazy(() => import('../pages/awards/NominationEntry'));
+const AcknowledgementPage = lazy(() => import('../pages/acknowledgement/AcknowledgementPage'));
+const AcknowledgementForm = lazy(() => import('../pages/acknowledgement/AcknowledgementForm'));
 const EnterAwardPage = lazy(() => import('../pages/awards/EnterAwardPage'));
 const PartnersPage = lazy(() => import('../pages/awards/PartnersPage'));
 const VoicesPage = lazy(() => import('../pages/awards/VoicesPage'));
@@ -41,7 +43,10 @@ export default function PublicRoutes() {
       <Route path="/award" element={<InstitutePublicFrame><AwardPage /></InstitutePublicFrame>} />
       <Route path="/categories" element={<InstitutePublicFrame><CategoriesPage /></InstitutePublicFrame>} />
       <Route path="/judging" element={<InstitutePublicFrame><JudgingPage /></InstitutePublicFrame>} />
-      <Route path="/nominate" element={<InstitutePublicFrame><NominatePage /></InstitutePublicFrame>} />
+      <Route path="/nominate" element={<InstitutePublicFrame><NominationEntry /></InstitutePublicFrame>} />
+      <Route path="/award/nominate" element={<InstitutePublicFrame><NominationEntry awardOnly /></InstitutePublicFrame>} />
+      <Route path="/acknowledgement" element={<InstitutePublicFrame><AcknowledgementPage /></InstitutePublicFrame>} />
+      <Route path="/acknowledgement/nominate" element={<InstitutePublicFrame><AcknowledgementForm /></InstitutePublicFrame>} />
       <Route path="/enter" element={<InstitutePublicFrame><EnterAwardPage /></InstitutePublicFrame>} />
       <Route path="/partners" element={<InstitutePublicFrame><PartnersPage /></InstitutePublicFrame>} />
       <Route path="/voices" element={<InstitutePublicFrame><VoicesPage /></InstitutePublicFrame>} />

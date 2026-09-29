@@ -11,8 +11,8 @@ export default function InstituteFooter() {
   const { get } = useAwardSiteContent();
   const claim = get('site_claim');
   const columns = [
-    [t('footer.award'), [[t('footer.categories'), '/categories'], [t('footer.judging'), '/judging'], [t('footer.nominate'), '/nominate'], [t('footer.enter'), '/enter']]],
-    [t('footer.institute'), [[t('footer.team'), '/team'], ['Cases', '/thesis'], [t('footer.voices'), '/voices'], [t('footer.assembly'), '/assembly'], [t('footer.experiences'), '/expeditions'], [t('footer.contact'), '/contact']]],
+    [t('footer.award'), [[t('footer.categories'), '/categories'], [t('footer.judging'), '/judging'], [t('footer.nominate'), '/award/nominate'], [t('footer.enter'), '/enter']]],
+    [t('footer.institute'), [['Acknowledgement', '/acknowledgement'], [t('footer.team'), '/team'], ['Cases', '/thesis'], [t('footer.voices'), '/voices'], [t('footer.assembly'), '/assembly'], [t('footer.experiences'), '/expeditions'], [t('footer.contact'), '/contact']]],
     [t('footer.institutional'), [[t('footer.foundingPartners'), '/partners'], [t('footer.governance'), '/judging'], [t('footer.partnerBriefing'), '/partners']]],
   ];
 

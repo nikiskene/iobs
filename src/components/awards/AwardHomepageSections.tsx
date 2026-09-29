@@ -42,7 +42,7 @@ export default function AwardHomepageSections() {
       <section className="award-home-section founding-edition">
         <div className="award-section-title"><p className="award-label">{founding?.label}</p><h2>{founding?.headline}</h2></div>
         {founding?.subheadline && <p>{founding.subheadline}</p>}
-        <div><Link className="award-button" to="/nominate">{t('home.nominate')}</Link><Link className="award-text-link" to="/partners">{t('home.partner')}</Link></div>
+        <div><Link className="award-button" to="/award/nominate">{t('home.nominate')}</Link><Link className="award-text-link" to="/partners">{t('home.partner')}</Link></div>
       </section>
     </>
   );
