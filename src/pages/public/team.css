@@ -2,24 +2,22 @@
 .team-category + .team-category { padding-top: 58px; border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
 .team-category-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin: 0 0 24px; }
 .team-category-heading > div { display: flex; align-items: baseline; gap: 13px; }
-.team-category-number { margin: 0; color: var(--accent); font: 9px/1 'DM Sans', sans-serif; letter-spacing: .18em; }
 .team-category-heading h2 { margin: 0; font: 500 clamp(29px, 3vw, 44px)/1 'Cormorant Garamond', serif; letter-spacing: -.02em; }
 .team-category-heading > p { margin: 0; color: var(--muted); font: 9px/1.2 'DM Sans', sans-serif; letter-spacing: .13em; text-transform: uppercase; white-space: nowrap; }
-.team-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-.team-person { display: flex; min-width: 0; flex-direction: column; overflow: hidden; border: 1px solid color-mix(in srgb, var(--ink) 15%, transparent); background: color-mix(in srgb, var(--paper) 93%, black); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.team-person { display: grid; min-width: 0; grid-template-columns: 34% 66%; overflow: hidden; border: 1px solid color-mix(in srgb, var(--ink) 15%, transparent); background: color-mix(in srgb, var(--paper) 93%, black); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
 .team-person:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 70%, var(--ink)); box-shadow: 0 14px 35px color-mix(in srgb, var(--ink) 13%, transparent); }
-.team-portrait { position: relative; aspect-ratio: 1 / 1; overflow: hidden; display: grid; place-items: center; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 25%, var(--paper)), color-mix(in srgb, var(--paper) 90%, black)); color: var(--accent); font: 500 52px 'Cormorant Garamond', serif; }
+.team-portrait { position: relative; min-height: 100%; overflow: hidden; display: grid; place-items: center; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 25%, var(--paper)), color-mix(in srgb, var(--paper) 90%, black)); color: var(--accent); font: 500 52px 'Cormorant Garamond', serif; }
 .team-portrait::after { content: ''; position: absolute; inset: 8px; border: 1px solid color-mix(in srgb, #fff 35%, transparent); pointer-events: none; }
 .team-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.82) contrast(1.03); transition: transform .45s ease, filter .45s ease; }
 .team-person:hover .team-portrait img { transform: scale(1.04); filter: saturate(1) contrast(1); }
-.team-person-heading { padding: 16px 16px 0; }
+.team-person-copy { display: flex; min-width: 0; flex-direction: column; }.team-person-heading { padding: 14px 14px 0; }
 .team-person h3 { margin: 0; font: 500 clamp(21px, 1.8vw, 28px)/1.04 'Cormorant Garamond', serif; letter-spacing: -.015em; overflow-wrap: anywhere; }
 .team-title { min-height: 2.7em; margin: 7px 0 0; color: var(--accent); font: 9px/1.35 'DM Sans', sans-serif; letter-spacing: .1em; text-transform: uppercase; }
-.team-description { display: -webkit-box; min-height: 3.25em; margin: 12px 16px 0; overflow: hidden; color: var(--muted); font-size: 12px; line-height: 1.62; white-space: pre-line; overflow-wrap: anywhere; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
-.team-socials { display: flex; gap: 10px 14px; margin: auto 16px 15px; padding-top: 14px; }
+.team-description { display: -webkit-box; margin: 8px 14px 0; overflow: hidden; color: var(--muted); font-size: 12px; line-height: 1.52; white-space: pre-line; overflow-wrap: anywhere; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.team-socials { display: flex; gap: 10px 14px; margin: auto 14px 13px; padding-top: 10px; }
 .team-socials a { display: inline-flex; align-items: center; gap: 5px; color: var(--ink); font: 9px/1 'DM Sans', sans-serif; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; transition: color .2s ease; }
 .team-socials a:hover { color: var(--accent); }
 .team-socials svg { width: 13px; height: 13px; stroke-width: 1.5; }
 .team-empty { margin: 0; color: var(--muted); font: 500 23px 'Cormorant Garamond', serif; }
-@media (max-width: 900px) { .team-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 620px) { .team-directory { gap: 46px; padding-top: 42px; padding-bottom: 66px; } .team-category + .team-category { padding-top: 46px; } .team-category-heading { margin-bottom: 17px; } .team-category-heading h2 { font-size: 31px; } .team-category-heading > p { font-size: 8px; letter-spacing: .09em; } .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .team-person { min-height: 0; } .team-portrait::after { inset: 5px; } .team-person-heading { padding: 11px 11px 0; } .team-person h3 { font-size: 21px; } .team-title { min-height: 2.5em; margin-top: 5px; font-size: 7px; letter-spacing: .08em; } .team-description { min-height: 0; margin: 8px 11px 0; font-size: 10px; line-height: 1.45; -webkit-line-clamp: 3; } .team-socials { gap: 8px; margin: auto 11px 11px; padding-top: 10px; } .team-socials a { font-size: 8px; } .team-socials svg { width: 11px; height: 11px; } }
+@media (max-width: 620px) { .team-directory { gap: 46px; padding-top: 42px; padding-bottom: 66px; } .team-category + .team-category { padding-top: 46px; } .team-category-heading { margin-bottom: 17px; } .team-category-heading h2 { font-size: 31px; } .team-category-heading > p { font-size: 8px; letter-spacing: .09em; } .team-grid { grid-template-columns: 1fr; gap: 10px; } .team-person { grid-template-columns: 34% 66%; } .team-portrait::after { inset: 5px; } .team-person-heading { padding: 11px 11px 0; } .team-person h3 { font-size: 21px; } .team-title { min-height: 0; margin-top: 5px; font-size: 7px; letter-spacing: .08em; } .team-description { margin: 8px 11px 0; font-size: 10px; line-height: 1.45; -webkit-line-clamp: 3; } .team-socials { gap: 8px; margin: auto 11px 11px; padding-top: 10px; } .team-socials a { font-size: 8px; } .team-socials svg { width: 11px; height: 11px; } }

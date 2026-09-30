@@ -100,7 +100,7 @@ export default function MemberEditor({ member, members, onCancel, onSaved, onCom
         <h2 className="text-lg font-semibold">Public presentation</h2>
         <label className="block text-sm">Team category<select className={inputClass} value={draft.category} onChange={(e) => change('category', e.target.value as ManagedMember['category'])}>
           {TEAM_CATEGORIES.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-        </select><span className="text-xs text-zinc-400">Founder is a public category. It does not change login permissions.</span></label>
+        </select><span className="text-xs text-zinc-400">Only Team, Supporters and Advisors can be shown on the public team page. This category does not change login permissions.</span></label>
         <label className="block text-sm">Team page visibility<select className={inputClass} value={draft.status} onChange={(e) => change('status', e.target.value as ManagedMember['status'])}>
           <option value="draft">Draft — hidden</option><option value="published">Published — visible on /team</option><option value="archived">Archived — hidden</option>
         </select></label>
