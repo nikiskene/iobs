@@ -28,6 +28,7 @@ export default function InstituteHeader() {
   const menuRef = useRef<HTMLDivElement>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
+  const [hasSubmissions, setHasSubmissions] = useState(false);
 
   useEffect(() => { setMobileOpen(false); setAccountOpen(false); }, [location.pathname, location.hash]);
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function InstituteHeader() {
     document.addEventListener('mousedown', close);
     return () => document.removeEventListener('mousedown', close);
   }, []);
+  useEffect(() => { if (!user) { setHasSubmissions(false); return; } void supabase.from('acknowledgement_nominations').select('id').eq('submitted_by', user.id).limit(1).then(({ data }) => setHasSubmissions(Boolean(data?.length))); }, [user?.id]);
   async function logout() { await supabase.auth.signOut(); setAccountOpen(false); navigate('/'); }
   const accountName = profile?.full_name || user?.email || 'Member';
   const initial = accountName.charAt(0).toUpperCase();
@@ -57,7 +59,7 @@ export default function InstituteHeader() {
             <button type="button" className="institute-account-trigger" onClick={() => setAccountOpen((open) => !open)} aria-label={`Open account menu for ${accountName}`} aria-expanded={accountOpen}>
               {profile?.photo_url ? <img src={profile.photo_url} alt="" /> : <span>{initial}</span>}{!!unreadCount && <b>{unreadCount > 9 ? '9+' : unreadCount}</b>}
             </button>
-            {accountOpen && <AccountMenu name={accountName} isAdmin={isAdmin} hasTeamAccess={hasTeamAccess} unreadCount={unreadCount} logout={logout} />}
+            {accountOpen && <AccountMenu name={accountName} isAdmin={isAdmin} hasTeamAccess={hasTeamAccess} hasSubmissions={hasSubmissions} unreadCount={unreadCount} logout={logout} />}
           </div> : <Link className="institute-login" to="/login" aria-label="Log in"><LogIn /></Link>}
           <button type="button" className="institute-menu-trigger" onClick={() => setMobileOpen((open) => !open)} aria-label="Toggle menu" aria-expanded={mobileOpen}>{mobileOpen ? <X /> : <Menu />}</button>
         </div>
@@ -71,6 +73,6 @@ export default function InstituteHeader() {
   );
 }
 
-function AccountMenu({ name, isAdmin, hasTeamAccess, unreadCount, logout }: { name:string; isAdmin:boolean; hasTeamAccess:boolean; unreadCount:number; logout:()=>void }) {
-  return <div className="institute-account-menu"><strong>{name}</strong><Link to="/dashboard/profile"><User /> Profile</Link><Link to="/dashboard/inbox"><Inbox /> Inbox {unreadCount ? `(${unreadCount})` : ''}</Link>{hasTeamAccess && <Link to="/work"><Briefcase /> Work</Link>}{isAdmin && <Link to="/admin"><Shield /> Admin</Link>}<button type="button" onClick={logout}><LogOut /> Log out</button></div>;
+function AccountMenu({ name, isAdmin, hasTeamAccess, hasSubmissions, unreadCount, logout }: { name:string; isAdmin:boolean; hasTeamAccess:boolean; hasSubmissions:boolean; unreadCount:number; logout:()=>void }) {
+  return <div className="institute-account-menu"><strong>{name}</strong><Link to="/dashboard/profile"><User /> Profile</Link>{hasSubmissions && <Link to="/acknowledgement/mine">My submissions</Link>}<Link to="/dashboard/inbox"><Inbox /> Inbox {unreadCount ? `(${unreadCount})` : ''}</Link>{hasTeamAccess && <Link to="/work"><Briefcase /> Work</Link>}{isAdmin && <Link to="/admin"><Shield /> Admin</Link>}<button type="button" onClick={logout}><LogOut /> Log out</button></div>;
 }
