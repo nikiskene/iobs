@@ -52,8 +52,8 @@ export default function AcknowledgementPage() {
       {error && <div role="alert" className="ack-notice">{error} <button onClick={() => void load()}>Try again</button></div>}
       {!loading && !error && !items.length && <div className="ack-empty"><h3>Who should be here?</h3><p>Bring a company’s contribution into view. The first nomination could be yours.</p>{mode === 'acknowledgement' && <Link to="/acknowledgement/nominate">Nominate a company →</Link>}</div>}
       <div className="ack-grid">{items.map(item => <article className="ack-card" key={item.id}>
-        <div className="ack-card-image">{safeWebUrl(item.image_url) ? <img src={safeWebUrl(item.image_url)} alt={item.company_name} loading="lazy" onError={event => { event.currentTarget.style.display = 'none'; }} /> : <span aria-hidden="true">{item.company_name.slice(0,1)}</span>}<span className="ack-ray">{NOMINATION_RAYS.find(([id]) => id === item.ray)?.[1]}</span></div>
-        <div className="ack-card-body"><div className="ack-tags">{PRINCIPLE_IDS.filter(id => item.principles[id]?.trim()).map(id => <span key={id}>{id}</span>)}</div>
+        <div className="ack-card-image">{safeWebUrl(item.image_url) ? <img src={safeWebUrl(item.image_url)} alt={item.company_name} loading="lazy" onError={event => { event.currentTarget.style.display = 'none'; }} /> : <span aria-hidden="true">{item.company_name.slice(0,1)}</span>}</div>
+        <div className="ack-card-body"><div className="ack-tags"><span>Ray of impact · {NOMINATION_RAYS.find(([id]) => id === item.ray)?.[1] || item.ray}</span></div>
           <h3>{item.company_name}</h3><p>{item.description}</p>
           <details><summary>What makes this Beautiful Success?</summary>{PRINCIPLE_IDS.filter(id => item.principles[id]?.trim()).map(id => <div className="ack-principle" key={id}><h4>{id}</h4><p>{item.principles[id]}</p></div>)}{safeWebUrl(item.website || '') && <a href={safeWebUrl(item.website || '')} target="_blank" rel="noopener noreferrer">Visit company website ↗</a>}</details>
           <div className="ack-votes" aria-label={`Votes for ${item.company_name}`}>
