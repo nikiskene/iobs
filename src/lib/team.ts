@@ -1,9 +1,9 @@
 export const TEAM_CATEGORIES = [
-  ['founders', 'Founders'],
-  ['team', 'Team'],
-  ['user', 'User'],
+  ['founders', 'Co-founders'],
+  ['advisory_board', 'Advisors'],
   ['supporters', 'Supporters'],
-  ['advisory_board', 'Advisory Board'],
+  ['team', 'Team'],
+  ['user', 'Users'],
 ] as const;
 
 export type TeamPerson = {
