@@ -36,7 +36,7 @@ export default function TeamAdmin() {
 
   const visible = members.filter((member) => memberMatches(member, search));
   return <div className="space-y-6">
-    <div><h1 className="text-2xl font-bold">Members</h1><p className="mt-2 text-sm text-zinc-400">One entry per person. Co-founders, Advisors, Supporters, Team, then Users. Edit public details, category and login access together.</p></div>
+    <div><h1 className="text-2xl font-bold">Members</h1><p className="mt-2 text-sm text-zinc-400">One entry per person. Founders, Advisors, Supporters, Team, then Users. Edit public details, category and login access together.</p></div>
     <div className="flex flex-wrap gap-3">
       <button className="rounded-lg bg-white/10 px-4 py-2 text-sm disabled:opacity-50" disabled={loading || !!error} onClick={() => setEditing(newMember())}>Add member</button>
       <Link className="rounded-lg border border-white/15 px-4 py-2 text-sm" to="/team" target="_blank" rel="noopener noreferrer">View public team page</Link>
