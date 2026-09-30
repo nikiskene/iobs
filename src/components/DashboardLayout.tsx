@@ -46,7 +46,7 @@ export default function DashboardLayout() {
   if (hasTeamAccess) explorerLinks.unshift({ to: '/work', label: 'Work', icon: Sparkles });
   const isInboxRoute = location.pathname.startsWith('/dashboard/inbox');
 
-  return <div className="min-h-screen bg-[#0A0A0A] pt-16"><div className={`mx-auto max-w-7xl px-4 py-4 md:px-6 md:py-8 ${isInboxRoute ? 'md:max-w-7xl' : ''}`}><div className="flex flex-col gap-8 lg:flex-row">
+  return <div className={`min-h-screen pt-16 ${isAdminRoute ? 'iobs-admin-shell' : 'bg-[#0A0A0A]'}`}><div className={`mx-auto max-w-7xl px-4 py-4 md:px-6 md:py-8 ${isInboxRoute ? 'md:max-w-7xl' : ''}`}><div className="flex flex-col gap-8 lg:flex-row">
     <aside className="hidden w-full shrink-0 lg:block lg:w-64"><div className="sticky top-24 space-y-6">
       <div className="px-3"><h2 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">{isAdminRoute ? 'Institute Admin' : 'Explorer'}</h2><p className="mt-1 truncate text-sm text-zinc-400">{profile?.full_name || 'Explorer'}</p></div>
       {isAdminRoute ? <div className="space-y-6">{adminGroups.map((group) => <SidebarGroupBlock key={group.title} group={group} />)}</div> : <div className="space-y-1">{explorerLinks.map((link) => <SidebarNavLink key={link.to} link={link} />)}{isAdmin && <NavLink to="/admin" className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-amber-500 transition-colors hover:bg-amber-400/5 hover:text-amber-400"><Shield className="h-4 w-4" />Admin</NavLink>}</div>}

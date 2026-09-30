@@ -72,3 +72,19 @@
   object-fit: cover;
   width: 100%;
 }
+
+.iobs-admin-shell {
+  background:
+    radial-gradient(circle at 88% 0%, rgba(213, 170, 88, 0.12), transparent 32rem),
+    linear-gradient(135deg, #210b14 0%, #35131f 50%, #210b14 100%);
+  color: #f8ecd8;
+  min-height: 100vh;
+}
+
+.iobs-admin-shell .text-zinc-400 { color: #ddc7ba; }
+.iobs-admin-shell .text-zinc-500,
+.iobs-admin-shell .text-zinc-600 { color: #b89891; }
+.iobs-admin-shell .border-white\/5,
+.iobs-admin-shell .border-white\/10 { border-color: rgba(213, 170, 88, 0.2); }
+.iobs-admin-shell .bg-white\/5 { background-color: rgba(248, 236, 216, 0.06); }
+.iobs-admin-shell .bg-white\/10 { background-color: rgba(213, 170, 88, 0.18); }

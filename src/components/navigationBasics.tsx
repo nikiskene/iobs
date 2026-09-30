@@ -1,10 +1,17 @@
 // src/components/navigationBasics.tsx
 import { Link } from 'react-router-dom';
 import { Globe, LogOut, Shield, User } from 'lucide-react';
+import { AWARD_ASSETS } from '../content/awardAssets';
 
 export type NavLinkItem = { to: string; label: string; badge?: number };
 
-export function Logo({ logoUrl }: { logoUrl: string | null }) {
+export function Logo({ logoUrl, institute = false }: { logoUrl: string | null; institute?: boolean }) {
+  if (institute) {
+    return <Link to="/" className="flex items-center gap-3 text-[#f8ecd8]" aria-label="Institute of Beautiful Success">
+      <img src={AWARD_ASSETS.circleDark} alt="" className="h-10 w-10 object-contain" />
+      <span className="hidden text-[10px] font-semibold uppercase leading-[1.25] tracking-[0.13em] sm:block">Institute of<br />Beautiful Success</span>
+    </Link>;
+  }
   return <Link to="/" className="group flex items-center gap-2">{logoUrl ? <img src={logoUrl} alt="WorldOS" className="h-10 w-auto object-contain" /> : <Globe className="h-6 w-6 text-sky-400 group-hover:text-sky-300" />}</Link>;
 }
 

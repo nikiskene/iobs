@@ -44,6 +44,7 @@ export default function Navigation() {
   ] : [];
   const links = [...publicLinks, ...userLinks];
   const isActive = (path: string) => path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
+  const isAdminRoute = location.pathname.startsWith('/admin');
 
   async function handleLogout() {
     await supabase.auth.signOut();
@@ -53,9 +54,9 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 border-b border-white/5 bg-[#0A0A0A]/90 backdrop-blur-md">
+    <nav className={`fixed left-0 right-0 top-0 z-50 border-b backdrop-blur-md ${isAdminRoute ? 'border-[#d5aa58]/25 bg-[#210b14]/95' : 'border-white/5 bg-[#0A0A0A]/90'}`}>
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Logo logoUrl={logoUrl} />
+        <Logo logoUrl={logoUrl} institute={isAdminRoute} />
         <div className="hidden items-center gap-1 lg:flex">
           {links.map((link) => <NavItem key={link.to} link={link} active={isActive(link.to)} />)}
           <div className="ml-3 h-5 w-px bg-white/10" />
