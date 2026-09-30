@@ -92,7 +92,7 @@ export default function ConversationsAdmin() {
   }
 
   const community = conversations.filter((item) => item.type === 'group_chat');
-  const worldos = conversations.filter(
+  const institute = conversations.filter(
     (item) => item.type === 'admin_dm' || item.type === 'system'
   );
   const direct = conversations.filter((item) => item.type === 'member_dm');
@@ -126,7 +126,7 @@ export default function ConversationsAdmin() {
           <div>
             <h2 className="font-semibold text-white">New Announcement</h2>
             <p className="text-xs text-zinc-400">
-              Sends a WorldOS Team message to all active members.
+              Sends an Institute message to all active members.
             </p>
           </div>
         </div>
@@ -163,10 +163,10 @@ export default function ConversationsAdmin() {
       ) : (
         <div className="grid gap-5 lg:grid-cols-3">
           <ConversationGroup
-            title="WorldOS Team"
+            title="Institute"
             description="Announcements and support."
             icon={Shield}
-            conversations={worldos}
+            conversations={institute}
           />
 
           <ConversationGroup

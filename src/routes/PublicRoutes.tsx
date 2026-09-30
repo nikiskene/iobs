@@ -23,7 +23,6 @@ const MethodWorldOSPage = lazy(() => import('../pages/public/MethodWorldOSPage')
 const ContactPage = lazy(() => import('../pages/public/ContactPage'));
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'));
 const ResetPasswordPage = lazy(() => import('../pages/auth/ResetPasswordPage'));
-const BuildSnapshot = lazy(() => import('../pages/BuildSnapshot'));
 const AwardPage = lazy(() => import('../pages/awards/AwardPage'));
 const CategoriesPage = lazy(() => import('../pages/awards/CategoriesPage'));
 const JudgingPage = lazy(() => import('../pages/awards/JudgingPage'));
@@ -149,7 +148,6 @@ export default function PublicRoutes() {
 
       <Route path="/login" element={<InstitutePublicFrame><LoginPage /></InstitutePublicFrame>} />
       <Route path="/reset-password" element={<InstitutePublicFrame><ResetPasswordPage /></InstitutePublicFrame>} />
-      <Route path="/snapshot" element={<BuildSnapshot />} />
     </>
   );
 }
