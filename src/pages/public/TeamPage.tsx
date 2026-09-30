@@ -5,7 +5,7 @@ import { TEAM_CATEGORIES, safeWebUrl, type TeamPerson } from '../../lib/team';
 import AwardPageHero from '../../components/awards/AwardPageHero';
 import './team.css';
 
-const PUBLIC_TEAM_CATEGORIES = ['team', 'supporters', 'advisory_board'] as const;
+const PUBLIC_TEAM_CATEGORIES = ['founders', 'team', 'supporters', 'advisory_board'] as const;
 
 export default function TeamPage() {
   const [members, setMembers] = useState<TeamPerson[]>([]);
@@ -31,7 +31,7 @@ export default function TeamPage() {
 
   return <main>
     <AwardPageHero eyebrow="The Institute" title="The people behind IOBS">
-      The team, supporters and advisers shaping the Institute of Beautiful Success.
+      The founders, team, supporters and advisers shaping the Institute of Beautiful Success.
     </AwardPageHero>
     <div className="ibs-section team-directory">
       {loading ? <p role="status">Loading the people behind IOBS…</p> : error ?
@@ -42,7 +42,6 @@ export default function TeamPage() {
           return <section className={`team-category team-category--${category}`} key={category} aria-labelledby={`team-${category}`}>
             <header className="team-category-heading">
               <div><h2 id={`team-${category}`}>{label}</h2></div>
-              <p>{people.length === 1 ? '1 person' : `${people.length} people`}</p>
             </header>
             <div className="team-grid">{people.map((person) => <article className="team-person" key={person.id}>
                 <div className="team-portrait">
