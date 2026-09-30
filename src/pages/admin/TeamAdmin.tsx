@@ -18,7 +18,11 @@ export default function TeamAdmin() {
     try {
       const result = await supabase.rpc('admin_list_members');
       if (result.error) throw result.error;
-      const people = (result.data || []) as ManagedMember[];
+      const categoryOrder: Record<string, number> = { team: 0, user: 1, founders: 2, supporters: 3, advisory_board: 4 };
+      const people = ((result.data || []) as ManagedMember[]).sort((left, right) =>
+        (categoryOrder[left.category] ?? 99) - (categoryOrder[right.category] ?? 99)
+        || left.full_name.localeCompare(right.full_name)
+      );
       setMembers(people);
       setEditing(editId ? people.find((person) => person.id === editId) || null : null);
     } catch {
@@ -32,7 +36,7 @@ export default function TeamAdmin() {
 
   const visible = members.filter((member) => memberMatches(member, search));
   return <div className="space-y-6">
-    <div><h1 className="text-2xl font-bold">Members</h1><p className="mt-2 text-sm text-zinc-400">One entry per person. Edit public details, team category and login access together.</p></div>
+    <div><h1 className="text-2xl font-bold">Members</h1><p className="mt-2 text-sm text-zinc-400">One entry per person. Team members appear first, followed by Users. Edit public details, category and login access together.</p></div>
     <div className="flex flex-wrap gap-3">
       <button className="rounded-lg bg-white/10 px-4 py-2 text-sm disabled:opacity-50" disabled={loading || !!error} onClick={() => setEditing(newMember())}>Add member</button>
       <Link className="rounded-lg border border-white/15 px-4 py-2 text-sm" to="/team" target="_blank" rel="noopener noreferrer">View public team page</Link>
