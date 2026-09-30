@@ -1,5 +1,6 @@
 // src/pages/dashboard/ProfilePage.tsx
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Camera, ExternalLink, Save } from 'lucide-react';
 
 import CityAutocomplete from '../../components/location/CityAutocomplete';
@@ -136,6 +137,14 @@ export default function ProfilePage() {
       <p className="mt-1 text-sm text-zinc-400">
         Manage your profile and visibility.
       </p>
+
+      <section className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-4">
+        <div>
+          <h2 className="text-sm font-medium text-white">Acknowledgement submissions</h2>
+          <p className="mt-1 text-sm text-zinc-400">View your company nominations and add or replace their images.</p>
+        </div>
+        <Link to="/acknowledgement/mine" className="rounded-md border border-amber-400/40 px-4 py-2 text-sm font-medium text-amber-200 transition-colors hover:bg-amber-400/10">My submissions</Link>
+      </section>
 
       <div className="mt-8 max-w-2xl space-y-6">
         <ProfilePhoto
