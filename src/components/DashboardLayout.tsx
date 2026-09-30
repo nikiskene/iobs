@@ -22,6 +22,7 @@ export default function DashboardLayout() {
       { to: '/admin/content/scale-worlds', label: 'Award Categories', icon: Layout },
       { to: '/admin/content/about', label: 'About Page', icon: Layout },
       { to: '/admin/content/theses', label: 'Cases', icon: BookOpen },
+      { to: '/admin/content/nominations', label: 'Nominations', icon: Award },
       { to: '/admin/content/recognitions', label: 'Recognitions', icon: Award },
       { to: '/admin/content/categories', label: 'Case Topics', icon: FileText },
       { to: '/admin/content/partners', label: 'Partner Logos', icon: Image },
