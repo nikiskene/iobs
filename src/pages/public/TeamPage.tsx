@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Linkedin, BookOpen } from 'lucide-react';
+import { Linkedin, BookOpen, X } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { TEAM_CATEGORIES, safeWebUrl, type TeamPerson } from '../../lib/team';
 import AwardPageHero from '../../components/awards/AwardPageHero';
@@ -11,6 +11,7 @@ export default function TeamPage() {
   const [members, setMembers] = useState<TeamPerson[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [selectedPerson, setSelectedPerson] = useState<TeamPerson | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -49,7 +50,7 @@ export default function TeamPage() {
                     <span aria-hidden="true">{person.full_name.charAt(0).toUpperCase()}</span>}
                 </div>
                 <div className="team-person-copy"><div className="team-person-heading"><h3>{person.full_name}</h3>{person.title && <p className="team-title">{person.title}</p>}</div>
-                {person.description && <p className="team-description">{person.description}</p>}
+                {person.description && <><p className="team-description">{person.description}</p><button type="button" className="team-bio-button" onClick={() => setSelectedPerson(person)}>Read full bio</button></>}
                 <div className="team-socials">
                   {safeWebUrl(person.linkedin_url) && <a href={person.linkedin_url} target="_blank" rel="noopener noreferrer" aria-label={`${person.full_name} on LinkedIn`}><Linkedin size={16} />LinkedIn</a>}
                   {safeWebUrl(person.substack_url) && <a href={person.substack_url} target="_blank" rel="noopener noreferrer" aria-label={`${person.full_name} on Substack`}><BookOpen size={16} />Substack</a>}
@@ -58,5 +59,12 @@ export default function TeamPage() {
           </section>;
         })}
     </div>
+    {selectedPerson && <div className="team-bio-dialog" role="dialog" aria-modal="true" aria-labelledby="team-bio-title" onMouseDown={() => setSelectedPerson(null)}>
+      <article className="team-bio-dialog-card" onMouseDown={(event) => event.stopPropagation()}>
+        <button type="button" className="team-bio-close" onClick={() => setSelectedPerson(null)} aria-label="Close biography"><X /></button>
+        {safeWebUrl(selectedPerson.photo_url) && <img src={selectedPerson.photo_url} alt="" />}
+        <div><p className="ibs-eyebrow">{selectedPerson.title || 'Institute of Beautiful Success'}</p><h2 id="team-bio-title">{selectedPerson.full_name}</h2><p>{selectedPerson.description}</p></div>
+      </article>
+    </div>}
   </main>;
 }
