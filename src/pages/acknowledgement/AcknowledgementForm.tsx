@@ -2,6 +2,7 @@ import { useRef, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { useNominationMode } from '../../providers/NominationModeProvider';
+import { useAuth } from '../../hooks/useAuth';
 import { getNominationContent, NOMINATION_RAYS, PRINCIPLE_IDS } from '../../content/nominationContent';
 import { safeWebUrl } from '../../lib/acknowledgements';
 import '../awards/nomination.css';
@@ -9,6 +10,7 @@ import './acknowledgement.css';
 
 export default function AcknowledgementForm() {
   const { mode, error: modeError, refresh } = useNominationMode();
+  const { user } = useAuth();
   const [saving, setSaving] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
@@ -32,7 +34,7 @@ export default function AcknowledgementForm() {
       if (file) {
         if (uploadedImage.current?.file === file) imageUrl = uploadedImage.current.url;
         else {
-          const path = `${crypto.randomUUID()}.${file.type.split('/')[1]}`;
+          const path = `${user!.id}/${crypto.randomUUID()}.${file.type.split('/')[1]}`;
           const upload = await supabase.storage.from('acknowledgement-images').upload(path, file);
           if (upload.error) throw new Error('The image could not be uploaded. Please try again.');
           imageUrl = supabase.storage.from('acknowledgement-images').getPublicUrl(path).data.publicUrl;
@@ -51,6 +53,7 @@ export default function AcknowledgementForm() {
   }
   if (modeError) return <section className="ibs-section"><p role="alert">{modeError}</p><button onClick={() => void refresh()}>Try again</button></section>;
   if (!mode) return <div className="route-loader" aria-label="Loading" />;
+  if (!user) return <section className="ack-page ack-hero"><p className="ibs-eyebrow">Beautiful Success · Acknowledgement</p><h1>Sign in to<br /><em>make a nomination.</em></h1><p>Your account lets you add or replace the company image after submitting, while the Institute reviews the entry before it is public.</p><Link className="award-button" to="/login?returnTo=/acknowledgement/nominate">Sign in to nominate</Link></section>;
   if (sent) return <section className="ack-page ack-hero"><p className="ibs-eyebrow">Nomination submitted</p><h1>Thank you for<br /><em>bringing it to light.</em></h1><p>Your nomination is now with the Institute for review. It will appear in the public gallery once it has been approved.</p><Link className="award-button" to="/acknowledgement">See the nominations</Link></section>;
   if (mode !== 'acknowledgement') return <section className="ibs-section"><h1>Acknowledgement submissions are closed.</h1><Link to="/acknowledgement">Explore the nominations</Link></section>;
   return <main className="ack-page"><section className="ack-hero"><Link className="ack-back" to="/acknowledgement">← All nominations</Link><p className="ibs-eyebrow">Beautiful Success · Acknowledgement</p><h1>Bring beautiful<br /><em>success into view.</em></h1><p>Nominate a company and tell us what makes its contribution matter.</p></section>

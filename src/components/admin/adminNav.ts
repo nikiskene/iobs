@@ -8,8 +8,7 @@ export const adminNavGroups: AdminNavGroup[] = [
   { title:'Home', to:'/admin', description:'Admin overview and quick actions.', links:[{ to:'/admin', label:'Admin Home', icon:Shield, description:'Overview, status and shortcuts.' }] },
   { title:'Content', to:'/admin/content', description:'Beautiful Success pages, categories and cases.', links:[
     { to:'/admin/content/site-copy', label:'Site Copy', icon:Type, description:'Edit current Beautiful Success headlines and page copy.' },
-    { to:'/admin/content/nominations', label:'Nominations', icon:Award, description:'Switch award / acknowledgement nominations and manage public company submissions.' },
-    { to:'/admin/content/recognitions', label:'Recognitions', icon:Award, description:'Prepare certificate acknowledgements and choose when they appear on the homepage.' },
+    { to:'/admin/content/acknowledgements', label:'Acknowledgements', icon:Award, description:'Review company submissions, publish acknowledgements and manage the active nomination path.' },
     { to:'/admin/content/scale-worlds', label:'Award Categories & Dial', icon:Globe2, description:'Edit the seven dial positions, labels and knob images.' },
     { to:'/admin/content/theses', label:'Cases', icon:BookOpen, description:'Manage Beautiful Success cases, images and award categories.' },
     { to:'/admin/content/partners', label:'Partner Logos', icon:Image, description:'Upload, categorize and order logos in the public partner stripe.' },

@@ -18,12 +18,11 @@ export default function DashboardLayout() {
   const adminGroups: SidebarGroup[] = [
     { title: 'Home', links: [{ to: '/admin', label: 'Admin Home', icon: Shield }] },
     { title: 'Content', links: [
-      { to: '/admin/content/homepage', label: 'Homepage', icon: Layout },
+      { to: '/admin/content/site-copy', label: 'Site Copy', icon: Layout },
       { to: '/admin/content/scale-worlds', label: 'Award Categories', icon: Layout },
       { to: '/admin/content/about', label: 'About Page', icon: Layout },
       { to: '/admin/content/theses', label: 'Cases', icon: BookOpen },
-      { to: '/admin/content/nominations', label: 'Nominations', icon: Award },
-      { to: '/admin/content/recognitions', label: 'Recognitions', icon: Award },
+      { to: '/admin/content/acknowledgements', label: 'Acknowledgements', icon: Award },
       { to: '/admin/content/categories', label: 'Case Topics', icon: FileText },
       { to: '/admin/content/partners', label: 'Partner Logos', icon: Image },
     ]},

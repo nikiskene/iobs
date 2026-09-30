@@ -30,7 +30,8 @@ export default function LoginPage() {
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({ email, password });
     if (authError) { setError(authError.message); setLoading(false); return; }
     const { data: profile } = await supabase.from("profiles").select("role").eq("id", authData.user.id).maybeSingle();
-    navigate(searchParams.get("returnTo") === "/acknowledgement" ? "/acknowledgement" : profile?.role === "admin" ? "/admin" : "/dashboard");
+    const returnTo = searchParams.get('returnTo');
+    navigate(returnTo === '/acknowledgement' || returnTo === '/acknowledgement/nominate' || returnTo === '/acknowledgement/mine' ? returnTo : profile?.role === "admin" ? "/admin" : "/dashboard");
   }
 
   return (

@@ -9,7 +9,6 @@ const NominationsAdmin = lazy(() => import('../pages/admin/NominationsAdmin'));
 const AdminHome = lazy(() => import('../pages/admin/AdminHome'));
 const AdminCategoryPage = lazy(() => import('../pages/admin/AdminCategoryPage'));
 const AwardSiteContentAdmin = lazy(() => import('../pages/admin/AwardSiteContentAdmin'));
-const RecognitionsAdmin = lazy(() => import('../pages/admin/RecognitionsAdmin'));
 const AboutCMS = lazy(() => import('../pages/admin/AboutCMS'));
 const CategoriesAdmin = lazy(() => import('../pages/admin/CategoriesAdmin'));
 const ThesesAdmin = lazy(() => import('../pages/admin/ThesesAdmin'));
@@ -35,8 +34,9 @@ export default function AdminRoutes() {
       <Route path="settings" element={<AdminCategoryPage title="Settings" />} />
       <Route path="content/homepage" element={<Navigate to="/admin/content/site-copy" replace />} />
       <Route path="content/site-copy" element={<AwardSiteContentAdmin />} />
-      <Route path="content/nominations" element={<NominationsAdmin />} />
-      <Route path="content/recognitions" element={<RecognitionsAdmin />} />
+      <Route path="content/acknowledgements" element={<NominationsAdmin />} />
+      <Route path="content/nominations" element={<Navigate to="/admin/content/acknowledgements" replace />} />
+      <Route path="content/recognitions" element={<Navigate to="/admin/content/acknowledgements" replace />} />
       <Route path="content/scale-worlds" element={<ScaleWorldsAdmin />} />
       <Route path="content/about" element={<AboutCMS />} />
       <Route path="content/theses" element={<ThesesAdmin />} />

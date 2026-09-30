@@ -30,6 +30,7 @@ const JudgingPage = lazy(() => import('../pages/awards/JudgingPage'));
 const NominationEntry = lazy(() => import('../pages/awards/NominationEntry'));
 const AcknowledgementPage = lazy(() => import('../pages/acknowledgement/AcknowledgementPage'));
 const AcknowledgementForm = lazy(() => import('../pages/acknowledgement/AcknowledgementForm'));
+const MyAcknowledgementsPage = lazy(() => import('../pages/acknowledgement/MyAcknowledgementsPage'));
 const EnterAwardPage = lazy(() => import('../pages/awards/EnterAwardPage'));
 const PartnersPage = lazy(() => import('../pages/awards/PartnersPage'));
 const VoicesPage = lazy(() => import('../pages/awards/VoicesPage'));
@@ -47,6 +48,7 @@ export default function PublicRoutes() {
       <Route path="/award/nominate" element={<InstitutePublicFrame><NominationEntry awardOnly /></InstitutePublicFrame>} />
       <Route path="/acknowledgement" element={<InstitutePublicFrame><AcknowledgementPage /></InstitutePublicFrame>} />
       <Route path="/acknowledgement/nominate" element={<InstitutePublicFrame><AcknowledgementForm /></InstitutePublicFrame>} />
+      <Route path="/acknowledgement/mine" element={<InstitutePublicFrame><MyAcknowledgementsPage /></InstitutePublicFrame>} />
       <Route path="/enter" element={<InstitutePublicFrame><EnterAwardPage /></InstitutePublicFrame>} />
       <Route path="/partners" element={<InstitutePublicFrame><PartnersPage /></InstitutePublicFrame>} />
       <Route path="/voices" element={<InstitutePublicFrame><VoicesPage /></InstitutePublicFrame>} />

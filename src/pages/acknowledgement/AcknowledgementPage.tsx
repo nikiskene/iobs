@@ -44,7 +44,7 @@ export default function AcknowledgementPage() {
       <p className="ibs-eyebrow">Beautiful Success · Acknowledgement</p>
       <h1>Good companies.<br /><em>Beautiful impact.</em></h1>
       <div className="ack-hero-bottom"><p>Discover companies making a difference through the principles of Beautiful Success. Share a nomination. Add your vote.</p>
-        {mode === 'acknowledgement' && <Link className="award-button" to="/acknowledgement/nominate">Nominate a company <ArrowUpRight size={18} /></Link>}
+        <div className="ack-hero-actions">{mode === 'acknowledgement' && <Link className="award-button" to="/acknowledgement/nominate">Nominate a company <ArrowUpRight size={18} /></Link>}{user && <Link className="ack-my-link" to="/acknowledgement/mine">My submissions</Link>}</div>
       </div>
     </section>
     <section className="ack-gallery" aria-label="Company nominations">
@@ -55,7 +55,7 @@ export default function AcknowledgementPage() {
         <div className="ack-card-image">{safeWebUrl(item.image_url) ? <img src={safeWebUrl(item.image_url)} alt={item.company_name} loading="lazy" onError={event => { event.currentTarget.style.display = 'none'; }} /> : <span aria-hidden="true">{item.company_name.slice(0,1)}</span>}<span className="ack-ray">{NOMINATION_RAYS.find(([id]) => id === item.ray)?.[1]}</span></div>
         <div className="ack-card-body"><div className="ack-tags">{PRINCIPLE_IDS.filter(id => item.principles[id]?.trim()).map(id => <span key={id}>{id}</span>)}</div>
           <h3>{item.company_name}</h3><p>{item.description}</p>
-          <details><summary>What makes this Beautiful Success?</summary>{PRINCIPLE_IDS.filter(id => item.principles[id]?.trim()).map(id => <div className="ack-principle" key={id}><h4>{id}</h4><p>{item.principles[id]}</p></div>)}{safeWebUrl(item.website) && <a href={safeWebUrl(item.website)} target="_blank" rel="noopener noreferrer">Visit company website ↗</a>}</details>
+          <details><summary>What makes this Beautiful Success?</summary>{PRINCIPLE_IDS.filter(id => item.principles[id]?.trim()).map(id => <div className="ack-principle" key={id}><h4>{id}</h4><p>{item.principles[id]}</p></div>)}{safeWebUrl(item.website || '') && <a href={safeWebUrl(item.website || '')} target="_blank" rel="noopener noreferrer">Visit company website ↗</a>}</details>
           <div className="ack-votes" aria-label={`Votes for ${item.company_name}`}>
             <button aria-label={`Upvote ${item.company_name}: ${item.upvotes} votes`} aria-pressed={item.my_vote === 1} disabled={!!busy} onClick={() => void vote(item,1)}><ArrowUp size={18} />{item.upvotes}</button>
             <button aria-label={`Downvote ${item.company_name}: ${item.downvotes} votes`} aria-pressed={item.my_vote === -1} disabled={!!busy} onClick={() => void vote(item,-1)}><ArrowDown size={18} />{item.downvotes}</button>
