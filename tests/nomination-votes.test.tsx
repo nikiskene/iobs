@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import VoteButtons from '../src/components/acknowledgement/VoteButtons';
+import type { AcknowledgementNomination } from '../src/lib/acknowledgements';
+const item: AcknowledgementNomination = { id:'test', company_name:'Test Company', website:null, image_url:'', description:'', ray:'society', principles:{}, created_at:'', upvotes:48, downvotes:1, my_vote:0 };
+const render = (changes: Partial<AcknowledgementNomination>) => renderToStaticMarkup(<VoteButtons item={{...item,...changes}} busy={null} onVote={()=>{}} />);
+assert.ok(!/\d+ votes/.test(render({})), '49 voters: no totals in accessible labels');
+assert.ok(!render({}).includes('<span>48</span>'), '49 voters: no visible totals');
+assert.match(render({upvotes:49}), /49 votes/,'50 voters: totals appear');
+assert.match(render({upvotes:49}), /<span>49<\/span>/);
+assert.match(render({my_vote:1}), /aria-pressed="true"/);
+assert.match(render({my_vote:1}), /fill="currentColor"/,'support heart filled');
+assert.match(render({my_vote:-1}), /aria-label="Downvote Test Company" aria-pressed="true"/);
+assert.equal((render({my_vote:0}).match(/aria-pressed="false"/g)||[]).length,2);
+console.log('Vote display tests passed: threshold 49/50, hidden accessible counts, both selections and neutral state.');

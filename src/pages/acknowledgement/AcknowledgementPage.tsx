@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowDown, ArrowUp, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../hooks/useAuth';
 import { useNominationMode } from '../../providers/NominationModeProvider';
 import { NOMINATION_RAYS, PRINCIPLE_IDS } from '../../content/nominationContent';
 import { safeWebUrl, type AcknowledgementNomination } from '../../lib/acknowledgements';
+import VoteButtons from '../../components/acknowledgement/VoteButtons';
 import ReadingDialog from '../../components/acknowledgement/ReadingDialog';
 import './acknowledgement.css';
 
@@ -42,12 +43,7 @@ export default function AcknowledgementPage() {
     setBusy(null);
   }
   const selected = items.find(item => item.id === selectedId);
-  const voteControls = (item: AcknowledgementNomination) => <div className="ack-votes" aria-label={`Votes for ${item.company_name}`}>
-    <span className="ack-vote-label">Community vote</span>
-    <button aria-label={`Upvote ${item.company_name}: ${item.upvotes} votes`} aria-pressed={item.my_vote === 1} disabled={!!busy} onClick={() => void vote(item,1)}><ArrowUp size={18} />{item.upvotes}</button>
-    <button aria-label={`Downvote ${item.company_name}: ${item.downvotes} votes`} aria-pressed={item.my_vote === -1} disabled={!!busy} onClick={() => void vote(item,-1)}><ArrowDown size={18} />{item.downvotes}</button>
-    {busy === item.id && <span role="status">Saving…</span>}
-  </div>;
+  const voteControls = (item: AcknowledgementNomination) => <VoteButtons item={item} busy={busy} onVote={direction => void vote(item, direction)} />;
   return <main className="ack-page">
     <section className="ack-hero">
       <p className="ibs-eyebrow">Beautiful Success · Acknowledgement</p>
