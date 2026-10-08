@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { useNominationMode } from '../../providers/NominationModeProvider';
 import { useAuth } from '../../hooks/useAuth';
-import { getNominationContent, NOMINATION_RAYS, PRINCIPLE_IDS } from '../../content/nominationContent';
+import { getNominationContent, NARRATIVE_MAX_LENGTH, narrativeLimitError, NOMINATION_RAYS, PRINCIPLE_IDS } from '../../content/nominationContent';
 import { safeWebUrl } from '../../lib/acknowledgements';
 import '../awards/nomination.css';
 import './acknowledgement.css';
@@ -24,6 +24,8 @@ export default function AcknowledgementForm() {
     const data = new FormData(form);
     const read = (name: string) => String(data.get(name) || '').trim();
     const principles = Object.fromEntries(PRINCIPLE_IDS.map(id => [id, read(id)]));
+    const limitError = narrativeLimitError(String(data.get('description') || ''), Object.fromEntries(PRINCIPLE_IDS.map(id => [id, String(data.get(id) || '')])));
+    if (limitError) { setError(limitError); return; }
     if (!Object.values(principles).some(Boolean)) { setError(copy.required); return; }
     if (!safeWebUrl(read('website'))) { setError('Please enter an http or https company website.'); return; }
     const file = (form.elements.namedItem('image') as HTMLInputElement).files?.[0];
@@ -61,10 +63,10 @@ export default function AcknowledgementForm() {
       <form className="award-form nomination-form" onSubmit={submit}><fieldset className="nomination-fields" disabled={saving}>
         <label>Company name<input name="company" required maxLength={120} pattern=".*\S.*" /></label>
         <label>Company website<input name="website" type="url" required maxLength={500} placeholder="https://" /></label>
-        <label>Short description<textarea name="description" required maxLength={360} rows={3} placeholder="What does this company do, and what difference does it make?" /></label>
+        <p className="nomination-help">{copy.limit}</p><label>Short description<textarea name="description" required maxLength={NARRATIVE_MAX_LENGTH} rows={3} placeholder="What does this company do, and what difference does it make?" /></label>
         <label>Photo or logo (optional)<input name="image" type="file" accept="image/jpeg,image/png,image/webp" /></label><p className="nomination-help">JPG, PNG or WebP, up to 3 MB. Use an image you have permission to share.</p>
         <label>{copy.ray}<select name="ray" required defaultValue=""><option value="" disabled>{copy.choose}</option>{NOMINATION_RAYS.map(([id,en]) => <option key={id} value={id}>{en}</option>)}</select></label><p className="nomination-help">{copy.rayHelp}</p>
-        <fieldset className="nomination-principles"><legend>{copy.title}</legend><p className="nomination-help">{copy.guidance}</p>{PRINCIPLE_IDS.map((id,index) => { const [title,question,explanation,example] = copy.principles[index]; return <div className="nomination-principle" key={id}><label htmlFor={`ack-${id}`}><span>{title}</span><span className="nomination-question">{question}</span></label><p id={`ack-${id}-help`} className="nomination-help">{explanation}</p><p className="nomination-example">For example: {example}</p><textarea id={`ack-${id}`} name={id} maxLength={750} rows={4} aria-describedby={`ack-${id}-help`} /></div>; })}</fieldset>
+        <fieldset className="nomination-principles"><legend>{copy.title}</legend><p className="nomination-help">{copy.guidance}</p>{PRINCIPLE_IDS.map((id,index) => { const [title,question,explanation,example] = copy.principles[index]; return <div className="nomination-principle" key={id}><label htmlFor={`ack-${id}`}><span>{title}</span><span className="nomination-question">{question}</span></label><p id={`ack-${id}-help`} className="nomination-help">{explanation}</p><p className="nomination-example">For example: {example}</p><textarea id={`ack-${id}`} name={id} maxLength={NARRATIVE_MAX_LENGTH} rows={4} aria-describedby={`ack-${id}-help`} /></div>; })}</fieldset>
         <label>Your name<input name="name" required maxLength={120} pattern=".*\S.*" autoComplete="name" /></label>
         <label>Your email<input name="email" type="email" required maxLength={254} autoComplete="email" /></label>
         {error && <p role="alert">{error}</p>}

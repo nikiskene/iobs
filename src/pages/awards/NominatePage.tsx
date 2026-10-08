@@ -3,7 +3,7 @@ import AwardPageHero from '../../components/awards/AwardPageHero';
 import { supabase } from '../../lib/supabase';
 import { useLocale } from '../../providers/LocaleProvider';
 import { getAwardLocaleContent } from '../../content/awardLocaleContent';
-import { getNominationContent, NOMINATION_RAYS, PRINCIPLE_IDS } from '../../content/nominationContent';
+import { getNominationContent, NARRATIVE_MAX_LENGTH, narrativeLimitError, NOMINATION_RAYS, PRINCIPLE_IDS } from '../../content/nominationContent';
 import './nomination.css';
 
 export default function NominatePage() {
@@ -11,6 +11,7 @@ export default function NominatePage() {
   const p = getAwardLocaleContent(locale).pages;
   const copy = getNominationContent(locale);
   const [state, setState] = useState<'idle'|'sending'|'sent'|'error'>('idle');
+  const [limitError, setLimitError] = useState('');
   const [missingPrinciple, setMissingPrinciple] = useState(false);
   const sending = useRef(false);
   const firstAnswer = useRef<HTMLTextAreaElement>(null);
@@ -21,6 +22,9 @@ export default function NominatePage() {
     const formElement = event.currentTarget;
     const data = new FormData(formElement);
     const read = (key: string) => String(data.get(key) || '').trim();
+    const lengthError = narrativeLimitError('', Object.fromEntries(PRINCIPLE_IDS.map(id => [id, String(data.get(id) || '')])));
+    setLimitError(lengthError);
+    if (lengthError) return;
     const answers = PRINCIPLE_IDS.map(read);
     if (!answers.some(Boolean)) {
       setMissingPrinciple(true);
@@ -33,15 +37,10 @@ export default function NominatePage() {
     sending.current = true;
     setState('sending');
     try {
-      const { error } = await supabase.from('contact_messages').insert({
-        name: read('name'), email: read('email'), organization: null,
-        reason: `AWARD NOMINATION · ${ray[1].toUpperCase()}`,
-        message: [
-          `Nominee: ${read('name')}`, `Ray: ${ray[1]} (${ray[0]})`,
-          ...PRINCIPLE_IDS.map((id, index) => `\n${id.toUpperCase()}:\n${answers[index] || 'Not provided'}`),
-          ...(read('link') ? [`\nEvidence: ${read('link')}`] : []),
-          `\nLanguage: ${locale.toUpperCase()}`,
-        ].join('\n'),
+      const { error } = await supabase.rpc('submit_award_nomination', {
+        p_name: read('name'), p_email: read('email'), p_ray: ray[0], p_ray_label: ray[1],
+        p_principles: Object.fromEntries(PRINCIPLE_IDS.map((id, index) => [id, answers[index]])),
+        p_link: read('link'), p_locale: locale,
       });
       if (error) throw error;
       formElement.reset();
@@ -79,7 +78,7 @@ export default function NominatePage() {
                   <label htmlFor={`principle-${id}`}><span>{title}</span><span className="nomination-question">{question}</span></label>
                   <p id={`${id}-help`} className="nomination-help">{explanation}</p>
                   <p id={`${id}-example`} className="nomination-example">{copy.example}: {example}</p>
-                  <textarea id={`principle-${id}`} name={id} rows={4} maxLength={750}
+                  <textarea id={`principle-${id}`} name={id} rows={4} maxLength={NARRATIVE_MAX_LENGTH}
                     ref={index === 0 ? firstAnswer : undefined}
                     aria-describedby={`${id}-help ${id}-example${missingPrinciple ? ' principles-error' : ''}`}
                     onChange={(event) => { if (event.target.value.trim()) setMissingPrinciple(false); }} />
@@ -90,6 +89,7 @@ export default function NominatePage() {
             <label>{p.yourEmail}<input name="email" type="email" required maxLength={200} autoComplete="email" /></label>
             <button className="award-button" type="submit">{state === 'sending' ? '…' : p.prepare}</button>
           </fieldset>
+          {limitError && <p role="alert">{limitError}</p>}
           {state === 'sent' && <p role="status">{p.sent}</p>}
           {state === 'error' && <p role="alert">{copy.error}</p>}
         </form>

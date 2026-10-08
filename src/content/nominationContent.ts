@@ -1,3 +1,8 @@
+export const NARRATIVE_MAX_LENGTH = 3000;
+export function narrativeLimitError(description: string, principles: Record<string, string>): string {
+  return [description, ...Object.values(principles)].some(value => value.length > NARRATIVE_MAX_LENGTH)
+    ? 'Please keep the description and each principle answer to 3,000 characters or fewer.' : '';
+}
 export const PRINCIPLE_IDS = ['offer', 'create', 'echo', 'momentum', 'legacy'] as const;
 export const NOMINATION_RAYS = [
   ['me', 'Me', 'أنا'], ['circle', 'My Community', 'مجتمعي'],
@@ -13,7 +18,7 @@ const en = {
   guidance: 'At least one principle must be answered. The more principles you can speak to, the stronger your submission. Share what you know; you can leave the others blank.',
   required: 'Please answer at least one of the five principles.',
   error: 'Your nomination could not be sent. Your answers are still here. Please try again.',
-  example: 'For example', limit: 'Up to 750 characters per answer.',
+  example: 'For example', limit: 'Up to 3,000 characters per answer.',
   principles: [
     ['OFFER', 'What do they offer to the world?', 'What contribution begins with “What can I offer to the world?” rather than “What’s in it for me?” What do they give, share, or make possible for others?', 'A company dedicates 1% of its profit to community-led projects.'],
     ['CREATE', 'What do they create that does not need protecting?', 'Protection is a basic human need. Where have they been able to direct resources towards creation instead of protecting ownership, exclusivity, or advantage?', 'A project makes useful products from discarded plastic bottles collected on Ghana’s beaches, creating value from materials no one else wants.'],
@@ -29,7 +34,7 @@ const ar: typeof en = {
   guidance: 'يجب الإجابة عن مبدأ واحد على الأقل. كلما تناولت مبادئ أكثر، أصبح ترشيحك أقوى. شارك ما تعرفه، ويمكنك ترك البقية فارغة.',
   required: 'يرجى الإجابة عن مبدأ واحد على الأقل من المبادئ الخمسة.',
   error: 'تعذّر إرسال ترشيحك. إجاباتك محفوظة في النموذج. يرجى المحاولة مجدداً.',
-  example: 'مثال', limit: 'حتى 750 حرفاً لكل إجابة.',
+  example: 'مثال', limit: 'حتى 3,000 حرفاً لكل إجابة.',
   principles: [
     ['العطاء · OFFER', 'ماذا يقدمون للعالم؟', 'ما المساهمة التي تبدأ بسؤال «ماذا يمكنني أن أقدم للعالم؟» بدلاً من «ماذا سأستفيد؟» ما الذي يمنحونه أو يشاركونه أو يتيحونه للآخرين؟', 'تخصص شركة 1% من أرباحها لمشاريع يقودها المجتمع المحلي.'],
     ['الإبداع · CREATE', 'ماذا يبتكرون بحيث لا يحتاج إلى حماية؟', 'الحماية حاجة إنسانية أساسية. أين استطاعوا توجيه مواردهم نحو الإبداع بدلاً من حماية الملكية أو الحصرية أو الميزة التنافسية؟', 'يصنع مشروع منتجات مفيدة من زجاجات بلاستيكية مهملة جُمعت من شواطئ غانا، ليخلق قيمة من مواد لم يعد أحد يريدها.'],
