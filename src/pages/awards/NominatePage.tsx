@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase';
 import { useLocale } from '../../providers/LocaleProvider';
 import { getAwardLocaleContent } from '../../content/awardLocaleContent';
 import { getNominationContent, NARRATIVE_MAX_LENGTH, narrativeLimitError, NOMINATION_RAYS, PRINCIPLE_IDS } from '../../content/nominationContent';
+import FieldHelp from '../../components/acknowledgement/FieldHelp';
 import './nomination.css';
 
 export default function NominatePage() {
@@ -75,7 +76,7 @@ export default function NominatePage() {
               {PRINCIPLE_IDS.map((id, index) => {
                 const [title, question, explanation, example] = copy.principles[index];
                 return <div key={id} className="nomination-principle">
-                  <label htmlFor={`principle-${id}`}><span>{title}</span><span className="nomination-question">{question}</span></label>
+                  <div className="nomination-field-heading"><label htmlFor={`principle-${id}`}><span>{title}</span><span className="nomination-question">{question}</span></label><FieldHelp field={id} locale={locale} /></div>
                   <p id={`${id}-help`} className="nomination-help">{explanation}</p>
                   <p id={`${id}-example`} className="nomination-example">{copy.example}: {example}</p>
                   <textarea id={`principle-${id}`} name={id} rows={4} maxLength={NARRATIVE_MAX_LENGTH}

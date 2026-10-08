@@ -11,3 +11,10 @@
 .nomination-form input,.nomination-form select{min-width:0;width:100%;box-sizing:border-box}
 .nomination-form [role=alert]{color:var(--accent)}
 @media(max-width:600px){.nomination-form{padding:22px 16px}}
+.nomination-field-heading{display:flex;align-items:start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.nomination-form .nomination-field-heading label{margin:0;flex:1}
+.nomination-info{flex:none;display:grid;place-items:center;width:36px;min-width:36px;height:36px;padding:0;border:0;background:transparent;color:var(--muted);cursor:pointer;font:italic 14px Georgia,serif}
+.nomination-info span{display:grid;place-items:center;width:19px;height:19px;border:1px solid currentColor;border-radius:50%}
+.nomination-info:hover{color:var(--ink)}.nomination-info:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:50%}
+.nomination-writing-steps{list-style:decimal;padding-inline-start:24px;margin:24px 0}.nomination-writing-steps li{padding-inline-start:8px;margin-bottom:22px}.nomination-writing-steps strong{font-weight:600}.nomination-writing-steps li::marker{color:var(--accent)}.nomination-writing-steps p{margin:4px 0 0;font-size:15px}
+.nomination-writing-note{padding-top:20px;border-top:1px solid color-mix(in srgb,var(--ink) 20%,transparent);font-size:14px;color:var(--muted)}

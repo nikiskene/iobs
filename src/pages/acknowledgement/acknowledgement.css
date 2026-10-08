@@ -20,3 +20,27 @@
 .ack-hero-actions{display:flex;align-items:center;gap:18px}.ack-my-link{text-decoration:underline;font-size:14px}
 @media(max-width:760px){.ack-grid{grid-template-columns:1fr}.ack-card{grid-template-columns:34% 66%}}
 @media(max-width:640px){.ack-page{padding:0 20px 48px}.ack-hero{padding:48px 0 36px}.ack-hero-bottom,.ack-gallery-heading{align-items:start;flex-direction:column;gap:20px}.ack-gallery{padding-top:32px}.ack-card{grid-template-columns:1fr}.ack-card-image{aspect-ratio:16 / 9;min-height:210px}.ack-card-body{padding:20px}.ack-hero-bottom .award-button{width:100%}}
+/* Public nominations use generous stacked entries; private editing retains its grid. */
+.ack-stack{display:grid;gap:28px}
+.ack-feature{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);align-items:start;background:transparent}
+.ack-feature .ack-card-image{aspect-ratio:16 / 9;margin:24px 0 24px 24px;background:color-mix(in srgb,var(--paper) 85%,white)}
+.ack-feature .ack-card-image img{object-fit:contain}
+.ack-feature .ack-card-body{padding:30px 32px}
+.ack-feature h3{font-size:clamp(28px,3vw,42px);line-height:1.12;letter-spacing:-.025em;margin:16px 0}
+.ack-feature .ack-preview{font-size:16px;line-height:1.7;white-space:pre-line;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:22px}
+.ack-entry-actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;margin-bottom:24px}
+.ack-read{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:var(--paper);border:1px solid var(--ink);padding:12px 18px;min-height:46px;font-size:13px;cursor:pointer}
+.ack-website{font-size:12px;line-height:1.6;text-underline-offset:4px;text-decoration:underline}
+.ack-vote-label{margin-inline-end:auto;color:var(--muted)}.ack-votes{flex-wrap:wrap}
+.ack-reading-image{aspect-ratio:16 / 9;display:grid;place-items:center;background:color-mix(in srgb,var(--paper) 85%,white);margin-bottom:28px;overflow:hidden}
+.ack-reading-image img{width:100%;height:100%;object-fit:contain}
+.ack-reading-intro{font-size:18px;line-height:1.75;white-space:pre-wrap;margin-bottom:30px}
+.ack-reading-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}.ack-reading-nav button{border:1px solid var(--ack-line);padding:8px 12px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;background:transparent;color:inherit;cursor:pointer}
+.ack-reading-principle{padding:26px 0;border-top:1px solid var(--ack-line);scroll-margin-top:140px}.ack-reading-principle h3{font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;margin:0 0 16px;color:var(--accent)}.ack-reading-principle p{margin:0;white-space:pre-wrap}
+.ack-reading-website{display:inline-flex;align-items:center;gap:8px;font-size:14px;text-underline-offset:4px;margin:0 0 28px}
+.ack-vote-note{font-size:12px;color:var(--muted);line-height:1.7;margin:18px 0 0}
+@media(max-width:900px){.ack-feature{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}.ack-feature .ack-card-image{margin:20px 0 20px 20px}.ack-feature .ack-card-body{padding:24px}.ack-feature .ack-preview{font-size:15px}}
+@media(max-width:640px){.ack-stack{gap:24px}.ack-feature{grid-template-columns:1fr}.ack-feature .ack-card-image{margin:0;min-height:0}.ack-feature .ack-card-body{padding:24px 20px}.ack-feature h3{font-size:30px}.ack-feature .ack-preview{-webkit-line-clamp:5}.ack-entry-actions{gap:18px}.ack-reading-intro{font-size:16px}.ack-reading-nav{gap:6px}.ack-hero-actions{flex-wrap:wrap;width:100%}.ack-votes button{padding:10px 14px}}
+@media(prefers-reduced-motion:no-preference){.ack-read,.nomination-info{transition:opacity .2s ease}.ack-read:hover{opacity:.8}}
+.ack-feature .ack-card-image img,.ack-reading-image img{position:absolute;inset:0;width:100%;height:100%;max-height:100%;object-fit:contain}
+.ack-reading-image{position:relative}
