@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Archive, ArchiveRestore, Check, FileText, FileUp, X } from 'lucide-react';
+import { Archive, ArchiveRestore, Check, FileText, FileUp, Trash2, X } from 'lucide-react';
+import DeleteWorkItemDialog from './DeleteWorkItemDialog';
 import { supabase } from '../../lib/supabase';
 import { openMomentumDocument, uploadMomentumDocument } from '../../lib/momentumDocuments';
 import { momentumCategories, momentumDocumentCategories, type MomentumDocument, type MomentumDocumentCategory, type MomentumItem, type MomentumOwner, type MomentumStatus } from '../../lib/momentumTypes';
 
-export default function MomentumForm({ item, owners, currentUserId, onClose, onSaved }: {
+export default function MomentumForm({ item, owners, currentUserId, onClose, onSaved, canDelete = false }: {
   item: MomentumItem | null; owners: MomentumOwner[]; currentUserId: string;
-  onClose: () => void; onSaved: () => void;
+  onClose: () => void; onSaved: () => void; canDelete?: boolean;
 }) {
   const [title, setTitle] = useState(item?.title || '');
   const [ownerId, setOwnerId] = useState(item?.owner_user_id || currentUserId);
@@ -30,6 +31,7 @@ export default function MomentumForm({ item, owners, currentUserId, onClose, onS
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
     if (status !== 'waiting') setWaitingOn('');
@@ -119,6 +121,8 @@ export default function MomentumForm({ item, owners, currentUserId, onClose, onS
         </div>
       </div>
       {error && <p className="mt-4 rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm text-red-300">{error}</p>}
+      {item && canDelete && <button type="button" disabled={saving || uploading} onClick={() => setConfirmDelete(true)} className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-red-400/30 px-5 text-sm text-red-300 hover:bg-red-400/10 disabled:opacity-50"><Trash2 className="h-4 w-4" />Delete item</button>}
+      {confirmDelete && item && canDelete && <DeleteWorkItemDialog item={item} onCancel={() => setConfirmDelete(false)} onDeleted={onSaved} />}
       <div className="mt-6 flex flex-wrap items-center justify-end gap-3">{item?.status === 'fact' && <button onClick={toggleArchive} disabled={saving} className="mr-auto inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2.5 text-sm text-stone-400 hover:border-amber-300/20 hover:text-amber-200">{item.archived_at ? <ArchiveRestore className="h-4 w-4" /> : <Archive className="h-4 w-4" />}{item.archived_at ? 'Restore fact' : 'Archive fact'}</button>}<button onClick={onClose} className="rounded-full px-5 py-2.5 text-sm text-stone-400 hover:text-white">Cancel</button><button onClick={save} disabled={saving} className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-5 py-2.5 text-sm font-semibold text-stone-950 hover:bg-amber-300 disabled:opacity-50"><Check className="h-4 w-4" />{saving ? 'Saving…' : item ? 'Save changes' : 'Create item'}</button></div>
     </div>
   </div>;

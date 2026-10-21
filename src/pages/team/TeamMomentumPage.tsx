@@ -21,6 +21,17 @@ export default function TeamMomentumPage() {
   const [mobileMode, setMobileMode] = useState<'overview' | 'facts'>('overview');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [canDelete, setCanDelete] = useState(false);
+  useEffect(() => {
+    let active = true;
+    setCanDelete(false);
+    if (user) {
+      supabase.rpc('can_delete_work_items').then(({ data, error }) => {
+        if (active) setCanDelete(!error && data === true);
+      });
+    }
+    return () => { active = false; };
+  }, [user]);
 
   const load = useCallback(async () => {
     setError('');
@@ -119,7 +130,7 @@ export default function TeamMomentumPage() {
     </div>
     </>}
 
-    {editing !== undefined && user && <MomentumForm item={editing} owners={owners} currentUserId={user.id} onClose={() => setEditing(undefined)} onSaved={() => { setEditing(undefined); void load(); }} />}
+    {editing !== undefined && user && <MomentumForm item={editing} owners={owners} currentUserId={user.id} canDelete={canDelete} onClose={() => setEditing(undefined)} onSaved={() => { setEditing(undefined); void load(); }} />}
   </div>;
 }
 
