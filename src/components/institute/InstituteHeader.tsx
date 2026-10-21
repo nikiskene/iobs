@@ -69,12 +69,12 @@ export default function InstituteHeader() {
       {mobileOpen && <div className="institute-mobile-nav">
         {PUBLIC_LINKS.map(([to, label]) => <Link to={to} key={to}>{label}</Link>)}
         <Link to={nominationLink}>{mode === 'acknowledgement' ? 'Acknowledgement' : t('nav.nominate')}</Link>
-        {user ? <><Link to="/dashboard/profile">Profile</Link><Link to="/dashboard/inbox">Inbox{unreadCount ? ` (${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office">My chapter</Link>}{hasTeamAccess && <Link to="/work">Work</Link>}{isAdmin && <Link to="/admin">Admin</Link>}<button type="button" onClick={logout}>Log out</button></> : <Link to="/login">Log in</Link>}
+        {user ? <><Link to="/dashboard/profile">Profile</Link><Link to="/dashboard/settings">Settings</Link><Link to="/dashboard/inbox">Inbox{unreadCount ? ` (${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office">My chapter</Link>}{hasTeamAccess && <Link to="/work">Work</Link>}{isAdmin && <Link to="/admin">Admin</Link>}<button type="button" onClick={logout}>Log out</button></> : <Link to="/login">Log in</Link>}
       </div>}
     </>
   );
 }
 
 function AccountMenu({ name, isAdmin, hasTeamAccess, hasChapterAccess, hasSubmissions, unreadCount, logout }: { name:string; isAdmin:boolean; hasTeamAccess:boolean; hasChapterAccess:boolean; hasSubmissions:boolean; unreadCount:number; logout:()=>void }) {
-  return <div className="institute-account-menu"><strong>{name}</strong><Link to="/dashboard/profile"><User /> Profile</Link>{hasSubmissions && <Link to="/acknowledgement/mine">My submissions</Link>}<Link to="/dashboard/inbox"><Inbox /> Inbox {unreadCount ? `(${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office"><Briefcase /> My chapter</Link>}{hasTeamAccess && <Link to="/work"><Briefcase /> Work</Link>}{isAdmin && <Link to="/admin"><Shield /> Admin</Link>}<button type="button" onClick={logout}><LogOut /> Log out</button></div>;
+  return <div className="institute-account-menu"><strong>{name}</strong><Link to="/dashboard/profile"><User /> Profile</Link><Link to="/dashboard/settings"><User /> Settings</Link>{hasSubmissions && <Link to="/acknowledgement/mine">My submissions</Link>}<Link to="/dashboard/inbox"><Inbox /> Inbox {unreadCount ? `(${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office"><Briefcase /> My chapter</Link>}{hasTeamAccess && <Link to="/work"><Briefcase /> Work</Link>}{isAdmin && <Link to="/admin"><Shield /> Admin</Link>}<button type="button" onClick={logout}><LogOut /> Log out</button></div>;
 }
