@@ -34,7 +34,13 @@ export function CookieConsentProvider({ children }: { children:ReactNode }) {
     const storage = (event:StorageEvent) => { if (event.key === CONSENT_KEY || event.key === null) sync(); };
     const visible = () => { if (document.visibilityState === 'visible') sync(); };
     window.addEventListener('storage',storage); window.addEventListener('focus',sync); window.addEventListener('pageshow',sync); document.addEventListener('visibilitychange',visible);
-    const timer = preference ? window.setTimeout(sync, Math.min(2_147_483_647, Math.max(0, preference.savedAt + CONSENT_MAX_AGE - Date.now()))) : undefined;
+    let timer: number | undefined;
+    const checkExpiry = () => {
+      sync();
+      const remaining = preference ? preference.savedAt + CONSENT_MAX_AGE - Date.now() : 0;
+      if (remaining > 0) timer = window.setTimeout(checkExpiry, Math.min(2_147_483_647, remaining));
+    };
+    if (preference) timer = window.setTimeout(checkExpiry, Math.min(2_147_483_647, Math.max(0, preference.savedAt + CONSENT_MAX_AGE - Date.now())));
     return () => { window.removeEventListener('storage',storage); window.removeEventListener('focus',sync); window.removeEventListener('pageshow',sync); document.removeEventListener('visibilitychange',visible); window.clearTimeout(timer); };
   }, [preference]);
   return <ConsentContext.Provider value={{preference,openSettings:()=>setSettings(true),choose}}>
