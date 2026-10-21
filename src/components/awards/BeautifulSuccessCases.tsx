@@ -1,3 +1,4 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 // src/components/awards/BeautifulSuccessCases.tsx
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -48,8 +49,9 @@ export default function BeautifulSuccessCases() {
 function CaseCard({ item, locale }: { item: CaseItem; locale: Locale }) {
   const ordered = [...(item.thesis_media || [])].sort((a, b) => a.display_order - b.display_order);
   const media = ordered.find((image) => image.is_featured) || ordered[0];
+  const { translate: tr } = useAwardSiteContent();
   const translation = locale === 'en' ? undefined : item.thesis_translations?.find((entry) => entry.locale === locale);
-  const title = translation?.title || item.title;
+  const title = translation?.title || (item.title ? tr(item.title) : item.title);
   const summary = translation?.subheadline || translation?.short_explanation || item.subheadline || item.short_explanation;
   return <article>{media && <img src={caseImage(media.file_url)} alt={media.alt_text || title} loading="lazy" decoding="async" />}<div><h3>{title}</h3>{summary && <p>{summary}</p>}</div></article>;
 }

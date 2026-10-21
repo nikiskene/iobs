@@ -1,3 +1,5 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
+import { localizeCmsRecord } from '../../content/localizedCms';
 import { useEffect, useState } from "react";
 import { Linkedin, BookOpen, X } from "lucide-react";
 import { supabase } from "../../lib/supabase";
@@ -14,6 +16,7 @@ const PUBLIC_TEAM_CATEGORIES = [
 ] as const;
 
 export default function TeamPage() {
+  const { translate: tr } = useAwardSiteContent();
   const [heads, setHeads] = useState<TeamPerson[]>([]);
   const [members, setMembers] = useState<TeamPerson[]>([]);
   const [loading, setLoading] = useState(true);
@@ -56,17 +59,12 @@ export default function TeamPage() {
 
   return (
     <main>
-      <AwardPageHero eyebrow="The Institute" title="The people behind IOBS">
-        The founders, team, supporters and advisers shaping the Institute of
-        Beautiful Success.
-      </AwardPageHero>
+      <AwardPageHero eyebrow={tr("The Institute")} title={tr("The people behind IOBS")}>{tr("The founders, team, supporters and advisers shaping the Institute of Beautiful Success.")}</AwardPageHero>
       <div className="ibs-section team-directory">
         {loading ? (
-          <p role="status">Loading the people behind IOBS…</p>
+          <p role="status">{tr("Loading the people behind IOBS…")}</p>
         ) : error ? (
-          <p role="alert">
-            We couldn’t load the team. Please try again shortly.
-          </p>
+          <p role="alert">{tr("We couldn’t load the team. Please try again shortly.")}</p>
         ) : (
           TEAM_CATEGORIES
             .filter(([category]) =>
@@ -77,10 +75,10 @@ export default function TeamPage() {
             .map(([category, label]) => {
               const people =
                 category === "chapters"
-                  ? heads.filter(
+                  ? localizeCmsRecord(heads, tr).filter(
                       (h, i, a) => a.findIndex((x) => x.id === h.id) === i,
                     )
-                  : members.filter((member) => member.category === category);
+                  : localizeCmsRecord(members, tr).filter((member) => member.category === category);
               if (people.length === 0) return null;
               return (
                 <section
@@ -90,7 +88,7 @@ export default function TeamPage() {
                 >
                   <header className="team-category-heading">
                     <div>
-                      <h2 id={`team-${category}`}>{label}</h2>
+                      <h2 id={`team-${category}`}>{tr(label)}</h2>
                     </div>
                   </header>
                   <div className="team-grid">
@@ -125,9 +123,7 @@ export default function TeamPage() {
                                 type="button"
                                 className="team-bio-button"
                                 onClick={() => setSelectedPerson(person)}
-                              >
-                                Read full bio
-                              </button>
+                              >{tr("Read full bio")}</button>
                             </>
                           )}
                           <div className="team-socials">
@@ -179,7 +175,7 @@ export default function TeamPage() {
               type="button"
               className="team-bio-close"
               onClick={() => setSelectedPerson(null)}
-              aria-label="Close biography"
+              aria-label={tr("Close biography")}
             >
               <X />
             </button>

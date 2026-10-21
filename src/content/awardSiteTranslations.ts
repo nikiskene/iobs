@@ -1,4 +1,6 @@
 // src/content/awardSiteTranslations.ts
+import arabicSiteCopy from './arabicSiteCopy.json';
+import { translateArabicCms } from './localizedCms';
 import type { Locale } from '../providers/LocaleProvider';
 import type { AwardSiteContent } from '../providers/AwardSiteContentProvider';
 
@@ -76,7 +78,7 @@ const COPY: Record<Locale,Record<string,Copy>> = {
 };
 
 export function awardSiteDefaults(locale: Locale): AwardSiteContent[] {
-  return Object.keys(BASE).map((key) => ({
+  const rows = Object.keys(BASE).map((key) => ({
     ...BASE[key],
     locale,
     label: COPY[locale][key]?.label ?? COPY.en[key]?.label ?? null,
@@ -84,4 +86,16 @@ export function awardSiteDefaults(locale: Locale): AwardSiteContent[] {
     subheadline: COPY[locale][key]?.subheadline ?? COPY.en[key]?.subheadline ?? null,
     body: key.startsWith('hero_') ? heroBody[locale] : COPY[locale][key]?.body ?? COPY.en[key]?.body ?? null,
   }));
+  return rows.map(row => {
+    if (locale !== 'ar') return row;
+    // Exact approved translations also cover the current V3 homepage defaults.
+    const saved = arabicSiteCopy.find(item => item.content_key === row.content_key);
+    if (saved) return { ...row, label:saved.label, headline:saved.headline, subheadline:saved.subheadline, body:saved.body };
+    const english = COPY.en[row.content_key];
+    for (const field of ['label','headline','subheadline','body'] as const) {
+      const source = english?.[field];
+      if (source && translateArabicCms(source) !== source) row[field] = translateArabicCms(source);
+    }
+    return row;
+  });
 }

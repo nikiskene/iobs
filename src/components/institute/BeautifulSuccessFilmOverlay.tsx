@@ -1,3 +1,4 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import MuxPlayer, { type MuxPlayerRefAttributes } from '@mux/mux-player-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { IntroPlaybackMode } from './BeautifulSuccessIntro';
@@ -7,6 +8,7 @@ const PLAYBACK_ID = '01iIe5ylvu00vtH01yByKIvbpZICmH027X79kqYUI1HyhIc';
 type Props = { mode: IntroPlaybackMode; onClosed: () => void };
 
 export default function BeautifulSuccessFilmOverlay({ mode, onClosed }: Props) {
+  const { translate: tr } = useAwardSiteContent();
   const playerRef = useRef<MuxPlayerRefAttributes>(null);
   const closeTimerRef = useRef<number>();
   const [isFading, setIsFading] = useState(false);
@@ -60,7 +62,7 @@ export default function BeautifulSuccessFilmOverlay({ mode, onClosed }: Props) {
   };
 
   return (
-    <div className={`beautiful-success-intro${isFading ? ' is-fading' : ''}`} role="dialog" aria-modal="true" aria-label="Beautiful Success film">
+    <div className={`beautiful-success-intro${isFading ? ' is-fading' : ''}`} role="dialog" aria-modal="true" aria-label={tr("Beautiful Success film")}>
       <MuxPlayer
         ref={playerRef}
         className="beautiful-success-intro__player"
@@ -79,13 +81,13 @@ export default function BeautifulSuccessFilmOverlay({ mode, onClosed }: Props) {
         onError={handlePlaybackError}
       />
 
-      <button className="beautiful-success-intro__close" type="button" onClick={() => closeOverlay()} aria-label="Close the Beautiful Success film">
+      <button className="beautiful-success-intro__close" type="button" onClick={() => closeOverlay()} aria-label={tr("Close the Beautiful Success film")}>
         <span aria-hidden="true">×</span>
       </button>
 
       {isMuted && (
-        <button className="beautiful-success-intro__sound" type="button" onClick={enableSound} aria-label="Enable sound for the Beautiful Success film">
-          Sound on
+        <button className="beautiful-success-intro__sound" type="button" onClick={enableSound} aria-label={tr("Enable sound for the Beautiful Success film")}>
+          {tr("Enable sound")}
         </button>
       )}
     </div>

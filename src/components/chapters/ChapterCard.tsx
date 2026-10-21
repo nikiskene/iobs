@@ -1,3 +1,5 @@
+import { useLocale } from '../../providers/LocaleProvider';
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import { safeWebUrl } from "../../lib/team";
@@ -10,6 +12,8 @@ export default function ChapterCard({ chapter, head, events = [], fromHome = fal
   events?: ChapterEvent[];
   fromHome?: boolean;
 }) {
+  const { locale } = useLocale();
+  const { translate: tr } = useAwardSiteContent();
   const email = chapter.email.trim();
   const hasEmail = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email);
   return (
@@ -29,21 +33,21 @@ export default function ChapterCard({ chapter, head, events = [], fromHome = fal
               {safeWebUrl(head.photo_url) ? (
                 <img src={head.photo_url} alt={head.full_name} loading="lazy" width={48} height={48} />
               ) : <span className="chapter-head-initial" aria-hidden="true">{head.full_name.charAt(0)}</span>}
-              <p>Chapter Head · {head.full_name}</p>
+              <p>{tr("Chapter Head")} · {head.full_name}</p>
             </div>
           )}
           {hasEmail && (
             <a className="chapter-card-email" href={`mailto:${encodeURIComponent(email)}`} aria-label={`Email the ${chapter.name} chapter`}>
-              <Mail size={20} aria-hidden="true" /><span>Email chapter</span>
+              <Mail size={20} aria-hidden="true" /><span>{tr("Email chapter")}</span>
             </a>
           )}
         </div>
         {events.length > 0 && (
           <div className="chapter-card-events">
-            <h4>Upcoming events</h4>
+            <h4>{tr("Upcoming events")}</h4>
             {events.map(event => (
               <Link key={event.id} to={`/events/${event.slug}`}>
-                <time dateTime={event.start_date}>{new Date(event.start_date + "T00:00:00").toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}</time>
+                <time dateTime={event.start_date}>{new Date(event.start_date + "T00:00:00").toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" })}</time>
                 <span>{event.title} →</span>
               </Link>
             ))}

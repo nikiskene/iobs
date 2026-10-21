@@ -2,6 +2,8 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { supabase } from '../lib/supabase';
 import { SCALE_WORLDS, type ScaleWorld } from '../components/institute/scaleWorlds';
+import { useAwardSiteContent } from './AwardSiteContentProvider';
+import { localizeCmsRecord } from '../content/localizedCms';
 import type { ImpactScale } from './ImpactScaleProvider';
 
 type ScaleRow = {
@@ -21,6 +23,7 @@ type ScaleRow = {
 const ScaleWorldsContext = createContext<ScaleWorld[]>(SCALE_WORLDS);
 
 export function ScaleWorldsProvider({ children }: { children: ReactNode }) {
+  const { translate } = useAwardSiteContent();
   const [worlds, setWorlds] = useState(SCALE_WORLDS);
 
   useEffect(() => {
@@ -40,7 +43,7 @@ export function ScaleWorldsProvider({ children }: { children: ReactNode }) {
     return () => { active = false; window.clearTimeout(timer); };
   }, []);
 
-  return <ScaleWorldsContext.Provider value={worlds}>{children}</ScaleWorldsContext.Provider>;
+  return <ScaleWorldsContext.Provider value={localizeCmsRecord(worlds, translate)}>{children}</ScaleWorldsContext.Provider>;
 }
 
 export const useScaleWorlds = () => useContext(ScaleWorldsContext);

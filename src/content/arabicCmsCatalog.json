@@ -1,0 +1,1388 @@
+[
+  {
+    "key": "text_258dcd5b6d26abb5a3b46c82",
+    "context": "team.Silje Hoegmark.title",
+    "source": "Executive Assistant",
+    "translation": "مساعدة تنفيذية"
+  },
+  {
+    "key": "text_b32e9b7e1f1dc4ac870569d5",
+    "context": "team.Silje Hoegmark.location",
+    "source": "Aarhus, Denmark",
+    "translation": "آرهوس، الدنمارك"
+  },
+  {
+    "key": "text_cbf63b1da86a434cdc81dd0f",
+    "context": "team.Silje Hoegmark.description",
+    "source": "I dream of giving more people the experience of “awe” — that feeling when you forget yourself and sense that you are part of something greater. That you belong. That you are present, both within yourself and in your surroundings.\n\nIn that moment, you are also free from your head and your thoughts. There is presence, calm, and perhaps even a small shift within.",
+    "translation": "أحلم بأن أمنح مزيداً من الناس تجربة «الدهشة»؛ ذلك الشعور حين تنسى نفسك وتدرك أنك جزء من شيء أكبر. أنك تنتمي. وأنك حاضر، في داخلك وفيما يحيط بك.\n\nفي تلك اللحظة، تتحرر أيضاً من ضجيج ذهنك وأفكارك. تحضر السكينة والوعي، وربما يحدث في داخلك تحول صغير."
+  },
+  {
+    "key": "text_9637f6b780262e0fe5d1e7b8",
+    "context": "team.Niki Skene.title",
+    "source": "Co-Founder",
+    "translation": "شريك مؤسس"
+  },
+  {
+    "key": "text_05e53b868da06c6b797bca61",
+    "context": "team.Niki Skene.location",
+    "source": "Dubai, United Arab Emirates",
+    "translation": "دبي، الإمارات العربية المتحدة"
+  },
+  {
+    "key": "text_3a5f460e7ba797c7e91e0d4f",
+    "context": "team.Niki Skene.description",
+    "source": "Niki Skene is a curator, speaker coach and explorer of how people and organizations navigate change. Since 2012, he has led more than 220 executive learning expeditions into innovation ecosystems including Silicon Valley, Shenzhen and Dubai, and coached around 3,000 speakers worldwide. A former TEDx Ambassador and Faculty Coach at Singularity University, his work today explores a deceptively simple question: What if greater success made the world better?",
+    "translation": "نيكي سكين قيّم على التجارب ومدرّب متحدثين، يستكشف كيف يتعامل الأفراد والمؤسسات مع التغيير. منذ عام 2012، قاد أكثر من 220 رحلة تعلّم تنفيذية إلى منظومات الابتكار، منها وادي السيليكون وشنتشن ودبي، ودرّب نحو 3,000 متحدث حول العالم. شغل سابقاً دور سفير TEDx ومدرّب أعضاء هيئة التدريس في جامعة Singularity. ويستكشف عمله اليوم سؤالاً يبدو بسيطاً: ماذا لو كان ازدياد النجاح يجعل العالم أفضل؟"
+  },
+  {
+    "key": "text_28da8c1f9edee99d216bf511",
+    "context": "team.Omar M. Almahmoud.title",
+    "source": "Advisor",
+    "translation": "مستشار"
+  },
+  {
+    "key": "text_f68248fbe855eafc7d2faec0",
+    "context": "team.Omar M. Almahmoud.description",
+    "source": "Omar M. Almahmoud is a builder of ecosystems, opportunities and people. As CEO of the UAE’s ICT Fund, he has spent years turning long-term ambition into tangible capacity—connecting education, research, entrepreneurship and technology to help prepare a nation for what comes next. But Omar’s significance reaches beyond the institutions and initiatives he leads. At the heart of his work is a deeply human idea: that progress becomes meaningful when it expands what others are able to become. He brings to IOBS the perspective of someone who understands success not merely as achievement, but as responsibility—the responsibility to use influence, resources and technology to create possibilities far beyond oneself.",
+    "translation": "عمر محمد المحمود يبني المنظومات والفرص والقدرات البشرية. بصفته الرئيس التنفيذي لصندوق تطوير قطاع الاتصالات وتقنية المعلومات في الإمارات، أمضى سنوات في تحويل الطموح بعيد المدى إلى قدرات ملموسة، رابطاً التعليم والبحث وريادة الأعمال والتكنولوجيا لإعداد وطن للمستقبل. لكن أثر عمر يتجاوز المؤسسات والمبادرات التي يقودها. ففي قلب عمله فكرة إنسانية عميقة: يصبح التقدم ذا معنى حين يوسّع ما يستطيع الآخرون أن يصبحوا عليه. ويحمل إلى IOBS رؤية من يفهم النجاح بوصفه إنجازاً ومسؤولية معاً؛ مسؤولية استخدام التأثير والموارد والتكنولوجيا لخلق إمكانات تتجاوز الذات بكثير."
+  },
+  {
+    "key": "text_9f762230077397c22f2c4087",
+    "context": "team.Mathis Wackernagel.location",
+    "source": "Berkeley, CA",
+    "translation": "بيركلي، كاليفورنيا"
+  },
+  {
+    "key": "text_b9eecc81a5328a48c1e388d6",
+    "context": "team.Mathis Wackernagel.description",
+    "source": "Mathis Wackernagel is a global sustainability pioneer and co-creator of the Ecological Footprint, one of the world’s most influential frameworks for understanding humanity’s demand on our planet. As founder and long-time leader of Global Footprint Network, his work has helped governments, organizations and millions of people confront a deceptively simple question: How can we thrive within the means of our one planet? For decades, Mathis has translated planetary limits from abstract science into something leaders can understand, measure and act upon—making him an important voice in redefining what progress, prosperity and ultimately success can mean in the 21st century.",
+    "translation": "ماتيس واكرناغل رائد عالمي في الاستدامة وأحد مبتكري البصمة البيئية، وهي من أكثر الأطر تأثيراً لفهم ما تطلبه البشرية من كوكبنا. بصفته مؤسس Global Footprint Network وقائدها لسنوات طويلة، ساعد الحكومات والمؤسسات وملايين الأفراد على مواجهة سؤال يبدو بسيطاً: كيف نزدهر ضمن موارد كوكبنا الواحد؟ على مدى عقود، حوّل ماتيس حدود الكوكب من علم مجرد إلى مفاهيم يستطيع القادة فهمها وقياسها والعمل بها، ليصبح صوتاً مهماً في إعادة تعريف التقدم والازدهار والنجاح في القرن الحادي والعشرين."
+  },
+  {
+    "key": "text_9f5691d610d948524d6fe756",
+    "context": "team.Dietmar Dahmen.location",
+    "source": "Vienna, Austria",
+    "translation": "فيينا، النمسا"
+  },
+  {
+    "key": "text_0bc26247863c1bdb1b6c6f06",
+    "context": "team.Dietmar Dahmen.description",
+    "source": "Starting out as a strategic planner, Dietmar soon became a highly decorated creative executive, with top- level network agencies. Today, Dietmar is a global keynote speaker on change, future, disruption, transformation and sustainable success. He is an expert on modern leadership, innovative business models, trends and marketing as well as data supported, human-centred and sustainable success.",
+    "translation": "بدأ ديتمار مخططاً استراتيجياً، ثم سرعان ما أصبح قائداً إبداعياً حائزاً على جوائز عديدة لدى كبرى شبكات الوكالات. واليوم هو متحدث عالمي رئيسي في موضوعات التغيير والمستقبل والابتكار الجذري والتحول والنجاح المستدام. وهو خبير في القيادة الحديثة ونماذج الأعمال المبتكرة والتوجهات والتسويق، وكذلك في النجاح المستند إلى البيانات والمتمحور حول الإنسان والمستدام."
+  },
+  {
+    "key": "text_ce8ecd253009043cc83f4c58",
+    "context": "events.ces.title",
+    "source": "CES & Silicon Valley Inspiration Tour",
+    "translation": "جولة الإلهام في CES ووادي السيليكون"
+  },
+  {
+    "key": "text_5db1032e0d56856bb6e9994e",
+    "context": "events.ces.location",
+    "source": "Las Vegas & Francisco",
+    "translation": "لاس فيغاس وفرانسيسكو"
+  },
+  {
+    "key": "text_aaa779352d9e4c9df27be963",
+    "context": "events.ces.investment",
+    "source": "USD/EUR 5500",
+    "translation": "5,500 دولار أمريكي / يورو"
+  },
+  {
+    "key": "text_8fcec5a5009a8ddbcea42c4d",
+    "context": "events.ces.description",
+    "source": "Start at CES Las Vegas, where thousands of companies compete to show you what’s next. We cut through the noise to find what is real, relevant and potentially transformative. Then we take those questions to Silicon Valley for three days of curated conversations with founders, investors, researchers and technology leaders. From thousands of announcements to a handful of conversations that help make sense of them — and turn what you’ve seen into better questions, clearer decisions and a sharper view of what comes next.",
+    "translation": "نبدأ في معرض CES في لاس فيغاس، حيث تتنافس آلاف الشركات لتعرض عليك ما هو قادم. نتجاوز الضجيج لنكتشف ما هو حقيقي وذو صلة وقادر على إحداث تحول. ثم نحمل هذه الأسئلة إلى وادي السيليكون لثلاثة أيام من الحوارات المنتقاة مع مؤسسين ومستثمرين وباحثين وقادة في التكنولوجيا. من آلاف الإعلانات إلى عدد قليل من الحوارات التي تساعد على فهمها، وتحويل ما رأيته إلى أسئلة أفضل وقرارات أوضح ورؤية أدق لما يأتي بعد ذلك."
+  },
+  {
+    "key": "text_bc6e9100f7fd1906e5f98677",
+    "context": "events.china.title",
+    "source": "Shenzhen & Hongkong Strategy Tour",
+    "translation": "جولة الاستراتيجية في شنتشن وهونغ كونغ"
+  },
+  {
+    "key": "text_512694ae4fabe5ae5c31842a",
+    "context": "events.china.location",
+    "source": "Shenzhen & Hongkong",
+    "translation": "شنتشن وهونغ كونغ"
+  },
+  {
+    "key": "text_a70692e8468a9dc878bb2c31",
+    "context": "events.china.investment",
+    "source": "EUR/USD 3500",
+    "translation": "3,500 يورو / دولار أمريكي"
+  },
+  {
+    "key": "text_a3403b4631be73fe72dcfae2",
+    "context": "scales.me.i_am",
+    "source": "The author of my identity, attention and direction.",
+    "translation": "أصوغ هويتي واهتمامي واتجاهي."
+  },
+  {
+    "key": "text_92d691f5564bcde1c7ab7319",
+    "context": "scales.me.label",
+    "source": "Just Me",
+    "translation": "أنا وحدي"
+  },
+  {
+    "key": "text_93ba0b932ef0185e8a4d488b",
+    "context": "scales.me.title",
+    "source": "What would you celebrate as success?",
+    "translation": "ما الذي تحتفي به بوصفه نجاحاً؟"
+  },
+  {
+    "key": "text_ab2f593ee33809f8ecd63a11",
+    "context": "scales.me.eyebrow",
+    "source": "A private beginning",
+    "translation": "بداية شخصية"
+  },
+  {
+    "key": "text_d52070902c0f2db9b5e0a131",
+    "context": "scales.me.i_can_be",
+    "source": "More intentional, more alive and more fully myself.",
+    "translation": "أكثر وعياً بخياراتي، وأكثر حيوية، وأقرب إلى حقيقتي."
+  },
+  {
+    "key": "text_2267b5280bcaaeb9029063d8",
+    "context": "scales.me.what_to_do",
+    "source": "Explore public tours, intimate talks and personal expeditions.",
+    "translation": "استكشف الجولات المفتوحة والحوارات الحميمة والرحلات الشخصية."
+  },
+  {
+    "key": "text_062abf1df3628c417d53ce7c",
+    "context": "scales.me.introduction",
+    "source": "Every world begins with a person willing to imagine a different life.",
+    "translation": "يبدأ كل عالم بإنسان مستعد لتخيّل حياة مختلفة."
+  },
+  {
+    "key": "text_832697f1feb12cc46ce0fa0c",
+    "context": "scales.circle.i_am",
+    "source": "A friend, peer, partner and participant in something shared.",
+    "translation": "صديق وزميل وشريك ومشارك في أمر يجمعنا."
+  },
+  {
+    "key": "text_28fb0def48a20630c852fac2",
+    "context": "scales.circle.label",
+    "source": "My Community",
+    "translation": "مجتمعي"
+  },
+  {
+    "key": "text_7b8704b704eb7e62cb8efcde",
+    "context": "scales.circle.title",
+    "source": "What would your community celebrate as success?",
+    "translation": "ما الذي يحتفي به مجتمعك بوصفه نجاحاً؟"
+  },
+  {
+    "key": "text_937b30b055e7fecdf1746ca7",
+    "context": "scales.circle.eyebrow",
+    "source": "The intimate world",
+    "translation": "العالم القريب"
+  },
+  {
+    "key": "text_8b9e094d85b0b3470e7f61ab",
+    "context": "scales.circle.i_can_be",
+    "source": "Part of a circle where candour, imagination and belonging flourish.",
+    "translation": "جزء من دائرة تزدهر فيها الصراحة والخيال والانتماء."
+  },
+  {
+    "key": "text_0bec912e3199898e621b3265",
+    "context": "scales.circle.what_to_do",
+    "source": "Join salons, shared journeys and small-group encounters.",
+    "translation": "انضم إلى الصالونات والرحلات المشتركة واللقاءات ضمن مجموعات صغيرة."
+  },
+  {
+    "key": "text_77eab3ecd0ca6279cb03f046",
+    "context": "scales.circle.introduction",
+    "source": "Beautiful success grows through the people who shape and challenge us.",
+    "translation": "ينمو النجاح الجميل مع الأشخاص الذين يشكّلوننا ويتحدّون أفكارنا."
+  },
+  {
+    "key": "text_e5bfdb75c6b81d79601128d2",
+    "context": "scales.teams.i_am",
+    "source": "A contributor to a purpose none of us can reach alone.",
+    "translation": "أساهم في غاية لا يستطيع أحد منا بلوغها وحده."
+  },
+  {
+    "key": "text_cee021f1b617fe093e435c18",
+    "context": "scales.teams.label",
+    "source": "My Team",
+    "translation": "فريقي"
+  },
+  {
+    "key": "text_d5b287126db23a21824019a5",
+    "context": "scales.teams.title",
+    "source": "What would your team celebrate as success?",
+    "translation": "ما الذي يحتفي به فريقك بوصفه نجاحاً؟"
+  },
+  {
+    "key": "text_3756687e34447efafbb9d056",
+    "context": "scales.teams.eyebrow",
+    "source": "The shared endeavour",
+    "translation": "مسعى مشترك"
+  },
+  {
+    "key": "text_f65753d991ceaef6e31d8cb9",
+    "context": "scales.teams.i_can_be",
+    "source": "Part of a team that combines excellence with humanity.",
+    "translation": "جزء من فريق يجمع التميّز والإنسانية."
+  },
+  {
+    "key": "text_46c105479e5886b3d38a735d",
+    "context": "scales.teams.what_to_do",
+    "source": "Enter workshops, facilitated sessions and team expeditions.",
+    "translation": "شارك في ورش العمل والجلسات الميسّرة ورحلات الفرق."
+  },
+  {
+    "key": "text_cffe4933d22000e2c0b76303",
+    "context": "scales.teams.introduction",
+    "source": "Teams are where identity becomes trust, rhythm and collective possibility.",
+    "translation": "في الفرق، تتحول الهوية إلى ثقة وتناغم وإمكانات مشتركة."
+  },
+  {
+    "key": "text_98f26dda2c6a10fd4a70a86b",
+    "context": "scales.organizations.i_am",
+    "source": "A steward of culture, resources and institutional possibility.",
+    "translation": "أرعى الثقافة والموارد والإمكانات المؤسسية."
+  },
+  {
+    "key": "text_4074904058df1da7ad0a38c3",
+    "context": "scales.organizations.label",
+    "source": "My Company",
+    "translation": "شركتي"
+  },
+  {
+    "key": "text_7deddf2f41ace701acb254d3",
+    "context": "scales.organizations.title",
+    "source": "What would your company celebrate as success?",
+    "translation": "ما الذي تحتفي به شركتك بوصفه نجاحاً؟"
+  },
+  {
+    "key": "text_968824b45aca4ea8693dc39f",
+    "context": "scales.organizations.eyebrow",
+    "source": "The living institution",
+    "translation": "المؤسسة الحيّة"
+  },
+  {
+    "key": "text_e28c830b74fd1979ec80d908",
+    "context": "scales.organizations.i_can_be",
+    "source": "Part of an organization designed around a more generous definition of success.",
+    "translation": "جزء من مؤسسة صُمّمت حول تعريف أكثر سخاءً للنجاح."
+  },
+  {
+    "key": "text_1189965c70a96df4df95c77f",
+    "context": "scales.organizations.what_to_do",
+    "source": "Explore custom programmes, leadership journeys and institutional expeditions.",
+    "translation": "استكشف البرامج المصمّمة خصيصاً ورحلات القيادة والتجارب المؤسسية."
+  },
+  {
+    "key": "text_be206ef2e52e7fd082fa77a5",
+    "context": "scales.organizations.introduction",
+    "source": "Organizations turn repeated choices into culture, systems and consequence.",
+    "translation": "تحوّل المؤسسات الخيارات المتكررة إلى ثقافة وأنظمة وأثر."
+  },
+  {
+    "key": "text_897196210c04041f30d15bad",
+    "context": "scales.country.i_am",
+    "source": "A citizen with a stake in the character and direction of my country.",
+    "translation": "مواطن يهمّه طابع وطنه واتجاهه."
+  },
+  {
+    "key": "text_05f92689d0ee44ea6818189d",
+    "context": "scales.country.label",
+    "source": "My Country",
+    "translation": "وطني"
+  },
+  {
+    "key": "text_d5d90180270d77c97b3321e6",
+    "context": "scales.country.title",
+    "source": "What would your country celebrate as success?",
+    "translation": "ما الذي يحتفي به وطنك بوصفه نجاحاً؟"
+  },
+  {
+    "key": "text_05a25a3f39f76ee6656bd8ce",
+    "context": "scales.country.eyebrow",
+    "source": "The national imagination",
+    "translation": "الخيال الوطني"
+  },
+  {
+    "key": "text_ffb9ddf0b6056905792331a2",
+    "context": "scales.country.i_can_be",
+    "source": "Part of a nation that turns belonging into possibility.",
+    "translation": "جزء من وطن يحوّل الانتماء إلى إمكانات."
+  },
+  {
+    "key": "text_4325f2cde88de7503e748d7f",
+    "context": "scales.country.what_to_do",
+    "source": "Explore national cases, public programmes and civic expeditions.",
+    "translation": "استكشف التجارب الوطنية والبرامج العامة والرحلات المدنية."
+  },
+  {
+    "key": "text_93d9a3633848bd1e13b5cf16",
+    "context": "scales.country.introduction",
+    "source": "A country is a shared promise expressed through culture, institutions and choice.",
+    "translation": "الوطن وعد مشترك تعبّر عنه الثقافة والمؤسسات والاختيارات."
+  },
+  {
+    "key": "text_701f1a97c959c6f405fbc754",
+    "context": "scales.society.i_am",
+    "source": "A temporary custodian of a living planet and a shared future.",
+    "translation": "مؤتمن مؤقت على كوكب حيّ ومستقبل مشترك."
+  },
+  {
+    "key": "text_7ab291335a165271918d7372",
+    "context": "scales.society.label",
+    "source": "The World",
+    "translation": "العالم"
+  },
+  {
+    "key": "text_36ff57c9bd98347f47462b81",
+    "context": "scales.society.title",
+    "source": "What would our world celebrate as success?",
+    "translation": "ما الذي يحتفي به عالمنا بوصفه نجاحاً؟"
+  },
+  {
+    "key": "text_e84d3b9ef49278947e3b274f",
+    "context": "scales.society.eyebrow",
+    "source": "The beautiful possible",
+    "translation": "الممكن الجميل"
+  },
+  {
+    "key": "text_ee7eed112ac0813dce375ad4",
+    "context": "scales.society.i_can_be",
+    "source": "Part of a civilization worthy of its extraordinary potential.",
+    "translation": "جزء من حضارة تليق بإمكاناتها الاستثنائية."
+  },
+  {
+    "key": "text_1e7c63f38823261b3b4d492f",
+    "context": "scales.society.what_to_do",
+    "source": "Enter flagship gatherings, global expeditions and transformative questions.",
+    "translation": "شارك في اللقاءات الكبرى والرحلات العالمية والأسئلة القادرة على إحداث تحول."
+  },
+  {
+    "key": "text_b2cdb55bb5e798f242b52490",
+    "context": "scales.society.introduction",
+    "source": "At the widest human scale, beautiful success becomes a civilizational proposition.",
+    "translation": "على أوسع نطاق بشري، يصبح النجاح الجميل رؤية حضارية."
+  },
+  {
+    "key": "text_9b446591d083cf60449d32e7",
+    "context": "scales.world.i_am",
+    "source": "An explorer at the edge of what humanity believes it can become.",
+    "translation": "مستكشف عند حدود ما تؤمن البشرية بأنها قادرة على أن تصبحه."
+  },
+  {
+    "key": "text_64c9124a74dc5207fa894c57",
+    "context": "scales.world.label",
+    "source": "Beyond World",
+    "translation": "ما وراء العالم"
+  },
+  {
+    "key": "text_74c4cc0eb6703db99e94e52e",
+    "context": "scales.world.title",
+    "source": "What would the universe celebrate as success?",
+    "translation": "ما الذي يحتفي به الكون بوصفه نجاحاً؟"
+  },
+  {
+    "key": "text_dc16edd7954ad7e5b978d460",
+    "context": "scales.world.eyebrow",
+    "source": "The beautiful impossible",
+    "translation": "المستحيل الجميل"
+  },
+  {
+    "key": "text_63980d42c05798f88152c37f",
+    "context": "scales.world.i_can_be",
+    "source": "Part of a future that does not yet have a name.",
+    "translation": "جزء من مستقبل لم يُسمَّ بعد."
+  },
+  {
+    "key": "text_f2dd8ce10adc86c453b7ac87",
+    "context": "scales.world.what_to_do",
+    "source": "Enter speculative gatherings, frontier expeditions and impossible questions.",
+    "translation": "شارك في لقاءات تستشرف الاحتمالات ورحلات إلى آفاق جديدة وأسئلة تبدو مستحيلة."
+  },
+  {
+    "key": "text_705038cd8d40e26c18d38fde",
+    "context": "scales.world.introduction",
+    "source": "The final position is the courage to imagine beyond inherited limits.",
+    "translation": "المحطة الأخيرة هي شجاعة التخيّل خارج الحدود الموروثة."
+  },
+  {
+    "key": "text_0013c01fe0d094209b8bd3d2",
+    "context": "chapters.Amsterdam.city",
+    "source": "Amsterdam",
+    "translation": "أمستردام"
+  },
+  {
+    "key": "text_3a386c13d283dc2ebbe2aeff",
+    "context": "chapters.Amsterdam.country",
+    "source": "Netherlands",
+    "translation": "هولندا"
+  },
+  {
+    "key": "text_b980147ed6edc22169365f95",
+    "context": "chapters.Amsterdam.headline",
+    "source": "Hoi!",
+    "translation": "مرحباً!"
+  },
+  {
+    "key": "text_e595f45dc6c9e7665d108e8e",
+    "context": "chapters.Amsterdam.continent",
+    "source": "Europe",
+    "translation": "أوروبا"
+  },
+  {
+    "key": "text_f254841a67846cd1b8e821e0",
+    "context": "chapters.Amsterdam.description",
+    "source": "For centuries, Amsterdam has been a city of merchants, pioneers and unconventional thinkers. A place that built its prosperity by challenging the familiar. Today, Amsterdam is asking a different question: What if success is not simply about having more, but about creating more value for everyone? From pioneering Doughnut Economics to experimenting with circular business models, the city is exploring a new understanding of prosperity, where economic ambition, human wellbeing and planetary responsibility go hand in hand. The IOBS Amsterdam Chapter brings together people who believe that success deserves a new definition.",
+    "translation": "منذ قرون، كانت أمستردام مدينة التجار والروّاد وأصحاب الفكر غير التقليدي؛ مكاناً بنى ازدهاره بتحدّي المألوف. واليوم تطرح أمستردام سؤالاً مختلفاً: ماذا لو لم يكن النجاح مجرد امتلاك المزيد، بل خلق قيمة أكبر للجميع؟ من ريادة اقتصاد الدونات إلى تجربة نماذج الأعمال الدائرية، تستكشف المدينة فهماً جديداً للازدهار، يسير فيه الطموح الاقتصادي ورفاه الإنسان والمسؤولية تجاه الكوكب جنباً إلى جنب. يجمع فرع IOBS في أمستردام أشخاصاً يؤمنون بأن النجاح يستحق تعريفاً جديداً."
+  },
+  {
+    "key": "text_6c425048aa7badd9d84615bd",
+    "context": "chapters.Dubai.city",
+    "source": "Dubai",
+    "translation": "دبي"
+  },
+  {
+    "key": "text_dd64913c8b91d76ca27b371f",
+    "context": "chapters.Dubai.country",
+    "source": "United Arab Emirates",
+    "translation": "الإمارات العربية المتحدة"
+  },
+  {
+    "key": "text_0a5150029cc729e2419c41de",
+    "context": "chapters.Dubai.headline",
+    "source": "As-salamu alaykum",
+    "translation": "السلام عليكم"
+  },
+  {
+    "key": "text_7ac02ec1c874b1daffd3a062",
+    "context": "chapters.Dubai.continent",
+    "source": "Asia",
+    "translation": "آسيا"
+  },
+  {
+    "key": "text_f06f1dbc40c30208951e3b50",
+    "context": "chapters.Dubai.description",
+    "source": "Dubai has a remarkable history of turning audacious ambitions into reality. A city that has repeatedly challenged what others considered possible, proving that the future is not something we simply wait for, but something we create. It was here, inspired by this spirit of possibility, that the idea for the Institute of Beautiful Success was born. Our ambition is no less audacious: to establish a new global standard for success, one that celebrates not only what we achieve, but also the value we create for others and the world around us. The IOBS Dubai Chapter brings together people who believe that even the boldest visions can become reality.",
+    "translation": "لدبي تاريخ لافت في تحويل الطموحات الجريئة إلى واقع. مدينة تحدّت مراراً ما اعتبره الآخرون ممكناً، وأثبتت أن المستقبل ليس شيئاً ننتظره فحسب، بل شيئاً نصنعه. هنا، وبإلهام من روح الإمكانات هذه، وُلدت فكرة معهد النجاح الجميل. وطموحنا لا يقل جرأة: إرساء معيار عالمي جديد للنجاح، يحتفي بما نحققه وبالقيمة التي نخلقها للآخرين وللعالم من حولنا. يجمع فرع IOBS في دبي أشخاصاً يؤمنون بأن أكثر الرؤى جرأة يمكن أن تصبح حقيقة."
+  },
+  {
+    "key": "text_5aa34886f7f3741de8460690",
+    "context": "chapters.San Francisco.city",
+    "source": "San Francisco",
+    "translation": "سان فرانسيسكو"
+  },
+  {
+    "key": "text_49dca65f362fee401292ed7a",
+    "context": "chapters.San Francisco.country",
+    "source": "United States",
+    "translation": "الولايات المتحدة"
+  },
+  {
+    "key": "text_e51d9f1682167b08faef2bfc",
+    "context": "chapters.San Francisco.headline",
+    "source": "Welcome to the City of Awe",
+    "translation": "أهلاً بكم في مدينة الدهشة"
+  },
+  {
+    "key": "text_64be0885bc3f641cdfb1322e",
+    "context": "chapters.San Francisco.continent",
+    "source": "North America",
+    "translation": "أمريكا الشمالية"
+  },
+  {
+    "key": "text_91bcd83b0d84d4824b38eeb9",
+    "context": "chapters.San Francisco.description",
+    "source": "For decades, San Francisco has been a place where unconventional ideas challenge the status quo and reshape the world. But changing the world requires more than bold ideas. It requires the courage to question what we believe we know. Born in the Bay Area, the Global Footprint Network demonstrates how data can challenge comfortable assumptions and reveal the true cost of our progress. Its work reminds us that what we measure shapes what we value, and ultimately what we celebrate. The IOBS San Francisco Chapter brings together people who believe that meaningful progress begins when curiosity, evidence and ambition meet.",
+    "translation": "منذ عقود، كانت سان فرانسيسكو مكاناً تتحدّى فيه الأفكار غير التقليدية الواقع القائم وتعيد تشكيل العالم. لكن تغيير العالم يتطلب أكثر من أفكار جريئة؛ يتطلب الشجاعة للتشكيك فيما نظن أننا نعرفه. تُظهر Global Footprint Network، التي وُلدت في منطقة الخليج، كيف تستطيع البيانات تحدّي الافتراضات المريحة وكشف التكلفة الحقيقية لتقدمنا. ويذكّرنا عملها بأن ما نقيسه يشكّل ما نقدّره، وما نحتفي به في النهاية. يجمع فرع IOBS في سان فرانسيسكو أشخاصاً يؤمنون بأن التقدم الهادف يبدأ حين يلتقي الفضول بالدليل والطموح."
+  },
+  {
+    "key": "text_db7ee413d60408e5d9107eb1",
+    "context": "chapters.Vienna.city",
+    "source": "Vienna",
+    "translation": "فيينا"
+  },
+  {
+    "key": "text_c9cab0238debc6e55498e2c0",
+    "context": "chapters.Vienna.country",
+    "source": "Austria",
+    "translation": "النمسا"
+  },
+  {
+    "key": "text_828422a318ab6118e5b65ca2",
+    "context": "chapters.Vienna.headline",
+    "source": "Servus in Wien",
+    "translation": "مرحباً بكم في فيينا"
+  },
+  {
+    "key": "text_4a219da734ea817f90e2015b",
+    "context": "chapters.Vienna.description",
+    "source": "For centuries, Vienna has been a city where art, science and intellectual curiosity have shaped the way we understand the world. Today, consistently ranked among the world’s most liveable cities, Vienna offers another perspective on success: prosperity is not only about what we achieve, but about the quality of life we create. From its rich cultural heritage to its commitment to affordable housing, public spaces and social wellbeing, Vienna demonstrates how collective choices can turn economic strength into everyday value for people. The IOBS Vienna Chapter brings together people who believe that Beautiful Success should not only be measured in achievements, but experienced in the way we live.",
+    "translation": "منذ قرون، كانت فيينا مدينة يشكّل فيها الفن والعلم والفضول الفكري فهمنا للعالم. واليوم، وهي تحتل باستمرار مكانة بين أفضل مدن العالم للعيش، تقدم رؤية أخرى للنجاح: الازدهار يتعلق بما نحققه وبجودة الحياة التي نصنعها. من تراثها الثقافي الغني إلى التزامها بالسكن الميسور والمساحات العامة والرفاه الاجتماعي، تُظهر فيينا كيف تستطيع الخيارات الجماعية تحويل القوة الاقتصادية إلى قيمة يومية للناس. يجمع فرع IOBS في فيينا أشخاصاً يؤمنون بأن النجاح الجميل يُقاس بالإنجازات ويُعاش أيضاً في تفاصيل حياتنا."
+  },
+  {
+    "key": "text_76f17ca4b396027714fb8836",
+    "context": "site_copy.hero_me.body",
+    "source": "The Beautiful Success Awards recognize achievements that make the world better through their success.",
+    "translation": "تكرّم جوائز النجاح الجميل الإنجازات التي تجعل العالم أفضل من خلال نجاحها."
+  },
+  {
+    "key": "text_80dd9677d8dced67a593ed8c",
+    "context": "site_copy.site_claim.headline",
+    "source": "Celebrating a better world, one Beautiful Success at a time.",
+    "translation": "نحتفي بعالم أفضل، نجاحاً جميلاً تلو الآخر."
+  },
+  {
+    "key": "text_9c202247f6a5e25c7eb97aa4",
+    "context": "site_copy.principle.body",
+    "source": "Not every success deserves to be celebrated. We recognize achievements whose positive value compounds as they grow.",
+    "translation": "ليس كل نجاح جديراً بالاحتفاء. نكرّم الإنجازات التي تتضاعف قيمتها الإيجابية كلما نمت."
+  },
+  {
+    "key": "text_e172d8ad9153f9de1bd24ad0",
+    "context": "site_copy.principle.label",
+    "source": "The Beautiful Success Principle",
+    "translation": "مبدأ النجاح الجميل"
+  },
+  {
+    "key": "text_4004c3b5c31585a3ab90a42f",
+    "context": "site_copy.principle.headline",
+    "source": "The more successful it becomes, the better the world becomes.",
+    "translation": "كلما ازداد نجاحه، أصبح العالم أفضل."
+  },
+  {
+    "key": "text_c10bf4a53fd5c303668fc7ee",
+    "context": "site_copy.judging_intro.label",
+    "source": "A new social contract, measured",
+    "translation": "عقد اجتماعي جديد، قابل للقياس"
+  },
+  {
+    "key": "text_bd93dac55957bd8b0c70f799",
+    "context": "site_copy.judging_intro.headline",
+    "source": "Recognition begins where ordinary success metrics end.",
+    "translation": "يبدأ التقدير حيث تنتهي مقاييس النجاح المعتادة."
+  },
+  {
+    "key": "text_22466b5a68ad045ff73e3f9c",
+    "context": "site_copy.recognition_intro.label",
+    "source": "Recognition",
+    "translation": "التقدير"
+  },
+  {
+    "key": "text_2a7cec963a45f20754200a2c",
+    "context": "site_copy.recognition_intro.headline",
+    "source": "Scarce by design.",
+    "translation": "نادر عن قصد."
+  },
+  {
+    "key": "text_1bd5a279abdda2b9d1ac2f4f",
+    "context": "site_copy.voices_intro.body",
+    "source": "Founding voices from business, culture, science and public life will help define what humanity should celebrate as success.",
+    "translation": "ستساعد أصوات مؤسِّسة من الأعمال والثقافة والعلم والحياة العامة في تحديد ما ينبغي للبشرية أن تحتفي به بوصفه نجاحاً."
+  },
+  {
+    "key": "text_0ee4a3cca7419dddb3b4eaca",
+    "context": "site_copy.voices_intro.label",
+    "source": "The Beautiful Success Question",
+    "translation": "سؤال النجاح الجميل"
+  },
+  {
+    "key": "text_7b60ba7630a8c4eff5cccf35",
+    "context": "site_copy.voices_intro.headline",
+    "source": "What does beautiful success mean to you?",
+    "translation": "ماذا يعني لك النجاح الجميل؟"
+  },
+  {
+    "key": "text_bb876c1b860919940314b29e",
+    "context": "site_copy.founding_edition.label",
+    "source": "The Founding Edition",
+    "translation": "الدورة التأسيسية"
+  },
+  {
+    "key": "text_3b3a9ff6b2cc6679cc9b94fe",
+    "context": "site_copy.founding_edition.headline",
+    "source": "One global search. Seven scales. One Grand Prix.",
+    "translation": "بحث عالمي واحد. سبعة نطاقات. جائزة كبرى واحدة."
+  },
+  {
+    "key": "text_23137895eb42db52fe881f40",
+    "context": "site_copy.founding_edition.subheadline",
+    "source": "Dubai · Shenzhen · Hong Kong · Vienna · London · San Francisco · Lithuania",
+    "translation": "دبي · شنتشن · هونغ كونغ · فيينا · لندن · سان فرانسيسكو · ليتوانيا"
+  },
+  {
+    "key": "text_428ab219711d35bd1031e455",
+    "context": "site_copy.partners_intro.headline",
+    "source": "Grateful for our Beautiful Partners",
+    "translation": "ممتنون لشركائنا الرائعين"
+  },
+  {
+    "key": "text_f834c648cafb867f236d1ea7",
+    "context": "site_copy.v3_hero.body",
+    "source": "Discover the Institute",
+    "translation": "اكتشف المعهد"
+  },
+  {
+    "key": "text_8c50bc072a034480f3361bd8",
+    "context": "site_copy.v3_hero.headline",
+    "source": "Beautiful Success",
+    "translation": "النجاح الجميل"
+  },
+  {
+    "key": "text_297b143f503b651434709cc2",
+    "context": "site_copy.v3_hero.subheadline",
+    "source": "Success is not the problem.\nOur definition of it is.",
+    "translation": "النجاح ليس المشكلة.\nتعريفنا له هو المشكلة."
+  },
+  {
+    "key": "text_bb914bb17558d8bc78211f8a",
+    "context": "site_copy.v3_principle.body",
+    "source": "For humans. For non-humans. For society. For the planet. For what comes after us.",
+    "translation": "للبشر. ولغير البشر. وللمجتمع. وللكوكب. ولمن يأتي بعدنا."
+  },
+  {
+    "key": "text_38fe7a8ee82ed2e071859b88",
+    "context": "site_copy.v3_principle.label",
+    "source": "02 — The Principle",
+    "translation": "02 — المبدأ"
+  },
+  {
+    "key": "text_51c3af57abc6cafd7ce426f9",
+    "context": "site_copy.v3_principles_intro.headline",
+    "source": "The five principles that define Beautiful Success",
+    "translation": "المبادئ الخمسة التي تحدّد النجاح الجميل"
+  },
+  {
+    "key": "text_3f977efa1bdf9fa10216e0a4",
+    "context": "site_copy.v3_principle_philanthropy.body",
+    "source": "What's in it for me is a fundamental basic need of every human. But it is also a finite desire. There is only so much you can ask for. But what can be created if you focus on what you can offer, is unlimited.",
+    "translation": "السؤال عمّا سأجنيه حاجة أساسية لدى كل إنسان. لكنه أيضاً رغبة محدودة؛ فثمة حدّ لما يمكنك طلبه. أما ما يمكن خلقه حين تركّز على ما تستطيع تقديمه، فلا حدود له."
+  },
+  {
+    "key": "text_838e8f39909ad5a2b29b6d79",
+    "context": "site_copy.v3_principle_philanthropy.label",
+    "source": "PHILANTROPY",
+    "translation": "العطاء"
+  },
+  {
+    "key": "text_ac26eabf4b4f1dc365cfa98b",
+    "context": "site_copy.v3_principle_philanthropy.headline",
+    "source": "What can I offer",
+    "translation": "ماذا أستطيع أن أقدّم؟"
+  },
+  {
+    "key": "text_c404d06b7dfbddad86f756d1",
+    "context": "site_copy.v3_principle_philanthropy.subheadline",
+    "source": "Give > Take",
+    "translation": "العطاء > الأخذ"
+  },
+  {
+    "key": "text_8e574c3df111546e4e130ddb",
+    "context": "site_copy.v3_principle_new_focus.body",
+    "source": "Protecting drains a lot of energy and ressources. What would be possible if we could direct the same resources into creation of something that does not need protection?",
+    "translation": "تستنزف الحماية كثيراً من الطاقة والموارد. ما الذي قد يصبح ممكناً لو وجّهنا الموارد نفسها إلى خلق شيء لا يحتاج إلى حماية؟"
+  },
+  {
+    "key": "text_e3c944e4e0c563a3e71ec060",
+    "context": "site_copy.v3_principle_new_focus.label",
+    "source": "New Focus",
+    "translation": "تركيز جديد"
+  },
+  {
+    "key": "text_e04915780ecc54d7175a4626",
+    "context": "site_copy.v3_principle_new_focus.headline",
+    "source": "What can I create?",
+    "translation": "ماذا أستطيع أن أخلق؟"
+  },
+  {
+    "key": "text_6578ff4e4e8dd69e3caba71b",
+    "context": "site_copy.v3_principle_new_focus.subheadline",
+    "source": "What if there is nothing to protect.",
+    "translation": "ماذا لو لم يكن هناك ما يحتاج إلى حماية؟"
+  },
+  {
+    "key": "text_b9140f8775841194708e35bc",
+    "context": "site_copy.v3_principle_echo.body",
+    "source": "You are who you surround yourself with. The average of your inner circle of 5 makes your personality. But what is the echo you create in your circle? What do people think differently after interacting with you?",
+    "translation": "أنت تتأثر بمن تحيط نفسك بهم. فمتوسط صفات أقرب خمسة أشخاص إليك يسهم في تشكيل شخصيتك. لكن ما الصدى الذي تتركه في دائرتك؟ ما الذي يفكّر فيه الناس بصورة مختلفة بعد تفاعلهم معك؟"
+  },
+  {
+    "key": "text_8335e4c92c40556ab31f1bc5",
+    "context": "site_copy.v3_principle_echo.label",
+    "source": "Echo",
+    "translation": "الصدى"
+  },
+  {
+    "key": "text_e38b43b6956cd71ef5d691d0",
+    "context": "site_copy.v3_principle_echo.headline",
+    "source": "Whose choices do I influence?",
+    "translation": "في خيارات مَن أؤثّر؟"
+  },
+  {
+    "key": "text_f8fecb819effb55df77ed745",
+    "context": "site_copy.v3_principle_echo.subheadline",
+    "source": "All the people you know.",
+    "translation": "كل الأشخاص الذين تعرفهم."
+  },
+  {
+    "key": "text_86a4d513da1e9c75bde1ee9c",
+    "context": "site_copy.v3_principle_momentum.body",
+    "source": "Every asset you have is energy. Most of most peoples assets are passive energy. What if this energy can be turned into momentum - and everything you own creates something new...",
+    "translation": "كل أصل تملكه هو طاقة. ومعظم أصول معظم الناس طاقة ساكنة. ماذا لو تحولت هذه الطاقة إلى زخم، وأصبح كل ما تملكه يخلق شيئاً جديداً؟"
+  },
+  {
+    "key": "text_438280e0494bdd701fa1533b",
+    "context": "site_copy.v3_principle_momentum.label",
+    "source": "Momentum",
+    "translation": "الزخم"
+  },
+  {
+    "key": "text_f173ce5286c757abae0ce656",
+    "context": "site_copy.v3_principle_momentum.headline",
+    "source": "What can my assets set in motion?",
+    "translation": "ما الذي تستطيع أصولي تحريكه؟"
+  },
+  {
+    "key": "text_f37f1d1f5be84728c9aa6277",
+    "context": "site_copy.v3_principle_momentum.subheadline",
+    "source": "The Power of What's Possible",
+    "translation": "قوة الممكن"
+  },
+  {
+    "key": "text_481b1072f8533162432b332f",
+    "context": "site_copy.v3_principle_legacy.body",
+    "source": "Big dreams are something beautiful. Only very few people can tap on their shoulders and say, \"I have turned my dreams into reality\". But which of those dreams are a bubble, the minute you have left the room? A bubble that bursts, because they never became someone elses dream, as well...",
+    "translation": "الأحلام الكبيرة شيء جميل. وقلة قليلة تستطيع أن تربت على كتفها وتقول: «حوّلت أحلامي إلى واقع». لكن أيّ هذه الأحلام يصبح فقاعة بمجرد مغادرتك الغرفة؟ فقاعة تنفجر لأنها لم تصبح أيضاً حلماً لشخص آخر؟"
+  },
+  {
+    "key": "text_1432897a6136de54f3a8bfcc",
+    "context": "site_copy.v3_principle_legacy.label",
+    "source": "Legacy",
+    "translation": "الإرث"
+  },
+  {
+    "key": "text_dcf0089b13bd09885bcca8df",
+    "context": "site_copy.v3_principle_legacy.headline",
+    "source": "What outlasts me?",
+    "translation": "ما الذي يبقى بعدي؟"
+  },
+  {
+    "key": "text_86b7deb07bc216eeb82f9b68",
+    "context": "site_copy.v3_principle_legacy.subheadline",
+    "source": "You have made it. Has \"it\" made you?",
+    "translation": "لقد حقّقت النجاح. فهل شكّلك هذا النجاح؟"
+  },
+  {
+    "key": "text_d49a66961b072a37974abb90",
+    "context": "site_copy.v3_scale.body",
+    "source": "Beautiful Success is not measured by how large it becomes.\nScale tells us how far it reaches.\nThe principles tell us whether it is beautiful.",
+    "translation": "لا يُقاس النجاح الجميل بحجمه.\nالنطاق يخبرنا إلى أين يصل أثره.\nوالمبادئ تخبرنا إن كان جميلاً."
+  },
+  {
+    "key": "text_7ddb1ad04475b6b76d8bc30c",
+    "context": "site_copy.v3_scale.label",
+    "source": "04 — The Scale of Impact",
+    "translation": "04 — نطاق الأثر"
+  },
+  {
+    "key": "text_d6a7dfee1e974b5c3909175b",
+    "context": "site_copy.v3_scale.headline",
+    "source": "How far does your success reach?",
+    "translation": "إلى أين يصل أثر نجاحك؟"
+  },
+  {
+    "key": "text_f7145e67e943162902014347",
+    "context": "site_copy.v3_scale.subheadline",
+    "source": "Scale is not score.",
+    "translation": "النطاق ليس ترتيباً."
+  },
+  {
+    "key": "text_bcf299053a9f353c2b316bb4",
+    "context": "site_copy.v3_question.body",
+    "source": "Explore the Institute|Nominate / Enter",
+    "translation": "استكشف المعهد|رشّح / شارك"
+  },
+  {
+    "key": "text_fe3f3c36ab6c0c56f0968d89",
+    "context": "site_copy.v3_question.headline",
+    "source": "If you could build anything in the world…",
+    "translation": "لو استطعت بناء أي شيء في العالم…"
+  },
+  {
+    "key": "text_65b4c5e821106e2def6ed9fe",
+    "context": "site_copy.v3_question.subheadline",
+    "source": "what would you build?",
+    "translation": "فماذا ستبني؟"
+  },
+  {
+    "key": "text_f5df7a8b65a9d3eba636d5f5",
+    "context": "expeditions.china.price",
+    "source": "USD 5.000",
+    "translation": "5,000 دولار أمريكي"
+  },
+  {
+    "key": "text_c3c616c54cfcbbecd8da31a0",
+    "context": "expeditions.china.description",
+    "source": "Innovation here is defined by four things at once: scale, speed, ambition, and connectivity. \n\nNowhere are they more concentrated than in Shenzhen, a city whose population has doubled and whose skyline is unrecognizable from a decade ago. It now leads the world in automotive technology, robotics, autonomous devices, and AI. Its uniquely integrated ecosystem and deep talent pool produce innovation cycles so fast they set the global clock.\n\nFor the November 2026 edition, the main program is based in Shenzhen, with four in-depth days inside this powerhouse. A single focused day in Hong Kong complements the journey, exposing you to the city's role as the capital, trade, and regulatory gateway linking global markets to China. The structure is deliberate: Shenzhen as the commanding force in next-generation technology, Hong Kong as the bridge that connects it to the rest of the world.\n\nThe program is individual and interactive. It begins with a kick-off call about a month before the tour, to align around each participant's goals and background. Our team then curates four to five executive-level meetings a day: deep dialogues with founders, advanced manufacturing visits, and breakthrough labs. The full itinerary is set around ten days before departure. Afterward you receive a post-tour playbook of key insights and executive notes, so the thinking stays with you and turns into action.\n\nCollecting trends makes for likable posts. \nUnderstanding the logic underneath them is what changes a strategic decision. \n\nIn Shenzhen you see that logic in motion: how relentless speed, scale, and bold creativity compound into a system that rewrites what is possible, and how Hong Kong's networks and capital plug that system into global markets.\n\nThat is where we close. We connect what you have seen to the World Operating System. Why the one the world runs on now is outdated and malfunctioning, and why the next one will run on fundamentally different principles. Shenzhen is one of the clearest places on earth to watch those principles already taking shape.\n\nFive days. One conversation with the future. Come have it.",
+    "translation": "يُعرَّف الابتكار هنا بأربعة أمور مجتمعة: الحجم والسرعة والطموح والترابط.\n\nولا تجتمع بهذه الكثافة في مكان كما تجتمع في شنتشن؛ مدينة تضاعف عدد سكانها وتبدّل أفقها تماماً خلال عقد. تتصدر اليوم تكنولوجيا السيارات والروبوتات والأجهزة ذاتية التشغيل والذكاء الاصطناعي. وتنتج منظومتها المتكاملة ومواهبها العميقة دورات ابتكار سريعة إلى حد أنها تضبط إيقاع العالم.\n\nفي نسخة نوفمبر 2026، يتمركز البرنامج الرئيسي في شنتشن، مع أربعة أيام معمّقة داخل هذه القوة المحرّكة. ويكمّل الرحلة يوم مركّز في هونغ كونغ، يكشف دور المدينة بوصفها بوابة رأس المال والتجارة والتنظيم التي تربط الأسواق العالمية بالصين. الهيكل مقصود: شنتشن قوة رائدة في تكنولوجيا الجيل المقبل، وهونغ كونغ جسرها إلى بقية العالم.\n\nالبرنامج فردي وتفاعلي. يبدأ بمكالمة تمهيدية قبل الجولة بنحو شهر، لمواءمة أهداف المشاركين وخلفياتهم. ثم ينتقي فريقنا أربعة إلى خمسة لقاءات تنفيذية يومياً: حوارات معمّقة مع مؤسسين، وزيارات للتصنيع المتقدم، ومختبرات رائدة. يكتمل البرنامج قبل المغادرة بنحو عشرة أيام. وبعد الرحلة تحصل على دليل عملي بأبرز الأفكار والملاحظات التنفيذية، كي تبقى الرؤى معك وتتحول إلى فعل.\n\nجمع التوجهات يصنع منشورات محبوبة.\nأما فهم المنطق الكامن وراءها، فهو ما يغيّر القرار الاستراتيجي.\n\nفي شنتشن ترى ذلك المنطق يتحرك: كيف تتراكم السرعة والحجم والإبداع الجريء لتصنع منظومة تعيد تعريف الممكن، وكيف تربط شبكات هونغ كونغ ورؤوس أموالها هذه المنظومة بالأسواق العالمية.\n\nهنا نختتم. نربط ما رأيته بنظام تشغيل العالم: لماذا أصبح النظام الحالي قديماً ومتعثراً، ولماذا سيقوم النظام المقبل على مبادئ مختلفة جذرياً. وشنتشن من أوضح الأماكن على الأرض لمشاهدة هذه المبادئ وهي تتشكل بالفعل.\n\nخمسة أيام. حوار واحد مع المستقبل. تعال لتشارك فيه."
+  },
+  {
+    "key": "text_31b08ee4bf61722e6dfe2bcc",
+    "context": "expeditions.china.short_description",
+    "source": "Shenzhen and Hong Kong Tour\n\nNovember 23 to 27, 2026.\nSome people chase the future. We would rather go and stand inside it.\nA curated five-day expedition into the fastest innovation ecosystem on earth. Four focused days in Shenzhen, the heart of China's surge in robotics, automotive, autonomous systems, and AI, plus one day in Hong Kong, the gateway linking global capital and trade to the mainland. Four to five executive meetings a day, each shaped around your industry and your questions, with the founders, manufacturers, and labs setting the pace.",
+    "translation": "جولة شنتشن وهونغ كونغ\n\nمن 23 إلى 27 نوفمبر 2026.\nالبعض يطارد المستقبل. ونحن نفضّل الذهاب لنقف في قلبه.\nرحلة منتقاة من خمسة أيام إلى أسرع منظومة ابتكار على الأرض. أربعة أيام مركّزة في شنتشن، قلب نهضة الصين في الروبوتات والسيارات والأنظمة ذاتية التشغيل والذكاء الاصطناعي، ويوم في هونغ كونغ، بوابة رأس المال والتجارة العالمية إلى البر الرئيسي. أربعة إلى خمسة لقاءات تنفيذية يومياً، تُصمّم حول قطاعك وأسئلتك، مع المؤسسين والمصنّعين والمختبرات الذين يحدّدون الإيقاع."
+  },
+  {
+    "key": "text_ab152f2ed29715720f796cd9",
+    "context": "expeditions.china.apply_button_label",
+    "source": "Secure your Spot",
+    "translation": "احجز مكانك"
+  },
+  {
+    "key": "text_897c8e2a57851ca0870f19c5",
+    "context": "expeditions.CES.price",
+    "source": "USD 5.500",
+    "translation": "5,500 دولار أمريكي"
+  },
+  {
+    "key": "text_7763f491c9a0883a24007b9e",
+    "context": "expeditions.CES.title",
+    "source": "CES & Silicon Valley Tour",
+    "translation": "جولة CES ووادي السيليكون"
+  },
+  {
+    "key": "text_d40ab8620bd1d436e8cb72f4",
+    "context": "expeditions.CES.location",
+    "source": "Las Vegas & Silicon Valley",
+    "translation": "لاس فيغاس ووادي السيليكون"
+  },
+  {
+    "key": "text_6b1e0a6cbe1e9bc521558f78",
+    "context": "expeditions.CES.description",
+    "source": "CES & Silicon Valley Flagship Tour\n\nSome people chase the future. We would rather experience, see and touch it on stage — and then go backstage.\n\nWe begin at CES Las Vegas, where thousands of companies compete to show the world what comes next. AI, robotics, mobility, computing, health, energy, enterprise technology and ideas that do not quite have a category yet. It is exhilarating, overwhelming and almost impossible to navigate well on your own.\n\nThink of us as a concierge of innovation.\n\nFor three days, we curate our way through CES. We follow the technologies and companies relevant to the group, meet people behind the products, listen to the conversations surrounding them and continuously ask: What is hype? What is real? What is becoming possible? And what deserves a second look?\n\nBecause collecting trends makes for likable posts. Understanding the logic underneath them is what changes a strategic decision.\n\nThen we leave Las Vegas.\n\nCES is the stage. Silicon Valley is backstage.\n\nAfter a day to relocate and reset, we spend three days sitting down with founders, investors, researchers and technology leaders across the Bay Area. Four to five carefully curated conversations per day, shaped around the people in the group, their industries and the questions we bring with us from CES.\n\nThis is where announcements become conversations.\n\nWe might discuss how AI changes the org chart with someone building it. Challenge assumptions about exponential change with a futurist. Explore planetary limits with the Global Footprint Network. Meet startups at Berkeley SkyDeck, hardware companies in the East Bay and people inside companies such as Google, Meta and Apple.\n\nThe point is not access for the sake of access.\n\nIt is access to people who can help you think.\n\nSome of the most valuable moments happen when the prepared conversation ends and someone around the table asks a question nobody expected. A one-hour meeting changes direction. A technology suddenly becomes relevant to your industry. An assumption you arrived with no longer survives the conversation.\n\nThat is why we keep the group small.\n\nMaximum ten participants. Enough diversity around the table to challenge each other. Small enough to have an actual conversation.\n\nSeven days take us from thousands of possible futures to a handful of questions worth taking home.\n\nSee the future on stage. Then meet the people building it.",
+    "translation": "الجولة الرئيسية إلى CES ووادي السيليكون\n\nالبعض يطارد المستقبل. ونحن نفضّل أن نختبره ونراه ونلمسه على المسرح، ثم نذهب إلى الكواليس.\n\nنبدأ في CES لاس فيغاس، حيث تتنافس آلاف الشركات لتعرض للعالم ما هو قادم. الذكاء الاصطناعي والروبوتات والتنقل والحوسبة والصحة والطاقة وتقنيات المؤسسات، وأفكار لم تجد تصنيفاً بعد. تجربة مبهرة ومكثفة، يكاد يستحيل استكشافها جيداً وحدك.\n\nاعتبرنا دليلك الشخصي إلى الابتكار.\n\nعلى مدى ثلاثة أيام، ننتقي مسارنا في CES. نتتبع التقنيات والشركات ذات الصلة بالمجموعة، ونلتقي الأشخاص وراء المنتجات، ونستمع إلى الحوارات الدائرة حولها، ونسأل باستمرار: ما المبالغة؟ ما الحقيقي؟ ما الذي يصبح ممكناً؟ وما الذي يستحق نظرة ثانية؟\n\nفجمع التوجهات يصنع منشورات محبوبة. أما فهم المنطق الكامن وراءها، فهو ما يغيّر القرار الاستراتيجي.\n\nثم نغادر لاس فيغاس.\n\nCES هو المسرح. ووادي السيليكون هو الكواليس.\n\nبعد يوم للانتقال واستعادة التركيز، نمضي ثلاثة أيام مع مؤسسين ومستثمرين وباحثين وقادة تكنولوجيا في منطقة الخليج. أربعة إلى خمسة حوارات منتقاة بعناية يومياً، تتشكل حول المشاركين وقطاعاتهم والأسئلة التي نحملها من CES.\n\nهنا تتحول الإعلانات إلى حوارات.\n\nقد نناقش أثر الذكاء الاصطناعي في الهيكل التنظيمي مع شخص يبنيه. أو نتحدّى افتراضات التغيير المتسارع مع مستشرف للمستقبل. أو نستكشف حدود الكوكب مع Global Footprint Network. أو نلتقي شركات ناشئة في Berkeley SkyDeck، وشركات أجهزة في إيست باي، وأشخاصاً داخل شركات مثل Google وMeta وApple.\n\nالغاية ليست الوصول لمجرد الوصول.\n\nبل الوصول إلى أشخاص يساعدونك على التفكير.\n\nبعض أثمن اللحظات يأتي حين ينتهي الحوار المعدّ مسبقاً، ويطرح أحد الحاضرين سؤالاً لم يتوقعه أحد. يغيّر لقاء مدته ساعة اتجاهه. تصبح تقنية ما ذات صلة بقطاعك فجأة. ولا يعود افتراض جئت به قادراً على الصمود أمام الحوار.\n\nلهذا نبقي المجموعة صغيرة.\n\nعشرة مشاركين كحد أقصى. تنوّع يكفي ليتحدّى بعضنا بعضاً، وحجم صغير يتيح حواراً حقيقياً.\n\nتنقلنا سبعة أيام من آلاف المستقبلات الممكنة إلى عدد قليل من الأسئلة الجديرة بأن نحملها معنا إلى الوطن.\n\nشاهد المستقبل على المسرح. ثم التقِ مَن يبنونه."
+  },
+  {
+    "key": "text_7494eaa603b7859ca0595741",
+    "context": "expeditions.CES.short_description",
+    "source": "If CES is the stage, Silicon Valley is backstage.\n\nWe begin with three days at CES Las Vegas, where thousands of companies show the world what they believe comes next. We navigate the noise, follow the signals and identify the technologies and questions worth taking further.\n\nThen we go backstage. Three days in Silicon Valley, sitting down with founders, investors, researchers and technology leaders to challenge what we have seen, understand what is already happening and explore what might come next.\n\nSee the future on stage. Then meet the people building it.",
+    "translation": "إذا كان CES هو المسرح، فوادي السيليكون هو الكواليس.\n\nنبدأ بثلاثة أيام في CES لاس فيغاس، حيث تعرض آلاف الشركات للعالم ما تعتقد أنه القادم. نتجاوز الضجيج ونتتبع الإشارات ونحدّد التقنيات والأسئلة التي تستحق مزيداً من الاستكشاف.\n\nثم نذهب إلى الكواليس. ثلاثة أيام في وادي السيليكون، نجلس فيها مع مؤسسين ومستثمرين وباحثين وقادة تكنولوجيا لنتحدّى ما رأيناه، ونفهم ما يحدث بالفعل، ونستكشف ما قد يأتي بعده.\n\nشاهد المستقبل على المسرح. ثم التقِ مَن يبنونه."
+  },
+  {
+    "key": "text_91903f794714f34ab38a50f4",
+    "context": "expeditions.CES.apply_button_label",
+    "source": "Join the Tour",
+    "translation": "انضم إلى الجولة"
+  },
+  {
+    "key": "text_243d598dbac71d07121f4601",
+    "context": "homepage_sections.hero.headline",
+    "source": "The next Operating System of the World",
+    "translation": "نظام التشغيل المقبل للعالم"
+  },
+  {
+    "key": "text_b253464511f86db858bf07d5",
+    "context": "homepage_sections.hero.subheadline",
+    "source": "Creating the next engine of our planet. For Humans and Non-Humans",
+    "translation": "نصنع المحرّك المقبل لكوكبنا. للبشر ولغير البشر"
+  },
+  {
+    "key": "text_1b9834a461ca38313af40d01",
+    "context": "homepage_sections.cta.body",
+    "source": "The most important conversations start with a single thesis.",
+    "translation": "تبدأ أهم الحوارات بأطروحة واحدة."
+  },
+  {
+    "key": "text_abe797e20f8edf11a9253837",
+    "context": "homepage_sections.cta.headline",
+    "source": "Ready to question everything?",
+    "translation": "هل أنت مستعد للتشكيك في كل شيء؟"
+  },
+  {
+    "key": "text_fad0a1f6ecdf088683d15a53",
+    "context": "homepage_sections.cta.subheadline",
+    "source": "Join WorldOS",
+    "translation": "انضم إلى WorldOS"
+  },
+  {
+    "key": "text_318221d112a0e7772ee1311d",
+    "context": "homepage_sections.locations.body",
+    "source": "SAN FRANCISCO, USA | VIENNA, AUSTRIA | KAUNAS, LITHUANIA | DUBAI, UAE, HONG KONG/SAR",
+    "translation": "سان فرانسيسكو، الولايات المتحدة | فيينا، النمسا | كاوناس، ليتوانيا | دبي، الإمارات | هونغ كونغ، المنطقة الإدارية الخاصة"
+  },
+  {
+    "key": "text_db9c3458cffc6d3e75113418",
+    "context": "homepage_sections.locations.headline",
+    "source": "We welcome Explorers from every neck of the woods. Currently, we are present in:",
+    "translation": "نرحّب بالمستكشفين من كل مكان. نتواجد حالياً في:"
+  },
+  {
+    "key": "text_20393ea597fa8a87f317734d",
+    "context": "homepage_sections.locations.subheadline",
+    "source": "The Institute of Operating Systems in the World",
+    "translation": "معهد أنظمة تشغيل العالم"
+  },
+  {
+    "key": "text_332e1dbb374e96a29e426c03",
+    "context": "homepage_sections.legal_impressum.body",
+    "source": "IACy International FZCO\n\nDubai Airport Free Zone Building 9W Block C Office 523 - 68 9WC 523 \nDubai, United Arab Emirates\n\nEmail: worldos@iacy.com\n\nThe Institute of Operating System of the World is a Division of IACy International FZCO and mentioned as \"WorldOS\" or \"the WorldOS Institute\" in the Declaration, below.\n\nResponsible for content according to applicable media and telecommunication laws:\nNikolaus SKENE, MBA\n\nDisclaimer\n\nThe content of this website is created with care and updated regularly. Nevertheless, no guarantee is given regarding accuracy, completeness or current validity. The WorldOS Institute is not liable for damages resulting from the use of this website or reliance on the information provided herein.\n\nExternal links are provided for informational purposes only. Responsibility for the content of linked websites lies solely with their respective operators.\n\nCopyright\n\nAll content on this website, including text, visuals, concepts, graphics, videos and publications, is protected by copyright and intellectual property law unless stated otherwise. Any reproduction, distribution or commercial use without prior written permission is prohibited.\n\nPrivacy Policy (GDPR)\n\nThe protection of personal data is important to us. Personal information submitted through this website is processed in accordance with applicable data protection laws, including the General Data Protection Regulation (GDPR).\n\n1. Data We Collect\n\nWe may collect personal information when users:\n\n* register for events\n* apply to join the institute\n* contact us via forms or email\n* participate in discussions or community features\n\nThis information may include:\n\n* name\n* email address\n* profile information\n* event participation data\n* messages submitted through platform features\n\n2. Purpose of Processing\n\nPersonal data is processed exclusively for purposes related to:\n\n* communication\n* membership administration\n* event organization\n* platform functionality\n* community interaction\n* improvement of services and user experience\n\nWe do not sell personal data to third parties.\n\n3. Legal Basis\n\nProcessing is carried out based on:\n\n* user consent\n* contractual necessity\n* legitimate interest in operating and improving the platform\n* legal obligations where applicable\n\n4. Storage & Security\n\nReasonable technical and organizational measures are implemented to protect stored data from unauthorized access, misuse, alteration or loss.\n\n5. Third-Party Services\n\nThis platform may use external providers for hosting, analytics, authentication, communication or media delivery. These providers may process data on our behalf under applicable data processing agreements.\n\n6. User Rights\n\nUnder GDPR, users may request:\n\n* access to their stored data\n* correction of inaccurate data\n* deletion of personal data\n* restriction of processing\n* export of their data\n* withdrawal of consent\n\nRequests may be submitted via:\n[privacy@email.com]\n\n7. Cookies\n\nThis website may use essential cookies and technical storage required for authentication, security and platform functionality. Additional analytics or tracking technologies may be introduced in the future and will be disclosed accordingly.\n\n8. Community & User Content\n\nUsers are responsible for the content they publish within community areas, chats or profile sections. The WorldOS Institute reserves the right to moderate, remove or restrict content that violates applicable law, community standards or the purpose of the platform.\n\n9. Changes\n\nThis legal and privacy information may be updated periodically to reflect legal, operational or technical changes.\n\nLast updated: May 2026",
+    "translation": "IACy International FZCO\n\nالمنطقة الحرة بمطار دبي، مبنى 9W، مجمّع C، مكتب 523 - 68 9WC 523\nدبي، الإمارات العربية المتحدة\n\nالبريد الإلكتروني: worldos@iacy.com\n\nمعهد نظام تشغيل العالم هو أحد أقسام IACy International FZCO، ويُشار إليه باسم «WorldOS» أو «معهد WorldOS» في البيان أدناه.\n\nالمسؤول عن المحتوى وفقاً لقوانين الإعلام والاتصالات المعمول بها:\nNikolaus SKENE, MBA\n\nإخلاء المسؤولية\n\nيُعدّ محتوى هذا الموقع بعناية ويُحدَّث بانتظام. ومع ذلك، لا نضمن دقته أو اكتماله أو سريانه في الوقت الحالي. لا يتحمل معهد WorldOS مسؤولية الأضرار الناتجة عن استخدام الموقع أو الاعتماد على المعلومات الواردة فيه.\n\nتُقدَّم الروابط الخارجية لأغراض المعلومات فقط. وتقع مسؤولية محتوى المواقع المرتبطة حصراً على مشغّليها.\n\nحقوق النشر\n\nجميع محتويات هذا الموقع، بما فيها النصوص والمواد المرئية والمفاهيم والرسومات والفيديو والمنشورات، محمية بحقوق النشر وقوانين الملكية الفكرية ما لم يُذكر خلاف ذلك. يُحظر النسخ أو التوزيع أو الاستخدام التجاري دون إذن كتابي مسبق.\n\nسياسة الخصوصية (GDPR)\n\nحماية البيانات الشخصية مهمة لنا. تُعالَج المعلومات الشخصية المقدّمة عبر الموقع وفقاً لقوانين حماية البيانات المعمول بها، بما فيها اللائحة العامة لحماية البيانات (GDPR).\n\n1. البيانات التي نجمعها\n\nقد نجمع معلومات شخصية عندما يقوم المستخدمون بما يلي:\n\n* التسجيل في الفعاليات\n* التقدّم للانضمام إلى المعهد\n* التواصل معنا عبر النماذج أو البريد الإلكتروني\n* المشاركة في النقاشات أو خصائص المجتمع\n\nقد تشمل هذه المعلومات:\n\n* الاسم\n* عنوان البريد الإلكتروني\n* معلومات الملف الشخصي\n* بيانات المشاركة في الفعاليات\n* الرسائل المرسلة عبر خصائص المنصة\n\n2. أغراض المعالجة\n\nتُعالَج البيانات الشخصية حصراً لأغراض تتعلق بما يلي:\n\n* التواصل\n* إدارة العضوية\n* تنظيم الفعاليات\n* وظائف المنصة\n* التفاعل المجتمعي\n* تحسين الخدمات وتجربة المستخدم\n\nلا نبيع البيانات الشخصية لأطراف ثالثة.\n\n3. الأساس القانوني\n\nتجري المعالجة استناداً إلى:\n\n* موافقة المستخدم\n* الضرورة التعاقدية\n* المصلحة المشروعة في تشغيل المنصة وتحسينها\n* الالتزامات القانونية حيث تنطبق\n\n4. التخزين والأمان\n\nنطبّق تدابير تقنية وتنظيمية معقولة لحماية البيانات المخزنة من الوصول غير المصرّح به أو إساءة الاستخدام أو التعديل أو الفقدان.\n\n5. خدمات الأطراف الثالثة\n\nقد تستخدم المنصة مزوّدين خارجيين للاستضافة أو التحليلات أو المصادقة أو التواصل أو توصيل الوسائط. وقد يعالج هؤلاء البيانات نيابة عنا بموجب اتفاقيات معالجة البيانات المعمول بها.\n\n6. حقوق المستخدم\n\nبموجب GDPR، يستطيع المستخدمون طلب:\n\n* الوصول إلى بياناتهم المخزنة\n* تصحيح البيانات غير الدقيقة\n* حذف البيانات الشخصية\n* تقييد المعالجة\n* تصدير بياناتهم\n* سحب الموافقة\n\nيمكن إرسال الطلبات عبر:\n[privacy@email.com]\n\n7. ملفات تعريف الارتباط\n\nقد يستخدم الموقع ملفات تعريف الارتباط الأساسية والتخزين التقني اللازم للمصادقة والأمان ووظائف المنصة. وقد تُضاف مستقبلاً تقنيات للتحليلات أو التتبع، وسيُفصح عنها حينئذ.\n\n8. المجتمع ومحتوى المستخدم\n\nيتحمل المستخدمون مسؤولية ما ينشرونه في مساحات المجتمع والمحادثات والملفات الشخصية. ويحتفظ معهد WorldOS بالحق في الإشراف على المحتوى الذي يخالف القانون أو معايير المجتمع أو غرض المنصة، أو إزالته أو تقييده.\n\n9. التغييرات\n\nقد تُحدَّث هذه المعلومات القانونية ومعلومات الخصوصية دورياً لتعكس التغييرات القانونية أو التشغيلية أو التقنية.\n\nآخر تحديث: مايو 2026"
+  },
+  {
+    "key": "text_e76e2764d73b061ba0dbee9c",
+    "context": "homepage_sections.legal_impressum.headline",
+    "source": "Legal / Impressum",
+    "translation": "المعلومات القانونية / بيانات الناشر"
+  },
+  {
+    "key": "text_7370ced6e740b788c24cf892",
+    "context": "homepage_sections.legal_impressum.subheadline",
+    "source": "Responsible for this website",
+    "translation": "المسؤول عن هذا الموقع"
+  },
+  {
+    "key": "text_f0991dc65619a1ee49352715",
+    "context": "homepage_sections.about_cta.body",
+    "source": "WorldOS is not a social network. It is not a think tank. It is a structured space for structured thinking — where the quality of the argument matters more than the volume of the voice.",
+    "translation": "WorldOS ليس شبكة اجتماعية، ولا مركز أبحاث. إنه مساحة منظّمة للتفكير المنظّم، حيث تهمّ جودة الحجة أكثر من ارتفاع الصوت."
+  },
+  {
+    "key": "text_ae45c3db2dbcfbd6ef28e0a8",
+    "context": "homepage_sections.about_cta.headline",
+    "source": "Built for Serious People",
+    "translation": "صُمّم لأصحاب الجدية"
+  },
+  {
+    "key": "text_494140f4069979bf67e59a74",
+    "context": "theses.From Sickcare to Healthcare.title",
+    "source": "From Sickcare to Healthcare",
+    "translation": "من رعاية المرض إلى رعاية الصحة"
+  },
+  {
+    "key": "text_6da215f8ba7a2b50479454ce",
+    "context": "theses.From Sickcare to Healthcare.subheadline",
+    "source": "The current system manages sickness.",
+    "translation": "النظام الحالي يدير المرض."
+  },
+  {
+    "key": "text_836602ad99a6b8851ac43821",
+    "context": "theses.From Sickcare to Healthcare.short_explanation",
+    "source": "A planet, populated by 10 Billion humans needs to stay healthy. We cannot afford managing diseases, anymore. Prevention, Quantified self and more will generate real time individual default base lines. Instant action outside of the baseline will ensure that every individual will stay healthy.",
+    "translation": "يحتاج كوكب يسكنه 10 مليارات إنسان إلى أن يبقى معافى. لم نعد نستطيع تحمّل الاكتفاء بإدارة الأمراض. ستوفّر الوقاية والقياس الذاتي وغيرهما خطوط أساس فردية آنية. وسيضمن التدخل الفوري عند الخروج عن خط الأساس بقاء كل فرد بصحة جيدة."
+  },
+  {
+    "key": "text_2e73ef8967de58e956286515",
+    "context": "theses.Longvitality > Longevity.title",
+    "source": "Longvitality > Longevity",
+    "translation": "حيوية مديدة > عمر مديد"
+  },
+  {
+    "key": "text_f2105755e97e7f95f0e95e2d",
+    "context": "theses.Longvitality > Longevity.subheadline",
+    "source": "Most of the population does not want to live forever, but no one wants to die over 25 years.",
+    "translation": "معظم الناس لا يريدون العيش إلى الأبد، لكن لا أحد يريد أن تستغرق وفاته 25 عاماً."
+  },
+  {
+    "key": "text_22262b2e696624ee0894606f",
+    "context": "theses.Longvitality > Longevity.short_explanation",
+    "source": "Goal of longevity science is to keep humans vital until a dramatically reduced transition out of life. Goal is not to become 125, goal is to stay alive and present and vital until the last breath.",
+    "translation": "هدف علم إطالة العمر هو الحفاظ على حيوية الإنسان حتى مرحلة انتقال أخيرة أقصر بكثير. ليس الهدف بلوغ 125 عاماً، بل البقاء حياً وحاضراً ومفعماً بالحيوية حتى النفس الأخير."
+  },
+  {
+    "key": "text_35fd6c340cbf086db136e6a0",
+    "context": "theses.Free Gas > Subsidized fueling.title",
+    "source": "Free Gas > Subsidized fueling",
+    "translation": "وقود مجاني > دعم الوقود"
+  },
+  {
+    "key": "text_b2d4275a17adf42db9ad749b",
+    "context": "theses.Free Gas > Subsidized fueling.subheadline",
+    "source": "If driving a car is an achieved right of urban society, it should be free within reason.",
+    "translation": "إذا كانت قيادة السيارة حقاً مكتسباً في المجتمع الحضري، فينبغي أن تكون مجانية ضمن المعقول."
+  },
+  {
+    "key": "text_b57a67ed0d9eab976844bdfb",
+    "context": "theses.Free Gas > Subsidized fueling.short_explanation",
+    "source": "Subsidizing gas prizes is very expensive and does not have any impact on the invidividual. One free tank per month covers \"the right to drive\", everything beyond driving a tank to zero shall be paid at regular rate",
+    "translation": "دعم أسعار الوقود مكلف جداً ولا يترك أثراً على الفرد. يغطي خزان مجاني واحد شهرياً «حق القيادة»، وما يتجاوز استهلاك هذا الخزان يُدفع بسعره المعتاد."
+  },
+  {
+    "key": "text_2a26b72ed525a4a4b90b2770",
+    "context": "theses.From \"be loved\" to \"build love\".title",
+    "source": "From \"be loved\" to \"build love\"",
+    "translation": "من «أن أكون محبوباً» إلى «أن أبني المحبة»"
+  },
+  {
+    "key": "text_11c5c7ce4d4e3c878f681b2b",
+    "context": "theses.From \"be loved\" to \"build love\".subheadline",
+    "source": "A shift in perspective. Dont ask \"Am I loved?\", but: \"Do I create Love?\"",
+    "translation": "تحوّل في المنظور. لا تسأل: «هل أنا محبوب؟»، بل: «هل أصنع المحبة؟»"
+  },
+  {
+    "key": "text_de170dcf9ed089388fd87ade",
+    "context": "theses.From \"be loved\" to \"build love\".short_explanation",
+    "source": "Every human creates an echo of their interaction with other humans. \"Am I loved\" is a function of needing and just creates addictive needing. \"Do I create Love\" is a function of expanding and enriches a whole culture. How much love is left, when you leave the room?",
+    "translation": "يترك كل إنسان صدى لتفاعله مع الآخرين. سؤال «هل أنا محبوب؟» ينطلق من الاحتياج ولا يصنع إلا احتياجاً متكرراً. أما «هل أصنع المحبة؟» فينطلق من التوسّع ويثري ثقافة بأكملها. كم من المحبة يبقى حين تغادر الغرفة؟"
+  },
+  {
+    "key": "text_be2fc6b48c965cd6650367cd",
+    "context": "theses.Work Forward.title",
+    "source": "Work Forward",
+    "translation": "العمل نحو الأمام"
+  },
+  {
+    "key": "text_4c6e571c28296251cbc11f31",
+    "context": "theses.Work Forward.subheadline",
+    "source": "Whatever you do, follow a play forward mission",
+    "translation": "مهما فعلت، اتبع رسالة يمتد أثرها إلى المستقبل"
+  },
+  {
+    "key": "text_f9bd39f525d3b157b6a4e478",
+    "context": "theses.Work Forward.short_explanation",
+    "source": "If we want to safe \"Job\", we have to attach meaning to it, meaning that goes beyond transactional motives like salary. Doctors WANT to heal patients. Students WANT to pass class. Firefighters WANT to put down fire. Meaning will not be replaced by technology.",
+    "translation": "إذا أردنا إنقاذ «الوظيفة»، فعلينا ربطها بمعنى يتجاوز الدوافع التبادلية كالراتب. الأطباء يريدون شفاء المرضى. والطلاب يريدون اجتياز الصف. ورجال الإطفاء يريدون إخماد النار. لن تحل التكنولوجيا محل المعنى."
+  },
+  {
+    "key": "text_b649708bdf986d6b246a20a1",
+    "context": "theses.Healthy food is free. Unhealthy food is expensive..title",
+    "source": "Healthy food is free. Unhealthy food is expensive.",
+    "translation": "الغذاء الصحي مجاني. وغير الصحي مكلف."
+  },
+  {
+    "key": "text_1f68ca707263f5bc8f367cba",
+    "context": "theses.Healthy food is free. Unhealthy food is expensive..subheadline",
+    "source": "Water and Apples come free. Sodas and Burgers are taxed heavily",
+    "translation": "الماء والتفاح مجانيان. والمشروبات الغازية والبرغر يخضعان لضرائب مرتفعة"
+  },
+  {
+    "key": "text_f36ef9963618cf406c20758d",
+    "context": "theses.Healthy food is free. Unhealthy food is expensive..short_explanation",
+    "source": "To make people eat a healthy and balanced diet, impact follows pain: when it gets expensive, people will consider. When its free, people will follow.",
+    "translation": "لتشجيع الناس على غذاء صحي ومتوازن، يأتي الأثر بعد الألم: حين ترتفع التكلفة، يعيد الناس النظر. وحين يكون الأمر مجانياً، يقبلون عليه."
+  },
+  {
+    "key": "text_5ce5efea31ee4661659e7b4d",
+    "context": "theses.Non lifestyle investments should be free.title",
+    "source": "Non lifestyle investments should be free",
+    "translation": "الاستثمارات الضرورية ينبغي أن تكون بلا فوائد"
+  },
+  {
+    "key": "text_25d900b586bfbe85f21ea285",
+    "context": "theses.Non lifestyle investments should be free.subheadline",
+    "source": "No interest for necessary investments, high interest for lifestyle investment.",
+    "translation": "بلا فوائد للاستثمارات الضرورية، وبفوائد مرتفعة لاستثمارات نمط الحياة."
+  },
+  {
+    "key": "text_67ab642f122b0184d422c7d2",
+    "context": "theses.Non lifestyle investments should be free.short_explanation",
+    "source": "Take you need € 10.000 to repair your bathroom, but you dont have the money: the loan shall be free. If you need € 100.000 it is more likely the change is not of fundamental necessity, the loan is not free. If you need € 1.000.000, it is very likely a pure lifestyle choice and the loan will be expensive.",
+    "translation": "لنفترض أنك تحتاج إلى 10,000 يورو لإصلاح حمّامك ولا تملك المال: ينبغي أن يكون القرض بلا فوائد. وإذا احتجت إلى 100,000 يورو، فمن الأرجح أن التغيير ليس ضرورة أساسية، فلا يكون القرض مجانياً. وإذا احتجت إلى مليون يورو، فهو على الأرجح خيار متعلق بنمط الحياة، وسيكون القرض مكلفاً."
+  },
+  {
+    "key": "text_8ab1e04479ddce98f0d1d25d",
+    "context": "theses.Travel will become the Life-API.title",
+    "source": "Travel will become the Life-API",
+    "translation": "السفر سيصبح واجهة الحياة البرمجية"
+  },
+  {
+    "key": "text_4eb311c1142dc073b6b3b4da",
+    "context": "theses.Travel will become the Life-API.subheadline",
+    "source": "Wherever people travel, the journey will be an extended System of their life.",
+    "translation": "أينما سافر الناس، ستصبح الرحلة امتداداً لنظام حياتهم."
+  },
+  {
+    "key": "text_592dfc655ba6d594223d85ff",
+    "context": "theses.Travel will become the Life-API.short_explanation",
+    "source": "People will travel to learn, understand, connect or escape. Every journey will become part of the travelers Operating System. For hospitality this also means hyperindividualization and data-inspired curation of the guest experience.",
+    "translation": "سيسافر الناس ليتعلموا أو يفهموا أو يتواصلوا أو يبتعدوا. وستصبح كل رحلة جزءاً من نظام تشغيل المسافر. ويعني ذلك للضيافة أيضاً تخصيصاً بالغ الدقة وانتقاءً لتجربة الضيف مستلهماً من البيانات."
+  },
+  {
+    "key": "text_34cfd3ba361012a44deb5a8a",
+    "context": "theses.Manage Curiosity.title",
+    "source": "Manage Curiosity",
+    "translation": "إدارة الفضول"
+  },
+  {
+    "key": "text_e3e8cf408a732475fc8eb55b",
+    "context": "theses.Manage Curiosity.subheadline",
+    "source": "The Next Role of Schools",
+    "translation": "الدور المقبل للمدارس"
+  },
+  {
+    "key": "text_dd09e9c0464c1caa29e018e8",
+    "context": "theses.Manage Curiosity.short_explanation",
+    "source": "The role of school is not to educate a curriculum. Content is available for free. Students have access to more information than any expert in history. Schools should identify curiosity and guide it toward meaningful sources.",
+    "translation": "دور المدرسة ليس تلقين المنهج. فالمحتوى متاح مجاناً، والطلاب يصلون إلى معلومات أكثر مما أتيح لأي خبير في التاريخ. ينبغي للمدارس أن تكتشف الفضول وتوجّهه إلى مصادر هادفة."
+  },
+  {
+    "key": "text_5377cc9cbf0145ce3dcf35a7",
+    "context": "theses.Create Architects of the Future.title",
+    "source": "Create Architects of the Future",
+    "translation": "إعداد معماريّي المستقبل"
+  },
+  {
+    "key": "text_ecb30a789812266a6a0b0378",
+    "context": "theses.Create Architects of the Future.subheadline",
+    "source": "Todays education helps us understanding the present by explaining the past. The future will not necessarily build on the past.",
+    "translation": "يساعدنا تعليم اليوم على فهم الحاضر بشرح الماضي. لكن المستقبل لن يبني بالضرورة على الماضي."
+  },
+  {
+    "key": "text_af639a107a893490814db125",
+    "context": "theses.Create Architects of the Future.short_explanation",
+    "source": "It takes untrained skills to anticipate a future that does not follow a linear path from experience. Thinking exponentially is a required trait to envision the future, design and execute it - but also understand living in it.",
+    "translation": "يتطلب توقّع مستقبل لا يتبع مساراً خطياً من الخبرة مهارات لم نتدرّب عليها. والتفكير الأُسّي قدرة ضرورية لتخيّل المستقبل وتصميمه وتنفيذه، وكذلك لفهم العيش فيه."
+  },
+  {
+    "key": "text_eff6638e2a864f2dc3c4b3a4",
+    "context": "theses.UBA over UBI.title",
+    "source": "UBA over UBI",
+    "translation": "الإتاحة الأساسية الشاملة قبل الدخل الأساسي الشامل"
+  },
+  {
+    "key": "text_67bb75dd95eda76b39508fc0",
+    "context": "theses.UBA over UBI.subheadline",
+    "source": "Universal Basic Access keeps the lights on. Literally",
+    "translation": "الإتاحة الأساسية الشاملة تُبقي الأنوار مضاءة. حرفياً"
+  },
+  {
+    "key": "text_0787fe0e56a26f54df3d5b48",
+    "context": "theses.UBA over UBI.short_explanation",
+    "source": "Instead of distributing money, fundamental/basic needs are always free: light is always on, fridge is always cold. Anything lifestyle has to be paid: plug your phone, pay for electricity.",
+    "translation": "بدلاً من توزيع المال، تكون الاحتياجات الأساسية مجانية دائماً: الضوء متاح والثلاجة باردة. أما ما يتصل بنمط الحياة فيُدفع ثمنه: اشحن هاتفك، وادفع تكلفة الكهرباء."
+  },
+  {
+    "key": "text_d538f159b5d43f861edeba4c",
+    "context": "theses.When is Public Transport Free?.title",
+    "source": "When is Public Transport Free?",
+    "translation": "متى يكون النقل العام مجانياً؟"
+  },
+  {
+    "key": "text_ec6f56778e145be49af95342",
+    "context": "theses.When is Public Transport Free?.subheadline",
+    "source": "Leaving the car at home can be incentivized: create circumstances under which an urban citizen can use public transport for free",
+    "translation": "يمكن تشجيع ترك السيارة في المنزل بتهيئة ظروف تتيح لسكان المدن استخدام النقل العام مجاناً"
+  },
+  {
+    "key": "text_23019abed5ffe4f25755d8b1",
+    "context": "theses.When is Public Transport Free?.short_explanation",
+    "source": "The motive of mobility determins the cost of travel. If you travel to work, to school, to university, travel should be free. If you dont have a job, are not in education, you pay full rate.",
+    "translation": "دافع التنقل يحدّد تكلفة الرحلة. إذا كنت تذهب إلى العمل أو المدرسة أو الجامعة، فينبغي أن يكون التنقل مجانياً. وإذا لم تكن تعمل أو تدرس، فتدفع السعر الكامل."
+  },
+  {
+    "key": "text_55898449eb74fb2e348d13e5",
+    "context": "categories.health.name",
+    "source": "Health",
+    "translation": "الصحة"
+  },
+  {
+    "key": "text_e798a62a24bf8cedc14a450e",
+    "context": "categories.health.description",
+    "source": "How human health changes when systems, technology, prevention and access evolve.",
+    "translation": "كيف تتغير صحة الإنسان مع تطوّر الأنظمة والتكنولوجيا والوقاية وإمكانية الوصول."
+  },
+  {
+    "key": "text_512ab3c6b9869577bd4474c5",
+    "context": "categories.education.name",
+    "source": "Education",
+    "translation": "التعليم"
+  },
+  {
+    "key": "text_6ad511bbab6aba036f04a5d2",
+    "context": "categories.education.description",
+    "source": "How learning systems can move from curriculum delivery to curiosity management.",
+    "translation": "كيف تنتقل أنظمة التعلّم من تقديم المناهج إلى إدارة الفضول."
+  },
+  {
+    "key": "text_e8f000eec8570e3b315f325c",
+    "context": "categories.mobility.name",
+    "source": "Mobility",
+    "translation": "التنقل"
+  },
+  {
+    "key": "text_f7b27f3edbe5efce790a478a",
+    "context": "categories.mobility.description",
+    "source": "How movement, cities, autonomy and access redefine where people can live and work.",
+    "translation": "كيف تعيد الحركة والمدن والاستقلالية وإمكانية الوصول تعريف الأماكن التي يستطيع الناس العيش والعمل فيها."
+  },
+  {
+    "key": "text_b696d75511dc16f2b52563e3",
+    "context": "categories.finance.name",
+    "source": "Finance",
+    "translation": "التمويل"
+  },
+  {
+    "key": "text_45e3915bb1bde751f0789643",
+    "context": "categories.finance.description",
+    "source": "How money, value, trust and ownership change in exponential systems.",
+    "translation": "كيف تتغير النقود والقيمة والثقة والملكية في الأنظمة المتسارعة أُسّياً."
+  },
+  {
+    "key": "text_f2fcd3f7dccadd194c4c5a54",
+    "context": "categories.energy.name",
+    "source": "Energy",
+    "translation": "الطاقة"
+  },
+  {
+    "key": "text_96ebd6b2b1978f03466a0e96",
+    "context": "categories.energy.description",
+    "source": "How abundance, infrastructure and resilience reshape civilization.",
+    "translation": "كيف تعيد الوفرة والبنية التحتية والقدرة على الصمود تشكيل الحضارة."
+  },
+  {
+    "key": "text_2f17a0f8d518e491c5a0c490",
+    "context": "categories.jobs.name",
+    "source": "Jobs",
+    "translation": "الوظائف"
+  },
+  {
+    "key": "text_bc32e149583ce99cb3940a5a",
+    "context": "categories.jobs.description",
+    "source": "How work changes when automation, identity and contribution are renegotiated.",
+    "translation": "كيف يتغير العمل مع إعادة التفاوض على الأتمتة والهوية والمساهمة."
+  },
+  {
+    "key": "text_d2b98fb53714f23cc0aa7b0a",
+    "context": "categories.travel.name",
+    "source": "Travel",
+    "translation": "السفر"
+  },
+  {
+    "key": "text_d7f0dfc3ab14be058e61d994",
+    "context": "categories.travel.description",
+    "source": "How travel evolves from consumption to learning, access and perspective.",
+    "translation": "كيف يتطور السفر من الاستهلاك إلى التعلّم والوصول وتوسيع الرؤية."
+  },
+  {
+    "key": "text_85752a46aa46dc5e13e8f440",
+    "context": "categories.relationships.name",
+    "source": "Relationships",
+    "translation": "العلاقات"
+  },
+  {
+    "key": "text_39116b69fc6f2d83cab175f8",
+    "context": "categories.relationships.description",
+    "source": "How human connection changes under speed, distance, technology and new social contracts.",
+    "translation": "كيف يتغير التواصل الإنساني في ظل السرعة والمسافة والتكنولوجيا والعقود الاجتماعية الجديدة."
+  },
+  {
+    "key": "text_7ab78b7058dd1c098c1fd7ab",
+    "context": "categories.nutrition.name",
+    "source": "Nutrition",
+    "translation": "التغذية"
+  },
+  {
+    "key": "text_903800e3f3b2b7ab76ec588f",
+    "context": "categories.nutrition.description",
+    "source": "How food systems, biology, culture and sustainability reshape what we eat.",
+    "translation": "كيف تعيد أنظمة الغذاء والبيولوجيا والثقافة والاستدامة تشكيل ما نأكله."
+  },
+  {
+    "key": "text_7b4e361f17843b020a059e5d",
+    "context": "acknowledgements.Viennexus Global Academy.description",
+    "source": "Viennexus Global Academy is rethinking upper-secondary education from Vienna. Students complete the Austrian Matura in three years while combining academic learning with real work experience, global exposure and entrepreneurship.\nEducation. Experience. Execution.",
+    "translation": "تعيد Viennexus Global Academy التفكير في التعليم الثانوي العالي انطلاقاً من فيينا. يُكمل الطلاب شهادة الثانوية النمساوية «ماتورا» خلال ثلاث سنوات، ويجمعون التعلّم الأكاديمي بالخبرة العملية والانفتاح العالمي وريادة الأعمال.\nتعليم. تجربة. تنفيذ."
+  },
+  {
+    "key": "text_22f62ca6a4c7494bcf83554e",
+    "context": "acknowledgements.Modern Elder Academy (MEA).description",
+    "source": "We prepare for so many chapters of life, yet receive surprisingly little encouragement to imagine the decades beyond our busiest years. When careers change and familiar roles loosen, there can be a wonderful freedom — and a very human question: what shall I do with all that I still have to give?\nCo-founded by Chip Conley, Jeff Hamaoui and Christine Sperber, Modern Elder Academy brings people together to explore that question with curiosity, warmth and possibility. Through workshops, online learning and lasting alumni connections, MEA helps people find purpose, friendship and new adventures in the second half of life. It gives a welcoming home to the wisdom we have gathered and the person we are still becoming.",
+    "translation": "نستعد لفصول كثيرة من الحياة، لكننا لا نحظى إلا بقليل من التشجيع لتخيّل العقود التي تأتي بعد أكثر سنواتنا انشغالاً. حين تتغير المسارات المهنية وتتراجع الأدوار المألوفة، قد تنفتح حرية رائعة، ويبرز سؤال إنساني جداً: ماذا أفعل بكل ما لا يزال لديّ لأقدّمه؟\nتأسست Modern Elder Academy على يد Chip Conley وJeff Hamaoui وChristine Sperber، وتجمع الناس لاستكشاف هذا السؤال بفضول ودفء وانفتاح على الممكن. من خلال ورش العمل والتعلّم عبر الإنترنت والروابط المستمرة بين الخريجين، تساعد MEA الناس على إيجاد الغاية والصداقة والمغامرات الجديدة في النصف الثاني من الحياة. إنها تمنح بيتاً مرحّباً بالحكمة التي جمعناها، وبالشخص الذي ما زلنا نصبحه."
+  },
+  {
+    "key": "text_5292c61823be6fc9395cf51d",
+    "context": "acknowledgements.Philippe DuBois et fils SA.description",
+    "source": "DuBois et fils creates new Swiss watches around original mechanical movements manufactured more than 50 years ago. Instead of producing another new movement, the company restores historic Swiss calibres, gives them a second life and preserves the stories, craftsmanship and engineering behind them.\nIts collection of historic movements and components has also become the foundation for a growing archive and museum of Swiss watchmaking history. The result is an unusual model of luxury: creating something new by preserving what already exists, and making objects designed to acquire history rather than become obsolete.",
+    "translation": "تصنع DuBois et fils ساعات سويسرية جديدة حول حركات ميكانيكية أصلية صُنعت قبل أكثر من 50 عاماً. وبدلاً من إنتاج حركة جديدة أخرى، ترمّم الشركة العيارات السويسرية التاريخية، وتمنحها حياة ثانية، وتحفظ القصص والحِرفية والهندسة الكامنة وراءها.\nوأصبحت مجموعتها من الحركات والمكوّنات التاريخية أساساً لأرشيف ومتحف متناميين لتاريخ صناعة الساعات السويسرية. والنتيجة نموذج غير معتاد للفخامة: ابتكار الجديد بالحفاظ على الموجود، وصنع أشياء مصمّمة لتكتسب تاريخاً بدلاً من أن تصبح متقادمة."
+  },
+  {
+    "key": "text_abe11e03a0bb9ebd8b083b0f",
+    "context": "acknowledgements.Viennexus Global Academy.echo",
+    "source": "We want to change the question from “What will I do after school?” to “What can I already create and contribute?” This changes how students see themselves and how companies and educators see young people.",
+    "translation": "نريد تغيير السؤال من «ماذا سأفعل بعد المدرسة؟» إلى «ما الذي أستطيع أن أخلقه وأساهم به منذ الآن؟». هذا يغيّر نظرة الطلاب إلى أنفسهم، ونظرة الشركات والمعلّمين إلى الشباب."
+  },
+  {
+    "key": "text_a3fdee82cfb7308550d955a3",
+    "context": "acknowledgements.Viennexus Global Academy.offer",
+    "source": "Viennexus prepares students not just for exams, but for life beyond school. They graduate with an Austrian Matura, real work experience across up to ten workplaces, and a better understanding of what they can contribute to the world. Most importantly they end up having equity in the school.",
+    "translation": "تُعدّ Viennexus الطلاب للامتحانات وللحياة بعد المدرسة أيضاً. يتخرجون بشهادة ماتورا نمساوية وخبرة عملية في ما يصل إلى عشرة أماكن عمل، وفهم أفضل لما يستطيعون تقديمه للعالم. والأهم أنهم ينتهون إلى امتلاك حصة في المدرسة."
+  },
+  {
+    "key": "text_b6820e21a60661f175095dfb",
+    "context": "acknowledgements.Viennexus Global Academy.create",
+    "source": "Viennexus creates a school students help build themselves. Students contribute ideas, skills and projects to the academy, turning education from something they consume into something they actively create.",
+    "translation": "تنشئ Viennexus مدرسة يساهم الطلاب أنفسهم في بنائها. يقدّم الطلاب أفكاراً ومهارات ومشاريع للأكاديمية، فيحوّلون التعليم من شيء يستهلكونه إلى شيء يخلقونه بفاعلية."
+  },
+  {
+    "key": "text_c3567383668628125c7af60c",
+    "context": "acknowledgements.Viennexus Global Academy.legacy",
+    "source": "Students could earn a Matura elsewhere. What would be missing is a school they helped build.\nOur ambition is that graduates can say:\n“I didn't just go to school. I helped build one.”\nMost importantly, even if it stopped the impact on the kids that had the chance to experience it, will remain for a lifetime.",
+    "translation": "يمكن للطلاب الحصول على ماتورا في مكان آخر. لكن ما سيغيب هو مدرسة شاركوا في بنائها.\nطموحنا أن يستطيع الخريجون القول:\n«لم أذهب إلى المدرسة فحسب. ساعدت في بناء واحدة».\nوالأهم أنه حتى لو توقف المشروع، سيبقى أثره في الأطفال الذين حظوا بتجربته مدى الحياة."
+  },
+  {
+    "key": "text_f62f606d2fd907c8ba629529",
+    "context": "acknowledgements.Viennexus Global Academy.momentum",
+    "source": "Viennexus connects assets that already exist the Austrian Matura, great teachers, companies, technology and Vienna itself in a new way. The city becomes part of the classroom and the real world becomes part of education.",
+    "translation": "تربط Viennexus أصولاً موجودة بالفعل بطريقة جديدة: الماتورا النمساوية، ومعلّمين مميّزين، وشركات، وتكنولوجيا، ومدينة فيينا نفسها. تصبح المدينة جزءاً من الفصل، والعالم الحقيقي جزءاً من التعليم."
+  },
+  {
+    "key": "text_de65d90269fbd1ee404c9ae4",
+    "context": "acknowledgements.Philippe DuBois et fils SA.echo",
+    "source": "DuBois et fils challenges one of the assumptions underlying modern consumption: that newer automatically means better.\nA mechanical movement produced in the 1940s, 50s or 60s can be restored today and continue operating for decades. Its imperfections even demand more human craftsmanship: unlike highly standardized modern components, each historic movement has to be individually understood, adjusted and serviced by a watchmaker.\nThat changes the conversation around a luxury object. Customers are not primarily buying the latest technical specification; they are buying something that already had a life before them and can have another life after them.\nDuBois et fils offers a counter-narrative to technological obsolescence: progress can also mean learning to value what is already here.\nSmartwatches give us the current time. DuBois ef fils watches gives us everything until the current time.",
+    "translation": "تتحدّى DuBois et fils أحد افتراضات الاستهلاك الحديث: أن الأحدث أفضل تلقائياً.\nيمكن ترميم حركة ميكانيكية صُنعت في أربعينيات القرن الماضي أو خمسينياته أو ستينياته اليوم، لتواصل العمل لعقود. بل إن اختلافاتها تتطلب مزيداً من الحِرفية البشرية: بخلاف المكوّنات الحديثة الموحّدة بدرجة كبيرة، تحتاج كل حركة تاريخية إلى أن يفهمها صانع ساعات ويضبطها ويصونها بصورة فردية.\nوهذا يغيّر الحوار حول قطعة الفخامة. فالعملاء لا يشترون أساساً أحدث المواصفات التقنية؛ بل يشترون شيئاً كانت له حياة قبلهم، ويمكن أن تكون له حياة بعدهم.\nتقدّم DuBois et fils سردية بديلة للتقادم التكنولوجي: قد يعني التقدم أيضاً تعلّم تقدير ما هو موجود بالفعل.\nتمنحنا الساعات الذكية الوقت الحالي. أما ساعات DuBois et fils فتمنحنا كل ما سبق اللحظة الحالية."
+  },
+  {
+    "key": "text_77580c60ca9fb2f2bc907755",
+    "context": "acknowledgements.Philippe DuBois et fils SA.offer",
+    "source": "DuBois et fils offers more than watches. It makes a largely forgotten chapter of Swiss industrial history accessible again.\nThe history of Swiss watchmaking is usually told through the famous brands whose names survived. DuBois et fils also tells the story of the movement manufacturers, engineers and craftspeople behind them — companies such as Felsa and A. Schild whose inventions powered watches across the industry but whose names are far less known today.\nHistoric movements are restored rather than discarded, their origins are researched, and their stories become part of the finished watch. The company has additionally created what Thomas Steinemann describes as the world’s first museum dedicated specifically to watch movements, displaying more than 2,000 different movements.\nThe offer is therefore both physical and cultural: preserving mechanical objects while making the knowledge and human ingenuity embedded in them visible again. The company’s current collections explicitly identify the original historic calibre, its manufacturer and its history.",
+    "translation": "تقدّم DuBois et fils أكثر من ساعات. إنها تعيد إتاحة فصل منسي إلى حد كبير من التاريخ الصناعي السويسري.\nعادة ما يُروى تاريخ صناعة الساعات السويسرية عبر العلامات الشهيرة التي بقيت أسماؤها. وتروي DuBois et fils أيضاً قصص مصنّعي الحركات والمهندسين والحِرفيين وراءها، مثل Felsa وA. Schild، الذين حرّكت اختراعاتهم ساعات القطاع كله، لكن أسماءهم أقل شهرة اليوم.\nتُرمَّم الحركات التاريخية بدلاً من التخلص منها، وتُبحث أصولها، وتصبح قصصها جزءاً من الساعة المكتملة. وأنشأت الشركة أيضاً ما يصفه Thomas Steinemann بأنه أول متحف في العالم مخصّص تحديداً لحركات الساعات، يعرض أكثر من 2,000 حركة مختلفة.\nلذلك فالعطاء مادي وثقافي معاً: الحفاظ على القطع الميكانيكية وإظهار المعرفة والبراعة الإنسانية المودعتين فيها مجدداً. وتحدّد مجموعات الشركة الحالية صراحة العيار التاريخي الأصلي ومصنّعه وتاريخه."
+  },
+  {
+    "key": "text_804169f65475d4d1eca1a37a",
+    "context": "acknowledgements.Philippe DuBois et fils SA.create",
+    "source": "DuBois et fils creates new value from assets that had effectively reached the end of their commercial life.\nIts historic movements were not newly manufactured for the watches. They had already been produced decades ago and were sitting unused in old inventories. Rather than treating “old” as inferior and consuming new raw materials simply because new production is possible, DuBois et fils restores these movements and builds contemporary watches around them.\nThis changes the starting question from “What new thing can we manufacture?” to “What value is already here that we have stopped seeing?”\nThe result does not depend on guarding a scarce new technology. Much of its value comes from recovering, understanding and sharing existing engineering, craftsmanship and history. Every restored movement becomes evidence that creation does not necessarily require more extraction or more production.",
+    "translation": "تخلق DuBois et fils قيمة جديدة من أصول كانت قد بلغت عملياً نهاية حياتها التجارية.\nلم تُصنَّع حركاتها التاريخية حديثاً لهذه الساعات؛ بل أُنتجت قبل عقود، وظلّت غير مستخدمة في مخزونات قديمة. وبدلاً من اعتبار «القديم» أدنى قيمة واستهلاك مواد خام جديدة لمجرد إمكان الإنتاج الجديد، ترمّم الشركة هذه الحركات وتبني حولها ساعات معاصرة.\nيتحوّل سؤال البداية من «ما الشيء الجديد الذي نستطيع تصنيعه؟» إلى «ما القيمة الموجودة هنا التي توقفنا عن رؤيتها؟».\nولا تعتمد النتيجة على حراسة تقنية جديدة نادرة. يأتي جانب كبير من قيمتها من استعادة الهندسة والحِرفية والتاريخ الموجود، وفهمه ومشاركته. تصبح كل حركة مرمَّمة دليلاً على أن الإبداع لا يتطلب بالضرورة مزيداً من الاستخراج أو الإنتاج."
+  },
+  {
+    "key": "text_b229d56902e3bda32116d0f9",
+    "context": "acknowledgements.Philippe DuBois et fils SA.legacy",
+    "source": "A commercial watch brand could be replaced. What DuBois et fils is assembling around it could not.\nIts collection contains thousands of physical witnesses to an era of Swiss engineering that is disappearing: historic movements, components, technical knowledge and the stories of manufacturers and inventors whose names have largely vanished behind today’s major luxury brands.\nDuBois’ ambition is to turn this collection into a competence centre for historic Swiss watchmaking — preserving not merely objects, but the ability to understand, restore and keep them functioning.\nThere is also a second kind of legacy embedded in every watch. A digital device is usually replaced when the next generation becomes technically superior. A mechanical watch can move in the opposite direction: its personal value can increase because it has been worn, inherited and passed on.\nDuBois et fils creates products intended to outlive their first owner. If the company disappeared, what would be missing is not simply another watchmaker, but a custodian connecting generations of Swiss engineering with generations of future owners.",
+    "translation": "يمكن استبدال علامة تجارية للساعات. لكن ما تجمعه DuBois et fils حولها لا يمكن استبداله.\nتضم مجموعتها آلاف الشواهد المادية على حقبة متلاشية من الهندسة السويسرية: حركات تاريخية ومكوّنات ومعرفة تقنية وقصص مصنّعين ومخترعين غابت أسماؤهم إلى حد كبير خلف علامات الفخامة الكبرى اليوم.\nتطمح DuBois إلى تحويل المجموعة إلى مركز خبرة لصناعة الساعات السويسرية التاريخية، يحفظ القطع والقدرة على فهمها وترميمها وإبقائها عاملة.\nوثمة نوع ثانٍ من الإرث داخل كل ساعة. فعادة ما يُستبدل الجهاز الرقمي حين يتفوّق الجيل التالي عليه تقنياً. أما الساعة الميكانيكية فقد تسير في الاتجاه المعاكس: تزداد قيمتها الشخصية لأنها لُبست ووُرثت وانتقلت بين الأجيال.\nتصنع DuBois et fils منتجات يُراد لها أن تعيش أطول من مالكها الأول. ولو اختفت الشركة، فلن يغيب مجرد صانع ساعات آخر، بل مؤتمن يصل أجيال الهندسة السويسرية بأجيال من المالكين المستقبليين."
+  },
+  {
+    "key": "text_3fe99a6897fedeedfd9c842b",
+    "context": "acknowledgements.Philippe DuBois et fils SA.momentum",
+    "source": "The company acquired a vast inventory of historic Swiss watch movements and components that had survived for decades without being used. Instead of treating the collection simply as stock, it turned it into the foundation of an entirely different business model.\nA box containing 176 historic movements can become 176 new watches. The number and characteristics of the surviving movements determine what can be created, rather than a marketing forecast determining how many new movements should be manufactured. Scarcity becomes a design parameter.\nAround this resource, DuBois et fils has built restoration expertise, highly limited collections, a museum and archive, and a substantial inventory of spare parts that can keep historic mechanical watches alive.\nIt is a compelling inversion of the conventional industrial model: the company does not first decide what it wants to produce and then source the resources. It begins with the resources that already exist and asks what they can become.",
+    "translation": "اقتنت الشركة مخزوناً واسعاً من حركات الساعات السويسرية التاريخية ومكوّناتها، ظلّ محفوظاً لعقود دون استخدام. وبدلاً من معاملته كمخزون للبيع فحسب، جعلته أساساً لنموذج أعمال مختلف تماماً.\nيمكن لصندوق يحوي 176 حركة تاريخية أن يصبح 176 ساعة جديدة. يحدّد عدد الحركات الباقية وخصائصها ما يمكن خلقه، بدلاً من أن يحدّد توقّع تسويقي عدد الحركات الجديدة التي ينبغي تصنيعها. تصبح الندرة معياراً للتصميم.\nوبنت DuBois et fils حول هذا المورد خبرة في الترميم، ومجموعات محدودة جداً، ومتحفاً وأرشيفاً، ومخزوناً كبيراً من قطع الغيار القادرة على إبقاء الساعات الميكانيكية التاريخية حيّة.\nإنه قلب لافت للنموذج الصناعي المعتاد: لا تقرّر الشركة أولاً ما تريد إنتاجه ثم تبحث عن موارده. تبدأ بالموارد الموجودة وتسأل عمّا تستطيع أن تصبحه."
+  },
+  {
+    "key": "text_fbbd0e7eaa337d5c393e1983",
+    "context": "acknowledgements.Modern Elder Academy (MEA).echo",
+    "source": "Sometimes a change begins with hearing someone say what you have been afraid to admit. Sometimes it begins with meeting someone whose enthusiasm reminds you of your own.\n\nMEA creates room for those encounters. Participant accounts describe finding fresh direction, new perspectives and friendships that mattered deeply to them. Chip Conley’s writing and talks invite people to approach aging with curiosity and imagine possibilities they may have dismissed.\n\nThat encouragement can reach beyond the people attending a program. MEA reports that its alumni chapters’ 2023 “September of Service” included beach and river cleanups, food packing and mentoring young entrepreneurs. People came together to explore their own next chapters and found ways to contribute to someone else’s.",
+    "translation": "أحياناً يبدأ التغيير حين تسمع شخصاً يقول ما خشيت الاعتراف به. وأحياناً يبدأ بلقاء شخص يذكّرك حماسه بحماسك أنت.\n\nتفتح MEA مساحة لهذه اللقاءات. تروي شهادات المشاركين العثور على اتجاه جديد ورؤى جديدة وصداقات عميقة الأهمية. وتدعو كتابات Chip Conley وأحاديثه الناس إلى مقاربة التقدم في العمر بفضول، وتخيّل إمكانات ربما استبعدوها.\n\nوقد يصل هذا التشجيع إلى ما وراء المشاركين في البرامج. تذكر MEA أن مبادرة «سبتمبر للخدمة» لفروع خريجيها عام 2023 شملت تنظيف الشواطئ والأنهار، وتعبئة الغذاء، وإرشاد روّاد أعمال شباب. اجتمع الناس لاستكشاف فصولهم المقبلة، ووجدوا طرقاً للمساهمة في فصول الآخرين."
+  },
+  {
+    "key": "text_866b5582d40cd61278c5f483",
+    "context": "acknowledgements.Modern Elder Academy (MEA).offer",
+    "source": "We spend years learning how to build a career, raise a family and become someone others can depend on. We receive much less encouragement to imagine what comes after those busiest years. Where will we find belonging? What would we love to explore? Who might benefit from everything we have learned?\n\nMEA makes room for those questions — and for the people asking them. It offers a welcoming place to pause, meet companions and imagine a next chapter with meaning. People bring their stories, their hard-earned wisdom and possibilities they may have set aside while taking care of everything else.\n\nChip Conley’s experience of mentoring younger colleagues while learning from them brings a generous spirit to this work. We can have something valuable to teach and something wonderful still to discover.\n\nThrough its programs, free public resources and partial scholarships for selected offerings, MEA invites people to recognize how much they have to give. Its beautiful offer is the encouragement to keep growing, in good company.",
+    "translation": "نقضي سنوات نتعلّم كيف نبني مسيرة مهنية وننشئ أسرة ونصبح أشخاصاً يعتمد عليهم الآخرون. ونلقى تشجيعاً أقل بكثير لتخيّل ما يأتي بعد أكثر سنواتنا انشغالاً. أين نجد الانتماء؟ وما الذي نحب استكشافه؟ ومَن قد يستفيد من كل ما تعلّمناه؟\n\nتفسح MEA مجالاً لهذه الأسئلة ولمن يطرحونها. تقدّم مكاناً مرحّباً للتوقف واللقاء وتخيّل فصل مقبل ذي معنى. يأتي الناس بقصصهم وحكمتهم المكتسبة بشق الأنفس، وإمكانات ربما وضعوها جانباً وهم يهتمون بكل شيء آخر.\n\nتحمل خبرة Chip Conley في إرشاد زملاء أصغر سناً والتعلّم منهم روحاً سخية إلى هذا العمل. فقد نملك شيئاً قيّماً نعلّمه، وشيئاً رائعاً لا يزال ينتظر اكتشافنا.\n\nومن خلال برامجها ومواردها العامة المجانية والمنح الجزئية لبعض برامجها، تدعو MEA الناس إلى إدراك مقدار ما لديهم ليقدّموه. عطاؤها الجميل هو التشجيع على مواصلة النمو، بصحبة طيبة."
+  },
+  {
+    "key": "text_116e405386481a992a907f81",
+    "context": "acknowledgements.Modern Elder Academy (MEA).create",
+    "source": "A lifetime leaves us with so much: things we got right, things we wish we had done differently, losses we learned to live with and unexpected joys. Much of that experience can remain quietly inside us, without a place to become useful to someone else.\nMEA helps people bring it into the light. Through reflection, learning and conversation, personal experience can become perspective, encouragement or the words another person needs to hear.\nThe human value created in those encounters can travel freely. An insight shared with a friend, a more thoughtful conversation with a colleague or the courage to help someone through a difficult change becomes part of everyday life.\nMEA creates opportunities for people to discover what they carry—and to give it a life beyond themselves. Wisdom becomes more valuable as it is shared.",
+    "translation": "تترك لنا الحياة الكثير: أموراً أحسنّا فيها، وأخرى تمنينا لو فعلناها بطريقة مختلفة، وخسارات تعلّمنا التعايش معها، وأفراحاً غير متوقعة. وقد يبقى كثير من هذه الخبرة ساكناً في داخلنا، بلا مكان ينفع فيه شخصاً آخر.\nتساعد MEA الناس على إخراجها إلى الضوء. عبر التأمل والتعلّم والحوار، قد تصبح الخبرة الشخصية منظوراً جديداً، أو تشجيعاً، أو كلمات يحتاج آخر إلى سماعها.\nوالقيمة الإنسانية التي تنشأ في هذه اللقاءات تستطيع الانتقال بحرية. فكرة تُشارك مع صديق، أو حوار أكثر مراعاة مع زميل، أو شجاعة لمساعدة شخص خلال تغيير صعب؛ كل ذلك يصبح جزءاً من الحياة اليومية.\nتخلق MEA فرصاً ليكتشف الناس ما يحملونه، ويمنحوه حياة تتجاوز ذواتهم. تصبح الحكمة أثمن حين تُشارك."
+  },
+  {
+    "key": "text_83731ae6f75954b5506822ce",
+    "context": "acknowledgements.Modern Elder Academy (MEA).legacy",
+    "source": "MEA has created a welcoming place for people who still have so much life to live and so much experience to share.\nMEA’s strength lies in the community it brings together: people willing to be beginners again, speak honestly about change and help one another imagine a future worth looking forward to. There is something precious about finding companions who welcome both the wisdom you have earned and the dreams you have yet to pursue.\nIts legacy lives on in friendships that continue, conversations that become easier and people who feel more able to offer what they know.\nBy co-founding MEA, Chip Conley helped give that possibility a home. Helping people discover that they still have much to learn, much to give and people to share the journey with is a beautiful contribution to a community.",
+    "translation": "أنشأت MEA مكاناً مرحّباً لأناس لا تزال أمامهم حياة كثيرة يعيشونها وخبرات كثيرة يشاركونها.\nتكمن قوتها في المجتمع الذي تجمعه: أشخاص مستعدون ليكونوا مبتدئين من جديد، وليتحدثوا بصدق عن التغيير، وليساعد بعضهم بعضاً على تخيّل مستقبل يستحق التطلّع إليه. هناك شيء ثمين في العثور على رفاق يرحّبون بالحكمة التي اكتسبتها وبالأحلام التي لم تسعَ إليها بعد.\nيعيش إرثها في صداقات مستمرة، وحوارات تصبح أسهل، وأناس يشعرون بقدرة أكبر على تقديم ما يعرفونه.\nبمشاركته في تأسيس MEA، ساعد Chip Conley في منح هذه الإمكانية بيتاً. مساعدة الناس على اكتشاف أن لديهم الكثير ليتعلّموه ويقدّموه، وأن ثمة مَن يشاركهم الرحلة، مساهمة جميلة في المجتمع."
+  },
+  {
+    "key": "text_a232d2024cf7fa2a20b7e5c2",
+    "context": "acknowledgements.Modern Elder Academy (MEA).momentum",
+    "source": "Chip Conley had spent years learning how to welcome people, build places where they felt at home and bring different generations into conversation. Together with his co-founders, he put that experience to work for people imagining the second half of their lives.\n\nMEA brings hospitality, teaching and thoughtful places to gather into the service of questions that deserve time and attention. Its campuses and online programs offer space to explore new interests, reconsider familiar assumptions and discover what a meaningful next chapter could look like.\n\nThen it provides ways to keep going. Alumni can reconnect through their cohorts, regional chapters, shared resources and groups built around common interests and experiences.\n\nThe momentum comes from people as much as from the academy. Someone arrives with a question or a hope, meets others willing to explore it and leaves with relationships they can continue nurturing. What begins as time away can become a continuing source of encouragement—and the confidence to take a first step.",
+    "translation": "أمضى Chip Conley سنوات يتعلّم كيف يرحّب بالناس، ويبني أماكن يشعرون فيها بأنهم في بيوتهم، ويجمع أجيالاً مختلفة في حوار. ووضع هذه الخبرة، مع شركائه المؤسسين، في خدمة أشخاص يتخيّلون النصف الثاني من حياتهم.\n\nتجمع MEA الضيافة والتعليم وأماكن اللقاء المدروسة لخدمة أسئلة تستحق الوقت والاهتمام. وتتيح مقارّها وبرامجها عبر الإنترنت مساحة لاستكشاف اهتمامات جديدة، وإعادة النظر في افتراضات مألوفة، واكتشاف شكل فصل مقبل ذي معنى.\n\nثم توفّر طرقاً للاستمرار. يستطيع الخريجون إعادة التواصل عبر مجموعاتهم وفروعهم الإقليمية ومواردهم المشتركة ومجموعات تجمعها اهتمامات وتجارب متقاربة.\n\nيأتي الزخم من الناس بقدر ما يأتي من الأكاديمية. يصل شخص بسؤال أو أمل، ويلتقي آخرين مستعدين لاستكشافه، ثم يغادر بعلاقات يستطيع مواصلة رعايتها. وما يبدأ كابتعاد مؤقت قد يصبح مصدراً مستمراً للتشجيع والثقة لاتخاذ الخطوة الأولى."
+  }
+]

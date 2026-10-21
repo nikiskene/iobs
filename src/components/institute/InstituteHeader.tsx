@@ -1,3 +1,4 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 // src/components/institute/InstituteHeader.tsx
 
 import { useEffect, useRef, useState } from 'react';
@@ -20,6 +21,7 @@ const PUBLIC_LINKS = [
 ] as const;
 
 export default function InstituteHeader() {
+  const { translate: tr } = useAwardSiteContent();
   const { mode } = useNominationMode();
   const nominationLink = mode === 'acknowledgement' ? '/acknowledgement' : '/nominate';
   const { locale, setLocale, t } = useLocale();
@@ -48,36 +50,37 @@ export default function InstituteHeader() {
   return (
     <>
       <header className="institute-header">
-        <Link className="institute-logo" to="/" aria-label="Institute of Beautiful Success">
-          <img src={optimizedImageUrl(AWARD_ASSETS.circleDark, 120, 78, 120)} alt="" width="60" height="60" decoding="async" /><span>Institute of<br />Beautiful Success</span>
+        <Link className="institute-logo" to="/" aria-label={tr("Institute of Beautiful Success")}>
+          <img src={optimizedImageUrl(AWARD_ASSETS.circleDark, 120, 78, 120)} alt="" width="60" height="60" decoding="async" /><span>{tr("Institute of")}<br />{tr("Beautiful Success")}</span>
         </Link>
-        <nav aria-label="Main navigation">
-          {PUBLIC_LINKS.map(([to, label]) => <Link to={to} key={to}>{label}</Link>)}
+        <nav aria-label={tr("Main navigation")}>
+          {PUBLIC_LINKS.map(([to, label]) => <Link to={to} key={to}>{tr(label)}</Link>)}
         {hasBeauAccess && <Link to="/beau">BEAU</Link>}
         </nav>
         <div className="institute-header-actions">
-          <select className="language-switcher" value={locale} onChange={(event) => setLocale(event.target.value as Locale)} aria-label="Language">
+          <select className="language-switcher" value={locale} onChange={(event) => setLocale(event.target.value as Locale)} aria-label={tr("Language")}>
             {LANGUAGE_OPTIONS.map((option) => <option value={option.code} key={option.code}>{option.short}</option>)}
           </select>
-          <Link className={`enter-link${mode === 'acknowledgement' ? ' acknowledgement-link' : ''}`} to={nominationLink}>{mode === 'acknowledgement' ? 'Acknowledgement' : t('nav.nominate')}</Link>
+          <Link className={`enter-link${mode === 'acknowledgement' ? ' acknowledgement-link' : ''}`} to={nominationLink}>{mode === 'acknowledgement' ? tr('Acknowledgement') : t('nav.nominate')}</Link>
           {user ? <div className="institute-account" ref={menuRef}>
             <button type="button" className="institute-account-trigger" onClick={() => setAccountOpen((open) => !open)} aria-label={`Open account menu for ${accountName}`} aria-expanded={accountOpen}>
               {profile?.photo_url ? <img src={profile.photo_url} alt="" /> : <span>{initial}</span>}{!!unreadCount && <b>{unreadCount > 9 ? '9+' : unreadCount}</b>}
             </button>
             {accountOpen && <AccountMenu name={accountName} isAdmin={isAdmin} hasTeamAccess={hasTeamAccess} hasChapterAccess={hasChapterAccess} hasSubmissions={hasSubmissions} unreadCount={unreadCount} logout={logout} />}
-          </div> : <Link className="institute-login" to="/login" aria-label="Log in"><LogIn /></Link>}
-          <button type="button" className="institute-menu-trigger" onClick={() => setMobileOpen((open) => !open)} aria-label="Toggle menu" aria-expanded={mobileOpen}>{mobileOpen ? <X /> : <Menu />}</button>
+          </div> : <Link className="institute-login" to="/login" aria-label={tr("Log in")}><LogIn /></Link>}
+          <button type="button" className="institute-menu-trigger" onClick={() => setMobileOpen((open) => !open)} aria-label={tr("Toggle menu")} aria-expanded={mobileOpen}>{mobileOpen ? <X /> : <Menu />}</button>
         </div>
       </header>
       {mobileOpen && <div className="institute-mobile-nav">
-        {PUBLIC_LINKS.map(([to, label]) => <Link to={to} key={to}>{label}</Link>)}
-        <Link to={nominationLink}>{mode === 'acknowledgement' ? 'Acknowledgement' : t('nav.nominate')}</Link>
-        {user ? <>{hasBeauAccess&&<Link to="/beau">BEAU</Link>}<Link to="/dashboard/profile">Profile</Link><Link to="/dashboard/settings">Settings</Link><Link to="/dashboard/settings/email">IOBS Email</Link><Link to="/dashboard/inbox">Inbox{unreadCount ? ` (${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office">My chapter</Link>}{hasTeamAccess && <Link to="/work">Work</Link>}{isAdmin && <Link to="/admin">Admin</Link>}<button type="button" onClick={logout}>Log out</button></> : <Link to="/login">Log in</Link>}
+        {PUBLIC_LINKS.map(([to, label]) => <Link to={to} key={to}>{tr(label)}</Link>)}
+        <Link to={nominationLink}>{mode === 'acknowledgement' ? tr('Acknowledgement') : t('nav.nominate')}</Link>
+        {user ? <>{hasBeauAccess&&<Link to="/beau">BEAU</Link>}<Link to="/dashboard/profile">{tr("Profile")}</Link><Link to="/dashboard/settings">{tr("Settings")}</Link><Link to="/dashboard/settings/email">{tr("IOBS Email")}</Link><Link to="/dashboard/inbox">{tr("Inbox")}{unreadCount ? ` (${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office">{tr("My chapter")}</Link>}{hasTeamAccess && <Link to="/work">{tr("Work")}</Link>}{isAdmin && <Link to="/admin">{tr("Admin")}</Link>}<button type="button" onClick={logout}>{tr("Log out")}</button></> : <Link to="/login">{tr("Log in")}</Link>}
       </div>}
     </>
   );
 }
 
 function AccountMenu({ name, isAdmin, hasTeamAccess, hasChapterAccess, hasSubmissions, unreadCount, logout }: { name:string; isAdmin:boolean; hasTeamAccess:boolean; hasChapterAccess:boolean; hasSubmissions:boolean; unreadCount:number; logout:()=>void }) {
-  return <div className="institute-account-menu"><strong>{name}</strong><Link to="/dashboard/profile"><User /> Profile</Link><Link to="/dashboard/settings"><User /> Settings</Link><Link to="/dashboard/settings/email"><User /> IOBS Email</Link>{hasSubmissions && <Link to="/acknowledgement/mine">My submissions</Link>}<Link to="/dashboard/inbox"><Inbox /> Inbox {unreadCount ? `(${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office"><Briefcase /> My chapter</Link>}{hasTeamAccess && <Link to="/work"><Briefcase /> Work</Link>}{isAdmin && <Link to="/admin"><Shield /> Admin</Link>}<button type="button" onClick={logout}><LogOut /> Log out</button></div>;
+  const { translate: tr } = useAwardSiteContent();
+  return <div className="institute-account-menu"><strong>{name}</strong><Link to="/dashboard/profile"><User />{tr("Profile")}</Link><Link to="/dashboard/settings"><User />{tr("Settings")}</Link><Link to="/dashboard/settings/email"><User />{tr("IOBS Email")}</Link>{hasSubmissions && <Link to="/acknowledgement/mine">{tr("My submissions")}</Link>}<Link to="/dashboard/inbox"><Inbox /> {tr("Inbox")} {unreadCount ? `(${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office"><Briefcase />{tr("My chapter")}</Link>}{hasTeamAccess && <Link to="/work"><Briefcase />{tr("Work")}</Link>}{isAdmin && <Link to="/admin"><Shield />{tr("Admin")}</Link>}<button type="button" onClick={logout}><LogOut />{tr("Log out")}</button></div>;
 }

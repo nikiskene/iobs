@@ -1,3 +1,4 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
@@ -11,6 +12,7 @@ import ReadingDialog from '../../components/acknowledgement/ReadingDialog';
 import './acknowledgement.css';
 
 export default function AcknowledgementPage() {
+  const { translate: tr } = useAwardSiteContent();
   const { mode } = useNominationMode();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -46,35 +48,35 @@ export default function AcknowledgementPage() {
   const voteControls = (item: AcknowledgementNomination) => <VoteButtons item={item} busy={busy} onVote={direction => void vote(item, direction)} />;
   return <main className="ack-page">
     <section className="ack-hero">
-      <p className="ibs-eyebrow">Beautiful Success · Acknowledgement</p>
-      <h1>Good companies.<br /><em>Beautiful impact.</em></h1>
-      <div className="ack-hero-bottom"><p>Discover companies making a difference through the principles of Beautiful Success. Share a nomination. Add your vote.</p>
-        <div className="ack-hero-actions">{mode === 'acknowledgement' && <Link className="award-button" to="/acknowledgement/nominate">Nominate a company <ArrowUpRight size={18} /></Link>}{user && <Link className="ack-my-link" to="/acknowledgement/mine">My submissions</Link>}</div>
+      <p className="ibs-eyebrow">{tr("Beautiful Success · Acknowledgement")}</p>
+      <h1>{tr("Good companies.")}<br /><em>{tr("Beautiful impact.")}</em></h1>
+      <div className="ack-hero-bottom"><p>{tr("Discover companies making a difference through the principles of Beautiful Success. Share a nomination. Add your vote.")}</p>
+        <div className="ack-hero-actions">{mode === 'acknowledgement' && <Link className="award-button" to="/acknowledgement/nominate">{tr("Nominate a company")}<ArrowUpRight size={18} /></Link>}{user && <Link className="ack-my-link" to="/acknowledgement/mine">{tr("My submissions")}</Link>}</div>
       </div>
     </section>
-    <section className="ack-gallery" aria-label="Company nominations">
-      <div className="ack-gallery-heading"><div><p className="ibs-eyebrow">The community’s nominations</p><h2>Success worth seeing.</h2></div><p>Newest first · Upvote or downvote<br />{user ? 'One vote per company. Change it anytime.' : 'Everyone can browse. Sign in to vote.'}</p></div>
-      {error && <div role="alert" className="ack-notice">{error} <button onClick={() => void load()}>Try again</button></div>}
-      {!loading && !error && !items.length && <div className="ack-empty"><h3>Who should be here?</h3><p>Bring a company’s contribution into view. The first nomination could be yours.</p>{mode === 'acknowledgement' && <Link to="/acknowledgement/nominate">Nominate a company →</Link>}</div>}
+    <section className="ack-gallery" aria-label={tr("Company nominations")}>
+      <div className="ack-gallery-heading"><div><p className="ibs-eyebrow">{tr("The community’s nominations")}</p><h2>{tr("Success worth seeing.")}</h2></div><p>{tr("Newest first · Upvote or downvote")}<br />{tr(user ? 'One vote per company. Change it anytime.' : 'Everyone can browse. Sign in to vote.')}</p></div>
+      {error && <div role="alert" className="ack-notice">{tr(error)} <button onClick={() => void load()}>{tr("Try again")}</button></div>}
+      {!loading && !error && !items.length && <div className="ack-empty"><h3>{tr("Who should be here?")}</h3><p>{tr("Bring a company’s contribution into view. The first nomination could be yours.")}</p>{mode === 'acknowledgement' && <Link to="/acknowledgement/nominate">{tr("Nominate a company →")}</Link>}</div>}
       <div className="ack-stack">{items.map(item => <article className="ack-card ack-feature" key={item.id}>
         <div className="ack-card-image">{safeWebUrl(item.image_url) ? <img src={safeWebUrl(item.image_url)} alt={item.company_name} loading="lazy" onError={event => { event.currentTarget.style.display = 'none'; }} /> : <span aria-hidden="true">{item.company_name.slice(0,1)}</span>}</div>
-        <div className="ack-card-body"><div className="ack-tags"><span>Ray of impact · {NOMINATION_RAYS.find(([id]) => id === item.ray)?.[1] || item.ray}</span></div>
-          <h3>{item.company_name}</h3><p className="ack-preview">{item.description}</p>
-          <div className="ack-entry-actions"><button className="ack-read" onClick={() => setSelectedId(item.id)} aria-label={`Read the full nomination for ${item.company_name}`} aria-haspopup="dialog">Read the nomination <ArrowUpRight size={17} /></button>{safeWebUrl(item.website || '') && <a className="ack-website" href={safeWebUrl(item.website || '')} target="_blank" rel="noopener noreferrer">Company website ↗</a>}</div>
+        <div className="ack-card-body"><div className="ack-tags"><span>{tr("Ray of impact")} · {tr(NOMINATION_RAYS.find(([id]) => id === item.ray)?.[1] || item.ray)}</span></div>
+          <h3>{item.company_name}</h3><p className="ack-preview">{tr(item.description)}</p>
+          <div className="ack-entry-actions"><button className="ack-read" onClick={() => setSelectedId(item.id)} aria-label={`Read the full nomination for ${item.company_name}`} aria-haspopup="dialog">{tr("Read the nomination")}<ArrowUpRight size={17} /></button>{safeWebUrl(item.website || '') && <a className="ack-website" href={safeWebUrl(item.website || '')} target="_blank" rel="noopener noreferrer">{tr("Company website ↗")}</a>}</div>
           {voteControls(item)}
         </div>
       </article>)}</div>
-      {loading && <p role="status">Loading nominations…</p>}
-      {more && <button className="award-button ack-more" disabled={loading} onClick={() => void load(items.length)}>Show more companies</button>}
+      {loading && <p role="status">{tr("Loading nominations…")}</p>}
+      {more && <button className="award-button ack-more" disabled={loading} onClick={() => void load(items.length)}>{tr("Show more companies")}</button>}
     </section>
-    {selected && <ReadingDialog title={selected.company_name} eyebrow={`Ray of impact · ${NOMINATION_RAYS.find(([id]) => id === selected.ray)?.[1] || selected.ray}`} onClose={() => setSelectedId(null)}>
+    {selected && <ReadingDialog title={selected.company_name} eyebrow={`${tr("Ray of impact")} · ${tr(NOMINATION_RAYS.find(([id]) => id === selected.ray)?.[1] || selected.ray)}`} onClose={() => setSelectedId(null)}>
       {safeWebUrl(selected.image_url) && <div className="ack-reading-image"><img src={safeWebUrl(selected.image_url)} alt={selected.company_name} /></div>}
-      <p className="ack-reading-intro">{selected.description}</p>
-      {PRINCIPLE_IDS.some(id => selected.principles[id]?.trim()) && <nav className="ack-reading-nav" aria-label="Principles in this nomination">{PRINCIPLE_IDS.filter(id => selected.principles[id]?.trim()).map(id => <button type="button" key={id} onClick={() => document.getElementById(`reading-${id}`)?.scrollIntoView({ block: 'start' })}>{id}</button>)}</nav>}
-      {PRINCIPLE_IDS.filter(id => selected.principles[id]?.trim()).map(id => <section id={`reading-${id}`} className="ack-reading-principle" key={id}><h3>{id}</h3><p>{selected.principles[id]}</p></section>)}
-      {safeWebUrl(selected.website || '') && <a className="ack-reading-website" href={safeWebUrl(selected.website || '')} target="_blank" rel="noopener noreferrer">Visit company website <ArrowUpRight size={17} /></a>}
+      <p className="ack-reading-intro">{tr(selected.description)}</p>
+      {PRINCIPLE_IDS.some(id => selected.principles[id]?.trim()) && <nav className="ack-reading-nav" aria-label={tr("Principles in this nomination")}>{PRINCIPLE_IDS.filter(id => selected.principles[id]?.trim()).map(id => <button type="button" key={id} onClick={() => document.getElementById(`reading-${id}`)?.scrollIntoView({ block: 'start' })}>{tr(id)}</button>)}</nav>}
+      {PRINCIPLE_IDS.filter(id => selected.principles[id]?.trim()).map(id => <section id={`reading-${id}`} className="ack-reading-principle" key={id}><h3>{tr(id)}</h3><p>{tr(selected.principles[id])}</p></section>)}
+      {safeWebUrl(selected.website || '') && <a className="ack-reading-website" href={safeWebUrl(selected.website || '')} target="_blank" rel="noopener noreferrer">{tr("Visit company website")} <ArrowUpRight size={17} /></a>}
       {error && <p role="alert" className="ack-notice">{error}</p>}
-      {voteControls(selected)}<p className="ack-vote-note">Votes are community input. The Institute decides which companies receive an acknowledgement.</p>
+      {voteControls(selected)}<p className="ack-vote-note">{tr("Votes are community input. The Institute decides which companies receive an acknowledgement.")}</p>
     </ReadingDialog>}
   </main>;
 }

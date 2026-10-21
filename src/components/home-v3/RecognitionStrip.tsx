@@ -1,3 +1,4 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
@@ -10,6 +11,7 @@ type Acknowledgement = {
 };
 
 export default function RecognitionStrip() {
+  const { translate: tr } = useAwardSiteContent();
   const [recognitions, setRecognitions] = useState<Acknowledgement[]>([]);
   const [enabled, setEnabled] = useState(false);
 
@@ -40,15 +42,15 @@ export default function RecognitionStrip() {
 
   return <section className="recognition-strip" aria-labelledby="recognitions-title">
     <div className="recognition-strip-heading">
-      <div><p className="home-v3-label">Institute of Beautiful Success</p><h2 id="recognitions-title">Acknowledgements</h2></div>
-      <p>Celebrating organizations whose success makes the world better.</p>
+      <div><p className="home-v3-label">{tr("Institute of Beautiful Success")}</p><h2 id="recognitions-title">{tr("Acknowledgements")}</h2></div>
+      <p>{tr("Celebrating organizations whose success makes the world better.")}</p>
     </div>
     <div className="recognition-rail" role="list">
       {recognitions.map((recognition, index) => <article className="recognition-card" key={recognition.id} role="listitem">
         <div className="recognition-image">
           {recognition.image_url ? <img src={recognition.image_url} alt={recognition.company_name} loading="lazy" decoding="async" /> : <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>}
         </div>
-        <div className="recognition-copy"><p className="recognition-index">Acknowledgement {String(index + 1).padStart(2, '0')}</p><h3>{recognition.company_name}</h3><p>{recognition.description}</p><span aria-hidden="true"><ArrowRight /></span></div>
+        <div className="recognition-copy"><p className="recognition-index">{tr("Acknowledgement")} {String(index + 1).padStart(2, '0')}</p><h3>{recognition.company_name}</h3><p>{tr(recognition.description)}</p><span aria-hidden="true"><ArrowRight /></span></div>
       </article>)}
     </div>
   </section>;

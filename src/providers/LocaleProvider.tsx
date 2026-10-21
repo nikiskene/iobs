@@ -86,12 +86,14 @@ const LocaleContext = createContext<LocaleContextValue>({ locale:'en', setLocale
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(() => {
+    const requested = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('lang') : null;
+    if (requested && ACTIVE_LOCALES.includes(requested as Locale)) { window.localStorage.setItem('beautiful-success-locale', requested); return requested as Locale; }
     const stored = typeof window !== 'undefined' ? window.localStorage.getItem('beautiful-success-locale') : null;
     if (stored && ACTIVE_LOCALES.includes(stored as Locale)) return stored as Locale;
     const browser = typeof navigator !== 'undefined' ? navigator.language.slice(0,2).toLowerCase() : 'en';
     return ACTIVE_LOCALES.includes(browser as Locale) ? browser as Locale : 'en';
   });
-  const setLocale = (next: Locale) => { setLocaleState(next); window.localStorage.setItem('beautiful-success-locale', next); };
+  const setLocale = (next: Locale) => { setLocaleState(next); window.localStorage.setItem('beautiful-success-locale', next); const url = new URL(window.location.href); if (url.searchParams.has('lang')) { url.searchParams.set('lang', next); window.history.replaceState(window.history.state, '', url); } };
   const isRtl = locale === 'ar';
   useEffect(() => {
     const id = 'iobs-secondary-fonts';

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 
+import { useAwardSiteContent } from "../providers/AwardSiteContentProvider";
+import { localizeCmsRecord } from "../content/localizedCms";
+
 export type PublicChapter = {
   id: string;
   name: string;
@@ -15,6 +18,7 @@ export type ChapterHead = { chapter_id: string; full_name: string; photo_url: st
 export type ChapterEvent = { id: string; chapter_id: string; title: string; start_date: string; slug: string };
 
 export function usePublicChapters(includeEvents = false) {
+  const { translate } = useAwardSiteContent();
   const [chapters, setChapters] = useState<PublicChapter[]>([]);
   const [heads, setHeads] = useState<ChapterHead[]>([]);
   const [events, setEvents] = useState<ChapterEvent[]>([]);
@@ -48,5 +52,5 @@ export function usePublicChapters(includeEvents = false) {
     });
     return () => { active = false; };
   }, [includeEvents]);
-  return { chapters, heads, events, loading, error };
+  return { chapters: localizeCmsRecord(chapters, translate), heads, events: localizeCmsRecord(events, translate), loading, error };
 }

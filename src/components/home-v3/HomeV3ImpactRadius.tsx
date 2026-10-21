@@ -1,3 +1,4 @@
+import { useLocale } from '../../providers/LocaleProvider';
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import RecognitionStrip from './RecognitionStrip';
@@ -11,6 +12,8 @@ import { optimizedImageUrl, viewportImageWidth } from '../../lib/media';
 const STORAGE_KEY = 'beautiful-success-v3-scale';
 
 export default function HomeV3ImpactRadius() {
+  const { translate: tr } = useAwardSiteContent();
+  const { isRtl } = useLocale();
   const { scale, setScale } = useImpactScale();
   const worlds = useScaleWorlds();
   const { get } = useAwardSiteContent();
@@ -42,7 +45,7 @@ export default function HomeV3ImpactRadius() {
   function onKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
     event.preventDefault();
-    const direction = event.key === 'ArrowRight' ? 1 : -1;
+    const direction = (event.key === 'ArrowRight' ? 1 : -1) * (isRtl ? -1 : 1);
     select((active + direction + HOME_V3_SCALES.length) % HOME_V3_SCALES.length);
   }
 
@@ -53,7 +56,7 @@ export default function HomeV3ImpactRadius() {
       <strong>{content?.subheadline}</strong>
       <div>{cmsLines(content?.body).map((line) => <p key={line}>{line}</p>)}</div>
     </div>
-    <div className="home-v3-radius" role="radiogroup" aria-label="Scale of impact" onKeyDown={onKeyDown}>
+    <div className="home-v3-radius" role="radiogroup" aria-label={tr("Scale of impact")} onKeyDown={onKeyDown}>
       <div className="home-v3-radius-arcs" aria-hidden="true"><i /><i /><i /></div>
       <div className="home-v3-radius-line" aria-hidden="true" />
       {HOME_V3_SCALES.map((item, index) => <button key={item.id} type="button" role="radio" aria-checked={index === active} tabIndex={index === active ? 0 : -1} className={index === active ? 'selected' : ''} onClick={() => select(index)}>

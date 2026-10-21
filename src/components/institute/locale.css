@@ -49,3 +49,11 @@ html[dir='rtl'] .award-text-link{direction:rtl}
 html[dir='rtl'] input,
 html[dir='rtl'] textarea,
 html[dir='rtl'] select{text-align:right}
+
+html[lang='ar'] body { font-family:'Noto Naskh Arabic',sans-serif; }
+html[lang='ar'] :is(.ibs-page-hero,.award-page-hero,.ibs-section,.chapter-card,.team-directory,.institute-header,.award-footer,.iobs-workspace-header) :is(h1,h2,h3,h4,p,a,span,button,input,textarea) {
+  font-family:'Noto Naskh Arabic',sans-serif;
+  letter-spacing:normal;
+}
+html[lang='ar'] :is(.chapter-card-copy,.team-person-copy,.award-page-hero,.ibs-page-hero) { text-align:start; }
+html[lang='ar'] input[type='email'],html[lang='ar'] input[type='url'] { direction:ltr; text-align:left; }

@@ -1,3 +1,6 @@
+import { useLocale } from '../../providers/LocaleProvider';
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
+import { localizeCmsRecord } from '../../content/localizedCms';
 // src/pages/public/EventDetailPage.tsx
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -8,8 +11,11 @@ import type { Event } from "../../lib/types";
 export default function EventDetailPage() {
   const { slug } = useParams();
 
-  const [event, setEvent] = useState<Event | null>(null);
+  const { locale } = useLocale();
+  const { translate: tr } = useAwardSiteContent();
+  const [rawRecord, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
+  const event = localizeCmsRecord(rawRecord, tr);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -41,13 +47,13 @@ export default function EventDetailPage() {
     setError("");
 
     if (!name.trim()) {
-      setError("Please enter your name.");
+      setError(tr("Please enter your name."));
       setSending(false);
       return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setError("Please enter your email.");
+      setError(tr("Please enter your email."));
       setSending(false);
       return;
     }
@@ -59,7 +65,7 @@ export default function EventDetailPage() {
       },
     );
     if (registrationError || data?.error) {
-      setError(data?.error || "Registration unavailable. Please try again.");
+      setError(data?.error || tr("Registration unavailable. Please try again."));
       setSending(false);
       return;
     }
@@ -75,7 +81,7 @@ export default function EventDetailPage() {
     return (
       <div className="bg-[#0A0A0A] pt-24 text-white">
         <div className="mx-auto max-w-5xl px-6 py-24">
-          <p className="text-zinc-500">Loading event...</p>
+          <p className="text-zinc-500">{tr("Loading event...")}</p>
         </div>
       </div>
     );
@@ -85,7 +91,7 @@ export default function EventDetailPage() {
     return (
       <div className="bg-[#0A0A0A] pt-24 text-white">
         <div className="mx-auto max-w-5xl px-6 py-24">
-          <h1 className="text-3xl font-bold">Event not found</h1>
+          <h1 className="text-3xl font-bold">{tr("Event not found")}</h1>
         </div>
       </div>
     );
@@ -106,20 +112,17 @@ export default function EventDetailPage() {
       <section className="px-6 py-20">
         {new URLSearchParams(window.location.search).get("checkout") ===
           "returned" && (
-          <p role="status">
-            Thank you. Your payment confirmation will appear in the attendee
-            list once processed.
-          </p>
+          <p role="status">{tr("Thank you. Your payment confirmation will appear in the attendee list once processed.")}</p>
         )}
         {new URLSearchParams(window.location.search).get("checkout") ===
           "cancelled" && (
-          <p role="status">Payment cancelled. You can try again below.</p>
+          <p role="status">{tr("Payment cancelled. You can try again below.")}</p>
         )}
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-wrap items-center gap-6 text-sm text-zinc-400">
             <div className="flex items-center gap-2">
               <CalendarDays className="h-4 w-4" />
-              {formatDate(event.start_date, event.end_date)}
+              {formatDate(event.start_date, event.end_date, locale)}
             </div>
 
             {event.location && (
@@ -144,9 +147,7 @@ export default function EventDetailPage() {
 
           {event.investment && (
             <div className="mt-12">
-              <h2 className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-                Investment
-              </h2>
+              <h2 className="text-sm uppercase tracking-[0.2em] text-zinc-500">{tr("Investment")}</h2>
 
               <p className="mt-3 text-2xl font-semibold">{event.investment}</p>
             </div>
@@ -154,9 +155,7 @@ export default function EventDetailPage() {
 
           {event.participation_info && (
             <div className="mt-12">
-              <h2 className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-                Participation Information
-              </h2>
+              <h2 className="text-sm uppercase tracking-[0.2em] text-zinc-500">{tr("Participation Information")}</h2>
 
               <p className="mt-3 max-w-4xl whitespace-pre-line text-zinc-400">
                 {event.participation_info}
@@ -166,38 +165,36 @@ export default function EventDetailPage() {
 
           {event.status === "scheduled" && (
             <div className="mt-16 rounded-2xl border border-white/5 bg-white/[0.03] p-8">
-              <h2 className="text-2xl font-bold">RSVP</h2>
+              <h2 className="text-2xl font-bold">{tr("RSVP")}</h2>
 
               <p className="mt-3 text-zinc-400">
                 {event.ticket_price_cents > 0
-                  ? `Ticket: ${new Intl.NumberFormat(undefined, { style: "currency", currency: event.ticket_currency }).format(event.ticket_price_cents / 100)}. Complete payment to confirm your place.`
-                  : "Reserve your place for free."}
+                  ? `${tr("Ticket")}: ${new Intl.NumberFormat(locale, { style: "currency", currency: event.ticket_currency }).format(event.ticket_price_cents / 100)}. ${tr("Complete payment to confirm your place.")}`
+                  : tr("Reserve your place for free.")}
               </p>
 
               {success ? (
-                <div className="mt-6 rounded-lg border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-300">
-                  Your registration has been received.
-                </div>
+                <div className="mt-6 rounded-lg border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-300">{tr("Your registration has been received.")}</div>
               ) : (
                 <div className="mt-6 space-y-4">
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Your Name"
+                    placeholder={tr("Your Name")}
                     className="w-full rounded-md border border-white/10 bg-white/5 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
                   />
 
                   <input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Your Email"
+                    placeholder={tr("Your Email")}
                     type="email"
                     className="w-full rounded-md border border-white/10 bg-white/5 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
                   />
 
                   {error && (
                     <div className="rounded-md border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm text-red-400">
-                      {error}
+                      {tr(error)}
                     </div>
                   )}
 
@@ -207,10 +204,10 @@ export default function EventDetailPage() {
                     className="rounded-md bg-sky-500 px-6 py-3 font-medium text-white transition hover:bg-sky-400 disabled:opacity-50"
                   >
                     {sending
-                      ? "Sending…"
+                      ? tr("Sending\u2026")
                       : event.ticket_price_cents > 0
-                        ? "Continue to payment"
-                        : "Register for free"}
+                        ? tr("Continue to payment")
+                        : tr("Register for free")}
                   </button>
                 </div>
               )}
@@ -219,9 +216,7 @@ export default function EventDetailPage() {
 
           {event.status === "past" && event.past_summary && (
             <div className="mt-16">
-              <h2 className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-                Event Summary
-              </h2>
+              <h2 className="text-sm uppercase tracking-[0.2em] text-zinc-500">{tr("Event Summary")}</h2>
 
               <p className="mt-4 max-w-4xl whitespace-pre-line text-zinc-300">
                 {event.past_summary}
@@ -245,12 +240,12 @@ export default function EventDetailPage() {
   );
 }
 
-function formatDate(start: string, end?: string | null) {
-  const startDate = new Date(start).toLocaleDateString();
+function formatDate(start: string, end: string | null | undefined, locale: string) {
+  const startDate = new Date(start).toLocaleDateString(locale);
 
   if (!end) return startDate;
 
-  const endDate = new Date(end).toLocaleDateString();
+  const endDate = new Date(end).toLocaleDateString(locale);
 
   return `${startDate} — ${endDate}`;
 }

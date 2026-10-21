@@ -1,3 +1,4 @@
+import { useAwardSiteContent } from '../../../providers/AwardSiteContentProvider';
 import type { ExpeditionProgramItem } from '../../../lib/types';
 
 export default function ProgramTimeline({
@@ -5,14 +6,13 @@ export default function ProgramTimeline({
 }: {
   items: ExpeditionProgramItem[];
 }) {
+  const { translate: tr } = useAwardSiteContent();
   if (items.length === 0) return null;
 
   return (
     <section className="border-t border-white/5 px-6 py-20">
       <div className="mx-auto max-w-6xl">
-        <h2 className="text-3xl font-bold tracking-tight md:text-5xl">
-          Program
-        </h2>
+        <h2 className="text-3xl font-bold tracking-tight md:text-5xl">{tr("Program")}</h2>
 
         <div className="mt-10 space-y-5">
           {items.map((item) => (
