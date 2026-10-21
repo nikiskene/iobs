@@ -7,6 +7,8 @@ import DashboardLayout from '../components/DashboardLayout';
 
 import ProtectedRoute from './ProtectedRoute';
 
+const SettingsPage=lazy(()=>import('../pages/dashboard/SettingsPage'));
+const EmailSettings=lazy(()=>import('../pages/dashboard/EmailSettings'));
 const ProfilePage = lazy(() => import('../pages/dashboard/ProfilePage'));
 const MyThesesPage = lazy(() => import('../pages/dashboard/MyThesesPage'));
 const InboxPage = lazy(() => import('../pages/dashboard/InboxPage'));
@@ -23,6 +25,8 @@ export default function DashboardRoutes() {
       }
     >
       <Route index element={<Navigate to="/dashboard/profile" replace />} />
+      <Route path="settings" element={<SettingsPage/>}/>
+      <Route path="settings/email" element={<EmailSettings/>}/>
       <Route path="profile" element={<ProfilePage />} />
       <Route path="explorers" element={<Navigate to="/members" replace />} />
       <Route path="members" element={<Navigate to="/members" replace />} />

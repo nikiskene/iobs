@@ -1,5 +1,6 @@
 // src/lib/types.ts
 export interface Profile {
+  member_id: string;
   id: string;
   profile_name: string;
   full_name: string | null;

@@ -13,6 +13,7 @@ export default function DashboardLayout() {
   const {hasChapterAccess}=useChapterAccess();
   const location = useLocation();
   const explorerLinks: SidebarLink[] = [
+    {to:'/dashboard/settings',label:'Settings',icon:User},
     { to: '/dashboard/profile', label: 'Profile', icon: User },
     { to: '/members', label: 'Members', icon: Users },
     { to: '/dashboard/theses', label: 'My Theses', icon: BookOpen },
