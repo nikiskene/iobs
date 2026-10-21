@@ -6,11 +6,11 @@ Supabase project: **IOBS**, `bunfdlazirfheomhvjdz`.
 
 ## Current delivery state
 
-Implemented locally: member eligibility in the existing Member Editor, member Settings → Email, address availability and creation, password changes, secure existing-mailbox linking, provider readiness/status checks, recovery after ambiguous provider results, and mobile layouts. Automated provider requests are mocked. No real mailbox has been created, linked, deleted or modified, including `niki@iobs.cc`.
+Implemented locally: member eligibility in the existing Member Editor, member Settings → Email, address availability and creation, password changes, secure existing-mailbox linking, provider readiness/status checks, recovery after ambiguous provider results, and mobile layouts. Automated provider requests are mocked. No real mailbox has been created or deleted, and no provider password has been modified. After explicit user authorization, the existing `niki@iobs.cc` mailbox was verified through the provider API and linked to its explicitly selected canonical member.
 
 The user confirmed upgrading from Micro to **Mini** for API access. `MIGADU_SECRET_KEY` is configured in Supabase by the user. `MIGADU_API_USER` was configured using the corrected account identifier supplied by the user. Neither credential is in the frontend, the repository or Netlify. Key contents have not been retrieved or displayed.
 
-The feature must remain unmerged and undeployed until local validation and required configuration are ready. Its SQL has not been executed. Credential presence and the confirmed plan do not prove authenticated provider access or email delivery. The in-app administrator connection check is read-only and must pass before provisioning is enabled.
+The feature remains subject to the configuration and validation gates below. The administrator has now applied the release SQL. Authenticated provider domain and recipient-inventory access have now been verified read-only. This does not prove send/receive delivery. The in-app administrator connection check is read-only and must pass before provisioning is enabled.
 
 ## Manual Supabase SQL
 
@@ -26,7 +26,7 @@ Do not also run the individual `supabase/migrations/20261021140000_member_email_
 | --- | --- | --- |
 | `MIGADU_SECRET_KEY` | API key created in Migadu → My Account → API Keys. Not a mailbox password. | Added by user |
 | `MIGADU_API_USER` | Email address of the Migadu administrative account that owns the key | Configured |
-| `IOBS_EMAIL_ENABLED` | Keep absent or `false` while checking setup. Set `true` only after provider access and domain readiness are confirmed. | Disabled by default |
+| `IOBS_EMAIL_ENABLED` | Keep absent or `false` while checking setup. Set `true` only after provider access and domain readiness are confirmed. | Enabled after read-only provider readiness passed |
 
 Supabase supplies `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. No new Netlify secret is needed. In particular, never create `VITE_MIGADU_*` variables. Keep request-body logging and session replay capture disabled for password inputs.
 
@@ -112,6 +112,10 @@ npm run test:email:browser
 - 17 isolated backend/provider tests pass without network permission.
 - 11 mocked-browser tests pass, including mobile widths of 320/390 px, tablet 768 px and desktop 1440 px.
 - Existing Chapters database checks (26) and payment-handler tests (10) pass as regressions.
-- Production prerequisites were checked read-only: canonical member records and migration history exist; the email tables and new helper functions are not installed yet.
+- Production prerequisites were checked read-only: canonical member records and migration history exist; the administrator has installed the email tables and new helper functions; the existing mailbox association is present.
 
 These results validate implementation behavior with fixtures. They do not establish provider account access, create a real mailbox, or prove send/receive delivery.
+
+## Chapter image uploads in the same release
+
+Chapter editing now includes Upload chapter image, an immediate preview, a 5 MB JPG/PNG/WebP file check, upload progress and a save guard during upload. Objects are inserted into the existing public `event-media` bucket under `chapters/<chapter-id>/hero/<unique-name>.<extension>`. Existing chapter-scoped storage policies authorize the uploader; no new SQL is required. Heads can upload only under a chapter they manage. Save chapter persists the generated public image URL through the restricted chapter-details RPC. Original images are retained rather than overwritten or deleted.
