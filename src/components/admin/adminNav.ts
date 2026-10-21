@@ -26,6 +26,7 @@ export const adminNavGroups: AdminNavGroup[] = [
     { to:'/admin/messaging/contact', label:'Admin Inbox', icon:Inbox, description:'Contact, partnership-deck and other public inquiries.' },
     { to:'/admin/messaging/conversations', label:'Conversations', icon:MessageCircle, description:'Manage conversation content.' },
   ]},
+  { title:'BEAU', to:'/admin/beau', description:'Approved knowledge, model settings and usage costs.', links:[{to:'/admin/beau',label:'BEAU Intelligence',icon:BookOpen}] },
   { title:'Settings', to:'/admin/settings', description:'Site configuration.', links:[
     { to:'/admin/settings/design', label:'Design & Site Settings', icon:Palette, description:'Manage logos, fonts and global visual settings.' },
   ]},

@@ -6,3 +6,7 @@ verify_jwt = false
 [functions.iobs-email]
 # The handler verifies every bearer token with Supabase Auth itself.
 verify_jwt = false
+
+[functions.beau]
+# Every bearer token is verified with Supabase Auth inside the handler.
+verify_jwt = false
