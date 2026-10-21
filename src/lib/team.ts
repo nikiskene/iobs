@@ -1,5 +1,6 @@
 export const TEAM_CATEGORIES = [
   ['founders', 'Founders'],
+  ['chapters', 'Chapter'],
   ['advisory_board', 'Advisors'],
   ['supporters', 'Supporters'],
   ['team', 'Team'],

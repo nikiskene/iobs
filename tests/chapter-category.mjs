@@ -1,0 +1,26 @@
+import { PGlite } from '@electric-sql/pglite';
+import { readFileSync } from 'node:fs';
+import assert from 'node:assert/strict';
+const db = new PGlite();
+const read = path => readFileSync(new URL(path, import.meta.url), 'utf8');
+await db.exec(read('./fixtures/chapters-base.sql'));
+await db.exec(read('../supabase/migrations/20260930170000_add_user_member_category.sql'));
+const categories = ['founders', 'advisory_board', 'supporters', 'team', 'user'];
+for (const category of categories)
+  await db.query('insert into team_people(full_name,category) values($1,$1)', [category]);
+const before = (await db.query('select * from team_people order by category')).rows;
+await db.exec('create schema supabase_migrations; create table supabase_migrations.schema_migrations(version text primary key,name text,statements text[])');
+const source = read('../supabase/migrations/20261021160000_add_chapter_member_category.sql');
+const release = read('../docs/chapter-category-supabase-release.sql');
+assert.ok(release.includes(source.replace(/commit;\s*$/, '').trim()));
+await db.exec(release);
+assert.deepEqual((await db.query('select * from team_people order by category')).rows, before);
+assert.equal((await db.query("select name from supabase_migrations.schema_migrations where version='20261021160000'")).rows[0].name, 'add_chapter_member_category');
+await db.exec("insert into team_people(full_name,category) values('Chapter member','chapters')");
+assert.equal((await db.query("select category from team_people where full_name='Chapter member'")).rows[0].category, 'chapters');
+await assert.rejects(db.exec("update team_people set category='super_admin' where full_name='Chapter member'"));
+assert.equal((await db.query("select relrowsecurity from pg_class where oid='team_people'::regclass")).rows[0].relrowsecurity, true);
+await db.exec(source);
+assert.equal((await db.query("select category from team_people where full_name='Chapter member'")).rows[0].category, 'chapters');
+await db.close();
+console.log('Chapter category migration passed: preserves all five categories, accepts Chapter, rejects invalid values, preserves RLS and records manual installation.');
