@@ -1,3 +1,5 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
+import { localizeCmsRecord } from '../../content/localizedCms';
 // src/pages/public/ThesisPage.tsx
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -13,7 +15,7 @@ const COPY: Record<Locale,Record<string,string>> = {
   en:{eyebrow:'Beautiful Success Cases',title:'Cases',intro:'Real achievements that show what Beautiful Success can look like in practice.',all:'All Categories',empty:'No published cases in this category yet.',featured:'Featured',more:'Read more',less:'Read less',loading:'Loading…'},
   de:{eyebrow:'Beautiful Success Cases',title:'Fälle',intro:'Reale Leistungen, die zeigen, wie Beautiful Success in der Praxis aussehen kann.',all:'Alle Kategorien',empty:'In dieser Kategorie gibt es noch keine veröffentlichten Fälle.',featured:'Hervorgehoben',more:'Mehr lesen',less:'Weniger lesen',loading:'Lädt…'},
   fr:{eyebrow:'Cas Beautiful Success',title:'Cas',intro:'Des réussites réelles qui montrent à quoi Beautiful Success peut ressembler en pratique.',all:'Toutes les catégories',empty:'Aucun cas publié dans cette catégorie pour le moment.',featured:'À la une',more:'Lire plus',less:'Lire moins',loading:'Chargement…'},
-  ar:{eyebrow:'حالات Beautiful Success',title:'الحالات',intro:'إنجازات حقيقية تُظهر كيف يمكن أن يبدو Beautiful Success في الواقع.',all:'كل الفئات',empty:'لا توجد حالات منشورة في هذه الفئة بعد.',featured:'مميز',more:'اقرأ المزيد',less:'اقرأ أقل',loading:'جارٍ التحميل…'},
+  ar:{eyebrow:'حالات النجاح الجميل',title:'الحالات',intro:'إنجازات حقيقية تُظهر كيف يمكن أن يبدو النجاح الجميل في الواقع.',all:'كل الفئات',empty:'لا توجد حالات منشورة في هذه الفئة بعد.',featured:'مميز',more:'اقرأ المزيد',less:'اقرأ أقل',loading:'جارٍ التحميل…'},
   zh:{eyebrow:'Beautiful Success 案例',title:'案例',intro:'真实成就，展示 Beautiful Success 在实践中可以是什么样子。',all:'全部类别',empty:'此类别暂时没有已发布案例。',featured:'精选',more:'展开阅读',less:'收起',loading:'加载中…'},
   es:{eyebrow:'Casos Beautiful Success',title:'Casos',intro:'Logros reales que muestran cómo puede verse Beautiful Success en la práctica.',all:'Todas las categorías',empty:'Aún no hay casos publicados en esta categoría.',featured:'Destacado',more:'Leer más',less:'Leer menos',loading:'Cargando…'},
 };
@@ -21,6 +23,7 @@ const COPY: Record<Locale,Record<string,string>> = {
 export default function ThesisPage() {
   const { slug } = useParams<{ slug: string }>();
   const { locale } = useLocale();
+  const { translate: tr } = useAwardSiteContent();
   const copy = COPY[locale];
   const [categories, setCategories] = useState<ThesisCategory[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<ThesisCategory | null>(null);
@@ -51,8 +54,8 @@ export default function ThesisPage() {
   }, [selectedCategory]);
 
   if (loading) return <div className="py-24 text-center"><p className="case-status">{copy.loading}</p></div>;
-  if (selectedCategory) return <CategoryDetail category={selectedCategory} theses={theses} locale={locale} copy={copy} onBack={() => setSelectedCategory(null)} />;
-  return <CategoryOverview categories={categories} copy={copy} />;
+  if (selectedCategory) return <CategoryDetail category={localizeCmsRecord(selectedCategory, tr)} theses={localizeCmsRecord(theses, tr)} locale={locale} copy={copy} onBack={() => setSelectedCategory(null)} />;
+  return <CategoryOverview categories={localizeCmsRecord(categories, tr)} copy={copy} />;
 }
 
 function CategoryOverview({ categories, copy }: { categories: ThesisCategory[]; copy:Record<string,string> }) {
@@ -71,11 +74,12 @@ function CategoryDetail({ category, theses, locale, copy, onBack }: { category:T
 
 function ThesisCard({ thesis, locale, copy }: { thesis:LocalizedThesis; locale:Locale; copy:Record<string,string> }) {
   const [expanded,setExpanded] = useState(false);
+  const { translate: tr } = useAwardSiteContent();
   const translation = locale === 'en' ? undefined : thesis.thesis_translations?.find((item) => item.locale === locale);
-  const title = translation?.title || thesis.title;
-  const subheadline = translation?.subheadline || thesis.subheadline;
-  const shortExplanation = translation?.short_explanation || thesis.short_explanation;
-  const body = translation?.body || thesis.body;
+  const title = translation?.title || (thesis.title ? tr(thesis.title) : thesis.title);
+  const subheadline = translation?.subheadline || (thesis.subheadline ? tr(thesis.subheadline) : thesis.subheadline);
+  const shortExplanation = translation?.short_explanation || (thesis.short_explanation ? tr(thesis.short_explanation) : thesis.short_explanation);
+  const body = translation?.body || (thesis.body ? tr(thesis.body) : thesis.body);
   const ordered = [...(thesis.thesis_media || [])].sort((a,b) => a.display_order - b.display_order);
   const image = ordered.find((item) => item.is_featured) || ordered[0];
 

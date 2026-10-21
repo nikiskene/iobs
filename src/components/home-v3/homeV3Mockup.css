@@ -102,3 +102,43 @@
   .home-v3-principle-modal h2{font-size:42px}
   .home-v3-principle-modal h3{font-size:26px}
 }
+
+/* Arabic keeps the visual hierarchy with connected, readable Arabic lettering.
+   Grid line 1 follows RTL, placing copy on the right and portraits on the left. */
+html[lang='ar'] .home-v3,
+html[lang='ar'] .home-v3 :is(h1,h2,h3,h4,p,strong,em,a,button,span),
+html[lang='ar'] .homepage-chapters :is(h2,h3,p,a,span) {
+  font-family: 'Noto Naskh Arabic', serif;
+  letter-spacing: normal;
+}
+html[lang='ar'] .home-v3-hero-copy {
+  padding-inline-start: max(5vw, calc((100vw - 1540px) / 2 + 5vw));
+  padding-inline-end: 0;
+  text-align: start;
+}
+html[lang='ar'] .home-v3-hero h1 :is(strong,em) {
+  font-size: clamp(70px, 8.5vw, 140px);
+  font-style: normal;
+  line-height: 1.25;
+}
+/* Only the homepage hero portraits are reflected; crossfades animate opacity. */
+html[lang='ar'] .home-v3-hero .home-v3-portrait img { transform: scaleX(-1); }
+html[lang='ar'] .home-v3 :is(h2,h3) { line-height: 1.45; }
+html[lang='ar'] .home-v3 :is(.home-v3-label,.home-v3-text-cta) { font-size: 14px; line-height: 1.7; }
+html[lang='ar'] .home-v3-proposition,
+html[lang='ar'] .home-v3-principle-territories button,
+html[lang='ar'] .recognition-strip-heading > p { text-align: start; }
+html[lang='ar'] .home-v3-proposition h2 :is(span,em),
+html[lang='ar'] .home-v3-question h2,
+html[lang='ar'] .home-v3-question > p:not(.home-v3-label) { white-space: normal; }
+html[lang='ar'] .home-v3-principle-territories h3 { font-size: clamp(24px,2vw,34px); }
+html[lang='ar'] .home-v3-principle-territories p { line-height: 1.65; }
+html[lang='ar'] .home-v3-principle-modal p { line-height: 1.9; }
+html[lang='ar'] .home-v3-question a { font-size: 16px; letter-spacing: normal; }
+html[lang='ar'] .home-v3-scale-story h3 { font-size: clamp(28px,3vw,42px); }
+@media (max-width: 767px) {
+  html[lang='ar'] .home-v3-hero-copy { padding: 44px 24px 24px; }
+  html[lang='ar'] .home-v3-hero h1 :is(strong,em) { font-size: clamp(62px,18vw,90px); }
+  html[lang='ar'] .home-v3 :is(.home-v3-label,.home-v3-text-cta) { font-size: 12px; }
+  html[lang='ar'] .home-v3-question a { font-size: 13px; }
+}

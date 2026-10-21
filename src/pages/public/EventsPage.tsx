@@ -1,3 +1,4 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 // src/pages/public/EventsPage.tsx
 import { useEffect, useState } from 'react';
 import ExperienceCard from '../../components/experiences/ExperienceCard';
@@ -5,6 +6,7 @@ import { supabase } from '../../lib/supabase';
 import type { Event } from '../../lib/types';
 
 export default function EventsPage() {
+  const { translate: tr } = useAwardSiteContent();
   const [category,setCategory]=useState('all');
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
@@ -23,26 +25,27 @@ export default function EventsPage() {
   return (
     <main>
       <section className="ibs-page-hero">
-        <p className="ibs-eyebrow">The Institute · Live</p>
+        <p className="ibs-eyebrow">{tr("The Institute · Live")}</p>
         <div>
-          <h1>Beautiful ideas become real when people gather.</h1>
-          <p>Salons, talks, tours, workshops and expeditions exploring what we can build—from a single life to the whole world.</p>
+          <h1>{tr("Beautiful ideas become real when people gather.")}</h1>
+          <p>{tr("Salons, talks, tours, workshops and expeditions exploring what we can build—from a single life to the whole world.")}</p>
         </div>
       </section>
-      <nav aria-label="Event categories" className="mx-auto flex max-w-6xl flex-wrap gap-3 px-6 py-4">{[['all','All'],['tour','Tours'],['workshop','Workshops'],['chapter_event','Chapter Events']].map(([id,label])=><button key={id} aria-pressed={category===id} onClick={()=>setCategory(id)} className="min-h-11 rounded border border-white/30 px-4">{label}</button>)}</nav>
-      <EventSection title="Upcoming" events={upcoming} loading={loading} />
-      <EventSection title="Previously at the Institute" events={past} past />
+      <nav aria-label={tr("Event categories")} className="mx-auto flex max-w-6xl flex-wrap gap-3 px-6 py-4">{[['all','All'],['tour','Tours'],['workshop','Workshops'],['chapter_event','Chapter Events']].map(([id,label])=><button key={id} aria-pressed={category===id} onClick={()=>setCategory(id)} className="min-h-11 rounded border border-white/30 px-4">{tr(label)}</button>)}</nav>
+      <EventSection title={tr("Upcoming")} events={upcoming} loading={loading} />
+      <EventSection title={tr("Previously at the Institute")} events={past} past />
     </main>
   );
 }
 
 function EventSection({ title, events, loading = false, past = false }: { title: string; events: Event[]; loading?: boolean; past?: boolean }) {
+  const { translate: tr } = useAwardSiteContent();
   return (
     <section className="ibs-section">
       <div className="ibs-section-head"><h2>{title}</h2></div>
-      {loading ? <p className="ibs-empty">Opening the calendar…</p> : events.length ? (
+      {loading ? <p className="ibs-empty">{tr("Opening the calendar…")}</p> : events.length ? (
         <div className="ibs-card-grid events">{events.map((event) => <ExperienceCard event={event} key={event.id} past={past} />)}</div>
-      ) : <div className="ibs-empty">{past ? 'The archive will grow here.' : 'New gatherings will be announced shortly.'}</div>}
+      ) : <div className="ibs-empty">{tr(past ? 'The archive will grow here.' : 'New gatherings will be announced shortly.')}</div>}
     </section>
   );
 }

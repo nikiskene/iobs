@@ -1,3 +1,4 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { usePublicChapters } from '../../hooks/usePublicChapters';
@@ -6,13 +7,14 @@ import { safeWebUrl } from '../../lib/team';
 import './homepageChapters.css';
 
 export default function ChaptersSection() {
+  const { translate: tr } = useAwardSiteContent();
   const { chapters, loading, error } = usePublicChapters();
   if (loading || error || !chapters.length) return null;
   return (
     <section className="homepage-chapters" aria-labelledby="homepage-chapters-title">
       <div className="homepage-chapters-heading">
-        <div><p className="home-v3-label">Our chapters</p><h2 id="homepage-chapters-title">A shared spirit. A local soul.</h2></div>
-        <Link to="/chapters" className="home-v3-text-cta">Explore our chapters →</Link>
+        <div><p className="home-v3-label">{tr("Our chapters")}</p><h2 id="homepage-chapters-title">{tr("A shared spirit. A local soul.")}</h2></div>
+        <Link to="/chapters" className="home-v3-text-cta">{tr("Explore our chapters →")}</Link>
       </div>
       <div className="homepage-chapters-grid">
         {chapters.map(chapter => (
@@ -27,7 +29,7 @@ export default function ChaptersSection() {
               <div className="homepage-chapter-copy">
                 <h3>{chapter.city}</h3>
                 {chapter.headline && <p>{chapter.headline}</p>}
-                <span className="homepage-chapter-more">More <ArrowUpRight size={15} aria-hidden="true" /></span>
+                <span className="homepage-chapter-more">{tr("More")}<ArrowUpRight size={15} aria-hidden="true" /></span>
               </div>
             </Link>
           </article>

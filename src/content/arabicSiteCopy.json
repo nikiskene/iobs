@@ -1,0 +1,252 @@
+[
+  {
+    "content_key": "hero_me",
+    "section": "hero",
+    "display_order": 10,
+    "is_active": true,
+    "label": "بداية شخصية",
+    "headline": "ما الذي تحتفي به بوصفه نجاحاً؟",
+    "subheadline": null,
+    "body": "تكرّم جوائز النجاح الجميل الإنجازات التي تجعل العالم أفضل من خلال نجاحها."
+  },
+  {
+    "content_key": "hero_community",
+    "section": "hero",
+    "display_order": 20,
+    "is_active": true,
+    "label": "العالم القريب",
+    "headline": "ما الذي يحتفي به مجتمعك بوصفه نجاحاً؟",
+    "subheadline": null,
+    "body": "تكرّم جوائز النجاح الجميل الإنجازات التي تجعل العالم أفضل من خلال نجاحها."
+  },
+  {
+    "content_key": "hero_team",
+    "section": "hero",
+    "display_order": 30,
+    "is_active": true,
+    "label": "مسعى مشترك",
+    "headline": "ما الذي يحتفي به فريقك بوصفه نجاحاً؟",
+    "subheadline": null,
+    "body": "تكرّم جوائز النجاح الجميل الإنجازات التي تجعل العالم أفضل من خلال نجاحها."
+  },
+  {
+    "content_key": "hero_company",
+    "section": "hero",
+    "display_order": 40,
+    "is_active": true,
+    "label": "المؤسسة الحيّة",
+    "headline": "ما الذي تحتفي به شركتك بوصفه نجاحاً؟",
+    "subheadline": null,
+    "body": "تكرّم جوائز النجاح الجميل الإنجازات التي تجعل العالم أفضل من خلال نجاحها."
+  },
+  {
+    "content_key": "hero_country",
+    "section": "hero",
+    "display_order": 50,
+    "is_active": true,
+    "label": "الخيال الوطني",
+    "headline": "ما الذي يحتفي به وطنك بوصفه نجاحاً؟",
+    "subheadline": null,
+    "body": "تكرّم جوائز النجاح الجميل الإنجازات التي تجعل العالم أفضل من خلال نجاحها."
+  },
+  {
+    "content_key": "hero_world",
+    "section": "hero",
+    "display_order": 60,
+    "is_active": true,
+    "label": "الممكن الجميل",
+    "headline": "ما الذي يحتفي به عالمنا بوصفه نجاحاً؟",
+    "subheadline": null,
+    "body": "تكرّم جوائز النجاح الجميل الإنجازات التي تجعل العالم أفضل من خلال نجاحها."
+  },
+  {
+    "content_key": "hero_universe",
+    "section": "hero",
+    "display_order": 70,
+    "is_active": true,
+    "label": "المستحيل الجميل",
+    "headline": "ما الذي يحتفي به الكون بوصفه نجاحاً؟",
+    "subheadline": null,
+    "body": "تكرّم جوائز النجاح الجميل الإنجازات التي تجعل العالم أفضل من خلال نجاحها."
+  },
+  {
+    "content_key": "site_claim",
+    "section": "global",
+    "display_order": 80,
+    "is_active": true,
+    "label": null,
+    "headline": "نحتفي بعالم أفضل، نجاحاً جميلاً تلو الآخر.",
+    "subheadline": null,
+    "body": null
+  },
+  {
+    "content_key": "principle",
+    "section": "homepage",
+    "display_order": 100,
+    "is_active": true,
+    "label": "مبدأ النجاح الجميل",
+    "headline": "كلما ازداد نجاحه، أصبح العالم أفضل.",
+    "subheadline": null,
+    "body": "ليس كل نجاح جديراً بالاحتفاء. نكرّم الإنجازات التي تتضاعف قيمتها الإيجابية كلما نمت."
+  },
+  {
+    "content_key": "judging_intro",
+    "section": "homepage",
+    "display_order": 110,
+    "is_active": true,
+    "label": "عقد اجتماعي جديد، قابل للقياس",
+    "headline": "يبدأ التقدير حيث تنتهي مقاييس النجاح المعتادة.",
+    "subheadline": null,
+    "body": null
+  },
+  {
+    "content_key": "recognition_intro",
+    "section": "homepage",
+    "display_order": 120,
+    "is_active": true,
+    "label": "التقدير",
+    "headline": "نادر عن قصد.",
+    "subheadline": null,
+    "body": null
+  },
+  {
+    "content_key": "voices_intro",
+    "section": "homepage",
+    "display_order": 130,
+    "is_active": true,
+    "label": "سؤال النجاح الجميل",
+    "headline": "ماذا يعني لك النجاح الجميل؟",
+    "subheadline": null,
+    "body": "ستساعد أصوات مؤسِّسة من الأعمال والثقافة والعلم والحياة العامة في تحديد ما ينبغي للبشرية أن تحتفي به بوصفه نجاحاً."
+  },
+  {
+    "content_key": "founding_edition",
+    "section": "homepage",
+    "display_order": 140,
+    "is_active": true,
+    "label": "الدورة التأسيسية",
+    "headline": "بحث عالمي واحد. سبعة نطاقات. جائزة كبرى واحدة.",
+    "subheadline": "دبي · شنتشن · هونغ كونغ · فيينا · لندن · سان فرانسيسكو · ليتوانيا",
+    "body": null
+  },
+  {
+    "content_key": "partners_intro",
+    "section": "partners",
+    "display_order": 150,
+    "is_active": true,
+    "label": null,
+    "headline": "ممتنون لشركائنا الرائعين",
+    "subheadline": null,
+    "body": null
+  },
+  {
+    "content_key": "v3_hero",
+    "section": "homepage_v3",
+    "display_order": 200,
+    "is_active": true,
+    "label": "نحتفي بعالم أفضل، نجاحاً جميلاً تلو الآخر.",
+    "headline": "النجاح الجميل",
+    "subheadline": "النجاح ليس المشكلة.\nتعريفنا له هو المشكلة.",
+    "body": "اكتشف المعهد"
+  },
+  {
+    "content_key": "v3_hero_images",
+    "section": "homepage_v3",
+    "display_order": 210,
+    "is_active": true,
+    "label": null,
+    "headline": null,
+    "subheadline": null,
+    "body": "https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/01.png\nhttps://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/02.png\nhttps://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/03.png\nhttps://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/04.png\nhttps://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/05.png\nhttps://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/06.png\nhttps://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/07.png\nhttps://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/08.png\nhttps://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/09.png\nhttps://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/10.png\nhttps://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/11.png\nhttps://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/homepage-media/V3/12.png"
+  },
+  {
+    "content_key": "v3_principle",
+    "section": "homepage_v3",
+    "display_order": 220,
+    "is_active": true,
+    "label": "02 — المبدأ",
+    "headline": "كلما ازداد نجاحه، أصبح العالم أفضل.",
+    "subheadline": null,
+    "body": "للبشر. ولغير البشر. وللمجتمع. وللكوكب. ولمن يأتي بعدنا."
+  },
+  {
+    "content_key": "v3_principles_intro",
+    "section": "homepage_v3",
+    "display_order": 225,
+    "is_active": true,
+    "label": "03",
+    "headline": "المبادئ الخمسة التي تحدّد النجاح الجميل",
+    "subheadline": null,
+    "body": null
+  },
+  {
+    "content_key": "v3_principle_philanthropy",
+    "section": "homepage_v3",
+    "display_order": 230,
+    "is_active": true,
+    "label": "العطاء",
+    "headline": "ماذا أستطيع أن أقدّم؟",
+    "subheadline": "العطاء > الأخذ",
+    "body": "السؤال عمّا سأجنيه حاجة أساسية لدى كل إنسان. لكنه أيضاً رغبة محدودة؛ فثمة حدّ لما يمكنك طلبه. أما ما يمكن خلقه حين تركّز على ما تستطيع تقديمه، فلا حدود له."
+  },
+  {
+    "content_key": "v3_principle_new_focus",
+    "section": "homepage_v3",
+    "display_order": 240,
+    "is_active": true,
+    "label": "تركيز جديد",
+    "headline": "ماذا أستطيع أن أخلق؟",
+    "subheadline": "ماذا لو لم يكن هناك ما يحتاج إلى حماية؟",
+    "body": "تستنزف الحماية كثيراً من الطاقة والموارد. ما الذي قد يصبح ممكناً لو وجّهنا الموارد نفسها إلى خلق شيء لا يحتاج إلى حماية؟"
+  },
+  {
+    "content_key": "v3_principle_echo",
+    "section": "homepage_v3",
+    "display_order": 250,
+    "is_active": true,
+    "label": "الصدى",
+    "headline": "في خيارات مَن أؤثّر؟",
+    "subheadline": "كل الأشخاص الذين تعرفهم.",
+    "body": "أنت تتأثر بمن تحيط نفسك بهم. فمتوسط صفات أقرب خمسة أشخاص إليك يسهم في تشكيل شخصيتك. لكن ما الصدى الذي تتركه في دائرتك؟ ما الذي يفكّر فيه الناس بصورة مختلفة بعد تفاعلهم معك؟"
+  },
+  {
+    "content_key": "v3_principle_momentum",
+    "section": "homepage_v3",
+    "display_order": 260,
+    "is_active": true,
+    "label": "الزخم",
+    "headline": "ما الذي تستطيع أصولي تحريكه؟",
+    "subheadline": "قوة الممكن",
+    "body": "كل أصل تملكه هو طاقة. ومعظم أصول معظم الناس طاقة ساكنة. ماذا لو تحولت هذه الطاقة إلى زخم، وأصبح كل ما تملكه يخلق شيئاً جديداً؟"
+  },
+  {
+    "content_key": "v3_principle_legacy",
+    "section": "homepage_v3",
+    "display_order": 270,
+    "is_active": true,
+    "label": "الإرث",
+    "headline": "ما الذي يبقى بعدي؟",
+    "subheadline": "لقد حقّقت النجاح. فهل شكّلك هذا النجاح؟",
+    "body": "الأحلام الكبيرة شيء جميل. وقلة قليلة تستطيع أن تربت على كتفها وتقول: «حوّلت أحلامي إلى واقع». لكن أيّ هذه الأحلام يصبح فقاعة بمجرد مغادرتك الغرفة؟ فقاعة تنفجر لأنها لم تصبح أيضاً حلماً لشخص آخر؟"
+  },
+  {
+    "content_key": "v3_scale",
+    "section": "homepage_v3",
+    "display_order": 280,
+    "is_active": true,
+    "label": "04 — نطاق الأثر",
+    "headline": "إلى أين يصل أثر نجاحك؟",
+    "subheadline": "النطاق ليس ترتيباً.",
+    "body": "لا يُقاس النجاح الجميل بحجمه.\nالنطاق يخبرنا إلى أين يصل أثره.\nوالمبادئ تخبرنا إن كان جميلاً."
+  },
+  {
+    "content_key": "v3_question",
+    "section": "homepage_v3",
+    "display_order": 290,
+    "is_active": true,
+    "label": "05",
+    "headline": "لو استطعت بناء أي شيء في العالم…",
+    "subheadline": "فماذا ستبني؟",
+    "body": "استكشف المعهد|رشّح / شارك"
+  }
+]

@@ -13,7 +13,9 @@
     "test:email": "node tests/email-security.mjs",
     "test:email:browser": "playwright test -c playwright.email.config.mjs",
     "test:beau": "node tests/beau-security.mjs && node tests/beau-approval-security.mjs",
-    "test:beau:browser": "playwright test -c playwright.beau.config.mjs"
+    "test:beau:browser": "playwright test -c playwright.beau.config.mjs",
+    "test:arabic": "node tests/arabic-cms.mjs",
+    "test:arabic:browser": "playwright test -c playwright.arabic.config.mjs"
   },
   "dependencies": {
     "@mux/mux-player-react": "^3.13.2",

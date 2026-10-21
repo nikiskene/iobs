@@ -1,3 +1,5 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
+import { localizeCmsRecord } from '../../content/localizedCms';
 // src/pages/public/ExpeditionDetailPage.tsx
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -10,8 +12,10 @@ import ExpeditionGallery from './expeditions/ExpeditionGallery';
 
 export default function ExpeditionDetailPage() {
   const { slug } = useParams();
-  const [expedition, setExpedition] = useState<Expedition | null>(null);
+  const { translate: tr } = useAwardSiteContent();
+  const [rawRecord, setExpedition] = useState<Expedition | null>(null);
   const [loading, setLoading] = useState(true);
+  const expedition = localizeCmsRecord(rawRecord, tr);
 
   useEffect(() => {
     const fetchExpedition = async () => {
@@ -37,9 +41,7 @@ export default function ExpeditionDetailPage() {
   if (loading) {
     return (
       <main className="min-h-screen bg-[#0A0A0A] pt-24 text-white">
-        <div className="mx-auto max-w-5xl px-6 py-24 text-zinc-500">
-          Loading expedition...
-        </div>
+        <div className="mx-auto max-w-5xl px-6 py-24 text-zinc-500">{tr("Loading expedition...")}</div>
       </main>
     );
   }
@@ -48,7 +50,7 @@ export default function ExpeditionDetailPage() {
     return (
       <main className="min-h-screen bg-[#0A0A0A] pt-24 text-white">
         <div className="mx-auto max-w-5xl px-6 py-24">
-          <h1 className="text-3xl font-bold">Expedition not found</h1>
+          <h1 className="text-3xl font-bold">{tr("Expedition not found")}</h1>
         </div>
       </main>
     );

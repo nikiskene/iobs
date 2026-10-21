@@ -1,3 +1,4 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { useEffect, useId, useRef, type ReactNode } from 'react';
 import { X } from 'lucide-react';
 import './readingDialog.css';
@@ -5,6 +6,7 @@ import './readingDialog.css';
 export default function ReadingDialog({ title, eyebrow, children, onClose, compact = false, closeLabel = 'Close window' }: {
   title: string; eyebrow: string; children: ReactNode; onClose: () => void; compact?: boolean; closeLabel?: string;
 }) {
+  const { translate: tr } = useAwardSiteContent();
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const openerRef = useRef(typeof document !== 'undefined' && document.activeElement instanceof HTMLElement ? document.activeElement : null);
@@ -26,7 +28,7 @@ export default function ReadingDialog({ title, eyebrow, children, onClose, compa
       if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) onClose();
     } }}>
     <header className="reading-dialog-header"><div><p className="reading-eyebrow">{eyebrow}</p><h2 id={titleId}>{title}</h2></div>
-      <button type="button" className="reading-close" aria-label={closeLabel} onClick={onClose}><X size={20} /></button>
+      <button type="button" className="reading-close" aria-label={tr(closeLabel)} onClick={onClose}><X size={20} /></button>
     </header>
     <div className="reading-dialog-content">{children}</div>
   </dialog>;

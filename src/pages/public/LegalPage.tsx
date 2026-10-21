@@ -1,11 +1,15 @@
+import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
+import { localizeCmsRecord } from '../../content/localizedCms';
 // src/pages/public/LegalPage.tsx
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import type { HomepageSection } from '../../lib/types';
 
 export default function LegalPage() {
-  const [section, setSection] = useState<HomepageSection | null>(null);
+  const { translate: tr } = useAwardSiteContent();
+  const [rawRecord, setSection] = useState<HomepageSection | null>(null);
   const [loading, setLoading] = useState(true);
+  const section = localizeCmsRecord(rawRecord, tr);
 
   useEffect(() => {
     const fetchLegal = async () => {

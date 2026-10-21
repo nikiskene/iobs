@@ -7,7 +7,7 @@ import { optimizedImageUrl, viewportImageWidth } from '../../lib/media';
 const PRINCIPLE_KEYS = ['v3_principle_philanthropy','v3_principle_new_focus','v3_principle_echo','v3_principle_momentum','v3_principle_legacy'];
 
 export default function HomeV3FivePrinciples() {
-  const { get } = useAwardSiteContent();
+  const { get, translate: tr } = useAwardSiteContent();
   const intro = get('v3_principles_intro');
   const [openPrinciple, setOpenPrinciple] = useState<AwardSiteContent | null>(null);
   const section = useNearViewport<HTMLElement>('150px');
@@ -31,8 +31,8 @@ export default function HomeV3FivePrinciples() {
     </div>
     {openPrinciple && <div className="home-v3-principle-modal" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpenPrinciple(null); }}>
       <section role="dialog" aria-modal="true" aria-labelledby="principle-dialog-title">
-        <button type="button" className="home-v3-modal-close" aria-label="Close" onClick={() => setOpenPrinciple(null)}>×</button>
-        <p className="home-v3-label">The Five Principles</p>
+        <button type="button" className="home-v3-modal-close" aria-label={tr("Close")} onClick={() => setOpenPrinciple(null)}>×</button>
+        <p className="home-v3-label">{tr("The Five Principles")}</p>
         <h2 id="principle-dialog-title">{openPrinciple.label}</h2>
         {openPrinciple.headline && <h3>{openPrinciple.headline}</h3>}
         {openPrinciple.subheadline && <p className="home-v3-modal-lead">{openPrinciple.subheadline}</p>}

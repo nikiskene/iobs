@@ -1,7 +1,11 @@
+import { useLocale } from '../../../providers/LocaleProvider';
+import { useAwardSiteContent } from '../../../providers/AwardSiteContentProvider';
 import { CalendarDays, MapPin } from 'lucide-react';
 import type { Expedition } from '../../../lib/types';
 
 export default function ExpeditionHero({ expedition }: { expedition: Expedition }) {
+  const { locale } = useLocale();
+  const { translate: tr } = useAwardSiteContent();
   return (
     <section className="relative min-h-[78vh] overflow-hidden pt-16">
       {expedition.hero_image_url && (
@@ -16,9 +20,7 @@ export default function ExpeditionHero({ expedition }: { expedition: Expedition 
 
       <div className="relative z-10 flex min-h-[78vh] items-end px-6 py-20">
         <div className="mx-auto w-full max-w-6xl">
-          <p className="text-sm uppercase tracking-[0.35em] text-sky-300/80">
-            Expedition
-          </p>
+          <p className="text-sm uppercase tracking-[0.35em] text-sky-300/80">{tr("Expedition")}</p>
 
           <h1 className="mt-5 max-w-5xl text-5xl font-bold leading-tight tracking-tight md:text-7xl">
             {expedition.title}
@@ -35,7 +37,7 @@ export default function ExpeditionHero({ expedition }: { expedition: Expedition 
             {expedition.start_date && (
               <div className="flex items-center gap-2">
                 <CalendarDays className="h-4 w-4 text-sky-300" />
-                {formatDate(expedition.start_date, expedition.end_date)}
+                {formatDate(expedition.start_date, expedition.end_date, locale)}
               </div>
             )}
 
@@ -49,9 +51,9 @@ export default function ExpeditionHero({ expedition }: { expedition: Expedition 
   );
 }
 
-function formatDate(start?: string | null, end?: string | null) {
+function formatDate(start: string | null | undefined, end: string | null | undefined, locale: string) {
   if (!start) return 'Date tba';
-  const startDate = new Date(start).toLocaleDateString();
+  const startDate = new Date(start).toLocaleDateString(locale);
   if (!end) return startDate;
-  return `${startDate} — ${new Date(end).toLocaleDateString()}`;
+  return `${startDate} — ${new Date(end).toLocaleDateString(locale)}`;
 }
