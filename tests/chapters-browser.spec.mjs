@@ -27,7 +27,7 @@ const event = {
   ticket_price_cents: 0,
   ticket_currency: "EUR",
 };
-async function mock(page, role) {
+async function mock(page, role, calls = []) {
   if (role)
     await page.addInitScript(
       ({ uid, role }) =>
@@ -51,6 +51,27 @@ async function mock(page, role) {
   await page.route("**/*.supabase.co/**", async (route) => {
     const req = route.request(),
       u = new URL(req.url());
+    calls.push({
+      path: u.pathname,
+      method: req.method(),
+      body: req.postData(),
+    });
+    if (u.pathname.includes("/storage/v1/object/")) {
+      if (req.method() === "POST")
+        return route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ Key: u.pathname, Id: "fixture" }),
+        });
+      return route.fulfill({
+        status: 200,
+        contentType: "image/png",
+        body: Buffer.from(
+          "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+          "base64",
+        ),
+      });
+    }
     let data = [];
     if (u.pathname.includes("/team_people"))
       data = [
@@ -194,4 +215,65 @@ test("public team places Chapter Heads between Founders and Advisors", async ({
   expect(headings.indexOf("Chapter")).toBeLessThan(
     headings.indexOf("Advisors"),
   );
+});
+
+for (const width of [320, 390, 1440]) {
+  test(`chapter head uploads and saves image at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    const calls = [];
+    await mock(page, "user", calls);
+    await page.goto("/chapter-office");
+    await page.getByRole("button", { name: "Edit", exact: true }).click();
+    await page
+      .getByLabel("Upload chapter image", { exact: true })
+      .setInputFiles({
+        name: "chapter.png",
+        mimeType: "image/png",
+        buffer: Buffer.from(
+          "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+          "base64",
+        ),
+      });
+    await expect(
+      page.getByRole("img", { name: "Chapter image preview" }),
+    ).toBeVisible();
+    await fits(page);
+    await page
+      .getByRole("button", { name: "Save chapter", exact: true })
+      .click();
+    await expect(
+      page.getByRole("button", { name: "Edit", exact: true }),
+    ).toBeVisible();
+    const upload = calls.find(
+      (c) => c.method === "POST" && c.path.includes("/storage/v1/object/"),
+    );
+    expect(upload.path).toContain(`/event-media/chapters/${chapter.id}/hero/`);
+    const save = calls.find((c) => c.path.endsWith("/chapter_update_details"));
+    expect(JSON.parse(save.body).details.hero_image_url).toContain(
+      `/storage/v1/object/public/event-media/chapters/${chapter.id}/hero/`,
+    );
+  });
+}
+test("invalid image is rejected without storage upload", async ({ page }) => {
+  const calls = [];
+  await mock(page, "user", calls);
+  await page.goto("/chapter-office");
+  await page.getByRole("button", { name: "Edit", exact: true }).click();
+  await page
+    .getByLabel("Upload chapter image", { exact: true })
+    .setInputFiles({
+      name: "bad.svg",
+      mimeType: "image/svg+xml",
+      buffer: Buffer.from("<svg/>"),
+    });
+  await expect(page.getByRole("alert")).toContainText(
+    "Choose a JPG, PNG or WebP",
+  );
+  expect(
+    calls.some(
+      (c) => c.method === "POST" && c.path.includes("/storage/v1/object/"),
+    ),
+  ).toBe(false);
 });

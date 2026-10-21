@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import ChapterImageUpload from "../../components/chapters/ChapterImageUpload";
 import ChapterMembers from "./ChapterMembers";
 import { supabase } from "../../lib/supabase";
 import CityAutocomplete from "../../components/location/CityAutocomplete";
@@ -48,7 +49,8 @@ export default function ChaptersAdmin() {
     [members, setMembers] = useState<Member[]>([]),
     [editing, setEditing] = useState<Chapter | null>(null),
     [error, setError] = useState(""),
-    [saving, setSaving] = useState(false);
+    [saving, setSaving] = useState(false),
+    [uploading, setUploading] = useState(false);
   const load = useCallback(async () => {
     const [c, m] = await Promise.all([
       supabase.rpc("my_managed_chapters"),
@@ -69,7 +71,7 @@ export default function ChaptersAdmin() {
     void load();
   }, [load]);
   async function save() {
-    if (!editing) return;
+    if (!editing || uploading) return;
     setError("");
     if (
       !editing.name.trim() ||
@@ -129,6 +131,7 @@ export default function ChaptersAdmin() {
         <h1 className="text-2xl font-semibold">Chapters</h1>
         {isAdmin && (
           <button
+            disabled={saving || uploading}
             className="rounded-lg bg-amber-500 px-5 py-3 font-semibold text-black"
             onClick={() => {
               setError("");
@@ -215,7 +218,7 @@ export default function ChaptersAdmin() {
               </select>
             </label>
           </fieldset>
-          {(["email", "headline", "hero_image_url"] as const).map((k) => (
+          {(["email", "headline"] as const).map((k) => (
             <label key={k} className="block capitalize">
               {k.replace(/_/g, " ")}
               <input
@@ -227,6 +230,20 @@ export default function ChaptersAdmin() {
               />
             </label>
           ))}
+          <ChapterImageUpload
+            disabled={saving}
+            key={editing.id}
+            chapterId={editing.id}
+            imageUrl={editing.hero_image_url}
+            onBusyChange={setUploading}
+            onChange={(url) =>
+              setEditing((current) =>
+                current?.id === editing.id
+                  ? { ...current, hero_image_url: url }
+                  : current,
+              )
+            }
+          />
           <label className="block">
             Status
             <select
@@ -244,13 +261,14 @@ export default function ChaptersAdmin() {
           {editing.id && <ChapterMembers chapterId={editing.id} />}
           <div className="flex flex-wrap gap-3">
             <button
-              disabled={saving}
+              disabled={saving || uploading}
               onClick={save}
               className="rounded-lg bg-amber-500 px-6 py-3 font-semibold text-black disabled:opacity-50"
             >
               {saving ? "Saving…" : "Save chapter"}
             </button>
             <button
+              disabled={saving || uploading}
               onClick={() => setEditing(null)}
               className="rounded-lg border border-white/20 px-6 py-3"
             >
