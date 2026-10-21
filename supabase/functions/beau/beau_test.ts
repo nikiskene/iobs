@@ -65,3 +65,9 @@ Deno.test('Admin retains approval management but cannot chat without explicit ap
  const handler=createHandler({env:n=>n==='SUPABASE_URL'?'https://fixture.supabase.co':'fixture',fetcher:async(url)=>{const p=new URL(String(url)).pathname;return Response.json(p==='/auth/v1/user'?{id}:p==='/rest/v1/profiles'?{id,member_id:id,role:'admin',is_active:true}:p==='/rest/v1/rpc/beau_active_member'?false:p==='/rest/v1/beau_settings'?{enabled:true}:[])}});
  for(const [action,status] of [['settings',200],['usage',200],['knowledge_list',200],['chat',403],['messages',403],['create_conversation',403]]){const r=await handler(new Request('https://fixture.supabase.co',{method:'POST',headers:{Authorization:'Bearer fixture','Content-Type':'application/json'},body:JSON.stringify({action})}));equal(r.status,status)}
 });
+
+Deno.test('economy models avoid extra reasoning in both paid tiers',async()=>{
+ for(const [model,effort] of [['gpt-5-nano','minimal'],['gpt-5-nano-2025-08-07','minimal'],['gpt-5.6-luna','none']])for(const intelligence of [false,true]){
+  await generate({key:'private-fixture',model,instructions:'Only approved references.',input:[],maxOutput:256,intelligence,signal:new AbortController().signal,onDelta:()=>{},fetcher:async(_url,init)=>{const body=JSON.parse(String(init?.body));equal(body.reasoning,{effort});equal(body.store,false);return new Response('data: {"type":"response.output_text.delta","delta":"Fixture answer"}\n\ndata: {"type":"response.completed","response":{"usage":{"input_tokens":20,"output_tokens":3}}}\n\n')}});
+ }
+});

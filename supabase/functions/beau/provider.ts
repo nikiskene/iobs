@@ -1,7 +1,10 @@
 import { BeauError, sseData } from './domain.ts';
 export type ProviderResult = {text:string;input:number;cached:number;output:number};
 export async function generate(options: {key:string;model:string;instructions:string;input:{role:string;content:string}[];maxOutput:number;intelligence:boolean;signal:AbortSignal;onDelta:(text:string)=>void;fetcher?:typeof fetch}): Promise<ProviderResult> {
-  const reasoning=/^gpt-5\.(4|6)(?:-|$)/.test(options.model)?{effort:options.intelligence?'low':'none'}:undefined;
+  // Economy models use the lowest supported effort, even in the Intelligence slot.
+  const reasoning=/^gpt-5-nano(?:-|$)/.test(options.model)?{effort:'minimal'}
+    :/^gpt-5\.6-luna(?:-|$)/.test(options.model)?{effort:'none'}
+    :/^gpt-5\.(4|6)(?:-|$)/.test(options.model)?{effort:options.intelligence?'low':'none'}:undefined;
   const response = await (options.fetcher || fetch)('https://api.openai.com/v1/responses', {
     method:'POST',headers:{Authorization:`Bearer ${options.key}`,'Content-Type':'application/json'},
     body:JSON.stringify({model:options.model,instructions:options.instructions,input:options.input,stream:true,store:false,max_output_tokens:options.maxOutput,...(reasoning?{reasoning}:{})}),signal:options.signal,
