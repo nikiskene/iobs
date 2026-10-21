@@ -34,6 +34,7 @@ export default function Navigation() {
   const publicLinks: NavLinkItem[] = [
     { to: '/thesis', label: 'Thesis' },
     { to: '/members', label: 'Members' },
+    { to: '/chapters', label: 'Chapters' },
     { to: '/expeditions', label: 'Expeditions' },
     { to: '/events', label: 'Events' },
     ...(!user ? [{ to: '/join', label: 'Join' }] : []),
