@@ -8,8 +8,9 @@ const chapter = {
   continent: "Europe",
   latitude: 48.2082,
   longitude: 16.3738,
-  email: "",
+  email: "vienna@iobs.cc",
   headline: "Beautiful success in Vienna",
+  description: "Vienna after dusk. Ideas linger over coffee, and conversations find their own rhythm.",
   hero_image_url: "",
   head_member_id: uid,
   status: "active",
@@ -123,7 +124,7 @@ async function mock(page, role, calls = []) {
           full_name: "Chapter Head",
           title: "Vienna",
           description: "Local community",
-          photo_url: "",
+          photo_url: "https://bunfdlazirfheomhvjdz.supabase.co/storage/v1/object/public/team-photos/head.png",
           linkedin_url: "",
           substack_url: "",
         },
@@ -174,6 +175,9 @@ for (const width of [320, 390, 768, 1440]) {
       page.getByRole("heading", { name: "Vienna", exact: true }),
     ).toBeVisible();
     await expect(page.getByText("Chapter Head · Chapter Head")).toBeVisible();
+    await expect(page.getByText(chapter.description, { exact: true })).toBeVisible();
+    await expect(page.getByRole("img", { name: "Chapter Head", exact: true })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Email the Vienna chapter" })).toHaveAttribute("href", "mailto:vienna%40iobs.cc");
     await fits(page);
     await page.getByRole("link", { name: /Vienna gathering/ }).click();
     await page.getByPlaceholder("Your Name").fill("Guest");
@@ -286,3 +290,40 @@ test("invalid image is rejected without storage upload", async ({ page }) => {
     ),
   ).toBe(false);
 });
+
+for (const width of [320, 390, 768, 1440]) {
+  test(`homepage shows chapter description, head photo and email on ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await mock(page);
+    await page.goto("/");
+    const section = page.getByRole("region", { name: "A shared spirit. A local soul." });
+    await expect(section.getByText(chapter.description, { exact: true })).toBeVisible();
+    await section.scrollIntoViewIfNeeded();
+    const portrait = section.getByRole("img", { name: "Chapter Head", exact: true });
+    await expect(portrait).toBeVisible();
+    await expect(portrait).toHaveAttribute("width", "48");
+    await expect(section.getByRole("link", { name: "Email the Vienna chapter" })).toHaveAttribute("href", "mailto:vienna%40iobs.cc");
+    await fits(page);
+    await page.screenshot({ path: `/tmp/iobs-chapter-home-${width}.png` });
+    await section.getByRole("link", { name: "Vienna", exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`/chapters#chapter-${chapter.id}$`));
+    await expect(page.getByRole("heading", { name: "Vienna", exact: true })).toBeVisible();
+  });
+}
+for (const role of ["admin", "user"]) {
+  test(`${role} can save a chapter description`, async ({ page }) => {
+    const calls = [];
+    await mock(page, role, calls);
+    await page.goto(role === "admin" ? "/admin/members/chapters" : "/chapter-office");
+    await page.getByRole("button", { name: "Edit", exact: true }).click();
+    await page.getByLabel("Chapter description", { exact: true }).fill("A city of late conversations and unexpected possibilities.");
+    await page.getByRole("button", { name: "Save chapter", exact: true }).click();
+    await expect.poll(() => calls.some(c => {
+      if (!c.body) return false;
+      const body = JSON.parse(c.body);
+      return (body.details?.description || body.description) === "A city of late conversations and unexpected possibilities.";
+    })).toBe(true);
+    const saved = calls.find(c => c.body && (JSON.parse(c.body).details?.description || JSON.parse(c.body).description) === "A city of late conversations and unexpected possibilities.");
+    expect(saved.path).toContain(role === "admin" ? "/rest/v1/chapters" : "/rpc/chapter_update_details");
+  });
+}

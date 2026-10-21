@@ -16,6 +16,7 @@ type Chapter = {
   longitude: number;
   email: string;
   headline: string;
+  description: string;
   hero_image_url: string;
   head_member_id: string | null;
   status: string;
@@ -31,6 +32,7 @@ const blank = (): Chapter => ({
   longitude: 0,
   email: "",
   headline: "",
+  description: "",
   hero_image_url: "",
   head_member_id: null,
   status: "draft",
@@ -90,6 +92,7 @@ export default function ChaptersAdmin() {
           details: {
             email: payload.email,
             headline: payload.headline,
+            description: payload.description,
             hero_image_url: payload.hero_image_url,
           },
         })
@@ -230,6 +233,21 @@ export default function ChaptersAdmin() {
               />
             </label>
           ))}
+          <div>
+            <label htmlFor="chapter-description" className="mb-2 block">Chapter description</label>
+            <textarea
+              id="chapter-description"
+              className={input}
+              rows={6}
+              maxLength={3000}
+              value={editing.description || ""}
+              onChange={(e) => setEditing({ ...editing, description: e.target.value })}
+              aria-describedby="chapter-description-help"
+            />
+            <p id="chapter-description-help" className="mt-2 text-sm text-zinc-400">
+              Capture the city’s atmosphere and the spirit of your chapter. Shown on the homepage and Chapters page. Up to 3,000 characters.
+            </p>
+          </div>
           <ChapterImageUpload
             disabled={saving}
             key={editing.id}
