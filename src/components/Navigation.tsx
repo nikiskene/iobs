@@ -1,77 +1,13 @@
-// src/components/Navigation.tsx
-import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { useUnreadMessages } from '../hooks/messaging/useUnreadMessages';
-import { useChapterAccess } from '../hooks/useChapterAccess';
-import { useAuth } from '../hooks/useAuth';
-import { supabase } from '../lib/supabase';
-import { Logo, NavItem, ProfileMenu, SignInLink, type NavLinkItem } from './navigationBasics';
-import { MobileMenu } from './navigationMenus';
+import InstituteHeader from './institute/InstituteHeader';
+import { LocaleProvider } from '../providers/LocaleProvider';
+import './institute/instituteHome.css';
+import './workspaceHeader.css';
 
+// Protected and legacy subsection routes share the public site's header.
 export default function Navigation() {
-  const { user, profile, isAdmin, hasTeamAccess } = useAuth();
-  const {hasChapterAccess}=useChapterAccess();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
-  const [logoUrl, setLogoUrl] = useState<string | null>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const unreadCount = useUnreadMessages();
-
-  useEffect(() => {
-    supabase.from('site_settings').select('logo_url').eq('is_active', true).maybeSingle()
-      .then(({ data }) => setLogoUrl(data?.logo_url || null));
-  }, []);
-
-  useEffect(() => {
-    function closeProfile(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) setProfileOpen(false);
-    }
-    document.addEventListener('mousedown', closeProfile);
-    return () => document.removeEventListener('mousedown', closeProfile);
-  }, []);
-
-  const publicLinks: NavLinkItem[] = [
-    { to: '/thesis', label: 'Thesis' },
-    { to: '/members', label: 'Members' },
-    { to: '/chapters', label: 'Chapters' },
-    { to: '/expeditions', label: 'Expeditions' },
-    { to: '/events', label: 'Events' },
-    ...(!user ? [{ to: '/join', label: 'Join' }] : []),
-  ];
-  const userLinks: NavLinkItem[] = user ? [
-    {to:'/dashboard/settings',label:'Settings'},
-    ...(hasChapterAccess ? [{to:'/chapter-office',label:'My chapter'}] : []),
-    ...(hasTeamAccess ? [{ to: '/work', label: 'Work' }] : []),
-    { to: '/dashboard/inbox', label: 'Inbox', badge: unreadCount },
-  ] : [];
-  const links = [...publicLinks, ...userLinks];
-  const isActive = (path: string) => path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
-  const isAdminRoute = location.pathname.startsWith('/admin');
-
-  async function handleLogout() {
-    await supabase.auth.signOut();
-    setProfileOpen(false);
-    setMobileOpen(false);
-    navigate('/');
-  }
-
-  return (
-    <nav className={`fixed left-0 right-0 top-0 z-50 border-b backdrop-blur-md ${isAdminRoute ? 'border-[#d5aa58]/25 bg-[#210b14]/95' : 'border-white/5 bg-[#0A0A0A]/90'}`}>
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Logo logoUrl={logoUrl} institute={isAdminRoute} />
-        <div className="hidden items-center gap-1 lg:flex">
-          {links.map((link) => <NavItem key={link.to} link={link} active={isActive(link.to)} />)}
-          <div className="ml-3 h-5 w-px bg-white/10" />
-          {user ? <ProfileMenu refElement={menuRef} open={profileOpen} onToggle={() => setProfileOpen((value) => !value)} onLogout={handleLogout} name={profile?.full_name || 'Explorer'} email={user.email || null} photoUrl={profile?.photo_url || null} isAdmin={isAdmin} /> : <SignInLink />}
-        </div>
-        <button type="button" onClick={() => setMobileOpen((value) => !value)} className="rounded-md p-2 text-zinc-400 hover:bg-white/5 hover:text-white lg:hidden" aria-label="Toggle navigation">
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
-      </div>
-      {mobileOpen && <MobileMenu links={links} isActive={isActive} user={Boolean(user)} isAdmin={isAdmin} onClose={() => setMobileOpen(false)} onLogout={handleLogout} />}
-    </nav>
-  );
+  return <LocaleProvider>
+    <div className="iobs-workspace-header">
+      <div className="iobs-workspace-header-inner"><InstituteHeader /></div>
+    </div>
+  </LocaleProvider>;
 }

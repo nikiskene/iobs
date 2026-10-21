@@ -1,0 +1,4 @@
+.iobs-workspace-header{position:fixed;inset:0 0 auto;z-index:50;background:#050406;color:#f5f0e8;--ink:#f5f0e8;--paper:#050406;--accent:#d7a64b;font-family:'Montserrat','DM Sans',sans-serif}
+.iobs-workspace-header-inner{max-width:1560px;margin-inline:auto;padding-inline:clamp(24px,3.2vw,56px)}
+.iobs-workspace-header .institute-mobile-nav{max-height:calc(100dvh - 88px);overflow-y:auto;overscroll-behavior:contain}
+@media(max-width:600px){.iobs-workspace-header .institute-mobile-nav{max-height:calc(100dvh - 76px)}}
