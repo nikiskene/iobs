@@ -292,22 +292,23 @@ test("invalid image is rejected without storage upload", async ({ page }) => {
 });
 
 for (const width of [320, 390, 768, 1440]) {
-  test(`homepage shows chapter description, head photo and email on ${width}px`, async ({ page }) => {
+  test(`homepage shows compact chapter tiles and opens full details on ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await mock(page);
     await page.goto("/");
     const section = page.getByRole("region", { name: "A shared spirit. A local soul." });
-    await expect(section.getByText(chapter.description, { exact: true })).toBeVisible();
+    await expect(section.getByRole("heading", {name: chapter.city, exact: true})).toBeVisible();
+    await expect(section.getByText(chapter.headline, {exact: true})).toBeVisible();
+    await expect(section.getByText(chapter.description, {exact: true})).toHaveCount(0);
+    await expect(section.locator('a[href^="mailto:"]')).toHaveCount(0);
+    await expect(section.getByText("Chapter Head · Chapter Head")).toHaveCount(0);
     await section.scrollIntoViewIfNeeded();
-    const portrait = section.getByRole("img", { name: "Chapter Head", exact: true });
-    await expect(portrait).toBeVisible();
-    await expect(portrait).toHaveAttribute("width", "48");
-    await expect(section.getByRole("link", { name: "Email the Vienna chapter" })).toHaveAttribute("href", "mailto:vienna%40iobs.cc");
     await fits(page);
     await page.screenshot({ path: `/tmp/iobs-chapter-home-${width}.png` });
-    await section.getByRole("link", { name: "Vienna", exact: true }).click();
+    await section.getByRole("link", {name: "More about the Vienna chapter", exact: true}).click();
     await expect(page).toHaveURL(new RegExp(`/chapters#chapter-${chapter.id}$`));
     await expect(page.getByRole("heading", { name: "Vienna", exact: true })).toBeVisible();
+    await expect(page.getByText(chapter.description, {exact: true})).toBeVisible();
   });
 }
 for (const role of ["admin", "user"]) {
