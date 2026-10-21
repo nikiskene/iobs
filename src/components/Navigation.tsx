@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useUnreadMessages } from '../hooks/messaging/useUnreadMessages';
+import { useChapterAccess } from '../hooks/useChapterAccess';
 import { useAuth } from '../hooks/useAuth';
 import { supabase } from '../lib/supabase';
 import { Logo, NavItem, ProfileMenu, SignInLink, type NavLinkItem } from './navigationBasics';
@@ -10,6 +11,7 @@ import { MobileMenu } from './navigationMenus';
 
 export default function Navigation() {
   const { user, profile, isAdmin, hasTeamAccess } = useAuth();
+  const {hasChapterAccess}=useChapterAccess();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -34,11 +36,13 @@ export default function Navigation() {
   const publicLinks: NavLinkItem[] = [
     { to: '/thesis', label: 'Thesis' },
     { to: '/members', label: 'Members' },
+    { to: '/chapters', label: 'Chapters' },
     { to: '/expeditions', label: 'Expeditions' },
     { to: '/events', label: 'Events' },
     ...(!user ? [{ to: '/join', label: 'Join' }] : []),
   ];
   const userLinks: NavLinkItem[] = user ? [
+    ...(hasChapterAccess ? [{to:'/chapter-office',label:'My chapter'}] : []),
     ...(hasTeamAccess ? [{ to: '/work', label: 'Work' }] : []),
     { to: '/dashboard/inbox', label: 'Inbox', badge: unreadCount },
   ] : [];

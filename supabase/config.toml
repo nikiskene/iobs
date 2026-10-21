@@ -1,0 +1,4 @@
+[functions.event-checkout]
+verify_jwt = false
+[functions.event-webhook]
+verify_jwt = false

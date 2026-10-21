@@ -12,6 +12,7 @@ const AwardSiteContentAdmin = lazy(() => import('../pages/admin/AwardSiteContent
 const AboutCMS = lazy(() => import('../pages/admin/AboutCMS'));
 const CategoriesAdmin = lazy(() => import('../pages/admin/CategoriesAdmin'));
 const ThesesAdmin = lazy(() => import('../pages/admin/ThesesAdmin'));
+const ChaptersAdmin = lazy(() => import('../pages/admin/ChaptersAdmin'));
 const TeamAdmin = lazy(() => import('../pages/admin/TeamAdmin'));
 const SiteSettingsAdmin = lazy(() => import('../pages/admin/SiteSettingsAdmin'));
 const ScaleWorldsAdmin = lazy(() => import('../pages/admin/ScaleWorldsAdmin'));
@@ -42,6 +43,7 @@ export default function AdminRoutes() {
       <Route path="content/theses" element={<ThesesAdmin />} />
       <Route path="content/categories" element={<CategoriesAdmin />} />
       <Route path="content/partners" element={<PartnerLogosAdmin />} />
+      <Route path="members/chapters" element={<ChaptersAdmin />} />
       <Route path="members/team" element={<TeamAdmin />} />
       <Route path="experiences/events" element={<EventsAdmin />} />
       <Route path="experiences/expeditions" element={<ExpeditionsAdmin />} />

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Briefcase, Inbox, LogIn, LogOut, Menu, Shield, User, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AWARD_ASSETS } from '../../content/awardAssets';
+import { useChapterAccess } from '../../hooks/useChapterAccess';
 import { useAuth } from '../../hooks/useAuth';
 import { useUnreadMessages } from '../../hooks/messaging/useUnreadMessages';
 import { supabase } from '../../lib/supabase';
@@ -14,7 +15,7 @@ import { useNominationMode } from '../../providers/NominationModeProvider';
 
 const PUBLIC_LINKS = [
   ['/about', 'The Institute'], ['/award', 'The Award'], ['/#principles', 'The Principles'],
-  ['/#scale-of-impact', 'Scales of Impact'], ['/thesis', 'Insights'],
+  ['/#scale-of-impact', 'Scales of Impact'], ['/thesis', 'Insights'], ['/chapters','Chapters'],
 ] as const;
 
 export default function InstituteHeader() {
@@ -22,6 +23,7 @@ export default function InstituteHeader() {
   const nominationLink = mode === 'acknowledgement' ? '/acknowledgement' : '/nominate';
   const { locale, setLocale, t } = useLocale();
   const { user, profile, isAdmin, hasTeamAccess } = useAuth();
+  const {hasChapterAccess}=useChapterAccess();
   const unreadCount = useUnreadMessages();
   const location = useLocation();
   const navigate = useNavigate();
@@ -59,7 +61,7 @@ export default function InstituteHeader() {
             <button type="button" className="institute-account-trigger" onClick={() => setAccountOpen((open) => !open)} aria-label={`Open account menu for ${accountName}`} aria-expanded={accountOpen}>
               {profile?.photo_url ? <img src={profile.photo_url} alt="" /> : <span>{initial}</span>}{!!unreadCount && <b>{unreadCount > 9 ? '9+' : unreadCount}</b>}
             </button>
-            {accountOpen && <AccountMenu name={accountName} isAdmin={isAdmin} hasTeamAccess={hasTeamAccess} hasSubmissions={hasSubmissions} unreadCount={unreadCount} logout={logout} />}
+            {accountOpen && <AccountMenu name={accountName} isAdmin={isAdmin} hasTeamAccess={hasTeamAccess} hasChapterAccess={hasChapterAccess} hasSubmissions={hasSubmissions} unreadCount={unreadCount} logout={logout} />}
           </div> : <Link className="institute-login" to="/login" aria-label="Log in"><LogIn /></Link>}
           <button type="button" className="institute-menu-trigger" onClick={() => setMobileOpen((open) => !open)} aria-label="Toggle menu" aria-expanded={mobileOpen}>{mobileOpen ? <X /> : <Menu />}</button>
         </div>
@@ -67,12 +69,12 @@ export default function InstituteHeader() {
       {mobileOpen && <div className="institute-mobile-nav">
         {PUBLIC_LINKS.map(([to, label]) => <Link to={to} key={to}>{label}</Link>)}
         <Link to={nominationLink}>{mode === 'acknowledgement' ? 'Acknowledgement' : t('nav.nominate')}</Link>
-        {user ? <><Link to="/dashboard/profile">Profile</Link><Link to="/dashboard/inbox">Inbox{unreadCount ? ` (${unreadCount})` : ''}</Link>{hasTeamAccess && <Link to="/work">Work</Link>}{isAdmin && <Link to="/admin">Admin</Link>}<button type="button" onClick={logout}>Log out</button></> : <Link to="/login">Log in</Link>}
+        {user ? <><Link to="/dashboard/profile">Profile</Link><Link to="/dashboard/inbox">Inbox{unreadCount ? ` (${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office">My chapter</Link>}{hasTeamAccess && <Link to="/work">Work</Link>}{isAdmin && <Link to="/admin">Admin</Link>}<button type="button" onClick={logout}>Log out</button></> : <Link to="/login">Log in</Link>}
       </div>}
     </>
   );
 }
 
-function AccountMenu({ name, isAdmin, hasTeamAccess, hasSubmissions, unreadCount, logout }: { name:string; isAdmin:boolean; hasTeamAccess:boolean; hasSubmissions:boolean; unreadCount:number; logout:()=>void }) {
-  return <div className="institute-account-menu"><strong>{name}</strong><Link to="/dashboard/profile"><User /> Profile</Link>{hasSubmissions && <Link to="/acknowledgement/mine">My submissions</Link>}<Link to="/dashboard/inbox"><Inbox /> Inbox {unreadCount ? `(${unreadCount})` : ''}</Link>{hasTeamAccess && <Link to="/work"><Briefcase /> Work</Link>}{isAdmin && <Link to="/admin"><Shield /> Admin</Link>}<button type="button" onClick={logout}><LogOut /> Log out</button></div>;
+function AccountMenu({ name, isAdmin, hasTeamAccess, hasChapterAccess, hasSubmissions, unreadCount, logout }: { name:string; isAdmin:boolean; hasTeamAccess:boolean; hasChapterAccess:boolean; hasSubmissions:boolean; unreadCount:number; logout:()=>void }) {
+  return <div className="institute-account-menu"><strong>{name}</strong><Link to="/dashboard/profile"><User /> Profile</Link>{hasSubmissions && <Link to="/acknowledgement/mine">My submissions</Link>}<Link to="/dashboard/inbox"><Inbox /> Inbox {unreadCount ? `(${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office"><Briefcase /> My chapter</Link>}{hasTeamAccess && <Link to="/work"><Briefcase /> Work</Link>}{isAdmin && <Link to="/admin"><Shield /> Admin</Link>}<button type="button" onClick={logout}><LogOut /> Log out</button></div>;
 }

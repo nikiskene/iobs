@@ -7,6 +7,7 @@ import PublicLayout from './PublicLayout';
 import InstitutePublicFrame from '../components/institute/InstitutePublicFrame';
 import HomeV3Page from '../pages/HomeV3Page';
 
+const ChaptersPage = lazy(() => import('../pages/public/ChaptersPage'));
 const TeamPage = lazy(() => import('../pages/public/TeamPage'));
 const AboutPage = lazy(() => import('../pages/public/AboutPage'));
 const MembersDirectoryPage = lazy(() => import('../pages/public/MembersDirectoryPage'));
@@ -64,6 +65,7 @@ export default function PublicRoutes() {
         }
       />
 
+      <Route path="/chapters" element={<InstitutePublicFrame><ChaptersPage /></InstitutePublicFrame>} />
       <Route path="/team" element={<InstitutePublicFrame><TeamPage /></InstitutePublicFrame>} />
       <Route path="/our-team" element={<Navigate to="/team" replace />} />
       <Route path="/members" element={<PublicLayout><MembersDirectoryPage /></PublicLayout>} />

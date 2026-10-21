@@ -1,5 +1,6 @@
 // src/components/DashboardLayout.tsx
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { useChapterAccess } from '../hooks/useChapterAccess';
 import { useAuth } from '../hooks/useAuth';
 import { ArrowLeft, BookOpen, MessageCircle, Shield, Sparkles, User, Users } from 'lucide-react';
 import { adminNavGroups } from './admin/adminNav';
@@ -9,6 +10,7 @@ type SidebarGroup = { title:string; links:SidebarLink[] };
 
 export default function DashboardLayout() {
   const { profile, isAdmin, hasTeamAccess } = useAuth();
+  const {hasChapterAccess}=useChapterAccess();
   const location = useLocation();
   const explorerLinks: SidebarLink[] = [
     { to: '/dashboard/profile', label: 'Profile', icon: User },
@@ -17,6 +19,7 @@ export default function DashboardLayout() {
     { to: '/dashboard/inbox', label: 'Messages', icon: MessageCircle },
   ];
   const isAdminRoute = location.pathname.startsWith('/admin');
+  if(hasChapterAccess) explorerLinks.unshift({to:'/chapter-office',label:'My chapter',icon:Users});
   if (hasTeamAccess) explorerLinks.unshift({ to: '/work', label: 'Work', icon: Sparkles });
   const isInboxRoute = location.pathname.startsWith('/dashboard/inbox');
 

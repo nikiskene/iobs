@@ -87,8 +87,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         session,
         profile,
         loading,
-        isAdmin: profile?.role === 'admin',
-        hasTeamAccess: Boolean(profile?.is_active && (profile.role === 'admin' || profile.is_team_member)),
+        isAdmin: Boolean(profile?.is_active && ['admin','super_admin'].includes(profile.role)),
+        hasTeamAccess: Boolean(profile?.is_active && (['admin','super_admin'].includes(profile.role) || profile.is_team_member)),
         refreshProfile,
       }}
     >

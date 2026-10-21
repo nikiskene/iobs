@@ -1,9 +1,9 @@
 // src/pages/public/EventDetailPage.tsx
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { CalendarDays, MapPin } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
-import type { Event } from '../../lib/types';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { CalendarDays, MapPin } from "lucide-react";
+import { supabase } from "../../lib/supabase";
+import type { Event } from "../../lib/types";
 
 export default function EventDetailPage() {
   const { slug } = useParams();
@@ -11,19 +11,20 @@ export default function EventDetailPage() {
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchEvent = async () => {
       const { data } = await supabase
-        .from('events')
-        .select('*')
-        .eq('slug', slug)
-        .eq('is_active', true)
+        .from("events")
+        .select("*")
+        .eq("slug", slug)
+        .eq("is_active", true)
+        .in("status", ["scheduled", "past"])
         .maybeSingle();
 
       setEvent((data as Event) || null);
@@ -37,34 +38,35 @@ export default function EventDetailPage() {
     if (!event) return;
 
     setSending(true);
-    setError('');
+    setError("");
 
     if (!name.trim()) {
-      setError('Please enter your name.');
+      setError("Please enter your name.");
       setSending(false);
       return;
     }
 
-    if (!email.trim()) {
-      setError('Please enter your email.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError("Please enter your email.");
       setSending(false);
       return;
     }
 
-    const { error: insertError } = await supabase
-      .from('event_rsvps')
-      .insert({
-        event_id: event.id,
-        name: name.trim(),
-        email: email.trim(),
-      });
-
-    if (insertError) {
-      setError(insertError.message);
+    const { data, error: registrationError } = await supabase.functions.invoke(
+      "event-checkout",
+      {
+        body: { event_id: event.id, name: name.trim(), email: email.trim() },
+      },
+    );
+    if (registrationError || data?.error) {
+      setError(data?.error || "Registration unavailable. Please try again.");
       setSending(false);
       return;
     }
-
+    if (data?.url) {
+      window.location.assign(data.url);
+      return;
+    }
     setSuccess(true);
     setSending(false);
   };
@@ -102,6 +104,17 @@ export default function EventDetailPage() {
       )}
 
       <section className="px-6 py-20">
+        {new URLSearchParams(window.location.search).get("checkout") ===
+          "returned" && (
+          <p role="status">
+            Thank you. Your payment confirmation will appear in the attendee
+            list once processed.
+          </p>
+        )}
+        {new URLSearchParams(window.location.search).get("checkout") ===
+          "cancelled" && (
+          <p role="status">Payment cancelled. You can try again below.</p>
+        )}
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-wrap items-center gap-6 text-sm text-zinc-400">
             <div className="flex items-center gap-2">
@@ -135,9 +148,7 @@ export default function EventDetailPage() {
                 Investment
               </h2>
 
-              <p className="mt-3 text-2xl font-semibold">
-                {event.investment}
-              </p>
+              <p className="mt-3 text-2xl font-semibold">{event.investment}</p>
             </div>
           )}
 
@@ -153,19 +164,19 @@ export default function EventDetailPage() {
             </div>
           )}
 
-          {event.status === 'scheduled' && (
+          {event.status === "scheduled" && (
             <div className="mt-16 rounded-2xl border border-white/5 bg-white/[0.03] p-8">
-              <h2 className="text-2xl font-bold">
-                RSVP
-              </h2>
+              <h2 className="text-2xl font-bold">RSVP</h2>
 
               <p className="mt-3 text-zinc-400">
-                Register your interest for this event.
+                {event.ticket_price_cents > 0
+                  ? `Ticket: ${new Intl.NumberFormat(undefined, { style: "currency", currency: event.ticket_currency }).format(event.ticket_price_cents / 100)}. Complete payment to confirm your place.`
+                  : "Reserve your place for free."}
               </p>
 
               {success ? (
                 <div className="mt-6 rounded-lg border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-300">
-                  RSVP received successfully.
+                  Your registration has been received.
                 </div>
               ) : (
                 <div className="mt-6 space-y-4">
@@ -195,14 +206,18 @@ export default function EventDetailPage() {
                     disabled={sending}
                     className="rounded-md bg-sky-500 px-6 py-3 font-medium text-white transition hover:bg-sky-400 disabled:opacity-50"
                   >
-                    {sending ? 'Sending...' : 'RSVP'}
+                    {sending
+                      ? "Sending…"
+                      : event.ticket_price_cents > 0
+                        ? "Continue to payment"
+                        : "Register for free"}
                   </button>
                 </div>
               )}
             </div>
           )}
 
-          {event.status === 'past' && event.past_summary && (
+          {event.status === "past" && event.past_summary && (
             <div className="mt-16">
               <h2 className="text-sm uppercase tracking-[0.2em] text-zinc-500">
                 Event Summary
@@ -214,7 +229,7 @@ export default function EventDetailPage() {
             </div>
           )}
 
-          {event.status === 'past' && event.youtube_url && (
+          {event.status === "past" && event.youtube_url && (
             <div className="mt-10 overflow-hidden rounded-2xl border border-white/5">
               <iframe
                 src={convertYoutubeUrl(event.youtube_url)}
@@ -241,8 +256,8 @@ function formatDate(start: string, end?: string | null) {
 }
 
 function convertYoutubeUrl(url: string) {
-  if (url.includes('watch?v=')) {
-    return url.replace('watch?v=', 'embed/');
+  if (url.includes("watch?v=")) {
+    return url.replace("watch?v=", "embed/");
   }
 
   return url;
