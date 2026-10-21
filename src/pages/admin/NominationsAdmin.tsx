@@ -38,7 +38,9 @@ export default function NominationsAdmin() {
     const limitError = narrativeLimitError(editing.description, editing.principles);
     if (limitError) { setError(limitError); return; }
     setBusy(true); setError('');
-    const { id, created_at, is_visible, ...changes } = editing;
+    const { id, ...changes } = editing;
+    delete (changes as Partial<Row>).created_at;
+    delete (changes as Partial<Row>).is_visible;
     const { data, error } = await supabase.from('acknowledgement_nominations').update(changes).eq('id', id).select('*').single();
     if (error || !data) setError('The submission could not be saved.');
     else { setRows(current => current.map(row => row.id === id ? data as Row : row)); setEditing(null); setNotice('Submission updated.'); }

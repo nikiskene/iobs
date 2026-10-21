@@ -1,0 +1,197 @@
+import { test, expect } from "@playwright/test";
+const uid = "00000000-0000-4000-8000-000000000001";
+const chapter = {
+  id: "00000000-0000-4000-8000-000000000002",
+  name: "Vienna",
+  city: "Vienna",
+  country: "Austria",
+  continent: "Europe",
+  latitude: 48.2082,
+  longitude: 16.3738,
+  email: "",
+  headline: "Beautiful success in Vienna",
+  hero_image_url: "",
+  head_member_id: uid,
+  status: "active",
+};
+const event = {
+  id: "00000000-0000-4000-8000-000000000003",
+  title: "Vienna gathering",
+  slug: "vienna-gathering",
+  status: "scheduled",
+  start_date: "2027-01-20",
+  end_date: null,
+  is_active: true,
+  category: "chapter_event",
+  chapter_id: chapter.id,
+  ticket_price_cents: 0,
+  ticket_currency: "EUR",
+};
+async function mock(page, role) {
+  if (role)
+    await page.addInitScript(
+      ({ uid, role }) =>
+        localStorage.setItem(
+          "sb-bunfdlazirfheomhvjdz-auth-token",
+          JSON.stringify({
+            access_token:
+              "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDEifQ.fixture",
+            refresh_token: "fixture",
+            expires_at: Math.floor(Date.now() / 1000) + 3600,
+            user: {
+              id: uid,
+              email: "head@example.com",
+              aud: "authenticated",
+              role: "authenticated",
+            },
+          }),
+        ),
+      { uid, role },
+    );
+  await page.route("**/*.supabase.co/**", async (route) => {
+    const req = route.request(),
+      u = new URL(req.url());
+    let data = [];
+    if (u.pathname.includes("/team_people"))
+      data = [
+        {
+          id: "founder",
+          full_name: "Founder",
+          category: "founders",
+          status: "published",
+          photo_url: "",
+          description: "",
+        },
+        {
+          id: "advisor",
+          full_name: "Advisor",
+          category: "advisory_board",
+          status: "published",
+          photo_url: "",
+          description: "",
+        },
+      ];
+    else if (u.pathname.includes("/auth/v1/user"))
+      data = { id: uid, email: "head@example.com" };
+    else if (u.pathname.includes("/profiles"))
+      data = {
+        id: uid,
+        full_name: "Chapter Head",
+        role: role || "user",
+        is_active: true,
+        member_id: uid,
+      };
+    else if (u.pathname.includes("/rpc/my_managed_chapters")) data = [chapter];
+    else if (u.pathname.includes("/rpc/admin_list_members"))
+      data = [
+        { id: uid, full_name: "Chapter Head", accounts: [{ is_active: true }] },
+      ];
+    else if (u.pathname.includes("/rpc/public_chapter_heads"))
+      data = [
+        {
+          chapter_id: chapter.id,
+          member_id: uid,
+          full_name: "Chapter Head",
+          title: "Vienna",
+          description: "Local community",
+          photo_url: "",
+          linkedin_url: "",
+          substack_url: "",
+        },
+      ];
+    else if (u.pathname.includes("/rpc/chapter_member_options"))
+      data = [{ id: uid, full_name: "Chapter Head" }];
+    else if (u.pathname.includes("/event_registrations"))
+      data = [
+        {
+          id: uid,
+          attendee_name: "Guest",
+          attendee_email: "guest@example.com",
+          payment_status: "free",
+          created_at: "2026-10-21",
+          amount_cents: 0,
+          currency: "EUR",
+        },
+      ];
+    else if (u.pathname.includes("/chapters")) data = [chapter];
+    else if (u.pathname.includes("/events"))
+      data = u.searchParams.has("slug") ? event : [event];
+    else if (u.pathname.includes("/functions/v1/event-checkout"))
+      data = { registered: true };
+    else if (u.pathname.includes("/site_settings")) data = { logo_url: null };
+    else if (u.pathname.includes("/nomination_settings"))
+      data = { id: true, mode: "acknowledgement" };
+    else if (u.pathname.includes("/storage/")) return route.abort();
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(data),
+    });
+  });
+}
+async function fits(page) {
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth,
+    ),
+  ).toBe(true);
+}
+for (const width of [320, 390, 768, 1440]) {
+  test(`public chapters and registration fit ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await mock(page);
+    await page.goto("/chapters");
+    await expect(
+      page.getByRole("heading", { name: "Vienna", exact: true }),
+    ).toBeVisible();
+    await expect(page.getByText("Chapter Head · Chapter Head")).toBeVisible();
+    await fits(page);
+    await page.getByRole("link", { name: /Vienna gathering/ }).click();
+    await page.getByPlaceholder("Your Name").fill("Guest");
+    await page.getByPlaceholder("Your Email").fill("guest@example.com");
+    await page.getByRole("button", { name: "Register for free" }).click();
+    await expect(
+      page.getByText("Your registration has been received."),
+    ).toBeVisible();
+    await fits(page);
+  });
+  test(`chapter head workspace fits ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await mock(page, "user");
+    await page.goto("/chapter-office");
+    await page.getByRole("button", { name: "Edit", exact: true }).click();
+    await expect(page.getByLabel("Chapter name")).toBeDisabled();
+    await expect(page.getByText("Associated members")).toBeVisible();
+    await fits(page);
+    await page.getByRole("button", { name: "Events", exact: true }).click();
+    await page.getByRole("button", { name: /Edit Vienna gathering/ }).click();
+    await expect(page.getByText("Attendees (1)")).toBeVisible();
+    await fits(page);
+    const download = page.waitForEvent("download");
+    await page.getByRole("button", { name: "Export CSV" }).click();
+    expect((await download).suggestedFilename()).toContain("attendees.csv");
+    await page.screenshot({
+      path: `/tmp/iobs-chapters-qa/head-${width}.png`,
+      fullPage: true,
+    });
+  });
+}
+test("public team places Chapter Heads between Founders and Advisors", async ({
+  page,
+}) => {
+  await mock(page);
+  await page.goto("/team");
+  await expect(
+    page.getByRole("heading", { name: "Chapter", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Chapter Head", exact: true }),
+  ).toBeVisible();
+  const headings = await page.locator("h2").allTextContents();
+  expect(headings.indexOf("Chapter")).toBeGreaterThan(
+    headings.indexOf("Founders"),
+  );
+  expect(headings.indexOf("Chapter")).toBeLessThan(
+    headings.indexOf("Advisors"),
+  );
+});

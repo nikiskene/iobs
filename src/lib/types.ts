@@ -119,6 +119,10 @@ export interface SiteSettings {
 }
 
 export interface Event {
+  category: 'tour' | 'workshop' | 'chapter_event';
+  chapter_id: string | null;
+  ticket_price_cents: number;
+  ticket_currency: string;
   id: string;
   created_at: string;
   updated_at: string;
