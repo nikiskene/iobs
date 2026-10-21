@@ -84,6 +84,14 @@ async function mock(page, role, calls = []) {
           description: "",
         },
         {
+          id: "unassigned-chapter-member",
+          full_name: "Chapter member without head assignment",
+          category: "chapters",
+          status: "published",
+          photo_url: "",
+          description: "",
+        },
+        {
           id: "advisor",
           full_name: "Advisor",
           category: "advisory_board",
@@ -208,6 +216,7 @@ test("public team places Chapter Heads between Founders and Advisors", async ({
   await expect(
     page.getByRole("heading", { name: "Chapter Head", exact: true }),
   ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Chapter member without head assignment" })).toHaveCount(0);
   const headings = await page.locator("h2").allTextContents();
   expect(headings.indexOf("Chapter")).toBeGreaterThan(
     headings.indexOf("Founders"),

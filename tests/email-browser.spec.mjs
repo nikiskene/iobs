@@ -41,6 +41,7 @@ async function mock(
   { allowed = true, mailbox = null, admin = false, reauth = false } = {},
 ) {
   let current = mailbox,
+    currentMember = { ...member },
     enabled = allowed;
   const actions = [];
   await page.addInitScript(
@@ -99,7 +100,13 @@ async function mock(
         is_active: true,
         role: admin ? "admin" : "user",
       };
-    else if (url.pathname.includes("/rpc/admin_list_members")) data = [member];
+    else if (url.pathname.includes("/rpc/admin_list_members")) data = [currentMember];
+    else if (url.pathname.includes("/rpc/admin_save_member")) {
+      const body = req.postDataJSON();
+      actions.push({ action: "save_member", ...body });
+      currentMember = { ...currentMember, ...body.p_member, accounts: body.p_accounts };
+      data = currentMember.id;
+    }
     else if (url.pathname.includes("/rpc/email_admin_set_eligibility")) {
       enabled = req.postDataJSON().allowed;
       data = null;
@@ -285,4 +292,24 @@ for (const admin of [false, true]) {
       await fits(page);
     });
   }
+}
+
+for (const width of [320, 1440]) {
+  test(`admin saves Chapter member category on ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 850 });
+    const actions = await mock(page, { admin: true });
+    await page.goto("/admin/members/team");
+    await page.getByRole("button", { name: "Edit", exact: true }).click();
+    await page.getByRole("combobox", { name: /Team category/ }).selectOption({ label: "Chapter" });
+    await page.getByRole("button", { name: "Save member", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Members", exact: true })).toBeVisible();
+    await expect.poll(() => actions.some(a => a.action === "save_member")).toBe(true);
+    await expect(page.getByRole("heading", { name: "Edit member", exact: true })).toHaveCount(0);
+    const saved = actions.find(a => a.action === "save_member");
+    expect(saved.p_member.category).toBe("chapters");
+    expect(saved.p_accounts).toEqual(member.accounts);
+    await page.getByRole("button", { name: "Edit", exact: true }).click();
+    await expect(page.getByRole("combobox", { name: /Team category/ })).toHaveValue("chapters");
+    await fits(page);
+  });
 }

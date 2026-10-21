@@ -68,13 +68,7 @@ export default function TeamPage() {
             We couldn’t load the team. Please try again shortly.
           </p>
         ) : (
-          (
-            [
-              TEAM_CATEGORIES[0],
-              ["chapters", "Chapter"],
-              ...TEAM_CATEGORIES.slice(1),
-            ] as readonly (readonly [string, string])[]
-          )
+          TEAM_CATEGORIES
             .filter(([category]) =>
               PUBLIC_TEAM_CATEGORIES.includes(
                 category as (typeof PUBLIC_TEAM_CATEGORIES)[number],
