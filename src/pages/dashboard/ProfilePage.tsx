@@ -6,9 +6,13 @@ import { Camera, ExternalLink, Save } from 'lucide-react';
 import CityAutocomplete from '../../components/location/CityAutocomplete';
 import { useAuth } from '../../hooks/useAuth';
 import { supabase } from '../../lib/supabase';
+import { useEmailAccount } from '../../hooks/useEmailAccount';
+import EmailSetupGuide from '../../components/email/EmailSetupGuide';
 
 export default function ProfilePage() {
   const { user, profile, refreshProfile } = useAuth();
+  const emailAccount = useEmailAccount();
+  const [showEmailSetup, setShowEmailSetup] = useState(false);
 
   const [fullName, setFullName] = useState('');
   const [profileName, setProfileName] = useState('');
@@ -145,6 +149,26 @@ export default function ProfilePage() {
         </div>
         <Link to="/acknowledgement/mine" className="rounded-md border border-amber-400/40 px-4 py-2 text-sm font-medium text-amber-200 transition-colors hover:bg-amber-400/10">My submissions</Link>
       </section>
+
+      <section className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-4">
+        <div className="min-w-0">
+          <h2 className="text-sm font-medium text-white">Your IOBS Email</h2>
+          <p className="mt-1 break-all text-sm text-zinc-400">
+            {emailAccount.mailbox?.email_address || 'Manage your official @iobs.cc email account and device setup.'}
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          {emailAccount.mailbox && (
+            <button type="button" onClick={() => setShowEmailSetup(true)} className="min-h-11 rounded-md border border-amber-400/40 px-4 text-sm font-medium text-amber-200 hover:bg-amber-400/10">
+              Set Up Email on Your Device
+            </button>
+          )}
+          <Link to="/dashboard/settings/email" className="inline-flex min-h-11 items-center rounded-md border border-white/20 px-4 text-sm">Manage IOBS Email</Link>
+        </div>
+      </section>
+      {showEmailSetup && emailAccount.mailbox && (
+        <EmailSetupGuide address={emailAccount.mailbox.email_address} onClose={() => setShowEmailSetup(false)} />
+      )}
 
       <div className="mt-8 max-w-2xl space-y-6">
         <ProfilePhoto

@@ -35,6 +35,7 @@ export function ProfileMenu({ refElement, open, onToggle, onLogout, name, email,
     {open && <div className="absolute right-0 mt-3 w-64 overflow-hidden rounded-xl border border-white/10 bg-[#111] shadow-2xl">
       <div className="border-b border-white/10 px-4 py-3"><p className="truncate text-sm font-medium text-white">{name}</p>{email && <p className="mt-0.5 truncate text-xs text-zinc-500">{email}</p>}</div>
       <Link to="/dashboard/profile" className={menuClass}><User className="h-4 w-4" />Profile</Link>
+      <Link to="/dashboard/settings/email" className={menuClass}><User className="h-4 w-4" />IOBS Email</Link>
       {isAdmin && <Link to="/admin" className={menuClass}><Shield className="h-4 w-4" />Admin</Link>}
       <button type="button" onClick={onLogout} className="flex w-full items-center gap-2 px-4 py-3 text-left text-sm text-red-300 hover:bg-red-500/10"><LogOut className="h-4 w-4" />Log out</button>
     </div>}

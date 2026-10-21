@@ -18,7 +18,8 @@ export default function EmailSettings() {
     [notice, setNotice] = useState(""),
     [error, setError] = useState(""),
     [reauth, setReauth] = useState(false),
-    [changing, setChanging] = useState(false);
+    [changing, setChanging] = useState(false),
+    [setupAddress, setSetupAddress] = useState("");
   const mailbox = account.mailbox,
     hasAccount =
       !!mailbox && ["active", "disabled", "missing"].includes(mailbox.status),
@@ -64,6 +65,8 @@ export default function EmailSettings() {
               ? "Your mailbox password has been changed."
               : "Account status refreshed.",
         );
+        if (action === "create")
+          setSetupAddress(data.email_address || `${local}@iobs.cc`);
         await account.refresh();
       }
     } catch (cause) {
@@ -147,7 +150,13 @@ export default function EmailSettings() {
                   Change Email Password
                 </button>
               </div>
-              <EmailSetupGuide address={mailbox!.email_address} />
+              <button
+                type="button"
+                onClick={() => setSetupAddress(mailbox!.email_address)}
+                className="min-h-11 rounded-lg border border-white/20 px-4"
+              >
+                Set Up Email on Your Device
+              </button>
             </>
           )}
           {((account.allowed && !hasAccount && !pending) || changing) && (
@@ -255,6 +264,12 @@ export default function EmailSettings() {
             </p>
           )}
         </>
+      )}
+      {setupAddress && (
+        <EmailSetupGuide
+          address={setupAddress}
+          onClose={() => setSetupAddress("")}
+        />
       )}
     </div>
   );

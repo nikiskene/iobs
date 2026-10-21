@@ -146,7 +146,7 @@ for (const width of [320, 390, 768, 1440]) {
     await fits(page);
     await page.getByRole("button", { name: "Create My Email Account" }).click();
     await expect(
-      page.locator("p").filter({ hasText: /^example\.member@iobs\.cc$/ }),
+      page.locator("section > p").filter({ hasText: /^example\.member@iobs\.cc$/ }),
     ).toBeVisible();
     await expect(
       page.getByRole("link", { name: "Open Webmail" }),
@@ -155,13 +155,21 @@ for (const width of [320, 390, 768, 1440]) {
       page.getByRole("button", { name: "Create My Email Account" }),
     ).toHaveCount(0);
     expect(actions.filter((a) => a.action === "create")).toHaveLength(1);
-    await page
-      .getByText("Set Up Email on Your Device", { exact: true })
-      .click();
-    await expect(
-      page.getByText("imap.migadu.com", { exact: true }),
-    ).toBeVisible();
+    const setup = page.getByRole("dialog", { name: "Set Up Email on Your Device" });
+    await expect(setup).toBeVisible();
+    for (const value of ["imap.migadu.com", "993", "smtp.migadu.com", "465"])
+      await expect(setup.getByText(value, { exact: true })).toBeVisible();
+    await expect(setup.getByText("example.member@iobs.cc", { exact: true })).toHaveCount(3);
     await fits(page);
+    await page.screenshot({ path: `/tmp/iobs-email-setup-${width}.png` });
+    expect(await setup.evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
+    await setup.getByRole("button", { name: "Done", exact: true }).click();
+    await expect(setup).toHaveCount(0);
+    await page.getByRole("button", { name: "Set Up Email on Your Device" }).click();
+    await expect(setup).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(setup).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Set Up Email on Your Device" })).toBeFocused();
   });
   test(`admin eligibility and existing link on ${width}px`, async ({
     page,
@@ -221,6 +229,7 @@ test("existing mailbox supports password change after eligibility is revoked", a
 }) => {
   const actions = await mock(page, { allowed: false, mailbox: existing });
   await page.goto("/dashboard/settings/email");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.getByRole("button", { name: "Change Email Password" }).click();
   await page
     .getByLabel("New mailbox password", { exact: true })
@@ -241,6 +250,7 @@ test("existing mailbox supports password change after eligibility is revoked", a
 test("sensitive action asks for fresh website sign-in", async ({ page }) => {
   await mock(page, { mailbox: existing, reauth: true });
   await page.goto("/dashboard/settings/email");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.getByRole("button", { name: "Change Email Password" }).click();
   await page
     .getByLabel("New mailbox password", { exact: true })
@@ -256,3 +266,23 @@ test("sensitive action asks for fresh website sign-in", async ({ page }) => {
     page.getByLabel("IOBS website password", { exact: true }),
   ).toHaveAttribute("type", "password");
 });
+for (const admin of [false, true]) {
+  for (const width of [320, 1440]) {
+    test(`${admin ? "admin" : "member"} opens email setup from profile on ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 850 });
+      await mock(page, { admin, mailbox: existing, allowed: false });
+      await page.goto("/dashboard/profile");
+      await expect(page.getByText(existing.email_address, { exact: true })).toBeVisible();
+      await page.getByRole("button", { name: "Set Up Email on Your Device" }).click();
+      const setup = page.getByRole("dialog", { name: "Set Up Email on Your Device" });
+      await expect(setup).toBeVisible();
+      await expect(setup.getByText("smtp.migadu.com", { exact: true })).toBeVisible();
+      await setup.getByRole("button", { name: "Close setup instructions" }).click();
+      await page.getByRole("link", { name: "Manage IOBS Email" }).click();
+      await expect(page).toHaveURL(/\/dashboard\/settings\/email$/);
+      await expect(page.getByRole("heading", { name: "Your IOBS Email" })).toBeVisible();
+      await expect(page.getByRole("dialog")).toHaveCount(0);
+      await fits(page);
+    });
+  }
+}
