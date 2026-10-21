@@ -1,3 +1,4 @@
+import CookiePrivacyNotice from '../../components/privacy/CookiePrivacyNotice';
 import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { localizeCmsRecord } from '../../content/localizedCms';
 // src/pages/public/LegalPage.tsx
@@ -43,8 +44,9 @@ export default function LegalPage() {
         </h1>
 
         <div className="mt-10 whitespace-pre-line text-base leading-relaxed text-zinc-300">
-          {section?.body || 'Legal information will be added shortly.'}
+          {section?.body?.replace(/Additional analytics or tracking technologies may be introduced in the future and will be disclosed accordingly\./, 'See Cookies and optional analytics below for the current analytics choices.').replace(/وقد تُضاف مستقبلاً تقنيات للتحليلات أو التتبع، وسيُفصح عنها حينئذ\./, 'راجع قسم ملفات الارتباط والتحليلات الاختيارية أدناه للاطلاع على الخيارات الحالية.') || 'Legal information will be added shortly.'}
         </div>
+        <CookiePrivacyNotice />
       </div>
     </main>
   );

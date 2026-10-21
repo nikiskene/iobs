@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'tests',testMatch:'cookies-browser.spec.mjs',use:{baseURL:process.env.IOBS_TEST_URL||'http://127.0.0.1:4181',headless:true,launchOptions:{channel:'chrome'}},webServer:process.env.IOBS_TEST_URL?undefined:{command:'npm run preview -- --host 127.0.0.1 --port 4181 --strictPort',url:'http://127.0.0.1:4181',reuseExistingServer:false},reporter:'list',timeout:30000});

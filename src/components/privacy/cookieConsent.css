@@ -1,0 +1,33 @@
+.iobs-cookie-banner,.iobs-cookie-dialog{box-sizing:border-box;border:1px solid #d7a64b70;background:#100b10;color:#f5f0e8;font-family:'DM Sans',sans-serif;box-shadow:0 10px 60px #0008;text-align:start}
+.iobs-cookie-banner{position:fixed;z-index:110;inset-inline:20px;bottom:max(20px,env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1300px;margin-inline:auto;padding:22px 26px;border-radius:12px}
+.iobs-cookie-banner h2,.iobs-cookie-dialog h2{margin:0 0 8px;font:500 25px/1.2 'Cormorant Garamond',Georgia,serif;letter-spacing:normal}
+.iobs-cookie-banner p,.iobs-cookie-dialog p{margin:0;font-size:13px;line-height:1.75;color:#d3c9ce;max-width:660px}
+.iobs-cookie-banner a,.iobs-cookie-dialog a,.iobs-cookie-legal a{text-decoration:underline;text-underline-offset:3px;color:#f5cc8a}
+.iobs-cookie-actions{display:flex;flex-wrap:wrap;gap:10px;flex-shrink:0}
+.iobs-cookie-actions button{min-height:44px;padding:10px 16px;border:1px solid #d7a64b99;border-radius:5px;background:transparent;color:#f5f0e8;font:500 12px/1.5 'DM Sans',sans-serif;cursor:pointer}
+.iobs-cookie-actions button:hover{background:#d7a64b26;border-color:#f5cc8a}
+.iobs-cookie-settings-link{position:relative;z-index:51;padding:8px 0;min-height:44px;border:0;background:transparent;color:inherit;font:inherit;text-align:start;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.iobs-cookie-dialog{width:min(590px,calc(100% - 32px));max-height:calc(100dvh - 40px);overflow:auto;border-radius:12px;padding:28px}
+.iobs-cookie-dialog::backdrop{background:#0009;backdrop-filter:blur(5px)}
+.iobs-cookie-dialog header{display:flex;justify-content:space-between;align-items:start;gap:20px}
+.iobs-cookie-dialog header h2{font-size:30px}
+.iobs-cookie-close{border:0;background:transparent;color:inherit;font:28px/1 sans-serif;min-width:44px;min-height:44px;cursor:pointer}
+.iobs-cookie-option{padding:20px 0;border-bottom:1px solid #ffffff20;margin-bottom:16px}
+.iobs-cookie-option label{display:flex;align-items:center;gap:12px;min-height:44px;font-size:15px;font-weight:500;cursor:pointer}
+.iobs-cookie-option label span{margin-inline-start:auto;font-size:12px;color:#d7a64b}
+.iobs-cookie-option input{width:22px;height:22px;accent-color:#d7a64b;flex-shrink:0}
+.iobs-cookie-dialog>.iobs-cookie-actions{margin-top:24px}
+.iobs-cookie-dialog>a{display:inline-block;margin-top:14px;font-size:13px}
+.iobs-cookie-legal{margin-top:40px;padding-top:32px;border-top:1px solid #ffffff30;scroll-margin-top:100px}
+.iobs-cookie-legal h2{font-size:26px;margin-bottom:20px}
+.iobs-cookie-legal p{white-space:pre-line;line-height:1.8;margin:20px 0;color:#d3c9ce}
+.iobs-cookie-banner button:focus-visible,.iobs-cookie-dialog :is(button,a,input):focus-visible,.iobs-cookie-settings-link:focus-visible{outline:2px solid #f5cc8a;outline-offset:4px}
+html[lang='ar'] :is(.iobs-cookie-banner,.iobs-cookie-dialog,.iobs-cookie-legal),html[lang='ar'] :is(.iobs-cookie-banner,.iobs-cookie-dialog,.iobs-cookie-legal) :is(button,h2,p,label){font-family:'Noto Naskh Arabic',serif;letter-spacing:normal}
+html[lang='ar'] :is(.iobs-cookie-banner,.iobs-cookie-dialog) p{font-size:16px}
+html[lang='ar'] .iobs-cookie-actions button{font-size:15px}
+@media(max-width:1000px){.iobs-cookie-banner{flex-direction:column;align-items:stretch;gap:16px}.iobs-cookie-banner p{max-width:none}}
+@media(max-width:520px){.iobs-cookie-banner{inset-inline:12px;bottom:max(12px,env(safe-area-inset-bottom));padding:18px;max-height:calc(100dvh - 32px);overflow:auto}.iobs-cookie-banner h2{font-size:23px}.iobs-cookie-banner .iobs-cookie-actions{display:grid;grid-template-columns:1fr 1fr}.iobs-cookie-banner .iobs-cookie-actions button:last-child{grid-column:1/-1}.iobs-cookie-dialog{padding:22px}.iobs-cookie-dialog .iobs-cookie-actions{flex-direction:column}}
+/* A separate footer row keeps the permanent control clear of the existing
+   fixed film link. Text is placed on the opposite physical side of that link. */
+.award-footer-base{flex-wrap:wrap}
+.award-footer-base>.iobs-cookie-settings-link{flex-basis:100%;text-align:left;align-self:stretch}

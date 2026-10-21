@@ -15,7 +15,9 @@
     "test:beau": "node tests/beau-security.mjs && node tests/beau-approval-security.mjs",
     "test:beau:browser": "playwright test -c playwright.beau.config.mjs",
     "test:arabic": "node tests/arabic-cms.mjs",
-    "test:arabic:browser": "playwright test -c playwright.arabic.config.mjs"
+    "test:arabic:browser": "playwright test -c playwright.arabic.config.mjs",
+    "test:cookies": "node tests/cookies-config.mjs",
+    "test:cookies:browser": "playwright test -c playwright.cookies.config.mjs"
   },
   "dependencies": {
     "@mux/mux-player-react": "^3.13.2",
