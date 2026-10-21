@@ -25,3 +25,12 @@ Text, Markdown, PDF and DOCX documents support up to 5 MB and 60,000 extracted c
 7. Verify the signed-in member flow: exact approved FAQ with zero API requests, an ordinary Mini response, a complex Intelligence response, history resume, private document attachment, and Admin usage totals. Check another member cannot see the conversation and a Chapter Head cannot manage other chapters. Automated fixture tests do not substitute for live authenticated QA.
 
 If SQL or provider verification fails, do not publish the dependent website. BEAU can be paused in its Admin settings. Existing site routes remain independent of BEAU. Phase 2 teaching/suggestion workflows and broad operational tools are outside this approved foundation.
+
+
+## Member approval update
+
+BEAU chat now requires explicit approval for the canonical member identity. All members, including Admins and Chapter Heads, start OFF; there is no automatic grandfathering. New members have no approval row and therefore cannot use BEAU. Admins manage the immediate-save switch at Admin → Members → Edit member → BEAU access. Approval covers linked login accounts for the same person. Active Admins retain knowledge/settings/usage administration regardless of their chat approval, so they can enable their own chat access. This does not grant chat access automatically.
+
+Deploy the backward-compatible `beau` function first: it checks the existing `beau_active_member` RPC. Then have the owner manually run `docs/beau-access-supabase-release.sql`. This replaces the access predicate and immediately gates all Edge Function requests as well as private-chat RLS, retrieval, cache and turn creation. Existing data is preserved. Run `docs/beau-access-supabase-verify.sql` read-only; expect migration/RLS/invalidation true, unsafe privileges false and initially zero approved members. Then publish the member switch and gated header/routes. Admins must explicitly turn access ON for members they approve, including themselves if they want to chat.
+
+Revocation blocks further requests, removes private-history read access through RLS, and invalidates factual caches. Reapproval restores access to that member’s existing private history. Requests already underway may finish; revocation prevents subsequent requests. Access changes are audited without conversation content. The website refreshes its access check on navigation/mount, window focus or visibility change, and immediately after Admin changes in that window. Backend approval is checked on every request even if a stale tab still shows a link.

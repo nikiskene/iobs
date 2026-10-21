@@ -30,6 +30,7 @@ Deno.test('real handler serves approved FAQ without reading OpenAI key and strea
    if(path==='/auth/v1/user')data={id,email:'fixture@example.com'};
    else if(path==='/rest/v1/profiles')data={id,member_id:id,role:'explorer',is_active:true};
    else if(path==='/rest/v1/chapters')data=[];
+   else if(path==='/rest/v1/rpc/beau_active_member')data=true;
    else if(path==='/rest/v1/beau_conversations')data={id,user_id:id};
    else if(path==='/rest/v1/beau_settings')data={enabled:true,mini_model:'gpt-5.4-mini',intelligence_model:'gpt-5.4',mini_input_price:.75,mini_cached_price:.075,mini_output_price:4.5,intelligence_input_price:2.5,intelligence_cached_price:.25,intelligence_output_price:15,max_output_tokens:256,system_instructions:'Be concise.'};
    else if(path==='/rest/v1/beau_revision')data={revision:1};
@@ -47,4 +48,20 @@ Deno.test('real handler serves approved FAQ without reading OpenAI key and strea
   const response=await handler(new Request('https://fixture.supabase.co/functions/v1/beau',{method:'POST',headers:{Authorization:'Bearer member-fixture','Content-Type':'application/json'},body:JSON.stringify({action:'chat',conversation_id:id,request_id:requestId,prompt:factual?'What is the fixture?':'Help me write an invitation.',mode:'auto'})}));
   equal(response.status,200);const stream=await response.text();assert(stream.includes('event: done'));assert(!stream.includes('beau-only-fixture'));equal(keyReads,factual?0:1);equal(providerCalls,factual?0:1);assert(reserved&&finished);
  }
+});
+
+Deno.test('unapproved members cannot bootstrap, chat or spoof an approval flag',async()=>{
+ const id='00000000-0000-4000-8000-000000000001';let paid=false;
+ const handler=createHandler({env:n=>n==='SUPABASE_URL'?'https://fixture.supabase.co':'fixture',fetcher:async(url)=>{
+ const p=new URL(String(url)).pathname;if(String(url).startsWith('https://api.openai.com'))paid=true;
+ return Response.json(p==='/auth/v1/user'?{id}:p==='/rest/v1/profiles'?{id,member_id:id,role:'explorer',is_active:true}:false);
+ }});
+ for(const action of ['bootstrap','chat','create_conversation','messages','download_file','knowledge_save']){const r=await handler(new Request('https://fixture.supabase.co',{method:'POST',headers:{Authorization:'Bearer fixture','Content-Type':'application/json'},body:JSON.stringify({action,approved:true,has_beau_access:true})}));equal(r.status,403);equal((await r.json()).code,'approval_required')}
+ assert(!paid);
+});
+
+Deno.test('Admin retains approval management but cannot chat without explicit approval',async()=>{
+ const id='00000000-0000-4000-8000-000000000001';
+ const handler=createHandler({env:n=>n==='SUPABASE_URL'?'https://fixture.supabase.co':'fixture',fetcher:async(url)=>{const p=new URL(String(url)).pathname;return Response.json(p==='/auth/v1/user'?{id}:p==='/rest/v1/profiles'?{id,member_id:id,role:'admin',is_active:true}:p==='/rest/v1/rpc/beau_active_member'?false:p==='/rest/v1/beau_settings'?{enabled:true}:[])}});
+ for(const [action,status] of [['settings',200],['usage',200],['knowledge_list',200],['chat',403],['messages',403],['create_conversation',403]]){const r=await handler(new Request('https://fixture.supabase.co',{method:'POST',headers:{Authorization:'Bearer fixture','Content-Type':'application/json'},body:JSON.stringify({action})}));equal(r.status,status)}
 });

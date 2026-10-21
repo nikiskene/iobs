@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react';
+import AdminMemberBeau from '../../components/beau/AdminMemberBeau';
 import AdminMemberEmail from '../../components/email/AdminMemberEmail';
 import { supabase } from '../../lib/supabase';
 import { TEAM_CATEGORIES, safeWebUrl } from '../../lib/team';
@@ -123,6 +124,7 @@ export default function MemberEditor({ member, members, onCancel, onSaved, onCom
           </div>)}
         </>}
       </section>
+      {member.updated_at&&<AdminMemberBeau memberId={member.id}/>}
       {member.updated_at&&<AdminMemberEmail memberId={member.id}/>}
       {error && <p role="alert" className="text-sm text-red-300">{error}</p>}
       <div className="flex gap-3"><button type="submit" className={buttonClass}>{busy ? 'Saving…' : 'Save member'}</button><button type="button" onClick={onCancel} className={buttonClass}>Back to members</button></div>

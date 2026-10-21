@@ -54,9 +54,12 @@ export function createHandler(deps:{env:(name:string)=>string|undefined;fetcher?
    if(authError||!auth.user)throw new BeauError('unauthorized','Please sign in again to use BEAU.',401);
    const actor=await checked(db.from('profiles').select('id,member_id,role,is_active').eq('id',auth.user.id).maybeSingle()) as Actor|null;
    if(!actor?.is_active)throw new BeauError('forbidden','Active membership is required.',403);
+   const approved=await checked<boolean>(db.rpc('beau_active_member',{actor:actor.id}));
+   if(!approved&&!isAdmin(actor))throw new BeauError('approval_required','An Admin needs to approve your BEAU access before you can use it.',403);
    const chapters=await managedChapters(db,actor);
    if(request.headers.get('content-type')?.includes('multipart/form-data')) {
      const form=await new Response(await bytes(request,6*1024*1024),{headers:{'Content-Type':request.headers.get('content-type')!}}).formData();
+     if(!approved&&form.get('action')!=='import')throw new BeauError('approval_required','An Admin needs to approve your BEAU access before you can use it.',403);
      if(!['upload','import'].includes(String(form.get('action'))))throw new BeauError('action','Unsupported action.');
      return respond(await upload(db,actor,chapters,form));
    }
@@ -64,6 +67,7 @@ export function createHandler(deps:{env:(name:string)=>string|undefined;fetcher?
    try{body=JSON.parse(new TextDecoder().decode(await bytes(request,300000)))}catch(e){if(e instanceof BeauError)throw e;throw new BeauError('invalid_json','Please check the request.');}
    if(!body||Array.isArray(body)||typeof body!=='object')throw new BeauError('invalid_request','Please check the request.');
    const action=body.action;
+   if(!approved&&!(isAdmin(actor)&&['bootstrap','knowledge_list','knowledge_save','knowledge_versions','settings','settings_save','usage'].includes(String(action))))throw new BeauError('approval_required','An Admin needs to approve your BEAU access before you can use it.',403);
    if(action==='chat')return await chat(db,actor,body,headers,()=>deps.env('OPENAI_API_KEY_BEAU'),fetcher);
    if(action==='bootstrap') {
     await cleanupFiles(db);

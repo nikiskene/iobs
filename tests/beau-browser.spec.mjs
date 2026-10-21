@@ -1,9 +1,9 @@
 import {zipSync,strToU8} from 'fflate';
 import {test,expect} from '@playwright/test';
 const uid='00000000-0000-4000-8000-000000000001';
-async function mock(page,{admin=false,signedIn=true,head=false}={}){
+async function mock(page,{admin=false,signedIn=true,head=false,approved=true}={}){
  if(signedIn)await page.addInitScript(({uid})=>localStorage.setItem('sb-bunfdlazirfheomhvjdz-auth-token',JSON.stringify({access_token:'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDEifQ.fixture',refresh_token:'fixture',expires_at:Math.floor(Date.now()/1000)+3600,user:{id:uid,email:'fixture@example.com',aud:'authenticated',role:'authenticated'}})),{uid});
- let conversations=[],messages=[],files=[],knowledge=[{id:uid,slug:'fixture',title:'Fixture identity',category:'Fixture',content:'Approved factual fixture.',status:'approved',visibility:'internal',chapter_id:null,source_note:'Fixture source',faq_questions:['What is IOBS?'],faq_answer:'',version:1}];const calls=[];
+ let conversations=[],messages=[],files=[],knowledge=[{id:uid,slug:'fixture',title:'Fixture identity',category:'Fixture',content:'Approved factual fixture.',status:'approved',visibility:'internal',chapter_id:null,source_note:'Fixture source',faq_questions:['What is IOBS?'],faq_answer:'',version:1}];const calls=[];let memberApproval=false;
  const settings={enabled:true,mini_model:'gpt-5.4-mini',intelligence_model:'gpt-5.4',mini_input_price:.75,mini_cached_price:.075,mini_output_price:4.5,intelligence_input_price:2.5,intelligence_cached_price:.25,intelligence_output_price:15,max_output_tokens:2048,daily_user_limit:100,daily_user_budget:2,daily_global_budget:20,system_instructions:'Be clear.'};
  await page.route('**/*.supabase.co/**',async route=>{
   const req=route.request(),path=new URL(req.url()).pathname;let data=[];
@@ -33,6 +33,10 @@ async function mock(page,{admin=false,signedIn=true,head=false}={}){
   }else if(path.includes('/auth/v1/user'))data={id:uid,email:'fixture@example.com'};
   else if(path.includes('/profiles')){const p={id:uid,member_id:uid,full_name:'Fixture Member',profile_name:'fixture',role:admin?'admin':'explorer',is_team_member:false,is_active:true};data=new URL(req.url()).searchParams.has('id')?p:[p]}
   else if(path.includes('/nomination_settings'))data={id:true,mode:'acknowledgement'};
+  else if(path.includes('/rpc/admin_list_members'))data=[{id:uid,full_name:'Fixture Member',category:'user',status:'draft',title:'',description:'',photo_url:'',linkedin_url:'',substack_url:'',sort_order:0,location:'',directory_public:false,primary_profile_id:uid,updated_at:'2026-10-21',accounts:[{id:uid,email:'fixture@example.com',profile_name:'fixture',role:'explorer',is_team_member:false,is_active:true}]}];
+  else if(path.includes('/rpc/admin_get_beau_access'))data=memberApproval;
+  else if(path.includes('/rpc/admin_set_beau_access')){const b=req.postDataJSON();calls.push({action:'set_access',...b});memberApproval=b.p_enabled;data=memberApproval;}
+  else if(path.includes('/rpc/has_beau_access'))data=approved;
   else if(path.includes('/rpc/my_managed_chapters'))data=head?[{id:uid,name:'Vienna'}]:[];
   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(data)});
  });return calls;
@@ -76,4 +80,10 @@ test('text PDF extraction uses the bundled worker',async({page})=>{
  const objects=['<< /Type /Catalog /Pages 2 0 R >>','<< /Type /Pages /Kids [3 0 R] /Count 1 >>','<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>','<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`];
  let pdf='%PDF-1.4\n';const offsets=[0];for(let i=0;i<objects.length;i++){offsets.push(Buffer.byteLength(pdf));pdf+=`${i+1} 0 obj\n${objects[i]}\nendobj\n`}const start=Buffer.byteLength(pdf);pdf+=`xref\n0 6\n0000000000 65535 f \n${offsets.slice(1).map(x=>String(x).padStart(10,'0')+' 00000 n ').join('\n')}\ntrailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${start}\n%%EOF`;
  await page.getByLabel('Attach document',{exact:true}).setInputFiles({name:'fixture.pdf',mimeType:'application/pdf',buffer:Buffer.from(pdf)});await expect.poll(()=>calls.some(c=>c.action==='multipart'&&c.body.includes('PDF extraction fixture'))).toBe(true);
+});
+
+test('unapproved member cannot open BEAU and has no navigation link',async({page})=>{const calls=await mock(page,{approved:false});await page.goto('/beau');await expect(page.getByText('An Admin needs to approve your BEAU access before you can use it. Please contact an Admin.')).toBeVisible();await expect(page.getByRole('link',{name:'BEAU',exact:true})).toHaveCount(0);await expect(page.getByLabel('Message BEAU',{exact:true})).toHaveCount(0);expect(calls.filter(c=>c.action==='bootstrap')).toHaveLength(0)});
+
+for(const width of [320,1440])test(`Admin approves and revokes BEAU in member setup at ${width}px`,async({page})=>{
+ await page.setViewportSize({width,height:900});const calls=await mock(page,{admin:true});await page.goto('/admin/members/team');await page.getByRole('button',{name:'Edit',exact:true}).click();const permission=page.getByRole('switch',{name:'Allow this member to use BEAU',exact:true});await expect(permission).toBeEnabled();await expect(permission).not.toBeChecked();await permission.click();await expect(permission).toBeChecked();expect(calls.filter(c=>c.action==='set_access')).toEqual([{action:'set_access',p_member_id:uid,p_enabled:true}]);await permission.click();await expect(permission).not.toBeChecked();expect(calls.filter(c=>c.action==='set_access')).toHaveLength(2);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:`/tmp/iobs-beau-member-approval-${width}.png`,fullPage:true});
 });
