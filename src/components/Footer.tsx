@@ -1,3 +1,4 @@
+import CookieSettingsLink from './privacy/CookieSettingsLink';
 import { useAwardSiteContent } from '../providers/AwardSiteContentProvider';
 // src/components/Footer.tsx
 import { Link } from 'react-router-dom';
@@ -42,7 +43,7 @@ export default function Footer() {
             <p className="mt-3 max-w-xs text-sm text-zinc-500">{tr("Celebrating a better world, one Beautiful Success at a time.")}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-16 gap-y-2 text-sm">
+          <div className="grid grid-cols-2 gap-x-16 gap-y-2 text-sm"><CookieSettingsLink />
             <Link
               to="/about"
               className="text-zinc-400 transition-colors hover:text-white"

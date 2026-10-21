@@ -2,6 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Consent defaults are local only. GTM is loaded by the app after opt-in. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage: 'denied', ad_storage: 'denied',
+        ad_user_data: 'denied', ad_personalization: 'denied'
+      });
+      gtag('set', { send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false });
+    </script>
 
     <title>The Beautiful Success Award — Success That Makes the World Better</title>
 
