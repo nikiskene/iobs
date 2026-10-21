@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Briefcase, Inbox, LogIn, LogOut, Menu, Shield, User, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AWARD_ASSETS } from '../../content/awardAssets';
+import { useBeauAccess } from '../../hooks/useBeauAccess';
 import { useChapterAccess } from '../../hooks/useChapterAccess';
 import { useAuth } from '../../hooks/useAuth';
 import { useUnreadMessages } from '../../hooks/messaging/useUnreadMessages';
@@ -24,6 +25,7 @@ export default function InstituteHeader() {
   const { locale, setLocale, t } = useLocale();
   const { user, profile, isAdmin, hasTeamAccess } = useAuth();
   const {hasChapterAccess}=useChapterAccess();
+  const {hasBeauAccess}=useBeauAccess();
   const unreadCount = useUnreadMessages();
   const location = useLocation();
   const navigate = useNavigate();
@@ -51,7 +53,7 @@ export default function InstituteHeader() {
         </Link>
         <nav aria-label="Main navigation">
           {PUBLIC_LINKS.map(([to, label]) => <Link to={to} key={to}>{label}</Link>)}
-        {user && <Link to="/beau">BEAU</Link>}
+        {hasBeauAccess && <Link to="/beau">BEAU</Link>}
         </nav>
         <div className="institute-header-actions">
           <select className="language-switcher" value={locale} onChange={(event) => setLocale(event.target.value as Locale)} aria-label="Language">
@@ -70,7 +72,7 @@ export default function InstituteHeader() {
       {mobileOpen && <div className="institute-mobile-nav">
         {PUBLIC_LINKS.map(([to, label]) => <Link to={to} key={to}>{label}</Link>)}
         <Link to={nominationLink}>{mode === 'acknowledgement' ? 'Acknowledgement' : t('nav.nominate')}</Link>
-        {user ? <><Link to="/beau">BEAU</Link><Link to="/dashboard/profile">Profile</Link><Link to="/dashboard/settings">Settings</Link><Link to="/dashboard/settings/email">IOBS Email</Link><Link to="/dashboard/inbox">Inbox{unreadCount ? ` (${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office">My chapter</Link>}{hasTeamAccess && <Link to="/work">Work</Link>}{isAdmin && <Link to="/admin">Admin</Link>}<button type="button" onClick={logout}>Log out</button></> : <Link to="/login">Log in</Link>}
+        {user ? <>{hasBeauAccess&&<Link to="/beau">BEAU</Link>}<Link to="/dashboard/profile">Profile</Link><Link to="/dashboard/settings">Settings</Link><Link to="/dashboard/settings/email">IOBS Email</Link><Link to="/dashboard/inbox">Inbox{unreadCount ? ` (${unreadCount})` : ''}</Link>{hasChapterAccess && <Link to="/chapter-office">My chapter</Link>}{hasTeamAccess && <Link to="/work">Work</Link>}{isAdmin && <Link to="/admin">Admin</Link>}<button type="button" onClick={logout}>Log out</button></> : <Link to="/login">Log in</Link>}
       </div>}
     </>
   );

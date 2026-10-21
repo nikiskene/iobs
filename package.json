@@ -12,7 +12,7 @@
     "test:chapters": "node tests/chapters-security.mjs",
     "test:email": "node tests/email-security.mjs",
     "test:email:browser": "playwright test -c playwright.email.config.mjs",
-    "test:beau": "node tests/beau-security.mjs",
+    "test:beau": "node tests/beau-security.mjs && node tests/beau-approval-security.mjs",
     "test:beau:browser": "playwright test -c playwright.beau.config.mjs"
   },
   "dependencies": {
