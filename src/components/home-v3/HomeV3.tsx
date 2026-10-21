@@ -5,6 +5,7 @@ import { cmsLines, HOME_V3_HERO_IMAGES } from '../../content/homeV3Content';
 import HomeV3Hero from './HomeV3Hero';
 import HomeV3FivePrinciples from './HomeV3FivePrinciples';
 import HomeV3ImpactRadius from './HomeV3ImpactRadius';
+import ChaptersSection from '../institute/ChaptersSection';
 import InstituteFooter from '../institute/InstituteFooter';
 import './homeV3.css';
 import './homeV3Mockup.css';
@@ -45,6 +46,7 @@ export default function HomeV3() {
     </section>
     <HomeV3FivePrinciples />
     <HomeV3ImpactRadius />
+    <ChaptersSection />
     <section ref={closing.ref} className="home-v3-question" aria-labelledby="opening-question-title" style={closing.isNear && question?.media_url ? { backgroundImage:`linear-gradient(90deg,#20000ddd,#20000d88),url(${optimizedImageUrl(question.media_url, mediaWidth)})` } : undefined}>
       <p className="home-v3-label">{question?.label}</p>
       <h2 id="opening-question-title">{question?.headline}</h2>

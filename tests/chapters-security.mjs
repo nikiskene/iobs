@@ -5,6 +5,8 @@ const db = new PGlite();
 const read = (p) => readFileSync(new URL(p, import.meta.url), "utf8");
 await db.exec(read("./fixtures/chapters-base.sql"));
 await db.exec(read("../docs/chapters-supabase-release.sql"));
+await db.exec("create schema supabase_migrations; create table supabase_migrations.schema_migrations(version text primary key,name text,statements text[])");
+await db.exec(read("../docs/chapter-descriptions-supabase-release.sql"));
 let count = 0;
 const check = (v, message) => {
   assert.ok(v, message);
@@ -112,7 +114,7 @@ check(
 );
 await db.query("select chapter_update_details($1,$2)", [
   a,
-  { headline: "Hello", head_member_id: ids[2], status: "active" },
+  { headline: "Hello", description: "Evening conversations by the river.", head_member_id: ids[2], status: "active" },
 ]);
 check(
   (
@@ -123,8 +125,10 @@ check(
   ).rows[0].head_member_id === ids[1],
   "detail RPC ignores ownership and status fields",
 );
+check((await db.query("select description from chapters where id=$1", [a])).rows[0].description === "Evening conversations by the river.", "head saves description on own chapter");
+check(await denied(`select chapter_update_details('${a}',jsonb_build_object('description',repeat('x',3001)))`), "description length limit enforced in database");
 check(
-  await denied(`select chapter_update_details('${b}','{}')`),
+  await denied(`select chapter_update_details('${b}','{"description":"Not mine"}')`),
   "head cannot edit another chapter via RPC",
 );
 check(
