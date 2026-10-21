@@ -42,6 +42,7 @@ export default function Navigation() {
     ...(!user ? [{ to: '/join', label: 'Join' }] : []),
   ];
   const userLinks: NavLinkItem[] = user ? [
+    {to:'/dashboard/settings',label:'Settings'},
     ...(hasChapterAccess ? [{to:'/chapter-office',label:'My chapter'}] : []),
     ...(hasTeamAccess ? [{ to: '/work', label: 'Work' }] : []),
     { to: '/dashboard/inbox', label: 'Inbox', badge: unreadCount },
