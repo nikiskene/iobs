@@ -25,3 +25,7 @@ supabase/.temp/
 
 test-results/
 playwright-report/
+
+# Institutional seed content must never enter the public repository.
+**/beau_seed.sql
+**/beau-supabase-release.sql

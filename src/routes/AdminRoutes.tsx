@@ -6,6 +6,7 @@ import Navigation from '../components/Navigation';
 import DashboardLayout from '../components/DashboardLayout';
 import AdminRoute from './AdminRoute';
 const NominationsAdmin = lazy(() => import('../pages/admin/NominationsAdmin'));
+const BeauAdmin = lazy(() => import('../pages/beau/BeauAdmin'));
 const AdminHome = lazy(() => import('../pages/admin/AdminHome'));
 const AdminCategoryPage = lazy(() => import('../pages/admin/AdminCategoryPage'));
 const AwardSiteContentAdmin = lazy(() => import('../pages/admin/AwardSiteContentAdmin'));
@@ -28,6 +29,7 @@ export default function AdminRoutes() {
   return (
     <Route path="/admin" element={<AdminRoute><Navigation /><DashboardLayout /></AdminRoute>}>
       <Route index element={<AdminHome />} />
+      <Route path="beau" element={<BeauAdmin />} />
       <Route path="content" element={<AdminCategoryPage title="Content" />} />
       <Route path="members" element={<AdminCategoryPage title="Members" />} />
       <Route path="experiences" element={<AdminCategoryPage title="Experiences" />} />
