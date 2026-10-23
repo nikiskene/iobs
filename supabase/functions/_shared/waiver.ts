@@ -1,4 +1,4 @@
-export const WAIVER_VERSION = "2026-10-23";
+export const WAIVER_VERSION = "2026-10-23.1";
 export const WAIVER_PARAGRAPHS = [
   "MEDIA RELEASE & CONSENT",
   "Institute of Beautiful Success / Beautiful Success Award",
@@ -60,7 +60,7 @@ export const WAIVER_PARAGRAPHS = [
   "I understand that the material described above may constitute personal data. I consent to IACY collecting, storing and processing this material for the purposes described in this release and to its publication through the channels described above. IACY will process the material in accordance with applicable data-protection requirements.",
   "Requests concerning my personal data or this consent may be directed to:",
   "IACY International FZCO, Dubai Airport Free Zone Building 9W Block C, Office 523, Dubai Airport Freezone, Dubai, United Arab Emirates",
-  "Website: www.iacy.com — Managing Director: Nikolaus Skene — Email: ns@iacy.com",
+  "Website: www.iacy.com — Managing Director: Nikolaus Skene — Email: help@iobs.cc",
   "11. Confirmation",
   "By signing below, I confirm that:",
   "I am at least 18 years old;",
