@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { AlertTriangle, Archive, ArrowLeft, ArrowUpRight, CheckCircle2, ChevronDown, Hourglass, Plus, Sparkles } from 'lucide-react';
 import MomentumCard from '../../components/team/MomentumCard';
@@ -83,7 +84,7 @@ export default function TeamMomentumPage() {
 
     <div className={mobileMode === 'overview' ? 'block' : 'hidden sm:block'}>
     <header className="relative overflow-hidden rounded-3xl border border-amber-300/10 bg-[radial-gradient(circle_at_top_right,rgba(180,123,42,0.18),transparent_42%),linear-gradient(135deg,#1b1510,#100e0c)] p-6 sm:p-9">
-      <div className="relative flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><div><div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-amber-400"><Sparkles className="h-4 w-4" />Team Momentum</div><h1 className="mt-4 max-w-2xl font-serif text-4xl leading-tight text-stone-50 sm:text-5xl">What became real?</h1><p className="mt-3 max-w-xl text-sm leading-relaxed text-stone-400 sm:text-base">See what is moving, make the next move, and turn momentum into facts.</p></div><button onClick={() => setEditing(null)} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-amber-400 px-5 py-3 text-sm font-semibold text-stone-950 shadow-lg shadow-amber-950/20 hover:bg-amber-300"><Plus className="h-4 w-4" />Add momentum</button></div>
+      <div className="relative flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><div><div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-amber-400"><Sparkles className="h-4 w-4" />Team Momentum</div><div className="mt-4 flex flex-wrap gap-4 text-sm text-amber-300"><Link className="underline" to="/work/waivers">Signed waivers</Link><Link className="underline" to="/works/waiver">Participant waiver form</Link></div><h1 className="mt-4 max-w-2xl font-serif text-4xl leading-tight text-stone-50 sm:text-5xl">What became real?</h1><p className="mt-3 max-w-xl text-sm leading-relaxed text-stone-400 sm:text-base">See what is moving, make the next move, and turn momentum into facts.</p></div><button onClick={() => setEditing(null)} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-amber-400 px-5 py-3 text-sm font-semibold text-stone-950 shadow-lg shadow-amber-950/20 hover:bg-amber-300"><Plus className="h-4 w-4" />Add momentum</button></div>
     </header>
 
     {error && <div className="mt-5 rounded-2xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm text-red-300">{error}</div>}

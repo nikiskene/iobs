@@ -35,10 +35,17 @@ const EnterAwardPage = lazy(() => import('../pages/awards/EnterAwardPage'));
 const PartnersPage = lazy(() => import('../pages/awards/PartnersPage'));
 const VoicesPage = lazy(() => import('../pages/awards/VoicesPage'));
 const AssemblyPage = lazy(() => import('../pages/awards/AssemblyPage'));
+const SchedulePage = lazy(() => import('../pages/public/SchedulePage'));
+const WaiverPage = lazy(() => import('../pages/public/WaiverPage'));
+const WaiverTermsPage = lazy(() => import('../pages/public/WaiverTermsPage'));
 export default function PublicRoutes() {
   return (
     <>
       <Route path="/" element={<HomeV3Page />} />
+      <Route path="/schedule" element={<InstitutePublicFrame><SchedulePage /></InstitutePublicFrame>} />
+      <Route path="/works/waiver" element={<InstitutePublicFrame><WaiverPage /></InstitutePublicFrame>} />
+      <Route path="/works/waiver/terms" element={<InstitutePublicFrame><WaiverTermsPage /></InstitutePublicFrame>} />
+      <Route path="/work/waiver" element={<Navigate to="/works/waiver" replace />} />
       <Route path="/beta" element={<Navigate to="/" replace />} />
       <Route path="/institute" element={<Navigate to="/" replace />} />
       <Route path="/award" element={<InstitutePublicFrame><AwardPage /></InstitutePublicFrame>} />
