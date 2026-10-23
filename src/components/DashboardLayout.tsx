@@ -21,7 +21,7 @@ export default function DashboardLayout() {
   ];
   const isAdminRoute = location.pathname.startsWith('/admin');
   if(hasChapterAccess) explorerLinks.unshift({to:'/chapter-office',label:'My chapter',icon:Users});
-  if (hasTeamAccess) explorerLinks.unshift({ to: '/work', label: 'Work', icon: Sparkles });
+  if (hasTeamAccess) explorerLinks.unshift({ to: '/work', label: 'Work', icon: Sparkles }, { to: '/work/waivers', label: 'Waivers', icon: BookOpen });
   const isInboxRoute = location.pathname.startsWith('/dashboard/inbox');
 
   return <div className={`min-h-screen pt-[76px] min-[601px]:pt-[88px] ${isAdminRoute ? 'iobs-admin-shell' : 'bg-[#0A0A0A]'}`}><div className={`mx-auto max-w-7xl px-4 py-4 md:px-6 md:py-8 ${isInboxRoute ? 'md:max-w-7xl' : ''}`}><div className="flex flex-col gap-8 lg:flex-row">
