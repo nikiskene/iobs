@@ -4,13 +4,12 @@ import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { useEffect, useRef, useState } from 'react';
 import { Briefcase, Inbox, LogIn, LogOut, Menu, Shield, User, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AWARD_ASSETS } from '../../content/awardAssets';
+import InstituteLogo from '../InstituteLogo';
 import { useBeauAccess } from '../../hooks/useBeauAccess';
 import { useChapterAccess } from '../../hooks/useChapterAccess';
 import { useAuth } from '../../hooks/useAuth';
 import { useUnreadMessages } from '../../hooks/messaging/useUnreadMessages';
 import { supabase } from '../../lib/supabase';
-import { optimizedImageUrl } from '../../lib/media';
 import { LANGUAGE_OPTIONS, useLocale, type Locale } from '../../providers/LocaleProvider';
 
 import { useNominationMode } from '../../providers/NominationModeProvider';
@@ -51,7 +50,7 @@ export default function InstituteHeader() {
     <>
       <header className="institute-header">
         <Link className="institute-logo" to="/" aria-label={tr("Institute of Beautiful Success")}>
-          <img src={optimizedImageUrl(AWARD_ASSETS.circleDark, 120, 78, 120)} alt="" width="60" height="60" decoding="async" /><span>{tr("Institute of")}<br />{tr("Beautiful Success")}</span>
+          <InstituteLogo compactOnMobile />
         </Link>
         <nav aria-label={tr("Main navigation")}>
           {PUBLIC_LINKS.map(([to, label]) => <Link to={to} key={to}>{tr(label)}</Link>)}

@@ -1,0 +1,7 @@
+.institute-brand{display:block;flex:none;width:236px;max-width:100%}
+.institute-brand img,.institute-logo .institute-brand img,.award-footer-intro .institute-brand img{display:block;width:100%;height:auto;object-fit:contain}
+.institute-logo{min-width:0;justify-self:start}
+.award-footer-intro .institute-brand{width:260px}
+@media(max-width:1280px){.institute-header.institute-header{grid-template-columns:minmax(0,1fr) auto}.institute-header.institute-header nav{display:none}.institute-header .institute-menu-trigger{display:grid}.institute-mobile-nav.institute-mobile-nav{display:block}}
+@media(max-width:600px){.institute-logo .institute-brand{width:200px}.award-footer-intro:has(.institute-brand){display:flex;flex-direction:column;align-items:flex-start;gap:12px}}
+@media(max-width:479px){.institute-brand-responsive,.institute-logo .institute-brand-responsive{width:46px}.institute-brand-responsive img,.institute-logo .institute-brand-responsive img{width:46px;height:46px}}
