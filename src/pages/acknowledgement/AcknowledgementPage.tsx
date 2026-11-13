@@ -1,6 +1,6 @@
 import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import { useCallback, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../hooks/useAuth';
@@ -16,7 +16,14 @@ export default function AcknowledgementPage() {
   const { mode } = useNominationMode();
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [params, setParams] = useSearchParams();
+  const selectedId = params.get('nomination');
+  function selectNomination(id?: string) {
+    const next = new URLSearchParams(params);
+    if (id) next.set('nomination', id);
+    else next.delete('nomination');
+    setParams(next, { replace: !id, preventScrollReset: true });
+  }
   const [items, setItems] = useState<AcknowledgementNomination[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -62,14 +69,14 @@ export default function AcknowledgementPage() {
         <div className="ack-card-image">{safeWebUrl(item.image_url) ? <img src={safeWebUrl(item.image_url)} alt={item.company_name} loading="lazy" onError={event => { event.currentTarget.style.display = 'none'; }} /> : <span aria-hidden="true">{item.company_name.slice(0,1)}</span>}</div>
         <div className="ack-card-body"><div className="ack-tags"><span>{tr("Ray of impact")} · {tr(NOMINATION_RAYS.find(([id]) => id === item.ray)?.[1] || item.ray)}</span></div>
           <h3>{item.company_name}</h3><p className="ack-preview">{tr(item.description)}</p>
-          <div className="ack-entry-actions"><button className="ack-read" onClick={() => setSelectedId(item.id)} aria-label={`Read the full nomination for ${item.company_name}`} aria-haspopup="dialog">{tr("Read the nomination")}<ArrowUpRight size={17} /></button>{safeWebUrl(item.website || '') && <a className="ack-website" href={safeWebUrl(item.website || '')} target="_blank" rel="noopener noreferrer">{tr("Company website ↗")}</a>}</div>
+          <div className="ack-entry-actions"><button className="ack-read" onClick={() => selectNomination(item.id)} aria-label={`Read the full nomination for ${item.company_name}`} aria-haspopup="dialog">{tr("Read the nomination")}<ArrowUpRight size={17} /></button>{safeWebUrl(item.website || '') && <a className="ack-website" href={safeWebUrl(item.website || '')} target="_blank" rel="noopener noreferrer">{tr("Company website ↗")}</a>}</div>
           {voteControls(item)}
         </div>
       </article>)}</div>
       {loading && <p role="status">{tr("Loading nominations…")}</p>}
       {more && <button className="award-button ack-more" disabled={loading} onClick={() => void load(items.length)}>{tr("Show more companies")}</button>}
     </section>
-    {selected && <ReadingDialog title={selected.company_name} eyebrow={`${tr("Ray of impact")} · ${tr(NOMINATION_RAYS.find(([id]) => id === selected.ray)?.[1] || selected.ray)}`} onClose={() => setSelectedId(null)}>
+    {selected && <ReadingDialog title={selected.company_name} eyebrow={`${tr("Ray of impact")} · ${tr(NOMINATION_RAYS.find(([id]) => id === selected.ray)?.[1] || selected.ray)}`} onClose={() => selectNomination()}>
       {safeWebUrl(selected.image_url) && <div className="ack-reading-image"><img src={safeWebUrl(selected.image_url)} alt={selected.company_name} /></div>}
       <p className="ack-reading-intro">{tr(selected.description)}</p>
       {PRINCIPLE_IDS.some(id => selected.principles[id]?.trim()) && <nav className="ack-reading-nav" aria-label={tr("Principles in this nomination")}>{PRINCIPLE_IDS.filter(id => selected.principles[id]?.trim()).map(id => <button type="button" key={id} onClick={() => document.getElementById(`reading-${id}`)?.scrollIntoView({ block: 'start' })}>{tr(id)}</button>)}</nav>}
