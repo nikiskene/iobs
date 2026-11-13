@@ -25,3 +25,8 @@ export const HOME_V3_SCALES: HomeV3Scale[] = [
   { id: 'society', urlId: 'world', label: 'THE WHOLE WORLD' },
   { id: 'world', urlId: 'beyond', label: 'BEYOND OUR WORLD' },
 ];
+
+export const PRINCIPLE_KEYS = [
+  'v3_principle_philanthropy', 'v3_principle_new_focus', 'v3_principle_echo',
+  'v3_principle_momentum', 'v3_principle_legacy',
+];

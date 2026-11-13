@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;650&family=Instrument+Serif&display=swap");
+
+.home-preview {
+  min-height: 100vh;
+  color: #212725;
+  background: #f8f6ef;
+  font-family: "Instrument Sans", system-ui, sans-serif;
+}
+
+.home-preview-wrap {
+  width: min(1120px, calc(100% - 64px));
+  margin-inline: auto;
+}
+
+.home-preview-header {
+  padding-block: 30px;
+}
+
+.home-preview-header a {
+  display: inline-block;
+}
+
+.home-preview-header .institute-brand img {
+  width: 202px;
+  max-width: 62vw;
+  height: auto;
+}
+
+.home-preview-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 74px);
+  padding-block: clamp(30px, 7vw, 94px) clamp(48px, 9vw, 112px);
+}
+
+.home-preview :is(h1, h2) {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -.036em;
+  text-wrap: balance;
+}
+
+.home-preview h1 {
+  font-size: clamp(3rem, 6vw, 5.55rem);
+  line-height: 1;
+}
+
+.home-preview h2 {
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  line-height: 1.06;
+}
+
+.home-preview h3,
+.home-preview .home-preview-principle-name {
+  font-family: inherit;
+  letter-spacing: normal;
+  font-size: 1.12rem;
+  font-weight: 650;
+}
+
+.home-preview-wave {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: #a7bac1;
+}
+
+.home-preview-wave :is(img, video) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-preview-section {
+  max-width: 880px;
+  margin-inline: auto;
+  padding-block: clamp(44px, 7vw, 84px);
+  border-top: 1px solid #cfcdc1;
+}
+
+.home-preview-section > p {
+  margin-top: 1rem;
+}
+
+.home-preview-principles {
+  list-style: none;
+  margin-block: 32px 18px;
+  padding: 0;
+}
+
+.home-preview-principles li {
+  display: grid;
+  grid-template-columns: minmax(125px, 1fr) minmax(0, 2.5fr);
+  gap: 12px 24px;
+  padding-block: 16px;
+  border-bottom: 1px solid #cfcdc1;
+}
+
+.home-preview-principles li:first-child {
+  border-top: 1px solid #cfcdc1;
+}
+
+.home-preview-principles p + p {
+  margin-top: .35rem;
+  color: #4b514b;
+}
+
+.home-preview-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #264e45;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.home-preview-stories {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 36px;
+  margin-block: 26px 14px;
+}
+
+.home-preview-stories article {
+  display: flex;
+  align-items: start;
+  gap: 14px;
+}
+
+.home-preview-stories article img {
+  width: 84px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.home-preview-stories article p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: .25rem;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow-wrap: anywhere;
+}
+
+.home-preview-rays {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 20px;
+  padding-inline-start: 20px;
+  list-style: disc;
+}
+
+.home-preview-footer {
+  padding-block: 32px;
+  border-top: 1px solid #cfcdc1;
+}
+
+.home-preview-footer :is(nav, .home-preview-meta) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+
+.home-preview-meta {
+  margin-top: 22px;
+  font-size: .875rem;
+  color: #4b514b;
+}
+
+.home-preview :is(a, button):hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 680px) {
+  .home-preview-wrap {
+    width: calc(100% - 36px);
+  }
+
+  .home-preview-hero,
+  .home-preview-principles li,
+  .home-preview-stories {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-preview-principles li {
+    gap: 4px;
+  }
+}

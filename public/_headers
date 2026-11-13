@@ -3,3 +3,6 @@
 
 /
   Cache-Control: public, max-age=0, must-revalidate
+
+/b
+  X-Robots-Tag: noindex

@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useAwardSiteContent } from '../../providers/AwardSiteContentProvider';
 import type { AwardSiteContent } from '../../providers/AwardSiteContentProvider';
+import { PRINCIPLE_KEYS } from '../../content/homeV3Content';
 import { useNearViewport } from '../../hooks/useNearViewport';
 import { optimizedImageUrl, viewportImageWidth } from '../../lib/media';
-
-const PRINCIPLE_KEYS = ['v3_principle_philanthropy','v3_principle_new_focus','v3_principle_echo','v3_principle_momentum','v3_principle_legacy'];
 
 export default function HomeV3FivePrinciples() {
   const { get, translate: tr } = useAwardSiteContent();

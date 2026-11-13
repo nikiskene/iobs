@@ -7,6 +7,10 @@ import PublicLayout from './PublicLayout';
 import InstitutePublicFrame from '../components/institute/InstitutePublicFrame';
 import HomeV3Page from '../pages/HomeV3Page';
 
+const HomePreviewPage = lazy(() => import('../pages/HomePreviewPage'));
+const PrinciplesPreviewPage = lazy(() => import('../pages/HomePreviewPage').then(module => ({ default: module.PrinciplesPreviewPage })));
+
+
 const ChaptersPage = lazy(() => import('../pages/public/ChaptersPage'));
 const TeamPage = lazy(() => import('../pages/public/TeamPage'));
 const AboutPage = lazy(() => import('../pages/public/AboutPage'));
@@ -42,6 +46,9 @@ export default function PublicRoutes() {
   return (
     <>
       <Route path="/" element={<HomeV3Page />} />
+      <Route path="/b" element={<HomePreviewPage />} />
+      <Route path="/principles" element={<PrinciplesPreviewPage />} />
+
       <Route path="/schedule" element={<InstitutePublicFrame><SchedulePage /></InstitutePublicFrame>} />
       <Route path="/works/waiver" element={<InstitutePublicFrame><WaiverPage /></InstitutePublicFrame>} />
       <Route path="/works/waiver/terms" element={<InstitutePublicFrame><WaiverTermsPage /></InstitutePublicFrame>} />
